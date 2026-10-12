@@ -7,7 +7,8 @@ HELP = ("🍿 <b>PopcornLife Studio</b>\n\n"
         "• Chaque matin je t'envoie 3 propositions : appuie sur A, B ou C.\n"
         "• Tu peux aussi m'écrire un film : « Gone Girl » ou « Fais-moi un TikTok sur Dark ».\n"
         "• « propositions » : j'envoie 3 nouvelles idées.\n"
-        "• « image 2 » : je change l'image de la slide 2 (1, 2 ou 3).")
+        "• « image 2 » : je change l'image de la slide 2 (1, 2 ou 3).\n"
+        "• « refais » : j'écris de nouveaux textes pour le dernier film. Tu peux préciser : « refais plus mystérieux ».")
 
 def load(name, default):
     try:
@@ -54,6 +55,41 @@ def propose():
     tg.send("\n".join(lines), [[b] for b in buttons])
 
 # ---------- création d'un post ----------
+def choose_images(meta, texts, paths):
+    """L'IA choisit, pour chaque phrase, l'image la plus cohérente parmi les images du film."""
+    bd = [None, None, None]
+    if not paths:
+        return [], [], bd
+    thumbs = []
+    for p in paths:
+        im = tmdb.download(p, "w300"); b = io.BytesIO(); im.save(b, "JPEG", quality=80); thumbs.append(b.getvalue())
+    choice = ai.pick_images(meta, texts, thumbs)
+    cache = {}
+    for n, c in enumerate(choice):
+        if c["idx"] not in cache:
+            cache[c["idx"]] = tmdb.download(paths[c["idx"]], "w1280")
+        bd[n] = cache[c["idx"]]
+    return [c["idx"] for c in choice], [c["focus"] for c in choice], bd
+
+def rewrite(guidance=""):
+    state = load("state", {"offset": 0}); last = state.get("last")
+    if not last:
+        tg.send("Je n'ai pas de post récent à refaire. Écris d'abord un titre de film."); return
+    meta = tmdb.details(last["type"], last["id"])
+    tg.send(f"✍️ Je réécris les textes de <b>{e(last['title'])}</b>…" + (f"\nConsigne : {e(guidance)}" if guidance else ""))
+    post = ai.write_post(meta, guidance, avoid=last["texts"])
+    assign, focus, bd = choose_images(meta, post["texts"], last["candidates"])
+    poster = tmdb.download(last["poster_path"], "w780")
+    files = render.render_all(post["texts"], bd, focus or [0.5] * 3, poster,
+                              {"title": last["title"], "year": last["year"], "platform": last["platform"], "rating": last["rating"]}, "out")
+    tg.send_files(files[:3])
+    tg.send(f"<b>Nouvelle caption (touche pour copier) :</b>\n<code>{e(post['caption'])}\n\n{e(post['hashtags'])}</code>")
+    tg.send(f"1. {e(post['texts'][0])}\n2. {e(post['texts'][1])}\n3. {e(post['texts'][2])}\n\n"
+            "La slide 4 (affiche) ne change pas. Pas encore ça ? Écris « refais » suivi de ce que tu veux, "
+            "par exemple « refais plus mystérieux, sans question ».")
+    last.update(texts=post["texts"], assign=assign, focus=focus or [0.5] * 3)
+    state["last"] = last; save("state", state)
+
 def produce(t, i):
     meta = tmdb.details(t, i)
     if not meta["overview"] or not meta["poster_path"]:
@@ -67,17 +103,7 @@ def produce(t, i):
     paths = tmdb.backdrops(t, i)
     last = {"type": t, "id": i, "title": meta["title"], "year": meta["year"], "rating": meta["rating"], "platform": plat,
             "texts": post["texts"], "poster_path": meta["poster_path"], "candidates": paths, "assign": [], "focus": []}
-    thumbs, bd = [], [None, None, None]
-    if paths:
-        small = [tmdb.download(p, "w300") for p in paths]
-        for im in small:
-            b = io.BytesIO(); im.save(b, "JPEG", quality=80); thumbs.append(b.getvalue())
-        choice = ai.pick_images(meta, post["texts"], thumbs)
-        last["assign"] = [c["idx"] for c in choice]; last["focus"] = [c["focus"] for c in choice]
-        cache = {}
-        for n, c in enumerate(choice):
-            if c["idx"] not in cache: cache[c["idx"]] = tmdb.download(paths[c["idx"]], "w1280")
-            bd[n] = cache[c["idx"]]
+    last["assign"], last["focus"], bd = choose_images(meta, post["texts"], paths)
     poster = tmdb.download(meta["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, last["focus"] or [0.5] * 3, poster,
                               {"title": meta["title"], "year": meta["year"], "platform": plat, "rating": meta["rating"]}, "out")
@@ -147,6 +173,8 @@ def handle(u, state):
         k = "abc".index(low)
         if k < len(state["pending"]): p = state["pending"][k]; produce(p["type"], p["id"])
     elif low.startswith("image") and low[5:].strip() in ("1", "2", "3"): redo_image(int(low[5:].strip()))
+    elif re.match(r"(?i)^(refais|refait|autre hook|nouveau hook|nouveaux textes|change les phrases|change le hook)\b", text):
+        rewrite(re.sub(r"(?i)^(refais|refait|autre hook|nouveau hook|nouveaux textes|change les phrases|change le hook)\b[\s:,\-]*", "", text).strip())
     elif low in ("propositions", "proposition", "/propositions", "idées", "idees"): propose()
     else: manual(text)
 

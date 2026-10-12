@@ -43,30 +43,43 @@ Pour chacune : un angle éditorial, une idée de hook (une phrase), et pourquoi 
 JSON : [{{"ref":"movie:123","angle":"","hook":"","pourquoi":""}}, ...]"""
     return ask_json(prompt)
 
-def write_post(meta):
+def write_post(meta, guidance="", avoid=None):
     kind = "série" if meta["type"] == "tv" else "film"
+    extra = ""
+    if guidance:
+        extra += f"\nINSTRUCTION DE LA RÉDACTRICE (à respecter en priorité absolue) : {guidance}\n"
+    if avoid:
+        extra += "\nTextes déjà proposés et REFUSÉS (ne les reprends pas, change d'angle et de technique) :\n" + "\n".join(f"- {x}" for x in avoid) + "\n"
     base = f"""Œuvre : {meta['title']} ({meta['year']}), {kind}. Genres : {', '.join(meta['genres'])}.
 Accroche officielle : {meta['tagline'] or '-'}
 Synopsis : {meta['overview']}
-
+{extra}
 Écris un carrousel TikTok de 3 phrases (une par slide), UNE phrase chacune, 14 mots maximum :
-- slide 1 : une phrase qui arrête le scroll, intrigue sans rien révéler ;
+- slide 1 : une accroche qui arrête le scroll, intrigue sans rien révéler ;
 - slide 2 : augmente la curiosité (situation étrange, tension, dilemme, détail mystérieux, ambiance ou promesse), sans spoiler ;
 - slide 3 : donne définitivement envie de regarder, un peu plus précise mais sans révéler l'important.
-Les trois forment une progression logique, chacune donne envie de voir la suivante. Exemples de TON (ne les réutilise pas) : « Ce film commence presque normalement… puis tout bascule. » / « Tu crois avoir compris l'histoire. Tu n'as encore rien vu. »
-ATTENTION AUX SPOILERS : le synopsis fourni peut lui-même révéler le secret central ou le retournement de l'histoire. Ne le reprends JAMAIS, même s'il est écrit dans le synopsis. Si l'œuvre repose sur un secret, un mensonge, une manipulation ou une révélation (qui est qui, ce qui est faux, ce qui se cache), ne le nomme pas : évoque seulement l'étrangeté, le malaise, la question que le personnage se pose, jamais la réponse. Pour chaque phrase, demande-toi : « quelqu'un qui n'a pas vu l'œuvre perd-il un plaisir de découverte en la lisant ? » Si oui, réécris.
+Les trois forment une progression logique, chacune donne envie de voir la suivante.
+
+MÉTHODE POUR LA SLIDE 1 (c'est elle qui décide de tout) :
+1. Dans "brouillons_s1", écris 6 accroches DIFFÉRENTES, chacune avec une technique différente : (a) un détail concret et étrange tiré du synopsis, (b) une contradiction ou un paradoxe, (c) une confession personnelle (« Je n'ai pas réussi à… », « J'ai arrêté de… »), (d) une règle ou une situation impossible, (e) une interpellation directe qui met le lecteur en position de choisir, (f) une promesse très précise sur ce que le film fait ressentir.
+2. Garde la plus forte : celle qui crée un vide qu'on ne peut combler qu'en swipant, et qui ne ressemble à aucune accroche vue cent fois.
+RÈGLES : sois CONCRÈTE plutôt qu'abstraite (un objet, un lieu, un chiffre, une situation précise, pas « quelque chose cloche »). Si une phrase pourrait être collée telle quelle sur un autre film, elle est trop vague : recommence. INTERDIT : « Et si… », « Imagine… », « Pourtant, quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu ne seras plus le même », « tu vas adorer », « un film qui… » en ouverture, les questions rhétoriques génériques, les superlatifs vides.
+
+ATTENTION AUX SPOILERS : le synopsis fourni peut lui-même révéler le secret central ou le retournement de l'histoire. Ne le reprends JAMAIS, même s'il est écrit dans le synopsis. Si l'œuvre repose sur un secret, un mensonge, une manipulation ou une révélation, ne le nomme pas : évoque seulement l'étrangeté, le malaise, la question que le personnage se pose, jamais la réponse. Pour chaque phrase, demande-toi : « quelqu'un qui n'a pas vu l'œuvre perd-il un plaisir de découverte en la lisant ? » Si oui, réécris.
+
 Ajoute une caption TikTok : 1 à 2 phrases courtes, concrètes, qui donnent un avis personnel précis sur l'œuvre (pas de formules toutes faites comme « n'a pas pris une ride », « à voir ou à revoir », « un incontournable »), avec éventuellement un CTA naturel comme « Tu l'as déjà vu ? ». Puis 6 hashtags : généraux (#film #cinema ou #serie) et spécifiques au titre, à l'acteur principal ou au genre ; pas de hashtags vagues comme #drame ou #recommandationfilm.
-JSON : {{"s1":"","s2":"","s3":"","caption":"","hashtags":["#..."],"spoiler_risk":false}}
+JSON : {{"brouillons_s1":["","","","","",""],"s1":"","s2":"","s3":"","caption":"","hashtags":["#..."],"spoiler_risk":false}}
 Mets spoiler_risk à true si tu as un doute sur un spoiler."""
     note = ""
     for _ in range(3):
-        r = ask_json(base + note)
+        r = ask_json(base + note, max_tokens=3000)
         s = [r.get("s1", ""), r.get("s2", ""), r.get("s3", "")]
         problems = []
         if any(not x.strip() for x in s): problems.append("une slide est vide")
         if any(len(x.split()) > 18 for x in s): problems.append("une phrase dépasse 14 mots")
         if r.get("spoiler_risk"): problems.append("risque de spoiler")
         if len(set(s)) < 3: problems.append("phrases identiques")
+        if avoid and s[0].strip() in [x.strip() for x in avoid]: problems.append("la slide 1 reprend un texte refusé")
         if not problems:
             tags = r.get("hashtags", [])
             tags = [t if t.startswith("#") else "#" + t for t in tags]
