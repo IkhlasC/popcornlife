@@ -1,56 +1,40 @@
 {
- "offset": 422725810,
- "pending": [
-  {
-   "type": "movie",
-   "id": 210577,
-   "title": "Gone Girl"
-  },
-  {
-   "type": "tv",
-   "id": 42009,
-   "title": "Black Mirror"
-  },
-  {
-   "type": "movie",
-   "id": 354912,
-   "title": "Coco"
-  }
- ],
+ "offset": 422725811,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 37165,
-  "title": "The Truman Show",
-  "year": "1998",
-  "rating": 8.2,
-  "platform": "Netflix / Paramount+",
+  "id": 210577,
+  "title": "Gone Girl",
+  "year": "2014",
+  "rating": 7.9,
+  "platform": "Disney+ / HBO Max",
   "texts": [
-   "Truman a tout pour être heureux, mais quelque chose cloche dans sa ville.",
-   "Ses voisins, ses collègues, sa femme : et si rien n'était comme il croit ?",
-   "Jim Carrey y est drôle et bouleversant, sa réaction au doute est géniale."
+   "Le jour de leurs cinq ans de mariage, Amy disparaît.",
+   "Maison saccagée, enquête, et tous les soupçons se tournent vers Nick.",
+   "Nick enquête de son côté, et ce couple parfait n'a pas fini de surprendre."
   ],
-  "poster_path": "/cOkoQaOPZBxqxQYlGu2i0o00sLn.jpg",
+  "poster_path": "/7xkJ1ACu40BjzLHVPRILWjFvW7.jpg",
   "candidates": [
-   "/rmiG2uwcNoGFmBKMoa1pIcf514L.jpg",
-   "/aCHn2TXYJfzPXQKA6r9mKPbMlUB.jpg",
-   "/kjWIp6COK4MKF0KSffzUD8l9Kuo.jpg",
-   "/1szsl8P3zzvb9O4WJM7B3CLQ7r4.jpg",
-   "/1xWHfZH4Fapu6Yrkv4oOk2rEUTx.jpg",
-   "/rVOHeP2uU4jtCunXWAWE6Xn5xam.jpg",
-   "/bxY7ve1LP8atCIuvr4jeeJMmU4w.jpg",
-   "/bRRxELS8dK3cpqFhaTQcIENAPOI.jpg",
-   "/nAWrt7agnSoXKmvwqDmoHUtuW4F.jpg",
-   "/rdgb4aUiMz9Vx5ZJoga4LkEMOTl.jpg"
+   "/iWak7wT0j6ycCc8lKr4NBz9c7n5.jpg",
+   "/1ufic9NSdolkgNkQSAVjlVp0uqn.jpg",
+   "/x9ezMgOtDPqHatHDvxEG0ILb6Ie.jpg",
+   "/h2JaQWLKhapm7AuSViJwGiv8ngC.jpg",
+   "/5s7y0ia1izCvFVjBRgHCgceHelf.jpg",
+   "/xISE4M4IhCFgd9oOEFKYfkknumg.jpg",
+   "/1mzisKntcKHEG3RoTGXIIHgmJV7.jpg",
+   "/pXQ0M1i2gkwSqagOPTniiR0fFtp.jpg",
+   "/2JXoeqbcXZxIb99zA4BTwmK1dDC.jpg",
+   "/6WUC6yVzfyZmlWPSgj0yB3WvrG3.jpg"
   ],
   "assign": [
+   6,
    5,
-   3,
    2
   ],
   "focus": [
-   0.55,
+   0.72,
    0.5,
-   0.5
+   0.45
   ]
  }
 }
