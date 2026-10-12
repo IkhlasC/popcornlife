@@ -1,54 +1,38 @@
 {
- "offset": 422725814,
- "pending": [
-  {
-   "type": "movie",
-   "id": 389,
-   "title": "Douze hommes en colère"
-  },
-  {
-   "type": "tv",
-   "id": 46298,
-   "title": "Hunter x Hunter"
-  },
-  {
-   "type": "movie",
-   "id": 1290821,
-   "title": "Shelter"
-  }
- ],
+ "offset": 422725815,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 210577,
-  "title": "Gone Girl",
-  "year": "2014",
-  "rating": 7.9,
-  "platform": "Disney+ / HBO Max",
+  "id": 389,
+  "title": "Douze hommes en colère",
+  "year": "1957",
+  "rating": 8.6,
+  "platform": "MUBI / MGM",
   "texts": [
-   "Le jour de leurs cinq ans de mariage, Amy disparaît.",
-   "Maison saccagée, enquête, et tous les soupçons se tournent vers Nick.",
-   "Nick enquête de son côté, et ce couple parfait n'a pas fini de surprendre."
+   "Onze jurés ont voté coupable. Un seul a un doute.",
+   "La vie d'un jeune homme se joue, et la décision doit être unanime.",
+   "Il n'a que la discussion pour convaincre les onze autres, un par un."
   ],
-  "poster_path": "/7xkJ1ACu40BjzLHVPRILWjFvW7.jpg",
+  "poster_path": "/fFXrCl7nBFFaQU3IgTlinvk6vTi.jpg",
   "candidates": [
-   "/iWak7wT0j6ycCc8lKr4NBz9c7n5.jpg",
-   "/1ufic9NSdolkgNkQSAVjlVp0uqn.jpg",
-   "/x9ezMgOtDPqHatHDvxEG0ILb6Ie.jpg",
-   "/h2JaQWLKhapm7AuSViJwGiv8ngC.jpg",
-   "/5s7y0ia1izCvFVjBRgHCgceHelf.jpg",
-   "/xISE4M4IhCFgd9oOEFKYfkknumg.jpg",
-   "/1mzisKntcKHEG3RoTGXIIHgmJV7.jpg",
-   "/pXQ0M1i2gkwSqagOPTniiR0fFtp.jpg",
-   "/2JXoeqbcXZxIb99zA4BTwmK1dDC.jpg",
-   "/6WUC6yVzfyZmlWPSgj0yB3WvrG3.jpg"
+   "/qqHQsStV6exghCM7zbObuYBiYxw.jpg",
+   "/w4bTBXcqXc2TUyS5Fc4h67uWbPn.jpg",
+   "/zqWJfpKq3ooParUqAvQC7XTFcN3.jpg",
+   "/p1nBxgrSu9Ex0Uvci1ItWWCWPlk.jpg",
+   "/9GSvXxJojJ7MM2rzvzSIUNDGfMF.jpg",
+   "/2ExdVu0AITPediwjpxGEl9e2NuF.jpg",
+   "/oFuAMAoAEQEAs6bD87Q8BxrAgMf.jpg",
+   "/9CEb1xVkk6Mhusxw2gTsDsuZt8v.jpg",
+   "/e2uXB2C4Rov55zCz7I2S0HaqeA1.jpg",
+   "/trmcU0UiwTXZxZbuewOA4gzMjQP.jpg"
   ],
   "assign": [
-   6,
    5,
-   2
+   1,
+   7
   ],
   "focus": [
-   0.72,
+   0.8,
    0.5,
    0.45
   ]
