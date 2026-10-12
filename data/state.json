@@ -1,39 +1,39 @@
 {
- "offset": 422725816,
+ "offset": 422725817,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 389,
-  "title": "Douze hommes en colère",
-  "year": "1957",
-  "rating": 8.6,
-  "platform": "MUBI / MGM",
+  "id": 1339713,
+  "title": "Obsession",
+  "year": "2026",
+  "rating": 8.2,
+  "platform": "",
   "texts": [
-   "Onze jurés ont voté coupable. Un seul a un doute.",
-   "La vie d'un jeune homme se joue, et la décision doit être unanime.",
-   "Il n'a que la discussion pour convaincre les onze autres, un par un."
+   "Et si ton crush de toujours tombait enfin fou de toi ?",
+   "Un introverti trouve un objet étrange, et son vœu le plus fou se réalise.",
+   "Sauf que son crush l'aime trop, et ça devient vite inquiétant."
   ],
-  "poster_path": "/fFXrCl7nBFFaQU3IgTlinvk6vTi.jpg",
+  "poster_path": "/mDCR1frpUvGfIKksuM440VLb7X9.jpg",
   "candidates": [
-   "/qqHQsStV6exghCM7zbObuYBiYxw.jpg",
-   "/w4bTBXcqXc2TUyS5Fc4h67uWbPn.jpg",
-   "/zqWJfpKq3ooParUqAvQC7XTFcN3.jpg",
-   "/p1nBxgrSu9Ex0Uvci1ItWWCWPlk.jpg",
-   "/9GSvXxJojJ7MM2rzvzSIUNDGfMF.jpg",
-   "/2ExdVu0AITPediwjpxGEl9e2NuF.jpg",
-   "/oFuAMAoAEQEAs6bD87Q8BxrAgMf.jpg",
-   "/9CEb1xVkk6Mhusxw2gTsDsuZt8v.jpg",
-   "/e2uXB2C4Rov55zCz7I2S0HaqeA1.jpg",
-   "/trmcU0UiwTXZxZbuewOA4gzMjQP.jpg"
+   "/5lTZyuBTNOfawsfPT8Q0cIg6qAF.jpg",
+   "/uoTZOIXnkcTgJe1emITpsQq7sPu.jpg",
+   "/diOZbaDnB2CIilwd0527AB1qMvW.jpg",
+   "/r013C8Me2bZ0pUi0OWJRh0h7MzT.jpg",
+   "/4k99kV4R1bbbrsnjR205v91Xbin.jpg",
+   "/u5BkYDM5gfK4wINfoIFMAcEUKhx.jpg",
+   "/7xZCxnhIB7XNwbJDoaNocFzGOmO.jpg",
+   "/8Z4mNUnfhiOSYzcCw3yoGR7q2un.jpg",
+   "/qDmeLX1NTCD7B2IbDhCEReJgmO8.jpg",
+   "/eIw1YYdQ2ycsitUuiMa9ygzqgPm.jpg"
   ],
   "assign": [
-   5,
-   1,
-   7
+   2,
+   0,
+   1
   ],
   "focus": [
-   0.8,
-   0.5,
+   0.52,
+   0.35,
    0.45
   ]
  }
