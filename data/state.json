@@ -1,5 +1,5 @@
 {
- "offset": 422725817,
+ "offset": 422725818,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,9 +9,9 @@
   "rating": 8.2,
   "platform": "",
   "texts": [
-   "Et si ton crush de toujours tombait enfin fou de toi ?",
-   "Un introverti trouve un objet étrange, et son vœu le plus fou se réalise.",
-   "Sauf que son crush l'aime trop, et ça devient vite inquiétant."
+   "Ce film m'a fait regretter d'avoir déjà voulu qu'on m'aime.",
+   "Un objet magique exauce n'importe quel souhait, et lui n'en voulait qu'un.",
+   "Dans Obsession, son crush tombe raide dingue de lui, et ça ne s'arrête plus."
   ],
   "poster_path": "/mDCR1frpUvGfIKksuM440VLb7X9.jpg",
   "candidates": [
@@ -32,9 +32,9 @@
    1
   ],
   "focus": [
-   0.52,
-   0.35,
-   0.45
+   0.41,
+   0.4,
+   0.5
   ]
  }
 }
