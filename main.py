@@ -1,4 +1,4 @@
-import sys, os, io, json, html, datetime, traceback
+import sys, os, io, re, json, html, datetime, traceback
 import tmdb, ai, tg, render
 
 DATA = "data"
@@ -104,13 +104,32 @@ def redo_image(n):
     tg.send_files([p]); tg.send(f"Voilà la slide {n} avec une autre image. Écris « image {n} » pour en essayer une autre.")
     save("state", state)
 
+def parse_request(message):
+    """Titre court = utilisé tel quel (avec année facultative). Phrase longue = l'IA extrait le titre."""
+    text = message.strip().strip('"«» ').strip()
+    title, year = text, None
+    mm = re.match(r"^(.*?)[\s,(]+((?:19|20)\d{2})\)?$", text)
+    if mm:
+        title, year = mm.group(1).strip(), mm.group(2)
+    long_request = len(title.split()) > 5 or re.match(r"(?i)^(fais|fait|cr[ée]e|peux|tiktok|un tiktok|je veux)", title)
+    if long_request:
+        try:
+            t, y = ai.extract_title(message)
+            if t:
+                title, year = t, (str(y) if y else year)
+        except Exception:
+            traceback.print_exc()
+            if " sur " in title:
+                title = title.rsplit(" sur ", 1)[1].strip(' .!?"«»')
+    return title, year
+
 def manual(message):
-    title, year = ai.extract_title(message)
+    title, year = parse_request(message)
     if not title:
         tg.send(HELP); return
     found = tmdb.search(title, year) or tmdb.search(title)
     if not found:
-        tg.send(f"Je ne trouve pas « {e(title)} » sur TMDB. Vérifie l'orthographe ?"); return
+        tg.send(f"Je ne trouve pas « {e(title)} » sur TMDB. Vérifie l'orthographe, ou ajoute l'année : « {e(title)} 2026 »."); return
     produce(*found[0])
 
 # ---------- lecture des messages Telegram ----------
