@@ -23,13 +23,22 @@ def cover(im, fx=0.5, fy=0.5):
     x = int((im.width - W) * min(max(fx, 0), 1)); y = int((im.height - H) * min(max(fy, 0), 1))
     return im.crop((x, y, x + W, y + H))
 
-def background(im=None, fx=0.5, blur=0):
+def background(im=None, fx=0.5, blur=0, poster=False):
     if im is None:
         return gradient()
     bg = cover(im, fx)
     if blur:
         bg = bg.filter(ImageFilter.GaussianBlur(blur))
-    return Image.blend(bg, Image.new("RGB", (W, H), (8, 6, 8)), S["dim"])
+    black = Image.new("RGB", (W, H), (6, 4, 6))
+    if poster:
+        return Image.blend(bg, black, S["poster_dim"])
+    bg = Image.blend(bg, black, S["dim"])
+    mask = Image.new("L", (W, H), 0); md = ImageDraw.Draw(mask)
+    y0 = int(H * S["fade_start"])
+    for y in range(y0, H):
+        t = (y - y0) / (H - y0)
+        md.line([(0, y), (W, y)], fill=int(255 * S["fade_strength"] * min(1, t * 1.6) ** 1.3))
+    return Image.composite(black, bg, mask)
 
 def logo(d):
     d.text((W // 2, S["safe"]["top"] - 50), S["logo_text"], font=font("font_small", 30), fill=S["accent"], anchor="mm")
@@ -56,9 +65,9 @@ def text_slide(text, path, index, img=None, fx=0.5):
         size -= 4
     if len(lines) * lh > box_h:
         raise ValueError(f"Texte trop long pour la slide {index}")
-    y = sf["top"] + (box_h - len(lines) * lh) // 2; cx = sf["left"] + box_w // 2
+    y = S["text_bottom"] - len(lines) * lh; cx = sf["left"] + box_w // 2
     for ln in lines:
-        d.text((cx + 3, y + 3), ln, font=f, fill=(0, 0, 0), anchor="ma")   # ombre
+        d.text((cx + 2, y + 2), ln, font=f, fill=(0, 0, 0), anchor="ma")   # ombre
         d.text((cx, y), ln, font=f, fill=S["text_color"], anchor="ma"); y += lh
     d.rectangle([cx - 40, y + 30, cx + 40, y + 36], fill=S["accent"])
     if index < 3:
@@ -66,7 +75,7 @@ def text_slide(text, path, index, img=None, fx=0.5):
     im.save(path, "JPEG", quality=93)
 
 def poster_slide(poster, meta, path):
-    im = background(poster, 0.5, blur=40); d = ImageDraw.Draw(im); logo(d)
+    im = background(poster, 0.5, blur=40, poster=True); d = ImageDraw.Draw(im); logo(d)
     pw = S["poster_width"]; ph = int(poster.height * pw / poster.width)
     max_h = H - S["safe"]["top"] - S["safe"]["bottom"] - 100
     if ph > max_h:
@@ -75,7 +84,7 @@ def poster_slide(poster, meta, path):
     mask = Image.new("L", (pw, ph), 0); ImageDraw.Draw(mask).rounded_rectangle([0, 0, pw, ph], 24, fill=255)
     x, y = (W - pw) // 2, S["safe"]["top"] + 10
     im.paste(p, (x, y), mask)
-    infos = " · ".join(v for v in [str(meta.get("year", "")), meta.get("platform", ""), f"★ {meta['rating']}" if meta.get("rating") else ""] if v)
+    infos = " · ".join(v for v in [str(meta.get("year", "")), meta.get("platform", ""), f"{meta['rating']}/10" if meta.get("rating") else ""] if v)
     d.text((W // 2, y + ph + 45), meta["title"], font=font("font_small", 36), fill=S["text_color"], anchor="mm")
     d.text((W // 2, y + ph + 95), infos, font=font("font_small", 28), fill=S["accent"], anchor="mm")
     im.save(path, "JPEG", quality=93)
