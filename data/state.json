@@ -1,5 +1,5 @@
 {
- "offset": 422725806,
+ "offset": 422725807,
  "pending": [],
  "last": {
   "type": "movie",
@@ -27,12 +27,12 @@
    "/rdgb4aUiMz9Vx5ZJoga4LkEMOTl.jpg"
   ],
   "assign": [
-   9,
+   0,
    5,
    2
   ],
   "focus": [
-   0.45,
+   0.5,
    0.62,
    0.55
   ]
