@@ -1,5 +1,5 @@
 {
- "offset": 422725818,
+ "offset": 422725819,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,9 +9,9 @@
   "rating": 8.2,
   "platform": "",
   "texts": [
-   "Ce film m'a fait regretter d'avoir déjà voulu qu'on m'aime.",
-   "Un objet magique exauce n'importe quel souhait, et lui n'en voulait qu'un.",
-   "Dans Obsession, son crush tombe raide dingue de lui, et ça ne s'arrête plus."
+   "Ton crush de toujours t'aime enfin. Et c'est ça, le problème.",
+   "Lui, timide, a mis la main sur un objet capable d'exaucer n'importe quel souhait.",
+   "Obsession, horreur et thriller : être désiré à ce point devient vite angoissant."
   ],
   "poster_path": "/mDCR1frpUvGfIKksuM440VLb7X9.jpg",
   "candidates": [
@@ -27,14 +27,14 @@
    "/eIw1YYdQ2ycsitUuiMa9ygzqgPm.jpg"
   ],
   "assign": [
-   2,
+   1,
    0,
-   1
+   2
   ],
   "focus": [
-   0.41,
-   0.4,
-   0.5
+   0.5,
+   0.35,
+   0.4
   ]
  }
 }
