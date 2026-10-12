@@ -54,7 +54,8 @@ Synopsis : {meta['overview']}
 - slide 2 : augmente la curiosité (situation étrange, tension, dilemme, détail mystérieux, ambiance ou promesse), sans spoiler ;
 - slide 3 : donne définitivement envie de regarder, un peu plus précise mais sans révéler l'important.
 Les trois forment une progression logique, chacune donne envie de voir la suivante. Exemples de TON (ne les réutilise pas) : « Ce film commence presque normalement… puis tout bascule. » / « Tu crois avoir compris l'histoire. Tu n'as encore rien vu. »
-Ajoute une caption TikTok (1 à 2 phrases courtes, avec éventuellement un CTA naturel comme « Tu l'as déjà vu ? »), et 6 hashtags (mélange de généraux #film #cinema et de spécifiques au titre/genre).
+ATTENTION AUX SPOILERS : le synopsis fourni peut lui-même révéler le secret central ou le retournement de l'histoire. Ne le reprends JAMAIS, même s'il est écrit dans le synopsis. Si l'œuvre repose sur un secret, un mensonge, une manipulation ou une révélation (qui est qui, ce qui est faux, ce qui se cache), ne le nomme pas : évoque seulement l'étrangeté, le malaise, la question que le personnage se pose, jamais la réponse. Pour chaque phrase, demande-toi : « quelqu'un qui n'a pas vu l'œuvre perd-il un plaisir de découverte en la lisant ? » Si oui, réécris.
+Ajoute une caption TikTok : 1 à 2 phrases courtes, concrètes, qui donnent un avis personnel précis sur l'œuvre (pas de formules toutes faites comme « n'a pas pris une ride », « à voir ou à revoir », « un incontournable »), avec éventuellement un CTA naturel comme « Tu l'as déjà vu ? ». Puis 6 hashtags : généraux (#film #cinema ou #serie) et spécifiques au titre, à l'acteur principal ou au genre ; pas de hashtags vagues comme #drame ou #recommandationfilm.
 JSON : {{"s1":"","s2":"","s3":"","caption":"","hashtags":["#..."],"spoiler_risk":false}}
 Mets spoiler_risk à true si tu as un doute sur un spoiler."""
     note = ""

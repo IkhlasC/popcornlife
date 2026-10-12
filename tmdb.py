@@ -53,7 +53,7 @@ def details(t, i):
 
 def _clean(name):
     for a, b in (("Amazon Prime Video", "Prime Video"), ("Disney Plus", "Disney+"), ("Apple TV Plus", "Apple TV+"),
-                 (" Standard with Ads", ""), (" with Ads", ""), (" Amazon Channel", "")):
+                 ("Paramount Plus Premium", "Paramount+"), ("Paramount Plus", "Paramount+"), (" Premium", ""), (" Standard with Ads", ""), (" with Ads", ""), (" Amazon Channel", "")):
         name = name.replace(a, b)
     return name.strip()
 
