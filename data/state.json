@@ -1,5 +1,5 @@
 {
- "offset": 422725826,
+ "offset": 422725827,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,9 +9,9 @@
   "rating": 8.1,
   "platform": "Disney+",
   "texts": [
-   "Ce chien regarde la télé pour s'instruire, et il m'a fait la leçon.",
-   "Il écoute chaque leçon de son maître, un pilote automobile, avec un sérieux déconcertant.",
-   "Aujourd'hui, Enzo se souvient de tout ce que sa famille a traversé."
+   "Ce chien comprend mieux les humains que nous, et ça m'a fait pleurer.",
+   "Denny, pilote automobile, parle à son chien comme à quelqu'un qui retient tout.",
+   "Prévois des mouchoirs : Enzo regarde sa famille avec un amour qui fait mal."
   ],
   "poster_path": "/2r2y16SUUm1NAJRWIFnnunKruv7.jpg",
   "candidates": [
@@ -28,12 +28,12 @@
   ],
   "assign": [
    9,
-   1,
-   0
+   3,
+   8
   ],
   "focus": [
-   0.35,
-   0.35,
+   0.3,
+   0.5,
    0.5
   ]
  }
