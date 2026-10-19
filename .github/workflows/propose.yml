@@ -1,7 +1,11 @@
 name: Propositions du jour
 on:
   schedule:
-    - cron: "0 6 * * *"
+    # Plusieurs tentatives : GitHub a parfois du retard. Le programme n'envoie qu'une fois par jour, à partir de 8 h (heure de Paris).
+    - cron: "7 6 * * *"
+    - cron: "37 6 * * *"
+    - cron: "7 7 * * *"
+    - cron: "37 7 * * *"
   workflow_dispatch:
 permissions:
   contents: write
@@ -18,8 +22,9 @@ jobs:
           python-version: "3.12"
           cache: pip
       - run: pip install -r requirements.txt
-      - run: python main.py propose
+      - run: python main.py daily
         env:
+          FORCE: ${{ github.event_name == 'workflow_dispatch' }}
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
