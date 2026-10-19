@@ -1,5 +1,8 @@
-import os, io, random, requests
+import os, io, random, datetime, requests
 from PIL import Image
+
+# Œuvres proposées chaque matin : sorties à partir de cette année (change ce chiffre si tu veux plus ou moins récent).
+MIN_YEAR = datetime.date.today().year - 8
 
 BASE = "https://api.themoviedb.org/3"; IMG = "https://image.tmdb.org/t/p/"
 
@@ -23,11 +26,15 @@ def candidates(exclude, n=30):
     pool = []
     for t in ("movie", "tv"):
         for page in random.sample(range(1, 9), 3):
+            date_key = "primary_release_date.gte" if t == "movie" else "first_air_date.gte"
             res = get(f"/discover/{t}", language="fr-FR", sort_by="popularity.desc", page=page,
-                      **{"vote_average.gte": 7.0, "vote_count.gte": 1500 if t == "movie" else 600},
+                      **{"vote_average.gte": 7.0, "vote_count.gte": 700 if t == "movie" else 300, date_key: f"{MIN_YEAR}-01-01"},
                       watch_region="FR", with_watch_monetization_types="flatrate")
             for it in res["results"]:
                 if (t, it["id"]) in exclude or not it.get("overview") or not it.get("poster_path"):
+                    continue
+                y = _year(it.get("release_date") or it.get("first_air_date"))
+                if not y.isdigit() or int(y) < MIN_YEAR:
                     continue
                 pool.append({"type": t, "id": it["id"], "title": it.get("title") or it.get("name"),
                              "year": _year(it.get("release_date") or it.get("first_air_date")),
@@ -68,7 +75,7 @@ def platforms(t, i):
         out[k] = names
     return out
 
-def backdrops(t, i, n=10):
+def backdrops(t, i, n=14):
     res = get(f"/{t}/{i}/images", include_image_language="null")["backdrops"]
     if len(res) < 4:
         res = get(f"/{t}/{i}/images", include_image_language="null,en,fr")["backdrops"]
