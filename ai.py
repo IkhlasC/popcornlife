@@ -5,6 +5,9 @@ MODEL = os.environ.get("MODEL_WRITE", "claude-sonnet-5-5")
 MODEL_FAST = os.environ.get("MODEL_FAST", "claude-haiku-5-5")
 _client = None
 
+# Style des slides. False = ta voix PopcornLife (majuscule au début). True = style « tout en minuscules, sans point final » du compte @alorsonregardequoi.
+STYLE_ORAL = False
+
 SYSTEM = """Tu écris pour PopcornLife, compte TikTok de recommandations de films et séries. Tu écris comme une vraie cinéphile qui recommande personnellement une œuvre à une amie : naturel, direct, jamais pompeux.
 Interdits : les clichés d'IA (« plongez dans », « incontournable », « chef-d'œuvre », « préparez-vous », « embarquez », « voyage »...), les emojis dans les slides, les paragraphes, les spoilers (ne révèle jamais un retournement, une mort, la fin, une identité cachée), et toute information sur l'intrigue qui ne figure pas dans le synopsis fourni."""
 
@@ -38,30 +41,61 @@ def propose(pool):
     prompt = f"""Voici une liste d'œuvres disponibles en streaming en France :
 {lines}
 
-Choisis 3 œuvres DIFFÉRENTES (pas 3 films du même genre ; 1 série maximum ; varie les pays si possible) qui ont le plus de potentiel pour un TikTok de recommandation qui fait swiper. Privilégie les sorties récentes, les univers visuellement forts (décors, ambiance, acteurs connus) et ceux dont on a envie de voir les images. Évite les titres trop vus partout si un titre plus surprenant est aussi bon.
+Choisis 3 œuvres DIFFÉRENTES (pas 3 films du même genre ; 1 série maximum ; varie les pays si possible) qui ont le plus de potentiel pour un TikTok de recommandation qui fait swiper. Privilégie les sorties récentes et les œuvres dont le CONCEPT tient en une seule image. Ce qui marche le mieux sur le compte : une MENACE VENUE DU CERCLE FAMILIER (un père, une mère, un enfant, un proche qui n'est pas ce qu'il semble), une INJUSTICE ou un dilemme moral, un piège dans un lieu du quotidien (airbnb, concert, tunnel, aéroport, vacances en famille), un retournement. Préfère les films de découverte aux blockbusters déjà vus partout. Évite les décors lointains ou fantastiques (apocalypse, western, dystopie, monstres), les clichés de genre (cimetière, village maudit) et les concepts qu'il faut expliquer.
 Pour chacune : un angle éditorial, une idée de hook (une phrase), et pourquoi ça peut fonctionner sur TikTok (une phrase).
 JSON : [{{"ref":"movie:123","angle":"","hook":"","pourquoi":""}}, ...]"""
     return ask_json(prompt)
 
-EXEMPLES = """CE QUI MARCHE SUR LE COMPTE PopcornLife (vrais posts, du plus vu au moins vu) :
-- Le Monde de John, 2,1 M de vues : 1) « Un garçon de 13 ans découvre un bunker à côté de sa maison. » 2) « Il décide de dr*guer toute sa famille et les enferme dedans. »
-- Curve (court-métrage), 309 K : 1) « Une femme se retrouve seule dans cette position. » 2) « Au moindre mouvement, la chute est assurée. »
-- Dans leur regard, 57 K : 1) « Un groupe d'amis passent la soirée à s'amuser dans Central Park. » 2) « Quand ils se retrouvent accusés à tort d'un v*ol et d'un m*eurtre. »
-- The Rain, 12 K (le plus faible) : 1) « Dans un monde apocalyptique, une seule goutte de pluie peut te t*er. » 2) « Une fille va tout faire pour protéger son petit frère. » La 2e phrase est la plus générique : c'est elle qui freine.
-Ce que ces textes ont en commun, et que tu dois reproduire :
-- phrases simples, concrètes, au présent, 8 à 12 mots, en langage parlé ;
-- un DÉTAIL PRÉCIS dans CHAQUE phrase (un âge, un chiffre, un lieu, un objet, une durée, un lien entre deux personnes) : si on peut remplacer le détail sans changer la phrase, il est trop vague ;
-- on RACONTE ce qui se passe, on ne dit jamais quoi ressentir : aucun jugement ni conclusion (« impossible de lâcher », « incroyable », « bouleversant », « tout bascule ») ;
-- la slide 1 pose une situation (normale ou étrange) ; la slide 2 donne la BASCULE et s'arrête JUSTE AVANT la réponse : on connaît le déclencheur, mais on retient la conséquence, l'identité ou le « pourquoi » ; c'est ce qui donne envie de voir la suite ;
-- aucune question, pas de « tu » dans les slides 1 et 2 ;
-- les mots sensibles sont masqués par un astérisque, comme sur le compte : t*er, m*eurtre, v*ol, dr*guer, s*icide, etc.
+EXEMPLES = """RÉFÉRENCES DE STYLE. Ne recopie jamais ces phrases ni ces idées : inspire-toi du RYTHME, de la STRUCTURE et du niveau de précision.
 
-COMPARE (style uniquement, ne reprends pas ces faits) :
-MAUVAIS (vague, bateau, il conclut au lieu de raconter) : « Des braqueurs expérimentés d'un côté, un inconnu trop précis de l'autre, impossible de lâcher. » / « Dans ce fourgon blindé, le petit nouveau ne rate aucune cible. »
-BON (un fait précis, et on veut la suite) : « Un convoyeur engagé il y a trois jours abat seul quatre braqueurs armés. » puis « Personne dans l'équipe ne sait d'où il sort, et il refuse de dire son nom. »
-Le BON donne un chiffre, une durée, un fait qu'on ne peut pas deviner, et laisse une zone d'ombre ; le MAUVAIS pourrait se coller sur n'importe quel film.
+A) TA VOIX PopcornLife (priorité : c'est le style du compte, majuscule au début, 11 à 12 mots par slide) :
+- Trap, 3,3 M de vues : « Ce t*eur en série se rend à un concert avec sa fille » / « Il se rend compte que le concert tout entier est un piège pour lui »
+- Le Monde de John, 2,1 M : « Un garçon de 13 ans découvre un bunker à côté de sa maison » / « Il décide de dr*guer toute sa famille et les enferme dedans »
+- Omar m'a tuer, 952 K : « Une vieille dame écrit le nom de son meurtrier avant de mourir » / « Omar, son jardinier, est jugé coupable, pourtant aucune preuve ne prouve sa culpabilité »
+- Prisoners, 895 K : « Et si ton enfant disparaissait… et que le seul suspect était intouchable » / « Jusqu'où irais-tu pour le faire parler ? »
+- Au nom de ma fille, 823 K : « Un père laisse sa fille partir en vacances chez une copine » / « Elle se fait t*er, son père accuse le père de sa copine mais personne ne le croit »
+- Goodnight Mommy, 647 K : « En rentrant, 2 jumeaux se rendent compte que leur mère a le visage bandé » / « Plus le temps passe, plus ils doutent de l'identité de cette femme »
+- Carry-On, 361 K : « Un agent de sécurité à l'aéroport trouve une oreillette à côté d'une valise » / « Pour sauver sa petite amie, il va devoir faire tout ce que lui dit la voix »
+- The Rental, 394 K : « Un couple loue un airbnb dans une maison isolée » / « Très vite, ils se rendent compte que la maison est truffée de caméras »
 
+B) Idées à reprendre d'un très grand compte du même concept (@alorsonregardequoi, jusqu'à 2,7 M de vues) : des détails encore plus concrets, des phrases coupées qui obligent à swiper.
+- « la nuit tombe, alors le chef d'une station de ski décide d'arrêter les télésièges pendant 1 semaine, mais… » / « sans le savoir, il oublie 3 amis, suspendus en hauteur, la nuit dans le froid… »
+- « une femme se retrouve seule sur une surface glissante avec un trou sans fin… » / « un mouvement de travers, elle tombe… elle bouge, elle tombe… » (le même film reste à 309 K quand le texte dit seulement « dans cette position » : le détail concret gagne)
+- « un homme assiste à un procès pour m*urtre en tant que membre du jury » / « mais, en écoutant les preuves, il comprend qu'il est lui-même responsable du crime »
+
+CE QUI FAIT LA DIFFÉRENCE (à reproduire) :
+- UNE phrase par slide, 8 à 16 mots (environ 12), en langage parlé, peu de virgules. Parfois une seule phrase coupée sur deux slides : la slide 1 est une proposition incomplète (« Après une dispute dans les bouchons », « Alors que… ») que la slide 2 termine.
+- La slide 1 met UNE PERSONNE DANS UNE SITUATION du quotidien (un père, une famille, un couple, un agent de sécurité), au présent. Elle ne commence JAMAIS par un décor ou un contexte (« Dans un monde où… », « En pleine apocalypse », « Alors qu'un tueur rôde en Amérique ») : le vrai hook doit être dans la slide 1.
+- Variantes qui marchent : l'inversion dès la slide 1 (le héros est en réalité le méchant : « Ce t*eur en série se rend à un concert avec sa fille »), le tutoiement « Et si ton… » (rarement), une phrase coupée par « mais… » ou « alors… ».
+- La MENACE VIENT DU CERCLE FAMILIER OU FAMILIER : un père, une mère qui n'est peut-être pas la mère, un enfant qui enferme sa famille, un logement loué. Pas un décor lointain.
+- La slide 2 montre la PRISE DE CONSCIENCE ou le retournement, jamais la fin : « se rend compte que… », « très vite… », « plus le temps passe, plus… », « il va devoir… ». Le meilleur : un retournement ou une ironie (le concert entier est un piège, le juré est le coupable).
+- Un sentiment d'INJUSTICE ou un dilemme moral fait réagir (on accuse le mauvais coupable, personne ne le croit, jusqu'où irait-on).
+- Détails utiles : un chiffre (13 ans, 2 jumeaux, 30 000 spectateurs, 1 semaine), un lieu clos du quotidien (airbnb, tunnel, aéroport, vacances), un objet qui déclenche l'intrigue (oreillette, valise, visage bandé, caméras), un lien familial (père, fille, mère, jumeaux).
+- Mots sensibles TOUJOURS masqués par un astérisque : t*eur, t*er, vi*ler, dr*guer, m*urtre, s*icide, m*rt.
+- Aucun jugement (« incroyable », « impossible de lâcher »), pas de point d'exclamation, pas d'emoji.
+
+CE QUI MARCHE MOINS (à éviter) : une slide 1 qui commence par un décor (« Alors qu'un t*eur rôde en Amérique ») ; une menace lointaine ou fantastique (apocalypse, dystopie, western, cimetière, monstres la nuit) ; une slide 2 qui EXPLIQUE au lieu de retourner (« en effet… », « le chemin va être périlleux ») ; une slide 2 vague (« leurs vacances tournent au drame ») ; un texte vague au lieu d'un détail précis (« dans cette position »).
+
+STRUCTURES RÉUTILISABLES (varie) :
+1. Proposition coupée : « Après [événement banal]… » puis « [Personnage] se rend compte que [menace] »
+2. Méchant en héros : « Ce [rôle inquiétant] fait [activité familiale banale] avec [proche] »
+3. Découverte + chiffre : « Un [enfant] de [N] ans découvre [lieu ou objet] près de chez lui »
+4. Prise de conscience progressive : « Plus le temps passe, plus [ils] doutent de [chose ou personne] »
+5. Objet déclencheur : « [Métier] trouve [petit objet] à côté de [lieu] » puis « Pour sauver [proche], il va devoir [obéir / faire] »
+6. Injustice : « [Personne] est accusé(e), pourtant [aucune preuve / personne ne la croit] »
+7. Cadre idyllique qui bascule : « Un couple loue [logement] [isolé] » puis « Très vite, ils se rendent compte que [détail inquiétant] »
+8. Chiffre repris : la slide 1 pose un nombre, la slide 2 le reprend (« et parmi ces 30 000, il y a… »)
 """
+
+def oral(t):
+    """Met la phrase au style oral : points de suspension propres, minuscule au début, pas de point final."""
+    t = re.sub(r"\.{3,}", "…", t.strip())
+    if not STYLE_ORAL:
+        return t
+    t = t.rstrip(". ")
+    if len(t) > 1 and t[0].isupper() and t[1].islower():
+        t = t[0].lower() + t[1:]
+    return t
 
 def write_post(meta, guidance="", avoid=None):
     kind = "série" if meta["type"] == "tv" else "film"
@@ -75,23 +109,23 @@ Accroche officielle : {meta['tagline'] or '-'}
 Synopsis : {meta['overview']}
 {extra}
 {EXEMPLES}
-Écris un carrousel TikTok de 3 phrases (une par slide), UNE phrase chacune, 12 mots maximum. Le but : retenir l'attention dès la slide 1 et créer du SUSPENSE à chaque slide, pour qu'on ait envie de swiper.
-- slide 1 : une situation concrète et précise (détail chiffré ou visuel) qui arrête le scroll ;
-- slide 2 : la bascule, racontée avec un fait précis, qui s'arrête juste avant la réponse (on retient la conséquence, l'identité ou le « pourquoi ») ;
+Écris un carrousel TikTok de 3 phrases (une par slide), UNE phrase chacune, 8 à 16 mots (environ 12). Le but : retenir l'attention dès la slide 1 et créer du SUSPENSE à chaque slide, pour qu'on ait envie de swiper.
+- slide 1 : UNE PERSONNE dans une situation du quotidien (ou l'inversion : le héros est en fait le méchant), avec le vrai hook dès cette slide ;
+- slide 2 : la prise de conscience ou le retournement (« se rend compte que… », « très vite… », « il va devoir… »), jamais la fin ;
 - slide 3 : l'enjeu ou le dilemme final, concret (un délai, un danger, un choix impossible), sans dire comment ça finit.
 Les trois forment une progression : chacune donne envie de voir la suivante.
 
 MÉTHODE (c'est ce qui décide de la qualité) :
-1. "brouillons_s1" : 6 versions DIFFÉRENTES de la slide 1 : (a) une personne précise (âge, métier) + un objet ou un lieu inhabituel, (b) une situation normale sur le point de dérailler, (c) une contrainte physique ou une règle impossible, (d) un piège ou une injustice, (e) un choix extrême, (f) un fait chiffré.
-2. "brouillons_s2" : 5 versions de la slide 2, chacune basée sur un FAIT PRÉCIS du synopsis et qui laisse volontairement une zone d'ombre.
+1. "brouillons_s1" : 6 versions DIFFÉRENTES de la slide 1 : (a) une personne + une situation du quotidien (airbnb, vacances, trajet, concert, travail), (b) l'inversion : le héros est en réalité le méchant ou le piège est pour lui, (c) la menace vient d'un proche (père, mère, enfant, voisin), (d) une proposition coupée (« Après… », « Alors que… ») que la slide 2 terminera, (e) une injustice, (f) un objet ou un fait chiffré qui déclenche l'intrigue.
+2. "brouillons_s2" : 5 versions de la slide 2 : (a) la prise de conscience (« se rend compte que… »), (b) un retournement ou une ironie, (c) « plus le temps passe, plus… » ou « très vite… », (d) « il va devoir… », (e) l'injustice (« pourtant personne ne le croit »). Toutes basées sur un FAIT PRÉCIS du synopsis, qui laissent volontairement une zone d'ombre.
 3. Garde pour chaque slide la plus concrète et la plus intrigante.
-Test final pour chaque phrase : (1) peut-on la coller telle quelle sur un autre film ? Alors elle est trop vague, recommence. (2) contient-elle un jugement ou une conclusion (« impossible de lâcher », « tout change ») ? Supprime-le. (3) donne-t-elle envie de connaître la suite ? Sinon, recommence.
-INTERDIT : « Et si… », « Imagine… », « quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu vas adorer », « d'un côté… de l'autre », « impossible de lâcher », les questions, les superlatifs vides.
+Test final pour chaque phrase : (1) peut-on la coller telle quelle sur un autre film ? Alors elle est trop vague, recommence. (2) la slide 1 commence-t-elle par un décor ou un contexte (« Dans un monde… », « En pleine… ») ? Réécris-la avec une personne. (3) contient-elle un jugement ou une conclusion ? Supprime-le. (4) donne-t-elle envie de connaître la suite ? Sinon, recommence.
+INTERDIT : « quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu vas adorer », « d'un côté… de l'autre », « impossible de lâcher », « leurs vacances tournent au drame » et autres formules vagues, les points d'exclamation, les emojis, les superlatifs vides, un nom d'acteur. Une question n'est autorisée qu'en slide 2 (« Jusqu'où irais-tu… ? »), jamais en slide 1 ni 3.
 
 RÈGLE SPOILER : tu peux raconter le point de départ et la première grande bascule de l'histoire (ce que dirait le résumé au dos du film), mais JAMAIS le retournement final, la fin, qui meurt à la fin, ni l'identité d'un personnage caché.
 Reste fidèle au synopsis fourni : n'invente aucun fait.
 
-Ajoute 6 hashtags : généraux (#film #cinema ou #serie) et spécifiques au titre, à l'acteur principal ou au genre ; pas de hashtags vagues comme #drame.
+Ajoute 6 hashtags : #film (ou #serie), #cinema, #quoiregarder, un hashtag du genre (#thriller, #suspense, #horreur, #psychologique…), le hashtag du titre (sans espaces ni accents) et un hashtag lié à l'intrigue.
 JSON : {{"brouillons_s1":["","","","","",""],"brouillons_s2":["","","","",""],"s1":"","s2":"","s3":"","hashtags":["#..."],"spoiler_risk":false}}
 Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retournement."""
     note = ""
@@ -100,18 +134,20 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
         s = [r.get("s1", ""), r.get("s2", ""), r.get("s3", "")]
         problems = []
         if any(not x.strip() for x in s): problems.append("une slide est vide")
-        if any(len(x.split()) > 16 for x in s): problems.append("une phrase dépasse 12 mots")
+        if any(len(x.split()) > 18 for x in s): problems.append("une phrase dépasse 16 mots")
         if r.get("spoiler_risk"): problems.append("risque de spoiler sur la fin ou un retournement")
         if len(set(s)) < 3: problems.append("phrases identiques")
-        if any("?" in x for x in s): problems.append("une phrase contient une question")
-        vague = re.compile(r"impossible de (le |la |les |s'en )?(l[âa]cher|quitter|d[ée]crocher)|d'un c[ôo]t[ée]|de l'autre|tout (bascule|change)|rien ne sera plus|plus jamais comme|quelque chose cloche|personne ne s'y attend|tu vas adorer", re.I)
+        if "?" in s[0] or "?" in s[2]: problems.append("une question en slide 1 ou 3 (réservée à la slide 2)")
+        if any("!" in x for x in s): problems.append("une phrase contient un point d'exclamation")
+        vague = re.compile(r"impossible de (le |la |les |s'en )?(l[âa]cher|quitter|d[ée]crocher)|d'un c[ôo]t[ée]|de l'autre|tout (bascule|change)|rien ne sera plus|plus jamais comme|quelque chose cloche|personne ne s'y attend|tu vas adorer|tournent? au drame", re.I)
+        if re.match(r"(?i)^(dans un (monde|futur|univers)|en pleine|dans un pays|dans une soci[ée]t[ée])", s[0].strip()): problems.append("la slide 1 commence par un décor : commence par une personne dans une situation")
         bad = [x for x in s if vague.search(x)]
         if bad: problems.append("formule vague ou conclusion interdite dans : " + " / ".join(bad) + " (raconte un fait précis à la place)")
-        if avoid and s[0].strip() in [x.strip() for x in avoid]: problems.append("la slide 1 reprend un texte refusé")
+        if avoid and oral(s[0]) in [x.strip() for x in avoid]: problems.append("la slide 1 reprend un texte refusé")
         if not problems:
             tags = r.get("hashtags", [])
             tags = [t if t.startswith("#") else "#" + t for t in tags]
-            return {"texts": s, "caption": "", "hashtags": " ".join(tags)}
+            return {"texts": [oral(x) for x in s], "caption": "", "hashtags": " ".join(tags)}
         note = "\n\nCorrige ce problème : " + ", ".join(problems) + "."
     raise RuntimeError("Impossible d'obtenir des textes valides")
 
