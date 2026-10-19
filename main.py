@@ -1,8 +1,10 @@
 import sys, os, io, re, json, html, datetime, traceback
+from zoneinfo import ZoneInfo
 import tmdb, ai, tg, render
 
 DATA = "data"
 RECENT_DAYS = 365
+SEND_HOUR = 8   # heure (Paris) à partir de laquelle les propositions du jour sont envoyées
 HELP = ("🍿 <b>PopcornLife Studio</b>\n\n"
         "• Chaque matin je t'envoie 3 propositions : appuie sur A, B ou C.\n"
         "• Tu peux aussi m'écrire un film : « Gone Girl » ou « Fais-moi un TikTok sur Dark ».\n"
@@ -35,6 +37,21 @@ def platform_info(t, i):
     return "", "Plateforme en France introuvable : je n'en affiche aucune sur la slide 4."
 
 # ---------- propositions ----------
+def daily():
+    """Envoie les propositions une seule fois par jour, à partir de 8 h (heure de Paris), même si GitHub a du retard."""
+    now = datetime.datetime.now(ZoneInfo("Europe/Paris")); today = now.date().isoformat()
+    force = os.environ.get("FORCE") == "true"
+    state = load("state", {"offset": 0})
+    if not force and (state.get("last_propose") == today or now.hour < SEND_HOUR):
+        return
+    state["last_propose"] = today; save("state", state)   # on note d'abord, pour ne jamais envoyer deux fois
+    try:
+        propose()
+    except Exception as ex:
+        traceback.print_exc()
+        try: tg.send(f"⚠️ Je n'ai pas pu préparer les propositions du jour ({e(ex)}). Écris « propositions » pour réessayer.")
+        except Exception: pass
+
 def propose():
     pool = tmdb.candidates(recent_ids())
     if len(pool) < 6:
@@ -55,21 +72,23 @@ def propose():
     tg.send("\n".join(lines), [[b] for b in buttons])
 
 # ---------- création d'un post ----------
-def choose_images(meta, texts, paths):
-    """L'IA choisit, pour chaque phrase, l'image la plus cohérente parmi les images du film."""
+def choose_images(meta, paths):
+    """L'IA choisit les 3 images les plus accrocheuses (la plus percutante en slide 1), puis on recentre sur le visage."""
     bd = [None, None, None]
     if not paths:
         return [], [], bd
     thumbs = []
     for p in paths:
         im = tmdb.download(p, "w300"); b = io.BytesIO(); im.save(b, "JPEG", quality=80); thumbs.append(b.getvalue())
-    choice = ai.pick_images(meta, texts, thumbs)
-    cache = {}
+    choice = ai.pick_images(meta, thumbs)
+    cache, focus = {}, []
     for n, c in enumerate(choice):
         if c["idx"] not in cache:
             cache[c["idx"]] = tmdb.download(paths[c["idx"]], "w1280")
         bd[n] = cache[c["idx"]]
-    return [c["idx"] for c in choice], [c["focus"] for c in choice], bd
+        face = render.face_focus(bd[n])   # on affine la position donnée par l'IA avec le vrai visage, s'il est détecté et cohérent
+        focus.append(face if face is not None and abs(face - c["focus"]) <= 0.25 else c["focus"])
+    return [c["idx"] for c in choice], focus, bd
 
 def rewrite(guidance=""):
     state = load("state", {"offset": 0}); last = state.get("last")
@@ -78,12 +97,11 @@ def rewrite(guidance=""):
     meta = tmdb.details(last["type"], last["id"])
     tg.send(f"✍️ Je réécris les textes de <b>{e(last['title'])}</b>…" + (f"\nConsigne : {e(guidance)}" if guidance else ""))
     post = ai.write_post(meta, guidance, avoid=last["texts"])
-    assign, focus, bd = choose_images(meta, post["texts"], last["candidates"])
+    assign, focus, bd = choose_images(meta, last["candidates"])
     poster = tmdb.download(last["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, focus or [0.5] * 3, poster,
                               {"title": last["title"], "year": last["year"], "platform": last["platform"], "rating": last["rating"]}, "out")
     tg.send_files(files[:3])
-    tg.send(f"<b>Nouvelle caption (touche pour copier) :</b>\n<code>{e(post['caption'])}\n\n{e(post['hashtags'])}</code>")
     tg.send(f"1. {e(post['texts'][0])}\n2. {e(post['texts'][1])}\n3. {e(post['texts'][2])}\n\n"
             "La slide 4 (affiche) ne change pas. Pas encore ça ? Écris « refais » suivi de ce que tu veux, "
             "par exemple « refais plus mystérieux, sans question ».")
@@ -103,12 +121,13 @@ def produce(t, i):
     paths = tmdb.backdrops(t, i)
     last = {"type": t, "id": i, "title": meta["title"], "year": meta["year"], "rating": meta["rating"], "platform": plat,
             "texts": post["texts"], "poster_path": meta["poster_path"], "candidates": paths, "assign": [], "focus": []}
-    last["assign"], last["focus"], bd = choose_images(meta, post["texts"], paths)
+    last["assign"], last["focus"], bd = choose_images(meta, paths)
     poster = tmdb.download(meta["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, last["focus"] or [0.5] * 3, poster,
                               {"title": meta["title"], "year": meta["year"], "platform": plat, "rating": meta["rating"]}, "out")
     tg.send_files(files)
-    tg.send(f"<b>Caption (touche pour copier) :</b>\n<code>{e(post['caption'])}\n\n{e(post['hashtags'])}</code>")
+    tg.send(f"<code>{e(meta['title'])}</code>")
+    tg.send(f"<code>{e(post['hashtags'])}</code>")
     tg.send(f"✅ <b>{e(meta['title'])}</b> est prêt.\n{e(plat_msg)}\n\n"
             f"1. {e(post['texts'][0])}\n2. {e(post['texts'][1])}\n3. {e(post['texts'][2])}\n\n"
             f"Une image ne te plaît pas ? Écris « image 1 », « image 2 » ou « image 3 ».\n{meta['url']}")
@@ -123,10 +142,11 @@ def redo_image(n):
     cands, assign = last["candidates"], last["assign"]
     cur = assign[n - 1]
     nxt = next((k % len(cands) for k in range(cur + 1, cur + 1 + len(cands)) if (k % len(cands)) not in assign), (cur + 1) % len(cands))
-    assign[n - 1] = nxt; last["focus"][n - 1] = 0.5
+    assign[n - 1] = nxt
     im = tmdb.download(cands[nxt], "w1280")
+    fx = render.face_focus(im); fx = 0.5 if fx is None else fx; last["focus"][n - 1] = fx
     os.makedirs("out", exist_ok=True); p = f"out/slide{n}.jpg"
-    render.text_slide(last["texts"][n - 1], p, n, im, 0.5)
+    render.text_slide(last["texts"][n - 1], p, n, im, fx)
     tg.send_files([p]); tg.send(f"Voilà la slide {n} avec une autre image. Écris « image {n} » pour en essayer une autre.")
     save("state", state)
 
@@ -181,14 +201,15 @@ def handle(u, state):
 def poll():
     state = load("state", {"offset": 0, "pending": [], "last": None})
     for u in tg.updates(state["offset"]):
-        state["offset"] = u["update_id"] + 1; save("state", state)
+        state = load("state", state); state["offset"] = u["update_id"] + 1; save("state", state)
         try:
             handle(u, load("state", state))
         except Exception as ex:
             traceback.print_exc()
             try: tg.send(f"⚠️ Une erreur est survenue : {e(ex)}\nRéessaie, ou écris-moi le titre directement.")
             except Exception: pass
+    daily()
 
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "poll"
-    {"propose": propose, "poll": poll}[cmd]()
+    {"propose": propose, "daily": daily, "poll": poll}[cmd]()
