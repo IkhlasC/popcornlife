@@ -18,10 +18,30 @@ def gradient():
     return img
 
 def cover(im, fx=0.5, fy=0.5):
+    """Recadre en 9:16 en CENTRANT sur le sujet : fx = position du sujet dans l'image (0 = bord gauche, 1 = bord droit)."""
     r = max(W / im.width, H / im.height)
     im = im.convert("RGB").resize((int(im.width * r) + 1, int(im.height * r) + 1), Image.LANCZOS)
-    x = int((im.width - W) * min(max(fx, 0), 1)); y = int((im.height - H) * min(max(fy, 0), 1))
+    x = int(min(max(fx * im.width - W / 2, 0), max(im.width - W, 0)))
+    y = int(min(max(fy * im.height - H / 2, 0), max(im.height - H, 0)))
     return im.crop((x, y, x + W, y + H))
+
+def face_focus(im):
+    """Position horizontale (0 à 1) du plus grand visage de l'image, ou None si aucun visage n'est détecté."""
+    try:
+        import cv2, numpy as np
+        g = np.array(im.convert("L")); h, w = g.shape; s = 640 / w
+        g = cv2.resize(g, (640, max(int(h * s), 1)))
+        best = None
+        for name in ("haarcascade_frontalface_default.xml", "haarcascade_profileface.xml"):
+            faces = cv2.CascadeClassifier(cv2.data.haarcascades + name).detectMultiScale(g, 1.1, 5, minSize=(40, 40))
+            for (x, y, fw, fh) in faces:
+                if best is None or fw * fh > best[2] * best[3]:
+                    best = (x, y, fw, fh)
+            if best is not None:
+                break
+        return float((best[0] + best[2] / 2) / 640) if best is not None else None
+    except Exception:
+        return None
 
 def background(im=None, fx=0.5, blur=0, poster=False):
     if im is None:
