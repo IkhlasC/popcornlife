@@ -38,10 +38,30 @@ def propose(pool):
     prompt = f"""Voici une liste d'œuvres disponibles en streaming en France :
 {lines}
 
-Choisis 3 œuvres DIFFÉRENTES (pas 3 films du même genre ; 1 série maximum ; varie les pays et les époques si possible) qui ont le plus de potentiel pour un TikTok de recommandation qui fait swiper. Évite les titres trop vus partout si un titre plus surprenant est aussi bon.
+Choisis 3 œuvres DIFFÉRENTES (pas 3 films du même genre ; 1 série maximum ; varie les pays si possible) qui ont le plus de potentiel pour un TikTok de recommandation qui fait swiper. Privilégie les sorties récentes, les univers visuellement forts (décors, ambiance, acteurs connus) et ceux dont on a envie de voir les images. Évite les titres trop vus partout si un titre plus surprenant est aussi bon.
 Pour chacune : un angle éditorial, une idée de hook (une phrase), et pourquoi ça peut fonctionner sur TikTok (une phrase).
 JSON : [{{"ref":"movie:123","angle":"","hook":"","pourquoi":""}}, ...]"""
     return ask_json(prompt)
+
+EXEMPLES = """CE QUI MARCHE SUR LE COMPTE PopcornLife (vrais posts, du plus vu au moins vu) :
+- Le Monde de John, 2,1 M de vues : 1) « Un garçon de 13 ans découvre un bunker à côté de sa maison. » 2) « Il décide de dr*guer toute sa famille et les enferme dedans. »
+- Curve (court-métrage), 309 K : 1) « Une femme se retrouve seule dans cette position. » 2) « Au moindre mouvement, la chute est assurée. »
+- Dans leur regard, 57 K : 1) « Un groupe d'amis passent la soirée à s'amuser dans Central Park. » 2) « Quand ils se retrouvent accusés à tort d'un v*ol et d'un m*eurtre. »
+- The Rain, 12 K (le plus faible) : 1) « Dans un monde apocalyptique, une seule goutte de pluie peut te t*er. » 2) « Une fille va tout faire pour protéger son petit frère. » La 2e phrase est la plus générique : c'est elle qui freine.
+Ce que ces textes ont en commun, et que tu dois reproduire :
+- phrases simples, concrètes, au présent, 8 à 12 mots, en langage parlé ;
+- un DÉTAIL PRÉCIS dans CHAQUE phrase (un âge, un chiffre, un lieu, un objet, une durée, un lien entre deux personnes) : si on peut remplacer le détail sans changer la phrase, il est trop vague ;
+- on RACONTE ce qui se passe, on ne dit jamais quoi ressentir : aucun jugement ni conclusion (« impossible de lâcher », « incroyable », « bouleversant », « tout bascule ») ;
+- la slide 1 pose une situation (normale ou étrange) ; la slide 2 donne la BASCULE et s'arrête JUSTE AVANT la réponse : on connaît le déclencheur, mais on retient la conséquence, l'identité ou le « pourquoi » ; c'est ce qui donne envie de voir la suite ;
+- aucune question, pas de « tu » dans les slides 1 et 2 ;
+- les mots sensibles sont masqués par un astérisque, comme sur le compte : t*er, m*eurtre, v*ol, dr*guer, s*icide, etc.
+
+COMPARE (style uniquement, ne reprends pas ces faits) :
+MAUVAIS (vague, bateau, il conclut au lieu de raconter) : « Des braqueurs expérimentés d'un côté, un inconnu trop précis de l'autre, impossible de lâcher. » / « Dans ce fourgon blindé, le petit nouveau ne rate aucune cible. »
+BON (un fait précis, et on veut la suite) : « Un convoyeur engagé il y a trois jours abat seul quatre braqueurs armés. » puis « Personne dans l'équipe ne sait d'où il sort, et il refuse de dire son nom. »
+Le BON donne un chiffre, une durée, un fait qu'on ne peut pas deviner, et laisse une zone d'ombre ; le MAUVAIS pourrait se coller sur n'importe quel film.
+
+"""
 
 def write_post(meta, guidance="", avoid=None):
     kind = "série" if meta["type"] == "tv" else "film"
@@ -49,61 +69,74 @@ def write_post(meta, guidance="", avoid=None):
     if guidance:
         extra += f"\nINSTRUCTION DE LA RÉDACTRICE (à respecter en priorité absolue) : {guidance}\n"
     if avoid:
-        extra += "\nTextes déjà proposés et REFUSÉS (ne les reprends pas, change d'angle et de technique) :\n" + "\n".join(f"- {x}" for x in avoid) + "\n"
+        extra += "\nTextes déjà proposés et REFUSÉS (ne les reprends pas, change d'angle) :\n" + "\n".join(f"- {x}" for x in avoid) + "\n"
     base = f"""Œuvre : {meta['title']} ({meta['year']}), {kind}. Genres : {', '.join(meta['genres'])}.
 Accroche officielle : {meta['tagline'] or '-'}
 Synopsis : {meta['overview']}
 {extra}
-Écris un carrousel TikTok de 3 phrases (une par slide), UNE phrase chacune, 14 mots maximum :
-- slide 1 : une accroche qui arrête le scroll, intrigue sans rien révéler ;
-- slide 2 : augmente la curiosité (situation étrange, tension, dilemme, détail mystérieux, ambiance ou promesse), sans spoiler ;
-- slide 3 : donne définitivement envie de regarder, un peu plus précise mais sans révéler l'important.
-Les trois forment une progression logique, chacune donne envie de voir la suivante.
+{EXEMPLES}
+Écris un carrousel TikTok de 3 phrases (une par slide), UNE phrase chacune, 12 mots maximum. Le but : retenir l'attention dès la slide 1 et créer du SUSPENSE à chaque slide, pour qu'on ait envie de swiper.
+- slide 1 : une situation concrète et précise (détail chiffré ou visuel) qui arrête le scroll ;
+- slide 2 : la bascule, racontée avec un fait précis, qui s'arrête juste avant la réponse (on retient la conséquence, l'identité ou le « pourquoi ») ;
+- slide 3 : l'enjeu ou le dilemme final, concret (un délai, un danger, un choix impossible), sans dire comment ça finit.
+Les trois forment une progression : chacune donne envie de voir la suivante.
 
-MÉTHODE POUR LA SLIDE 1 (c'est elle qui décide de tout) :
-1. Dans "brouillons_s1", écris 6 accroches DIFFÉRENTES, chacune avec une technique différente : (a) un détail concret et étrange tiré du synopsis, (b) une contradiction ou un paradoxe, (c) une confession personnelle (« Je n'ai pas réussi à… », « J'ai arrêté de… »), (d) une règle ou une situation impossible, (e) une interpellation directe qui met le lecteur en position de choisir, (f) une promesse très précise sur ce que le film fait ressentir.
-2. Garde la plus forte : celle qui crée un vide qu'on ne peut combler qu'en swipant, et qui ne ressemble à aucune accroche vue cent fois.
-RÈGLES : sois CONCRÈTE plutôt qu'abstraite (un objet, un lieu, un chiffre, une situation précise, pas « quelque chose cloche »). Si une phrase pourrait être collée telle quelle sur un autre film, elle est trop vague : recommence. INTERDIT : « Et si… », « Imagine… », « Pourtant, quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu ne seras plus le même », « tu vas adorer », « un film qui… » en ouverture, les questions rhétoriques génériques, les superlatifs vides.
+MÉTHODE (c'est ce qui décide de la qualité) :
+1. "brouillons_s1" : 6 versions DIFFÉRENTES de la slide 1 : (a) une personne précise (âge, métier) + un objet ou un lieu inhabituel, (b) une situation normale sur le point de dérailler, (c) une contrainte physique ou une règle impossible, (d) un piège ou une injustice, (e) un choix extrême, (f) un fait chiffré.
+2. "brouillons_s2" : 5 versions de la slide 2, chacune basée sur un FAIT PRÉCIS du synopsis et qui laisse volontairement une zone d'ombre.
+3. Garde pour chaque slide la plus concrète et la plus intrigante.
+Test final pour chaque phrase : (1) peut-on la coller telle quelle sur un autre film ? Alors elle est trop vague, recommence. (2) contient-elle un jugement ou une conclusion (« impossible de lâcher », « tout change ») ? Supprime-le. (3) donne-t-elle envie de connaître la suite ? Sinon, recommence.
+INTERDIT : « Et si… », « Imagine… », « quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu vas adorer », « d'un côté… de l'autre », « impossible de lâcher », les questions, les superlatifs vides.
 
-ATTENTION AUX SPOILERS : le synopsis fourni peut lui-même révéler le secret central ou le retournement de l'histoire. Ne le reprends JAMAIS, même s'il est écrit dans le synopsis. Si l'œuvre repose sur un secret, un mensonge, une manipulation ou une révélation, ne le nomme pas : évoque seulement l'étrangeté, le malaise, la question que le personnage se pose, jamais la réponse. Pour chaque phrase, demande-toi : « quelqu'un qui n'a pas vu l'œuvre perd-il un plaisir de découverte en la lisant ? » Si oui, réécris.
+RÈGLE SPOILER : tu peux raconter le point de départ et la première grande bascule de l'histoire (ce que dirait le résumé au dos du film), mais JAMAIS le retournement final, la fin, qui meurt à la fin, ni l'identité d'un personnage caché.
+Reste fidèle au synopsis fourni : n'invente aucun fait.
 
-Ajoute une caption TikTok : 1 à 2 phrases courtes, concrètes, qui donnent un avis personnel précis sur l'œuvre (pas de formules toutes faites comme « n'a pas pris une ride », « à voir ou à revoir », « un incontournable »), avec éventuellement un CTA naturel comme « Tu l'as déjà vu ? ». Puis 6 hashtags : généraux (#film #cinema ou #serie) et spécifiques au titre, à l'acteur principal ou au genre ; pas de hashtags vagues comme #drame ou #recommandationfilm.
-JSON : {{"brouillons_s1":["","","","","",""],"s1":"","s2":"","s3":"","caption":"","hashtags":["#..."],"spoiler_risk":false}}
-Mets spoiler_risk à true si tu as un doute sur un spoiler."""
+Ajoute 6 hashtags : généraux (#film #cinema ou #serie) et spécifiques au titre, à l'acteur principal ou au genre ; pas de hashtags vagues comme #drame.
+JSON : {{"brouillons_s1":["","","","","",""],"brouillons_s2":["","","","",""],"s1":"","s2":"","s3":"","hashtags":["#..."],"spoiler_risk":false}}
+Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retournement."""
     note = ""
     for _ in range(3):
         r = ask_json(base + note, max_tokens=3000)
         s = [r.get("s1", ""), r.get("s2", ""), r.get("s3", "")]
         problems = []
         if any(not x.strip() for x in s): problems.append("une slide est vide")
-        if any(len(x.split()) > 18 for x in s): problems.append("une phrase dépasse 14 mots")
-        if r.get("spoiler_risk"): problems.append("risque de spoiler")
+        if any(len(x.split()) > 16 for x in s): problems.append("une phrase dépasse 12 mots")
+        if r.get("spoiler_risk"): problems.append("risque de spoiler sur la fin ou un retournement")
         if len(set(s)) < 3: problems.append("phrases identiques")
+        if any("?" in x for x in s): problems.append("une phrase contient une question")
+        vague = re.compile(r"impossible de (le |la |les |s'en )?(l[âa]cher|quitter|d[ée]crocher)|d'un c[ôo]t[ée]|de l'autre|tout (bascule|change)|rien ne sera plus|plus jamais comme|quelque chose cloche|personne ne s'y attend|tu vas adorer", re.I)
+        bad = [x for x in s if vague.search(x)]
+        if bad: problems.append("formule vague ou conclusion interdite dans : " + " / ".join(bad) + " (raconte un fait précis à la place)")
         if avoid and s[0].strip() in [x.strip() for x in avoid]: problems.append("la slide 1 reprend un texte refusé")
         if not problems:
             tags = r.get("hashtags", [])
             tags = [t if t.startswith("#") else "#" + t for t in tags]
-            return {"texts": s, "caption": r.get("caption", "").strip(), "hashtags": " ".join(tags)}
+            return {"texts": s, "caption": "", "hashtags": " ".join(tags)}
         note = "\n\nCorrige ce problème : " + ", ".join(problems) + "."
-    raise RuntimeError("Impossible d'obtenir des textes valides sans spoiler")
+    raise RuntimeError("Impossible d'obtenir des textes valides")
 
-def pick_images(meta, texts, thumbs):
+def pick_images(meta, thumbs):
     prompt = f"""Voici {len(thumbs)} images du {'film' if meta['type']=='movie' else 'la série'} « {meta['title']} ».
-Pour chacune de ces 3 phrases de slide, choisis l'image la plus cohérente avec son sens ou son ambiance :
-1. {texts[0]}
-2. {texts[1]}
-3. {texts[2]}
-Évite les images floues, celles avec du texte ou un logo visible, et celles qui pourraient spoiler (révélation, fin). Utilise 3 images différentes si possible. Donne aussi focus_x (0 = gauche, 1 = droite) : où se trouve le sujet principal, pour le recadrage vertical.
-JSON : [{{"image":1,"focus_x":0.5}}, {{"image":2,"focus_x":0.5}}, {{"image":3,"focus_x":0.5}}]"""
+Choisis les 3 images les plus ACCROCHEUSES visuellement pour un carrousel TikTok vertical. Ne cherche PAS à illustrer un texte : cherche les images qui arrêtent le scroll et donnent envie de voir l'œuvre.
+Critères, par ordre d'importance :
+- un visage en gros plan ou plan rapproché, avec une émotion ou une intensité forte (regard, tension, peur, colère, sourire marquant), ou une image spectaculaire (décor, action) très lisible ;
+- UN sujet principal net, placé plutôt dans la moitié HAUTE de l'image (le texte occupera le bas) ;
+- couleurs et contrastes marqués, image nette et lumineuse ;
+- fuis : plans larges où les personnages sont minuscules, foule, flou, image sombre ou terne, texte ou logo visible, visage coupé, scène qui spoile la fin.
+L'image placée en n°1 doit être LA plus percutante de toutes (c'est elle qui décide si on continue). Utilise 3 images différentes.
+Pour chaque image choisie, donne focus_x : la position horizontale du visage ou du sujet principal (0 = bord gauche, 1 = bord droit), pour recadrer en vertical autour de lui.
+JSON : [{{"image":1,"focus_x":0.5}}, {{"image":2,"focus_x":0.5}}, {{"image":3,"focus_x":0.5}}] (dans l'ordre des slides 1, 2, 3)"""
     r = ask_json(prompt, images=thumbs)
-    out = []
+    out, used = [], set()
     for i in range(3):
         try:
             idx = int(r[i]["image"]) - 1
-            if not 0 <= idx < len(thumbs): raise ValueError
+            if not 0 <= idx < len(thumbs) or idx in used: raise ValueError
             out.append({"idx": idx, "focus": float(r[i].get("focus_x", 0.5))})
         except Exception:
-            out.append({"idx": i % len(thumbs), "focus": 0.5})
+            idx = next(k for k in range(len(thumbs)) if k not in used)
+            out.append({"idx": idx, "focus": 0.5})
+        used.add(out[-1]["idx"])
     return out
 
 def extract_title(message):
