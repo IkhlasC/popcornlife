@@ -12,6 +12,7 @@ STYLE = {
                    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", "C:/Windows/Fonts/arial.ttf"],
     "text_max_size": 80, "text_min_size": 50, "line_spacing": 1.18,
     "text_bottom": 1430,         # position du BAS du texte (plus le chiffre est petit, plus le texte monte ; max 1920)
+    "zoom": 0.80,                # zoom des photos : 1.0 = plein cadre (très zoomé) ; plus le chiffre est petit, plus on voit de décor (ex. 0.7)
     "dim": 0.20,                 # assombrissement général de l'image (0 = aucun, 1 = noir)
     "fade_start": 0.42,          # où commence le dégradé sombre en bas (0 = haut de l'image, 1 = bas)
     "fade_strength": 0.88,       # force du dégradé sombre derrière le texte
