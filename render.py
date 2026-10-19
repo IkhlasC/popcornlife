@@ -43,10 +43,29 @@ def face_focus(im):
     except Exception:
         return None
 
+def scene(im, fx=0.5):
+    """Photo dézoomée : on voit plus de décor autour du sujet. Le bas se fond dans une version floue de la même photo."""
+    full = cover(im, fx)
+    z = S.get("zoom", 1.0)
+    if z >= 1:
+        return full
+    im = im.convert("RGB"); rr = max(W / im.width, H / im.height) * z
+    sw, sh = int(im.width * rr) + 1, int(im.height * rr) + 1
+    if sw < W:
+        return full
+    fg = im.resize((sw, sh), Image.LANCZOS)
+    x = int(min(max(fx * sw - W / 2, 0), sw - W)); fg = fg.crop((x, 0, x + W, min(sh, H)))
+    base = full.filter(ImageFilter.GaussianBlur(45))
+    mask = Image.new("L", fg.size, 255); md = ImageDraw.Draw(mask); fade = min(200, fg.height // 3)
+    for k in range(fade):
+        md.line([(0, fg.height - fade + k), (W, fg.height - fade + k)], fill=int(255 * (1 - k / fade)))
+    base.paste(fg, (0, 0), mask)
+    return base
+
 def background(im=None, fx=0.5, blur=0, poster=False):
     if im is None:
         return gradient()
-    bg = cover(im, fx)
+    bg = scene(im, fx) if (not poster and not blur) else cover(im, fx)
     if blur:
         bg = bg.filter(ImageFilter.GaussianBlur(blur))
     black = Image.new("RGB", (W, H), (6, 4, 6))
