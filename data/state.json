@@ -1,5 +1,5 @@
 {
- "offset": 422725836,
+ "offset": 422725837,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,9 +9,9 @@
   "rating": 8.3,
   "platform": "Netflix",
   "texts": [
-   "Une jeune femme envoie ses confessions en vocal à sa sœur m*rte.",
-   "Mais chaque vocal atterrit sur le répondeur d'un inconnu.",
-   "Il tombe sous son charme et doit choisir : se taire ou avouer."
+   "Une jeune femme laisse des vocaux à sa sœur m*rte.",
+   "Ses confessions hilarantes finissent sur le répondeur d'un inconnu.",
+   "Il tombe sous le charme d'une femme qui ignore qu'il l'écoute."
   ],
   "poster_path": "/gqnv5448y3R5KAelvhapSKtiU5z.jpg",
   "candidates": [
@@ -32,13 +32,13 @@
   ],
   "assign": [
    1,
-   10,
-   12
+   9,
+   0
   ],
   "focus": [
-   0.5,
-   0.496875,
-   0.490625
+   0.52,
+   0.46484375,
+   0.35
   ]
  },
  "last_propose": "2026-10-19"
