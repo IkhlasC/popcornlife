@@ -1,44 +1,44 @@
 {
- "offset": 422725841,
+ "offset": 422725842,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 1010581,
-  "title": "À contre-sens",
-  "year": "2023",
-  "rating": 7.7,
-  "platform": "Prime Video",
+  "id": 1339713,
+  "title": "Obsession",
+  "year": "2026",
+  "rating": 8.2,
+  "platform": "",
   "texts": [
-   "Une fille de 17 ans emménage chez le nouveau mari riche de sa mère",
-   "Elle se rend compte que son demi-frère parfait cache des courses illégales et des bagarres",
-   "Ils tombent amoureux en secret alors que tout leur entourage s'y oppose"
+   "Un garçon timide trouve un objet qui exauce n'importe quel souhait",
+   "Très vite, la fille dont il rêve depuis toujours devient raide dingue de lui",
+   "Son amour devient une obsession totale et c'est lui qui l'a souhaité"
   ],
-  "poster_path": "/3ZCfSSxZ2e4Kiwu3Y9dvfT5n1m6.jpg",
+  "poster_path": "/mDCR1frpUvGfIKksuM440VLb7X9.jpg",
   "candidates": [
-   "/oz4U9eA6ilYf1tyiVuGmkftdLac.jpg",
-   "/lntyt4OVDbcxA1l7LtwITbrD3FI.jpg",
-   "/8vTaoJQ1HmWY8hXztUbkNBpnAc0.jpg",
-   "/anGpqEH7KpPr7y1NOJXA7G5TfnI.jpg",
-   "/rEDpmM2OUhuCijGhhoiyzYLAyiC.jpg",
-   "/nThDBidi0xKjG0M1gojO9nmXwLb.jpg",
-   "/dxMV1aBOHObtmLcF3N26sZZ623z.jpg",
-   "/4JvdjaBTxU0x5apU53oenGTogBR.jpg",
-   "/uHdRlcU6DyrGAmMDERVZytHSBGF.jpg",
-   "/oos81pt3pTDhX7W8kai8n5AkFaF.jpg",
-   "/rdl97gVcKff9YkJ5dN3RnPffjL1.jpg",
-   "/v6yOxe2ZSw5AKt5o0vjCtIQxShq.jpg",
-   "/yKXUXcLKmPYHpB4p0kEPnk9pkAM.jpg",
-   "/jZ9sxkL4yqvOS9EDvw9D4Kgkn6q.jpg"
+   "/5lTZyuBTNOfawsfPT8Q0cIg6qAF.jpg",
+   "/uoTZOIXnkcTgJe1emITpsQq7sPu.jpg",
+   "/diOZbaDnB2CIilwd0527AB1qMvW.jpg",
+   "/r013C8Me2bZ0pUi0OWJRh0h7MzT.jpg",
+   "/4k99kV4R1bbbrsnjR205v91Xbin.jpg",
+   "/u5BkYDM5gfK4wINfoIFMAcEUKhx.jpg",
+   "/7xZCxnhIB7XNwbJDoaNocFzGOmO.jpg",
+   "/8Z4mNUnfhiOSYzcCw3yoGR7q2un.jpg",
+   "/qDmeLX1NTCD7B2IbDhCEReJgmO8.jpg",
+   "/eIw1YYdQ2ycsitUuiMa9ygzqgPm.jpg",
+   "/uXVj5lfXuUdXpDheQ9SHmwKuQta.jpg",
+   "/oICYZzr1arFtiaPrQfOTYZOOrCy.jpg",
+   "/d40SQY5TXCF8NJN2C6FnxFHsOD4.jpg",
+   "/fnASfC4pJ4NSzJ1ch7FBD99PiaZ.jpg"
   ],
   "assign": [
-   0,
-   6,
-   3
+   3,
+   5,
+   1
   ],
   "focus": [
-   0.7,
-   0.46875,
-   0.6078125
+   0.5515625,
+   0.52578125,
+   0.7796875
   ]
  },
  "last_propose": "2026-10-19"
