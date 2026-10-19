@@ -1,56 +1,44 @@
 {
- "offset": 422725834,
- "pending": [
-  {
-   "type": "movie",
-   "id": 1064486,
-   "title": "Mémoires d’un escargot"
-  },
-  {
-   "type": "movie",
-   "id": 614945,
-   "title": "Si tu m'écoutes"
-  },
-  {
-   "type": "movie",
-   "id": 1137844,
-   "title": "Mayday"
-  }
- ],
+ "offset": 422725835,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 637649,
-  "title": "Un Homme en colère",
-  "year": "2021",
-  "rating": 7.6,
-  "platform": "Prime Video",
+  "id": 614945,
+  "title": "Si tu m'écoutes",
+  "year": "2026",
+  "rating": 8.3,
+  "platform": "Netflix",
   "texts": [
-   "Dans ce fourgon blindé, le petit nouveau ne rate aucune cible.",
-   "Personne dans l'équipe ne sait d'où il vient, ni pourquoi il est là.",
-   "Des braqueurs expérimentés d'un côté, un inconnu trop précis de l'autre, impossible de lâcher."
+   "Une jeune femme envoie ses confessions en vocal à sa sœur m*rte.",
+   "Mais chaque vocal atterrit sur le répondeur d'un inconnu.",
+   "Il tombe sous son charme et doit choisir : se taire ou avouer."
   ],
-  "poster_path": "/u1xYjmCpDqgUfLlSgq8HlHtVVor.jpg",
+  "poster_path": "/gqnv5448y3R5KAelvhapSKtiU5z.jpg",
   "candidates": [
-   "/70AV2Xx5FQYj20labp0EGdbjI6E.jpg",
-   "/gqkPugYBRf9idMFImPW14jVnMjN.jpg",
-   "/fPo9i1Ozf7i2KkkvPVA9NUIb9sV.jpg",
-   "/g0C0SP89u22k6abx7vD7nexUxeZ.jpg",
-   "/tqVAk3JtMV3KJoH8WvrajrZ6ML6.jpg",
-   "/qAaneIBfYWBedc9MAC28NGYzNXg.jpg",
-   "/bkVaGFyt6euOV0ZGImQTzKN1dbB.jpg",
-   "/77tui163estZrQ78NBggqDB4n2C.jpg",
-   "/jT3qYmarKthWD5CRxcwqZiQ1dMI.jpg",
-   "/bZcb6EOnt7rnU1SyLMwM2Wg8BLl.jpg"
+   "/2WU6Y6aonzD6uAaCmNnEFlesxxJ.jpg",
+   "/nz6avJDkwKct3smKgrn6UmdO9TU.jpg",
+   "/7wwzkJ8it0LO76JBN2NCYqzrCZw.jpg",
+   "/7KOJh05UuCsrtj04rbbLNZBJclX.jpg",
+   "/42tC70C8ZnSsf5v4pBAMcio5DY7.jpg",
+   "/nM5bS9igsYpe4AIryRwwMYumtuS.jpg",
+   "/wtXZqHlAtsQmGgte9y40AkwhFLq.jpg",
+   "/57XHpPDN76oZ00JuI7X6ITyOXoP.jpg",
+   "/c1DQruoPf7S69GU72HiNxSrQ9Ho.jpg",
+   "/cZvOEqjzW2lKfzhYDG92OS3YtBK.jpg",
+   "/AaannV5L3OtV1iwG4e5YtachWvr.jpg",
+   "/c3248GWa2r9K086z1kdxbAXJiVG.jpg",
+   "/31YXqmtgUjFHDRaX4dzZ3O5vnbi.jpg",
+   "/91HrrBemocMwd9dlKs70e8nlXCM.jpg"
   ],
   "assign": [
    1,
-   0,
-   4
+   9,
+   12
   ],
   "focus": [
    0.5,
-   0.5,
-   0.6
+   0.46484375,
+   0.490625
   ]
  },
  "last_propose": "2026-10-19"
