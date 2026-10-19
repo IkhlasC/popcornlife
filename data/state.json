@@ -1,20 +1,20 @@
 {
- "offset": 422725832,
+ "offset": 422725834,
  "pending": [
   {
    "type": "movie",
-   "id": 4935,
-   "title": "Le Château ambulant"
-  },
-  {
-   "type": "tv",
-   "id": 124364,
-   "title": "FROM"
+   "id": 1064486,
+   "title": "Mémoires d’un escargot"
   },
   {
    "type": "movie",
-   "id": 398818,
-   "title": "Call Me by Your Name"
+   "id": 614945,
+   "title": "Si tu m'écoutes"
+  },
+  {
+   "type": "movie",
+   "id": 1137844,
+   "title": "Mayday"
   }
  ],
  "last": {
@@ -52,5 +52,6 @@
    0.5,
    0.6
   ]
- }
+ },
+ "last_propose": "2026-10-19"
 }
