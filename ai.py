@@ -26,15 +26,33 @@ def ask(prompt, images=None, model=None, max_tokens=2500):
                              messages=[{"role": "user", "content": content}])
     return "".join(b.text for b in r.content if b.type == "text")
 
+def parse_json(txt):
+    """Extrait le JSON d'une réponse, même entourée de texte ou de ```. Renvoie None si illisible."""
+    clean = re.sub(r"^```(?:json)?\s*|\s*```$", "", txt.strip(), flags=re.M).strip()
+    cands = [clean]
+    for pat in (r"\{.*\}", r"\[.*\]"):
+        m = re.search(pat, clean, re.S)
+        if m: cands.append(m.group(0))
+    for c in cands:
+        try:
+            return json.loads(c)
+        except Exception:
+            pass
+    return None
+
 def ask_json(prompt, **kw):
     for attempt in range(2):
-        txt = ask(prompt, **kw)
-        m = re.search(r"(\{.*\}|\[.*\])", txt, re.S)
-        try:
-            return json.loads(m.group(1))
-        except Exception:
-            prompt += "\n\nRéponds UNIQUEMENT avec du JSON valide."
+        r = parse_json(ask(prompt, **kw))
+        if r is not None:
+            return r
+        prompt += "\n\nRéponds UNIQUEMENT avec du JSON valide."
     raise RuntimeError("Réponse IA illisible")
+
+def as_dict(r):
+    """Si l'IA a renvoyé une liste contenant l'objet attendu, on prend l'objet."""
+    if isinstance(r, list):
+        r = next((x for x in r if isinstance(x, dict)), {})
+    return r if isinstance(r, dict) else {}
 
 def propose(pool):
     lines = "\n".join(f'{p["type"]}:{p["id"]} | {p["title"]} ({p["year"]}) | note {p["rating"]} | {", ".join(p["genres"])} | {p["overview"][:220]}' for p in pool)
@@ -130,7 +148,7 @@ JSON : {{"brouillons_s1":["","","","","",""],"brouillons_s2":["","","","",""],"s
 Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retournement."""
     note = ""
     for _ in range(3):
-        r = ask_json(base + note, max_tokens=3000)
+        r = as_dict(ask_json(base + note, max_tokens=3000))
         s = [r.get("s1", ""), r.get("s2", ""), r.get("s3", "")]
         problems = []
         if any(not x.strip() for x in s): problems.append("une slide est vide")
@@ -163,6 +181,11 @@ L'image placée en n°1 doit être LA plus percutante de toutes (c'est elle qui 
 Pour chaque image choisie, donne focus_x : la position horizontale du visage ou du sujet principal (0 = bord gauche, 1 = bord droit), pour recadrer en vertical autour de lui.
 JSON : [{{"image":1,"focus_x":0.5}}, {{"image":2,"focus_x":0.5}}, {{"image":3,"focus_x":0.5}}] (dans l'ordre des slides 1, 2, 3)"""
     r = ask_json(prompt, images=thumbs)
+    if isinstance(r, dict):                       # l'IA a enveloppé la liste dans un objet
+        r = next((v for v in r.values() if isinstance(v, list)), [])
+    while r and isinstance(r, list) and isinstance(r[0], list):   # liste dans une liste
+        r = r[0]
+    r = [x for x in r if isinstance(x, dict)] if isinstance(r, list) else []
     out, used = [], set()
     for i in range(3):
         try:
@@ -176,5 +199,5 @@ JSON : [{{"image":1,"focus_x":0.5}}, {{"image":2,"focus_x":0.5}}, {{"image":3,"f
     return out
 
 def extract_title(message):
-    r = ask_json(f'Message : « {message} »\nQuel film ou quelle série la personne demande-t-elle ? JSON : {{"titre":"","annee":null}} (titre vide si ce n\'est pas une demande de film/série).', model=MODEL_FAST, max_tokens=200)
+    r = as_dict(ask_json(f'Message : « {message} »\nQuel film ou quelle série la personne demande-t-elle ? JSON : {{"titre":"","annee":null}} (titre vide si ce n\'est pas une demande de film/série).', model=MODEL_FAST, max_tokens=200))
     return (r.get("titre") or "").strip(), r.get("annee")
