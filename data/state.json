@@ -1,60 +1,44 @@
 {
- "offset": 422725839,
- "pending": [
-  {
-   "type": "movie",
-   "id": 1151031,
-   "title": "Substitution : Bring Her Back"
-  },
-  {
-   "type": "movie",
-   "id": 1010581,
-   "title": "À contre-sens"
-  },
-  {
-   "type": "tv",
-   "id": 196322,
-   "title": "Dark Matter"
-  }
- ],
+ "offset": 422725840,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 614945,
-  "title": "Si tu m'écoutes",
-  "year": "2026",
-  "rating": 8.3,
-  "platform": "Netflix",
+  "id": 1151031,
+  "title": "Substitution : Bring Her Back",
+  "year": "2025",
+  "rating": 7.3,
+  "platform": "Canal+",
   "texts": [
-   "Une jeune femme laisse des vocaux à sa sœur m*rte.",
-   "Ses confessions hilarantes finissent sur le répondeur d'un inconnu.",
-   "Il tombe sous le charme d'une femme qui ignore qu'il l'écoute."
+   "Un ado perd son père et veut la garde de sa demi-sœur malvoyante",
+   "Très vite, il se rend compte que leur hôtesse héberge déjà un petit garçon muet",
+   "Il doit tenir 3 mois chez une femme qui veut éveiller l'esprit de sa fille noyée"
   ],
-  "poster_path": "/gqnv5448y3R5KAelvhapSKtiU5z.jpg",
+  "poster_path": "/AjBNmvAUbl8RMMYmv1dFfP9I1II.jpg",
   "candidates": [
-   "/2WU6Y6aonzD6uAaCmNnEFlesxxJ.jpg",
-   "/nz6avJDkwKct3smKgrn6UmdO9TU.jpg",
-   "/7wwzkJ8it0LO76JBN2NCYqzrCZw.jpg",
-   "/7KOJh05UuCsrtj04rbbLNZBJclX.jpg",
-   "/42tC70C8ZnSsf5v4pBAMcio5DY7.jpg",
-   "/nM5bS9igsYpe4AIryRwwMYumtuS.jpg",
-   "/wtXZqHlAtsQmGgte9y40AkwhFLq.jpg",
-   "/57XHpPDN76oZ00JuI7X6ITyOXoP.jpg",
-   "/c1DQruoPf7S69GU72HiNxSrQ9Ho.jpg",
-   "/cZvOEqjzW2lKfzhYDG92OS3YtBK.jpg",
-   "/AaannV5L3OtV1iwG4e5YtachWvr.jpg",
-   "/c3248GWa2r9K086z1kdxbAXJiVG.jpg",
-   "/31YXqmtgUjFHDRaX4dzZ3O5vnbi.jpg",
-   "/91HrrBemocMwd9dlKs70e8nlXCM.jpg"
+   "/2IIKts2A9vnUdM9tTC76B8tDmuZ.jpg",
+   "/U0A4zWh6XbJt1jDAPuGqKcu4ga.jpg",
+   "/fVbHJenFi5DwqaRMLI3JHWHr2Wd.jpg",
+   "/oqw3QoBX8K2lbeuMCpXQYG6LIzE.jpg",
+   "/5esDYWV0NoFwqPa1iC0g9akqZo9.jpg",
+   "/nEXA1Dl2MOQY2RrelOdxQDJOl61.jpg",
+   "/abfJ72E4H2slFv3BzK7iGzNYnHm.jpg",
+   "/ayEo9tlBM57ICEDotqTvQLRmstu.jpg",
+   "/zX8UkmCzZ1THMqFk3NTjH5TicnM.jpg",
+   "/uxQUoXzFCr5d42cPVjVp4bWcnYW.jpg",
+   "/lwsNOgws670Z6xAP0r1juNTFUM3.jpg",
+   "/dfNg7LagiVdnuT2tVDcaH66tgWK.jpg",
+   "/lKFWRdkrWJLmY2eMd9WEFmXGphg.jpg",
+   "/eXnQHgawjxLmq7PTZ8QjPn7ixVU.jpg"
   ],
   "assign": [
-   1,
+   8,
    9,
-   0
+   5
   ],
   "focus": [
-   0.52,
-   0.46484375,
-   0.35
+   0.5,
+   0.45,
+   0.5
   ]
  },
  "last_propose": "2026-10-19"
