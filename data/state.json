@@ -1,60 +1,44 @@
 {
- "offset": 422725842,
- "pending": [
-  {
-   "type": "movie",
-   "id": 1368166,
-   "title": "La Femme de ménage"
-  },
-  {
-   "type": "movie",
-   "id": 1621552,
-   "title": "La captura"
-  },
-  {
-   "type": "tv",
-   "id": 104877,
-   "title": "Love is in the Air"
-  }
- ],
+ "offset": 422725843,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 1339713,
-  "title": "Obsession",
-  "year": "2026",
-  "rating": 8.2,
-  "platform": "",
+  "id": 1368166,
+  "title": "La Femme de ménage",
+  "year": "2025",
+  "rating": 7.3,
+  "platform": "Canal+",
   "texts": [
-   "Un garçon timide trouve un objet qui exauce n'importe quel souhait",
-   "Très vite, la fille dont il rêve depuis toujours devient raide dingue de lui",
-   "Son amour devient une obsession totale et c'est lui qui l'a souhaité"
+   "Pour repartir de zéro, Millie devient femme de ménage à demeure chez un couple riche",
+   "Très vite, elle comprend que Nina et Andrew jouent avec elle",
+   "Logée chez eux, elle découvre que chaque secret du manoir la met en danger"
   ],
-  "poster_path": "/mDCR1frpUvGfIKksuM440VLb7X9.jpg",
+  "poster_path": "/naFRoBTiHycN71wO02BA1NyLJ28.jpg",
   "candidates": [
-   "/5lTZyuBTNOfawsfPT8Q0cIg6qAF.jpg",
-   "/uoTZOIXnkcTgJe1emITpsQq7sPu.jpg",
-   "/diOZbaDnB2CIilwd0527AB1qMvW.jpg",
-   "/r013C8Me2bZ0pUi0OWJRh0h7MzT.jpg",
-   "/4k99kV4R1bbbrsnjR205v91Xbin.jpg",
-   "/u5BkYDM5gfK4wINfoIFMAcEUKhx.jpg",
-   "/7xZCxnhIB7XNwbJDoaNocFzGOmO.jpg",
-   "/8Z4mNUnfhiOSYzcCw3yoGR7q2un.jpg",
-   "/qDmeLX1NTCD7B2IbDhCEReJgmO8.jpg",
-   "/eIw1YYdQ2ycsitUuiMa9ygzqgPm.jpg",
-   "/uXVj5lfXuUdXpDheQ9SHmwKuQta.jpg",
-   "/oICYZzr1arFtiaPrQfOTYZOOrCy.jpg",
-   "/d40SQY5TXCF8NJN2C6FnxFHsOD4.jpg",
-   "/fnASfC4pJ4NSzJ1ch7FBD99PiaZ.jpg"
+   "/zTnAnYIn0Iv3cn0ZHlzLhou3ybm.jpg",
+   "/sK3z0Naed3H1Wuh7a21YRVMxYqt.jpg",
+   "/8lgSWWrpS75Hwdm0TZlL1dK7VDD.jpg",
+   "/OUEBvYMdrqrTgcJAhrRBef8Gjg.jpg",
+   "/gEHDCtR9PNZvLG70sFBYJCFznRY.jpg",
+   "/bEcRxVHyCmwTYYlVVLLgGz2GdWW.jpg",
+   "/wkBM1RsOKgXyZ7vdAyqIO6VWmfs.jpg",
+   "/ncY1mPmuefm08B5h7XEzVoYEm0H.jpg",
+   "/xSEDS9KPpaTYRN1rQAXO61ikIlz.jpg",
+   "/nMMkDyUqVTZcOsvqWZOzYlv1PUz.jpg",
+   "/gFHimE7YaNOKbYPgTIrhXJW9PJa.jpg",
+   "/3CTxjBNIWx8qZm36ZT29yTBQcFe.jpg",
+   "/qIGH3UUqvM5BOr7YPR47I5eCZJq.jpg",
+   "/ae0p8SqtMNNxbmbUHyCaE20D2aQ.jpg"
   ],
   "assign": [
-   3,
-   5,
-   1
+   4,
+   10,
+   2
   ],
   "focus": [
-   0.5515625,
-   0.52578125,
-   0.7796875
+   0.5703125,
+   0.47734375,
+   0.42
   ]
  },
  "last_propose": "2026-10-20"
