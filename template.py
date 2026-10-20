@@ -13,13 +13,14 @@ STYLE = {
     "text_max_size": 80, "text_min_size": 50, "line_spacing": 1.18,
     "text_bottom": 1430,         # position du BAS du texte (plus le chiffre est petit, plus le texte monte ; max 1920)
     "zoom": 0.80,                # zoom des photos : 1.0 = plein cadre (très zoomé) ; plus le chiffre est petit, plus on voit de décor (ex. 0.7)
-    "dim": 0.20,                 # assombrissement général de l'image (0 = aucun, 1 = noir)
-    "fade_start": 0.42,          # où commence le dégradé sombre en bas (0 = haut de l'image, 1 = bas)
-    "fade_strength": 0.88,       # force du dégradé sombre derrière le texte
+    "dim": 0.06,                 # assombrissement général de l'image (0 = aucun, 1 = noir)
+    "fade_start": 0.52,          # où commence le dégradé sombre en bas (0 = haut de l'image, 1 = bas)
+    "fade_strength": 0.70,       # force du dégradé sombre derrière le texte
     "poster_dim": 0.58,          # assombrissement du fond flouté de la slide 4
     "bg_top": (14, 10, 12), "bg_bottom": (52, 14, 20),   # fond si aucune image
     "text_color": (255, 255, 255), "accent": (229, 9, 20),
-    "text_bg": (229, 9, 20),     # fond rouge derrière le texte des slides (mets None pour le retirer)
+    "text_bg": (150, 12, 22),    # fond rouge (plus sombre) derrière le texte des slides (mets None pour le retirer)
+    "text_bg_alpha": 0.88,       # transparence du fond rouge (1 = opaque)
     "logo_text": "POPCORNLIFE",
     # Zones à laisser libres pour l'interface TikTok (en pixels)
     "safe": {"top": 200, "bottom": 420, "left": 90, "right": 150},
