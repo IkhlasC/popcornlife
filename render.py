@@ -62,6 +62,18 @@ def scene(im, fx=0.5):
     base.paste(fg, (0, 0), mask)
     return base
 
+def _lift(im):
+    """Éclaircit une image trop sombre pour qu'on la distingue bien (gamma), sans toucher aux images déjà lumineuses."""
+    try:
+        from PIL import ImageStat
+        lum = ImageStat.Stat(im.convert("L").crop((0, 0, W, int(H * 0.55)))).mean[0]
+        if lum >= 95: return im
+        g = max(0.55, 0.55 + (lum - 30) / 65 * 0.45) if lum > 30 else 0.55
+        lut = [int(255 * ((i / 255) ** g)) for i in range(256)]
+        return im.point(lut * 3)
+    except Exception:
+        return im
+
 def background(im=None, fx=0.5, blur=0, poster=False):
     if im is None:
         return gradient()
@@ -71,6 +83,7 @@ def background(im=None, fx=0.5, blur=0, poster=False):
     black = Image.new("RGB", (W, H), (6, 4, 6))
     if poster:
         return Image.blend(bg, black, S["poster_dim"])
+    bg = _lift(bg)
     bg = Image.blend(bg, black, S["dim"])
     mask = Image.new("L", (W, H), 0); md = ImageDraw.Draw(mask)
     y0 = int(H * S["fade_start"])
@@ -106,10 +119,13 @@ def text_slide(text, path, index, img=None, fx=0.5):
         raise ValueError(f"Texte trop long pour la slide {index}")
     y = S["text_bottom"] - len(lines) * lh; cx = sf["left"] + box_w // 2
     bg = S.get("text_bg")
-    if bg:                                           # fond rouge derrière chaque ligne
-        for n, ln in enumerate(lines):
-            l, t, rr, b = d.textbbox((cx, y + n * lh), ln, font=f, anchor="ma")
-            d.rounded_rectangle([l - 30, t - 10, rr + 30, b + 10], radius=18, fill=bg)
+    if bg:                                           # UN seul bloc rouge continu derrière tout le texte
+        l0, t0, _, _ = d.textbbox((cx, y), lines[0], font=f, anchor="ma")
+        _, _, _, b1 = d.textbbox((cx, y + (len(lines) - 1) * lh), lines[-1], font=f, anchor="ma")
+        mw = max(d.textlength(ln, font=f) for ln in lines)
+        ov = Image.new("RGBA", im.size, (0, 0, 0, 0))
+        ImageDraw.Draw(ov).rounded_rectangle([cx - mw / 2 - 40, t0 - 26, cx + mw / 2 + 40, b1 + 26], radius=26, fill=(*bg, int(255 * S.get("text_bg_alpha", 1))))
+        im = Image.alpha_composite(im.convert("RGBA"), ov).convert("RGB"); d = ImageDraw.Draw(im)
     for ln in lines:
         if not bg:
             d.text((cx + 2, y + 2), ln, font=f, fill=(0, 0, 0), anchor="ma")   # ombre
