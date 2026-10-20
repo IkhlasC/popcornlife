@@ -68,7 +68,7 @@ JSON : [{{"ref":"movie:123","score_reaction":8,"angle":"","hook":"","pourquoi":"
 
 EXEMPLES = """RÉFÉRENCES DE STYLE. Ne recopie jamais ces phrases ni ces idées : inspire-toi du RYTHME, de la STRUCTURE et du niveau de précision.
 
-A) TA VOIX PopcornLife (priorité : c'est le style du compte, majuscule au début, 11 à 12 mots par slide) :
+A) TA VOIX PopcornLife (priorité : c'est le style du compte, majuscule au début, 9 à 12 mots par slide) :
 - Trap, 3,3 M de vues : « Ce t*eur en série se rend à un concert avec sa fille » / « Il se rend compte que le concert tout entier est un piège pour lui »
 - Le Monde de John, 2,1 M : « Un garçon de 13 ans découvre un bunker à côté de sa maison » / « Il décide de dr*guer toute sa famille et les enferme dedans »
 - Omar m'a tuer, 952 K : « Une vieille dame écrit le nom de son meurtrier avant de mourir » / « Omar, son jardinier, est jugé coupable, pourtant aucune preuve ne prouve sa culpabilité »
@@ -91,7 +91,7 @@ C) ACCROCHE « IMAGINE… » (pour que le lecteur se sente concerné ; à utilis
 Règles de l'accroche « Imagine » : elle ouvre la slide 1 (« Imagine que tu es… » ou « Imagine ton frère / ta mère / ton père / ta meilleure amie… »), suivie d'un FAIT CHOQUANT et concret du synopsis, jamais flou ; la slide 2 enchaîne au tutoiement ou à la 3e personne ; elle n'est pas une question. À utiliser dans environ 1 carrousel sur 3, uniquement quand le synopsis s'y prête (un proche, un enfant, une situation du quotidien qu'on peut se représenter). Pour une histoire lointaine ou fantastique, ne la force pas.
 
 CE QUI FAIT LA DIFFÉRENCE (à reproduire) :
-- UNE phrase par slide, 8 à 16 mots (environ 12), en langage parlé, peu de virgules. Parfois une seule phrase coupée sur deux slides : la slide 1 est une proposition incomplète (« Après une dispute dans les bouchons », « Alors que… ») que la slide 2 termine.
+- UNE phrase par slide, 7 à 12 mots (environ 10), en langage parlé, peu de virgules. Parfois une seule phrase coupée sur deux slides : la slide 1 est une proposition incomplète (« Après une dispute dans les bouchons », « Alors que… ») que la slide 2 termine.
 - La slide 1 met UNE PERSONNE DANS UNE SITUATION du quotidien (un père, une famille, un couple, un agent de sécurité), au présent. Elle ne commence JAMAIS par un décor ou un contexte (« Dans un monde où… », « En pleine apocalypse », « Alors qu'un tueur rôde en Amérique ») : le vrai hook doit être dans la slide 1.
 - Variantes qui marchent : l'inversion dès la slide 1 (le héros est en réalité le méchant : « Ce t*eur en série se rend à un concert avec sa fille »), le tutoiement « Et si ton… » (rarement), une phrase coupée par « mais… » ou « alors… ».
 - La MENACE VIENT DU CERCLE FAMILIER OU FAMILIER : un père, une mère qui n'est peut-être pas la mère, un enfant qui enferme sa famille, un logement loué. Pas un décor lointain.
@@ -137,7 +137,7 @@ Accroche officielle : {meta['tagline'] or '-'}
 Synopsis : {meta['overview']}
 {extra}
 {EXEMPLES}
-Écris un carrousel TikTok de 3 phrases (une par slide), UNE phrase chacune, 8 à 16 mots (environ 12). Le but : retenir l'attention dès la slide 1 et créer du SUSPENSE à chaque slide, pour qu'on ait envie de swiper.
+Écris un carrousel TikTok de 3 phrases (une par slide), UNE phrase chacune, 7 à 12 mots (environ 10). Le but : retenir l'attention dès la slide 1 et créer du SUSPENSE à chaque slide, pour qu'on ait envie de swiper.
 - slide 1 : UNE PERSONNE dans une situation du quotidien (ou l'inversion : le héros est en fait le méchant), avec le vrai hook dès cette slide ;
 - slide 2 : la prise de conscience ou le retournement (« se rend compte que… », « très vite… », « il va devoir… »), jamais la fin ;
 - slide 3 : l'enjeu ou le dilemme final, concret (un délai, un danger, un choix impossible), sans dire comment ça finit.
@@ -162,7 +162,7 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
         s = [r.get("s1", ""), r.get("s2", ""), r.get("s3", "")]
         problems = []
         if any(not x.strip() for x in s): problems.append("une slide est vide")
-        if any(len(x.split()) > 18 for x in s): problems.append("une phrase dépasse 16 mots")
+        if any(len(x.split()) > 14 for x in s): problems.append("une phrase est trop longue : 12 mots maximum, raccourcis en gardant le fait choquant")
         if r.get("spoiler_risk"): problems.append("risque de spoiler sur la fin ou un retournement")
         if len(set(s)) < 3: problems.append("phrases identiques")
         if "?" in s[0] or "?" in s[2]: problems.append("une question en slide 1 ou 3 (réservée à la slide 2)")
@@ -179,12 +179,25 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
         note = "\n\nCorrige ce problème : " + ", ".join(problems) + "."
     raise RuntimeError("Impossible d'obtenir des textes valides")
 
+def _penalty(b):
+    """Pénalité pour une image sombre ou floue (mesurée avec Pillow, indépendante de l'IA)."""
+    try:
+        from PIL import Image, ImageFilter, ImageStat
+        im = Image.open(io.BytesIO(b)).convert("L")
+        lum = ImageStat.Stat(im).mean[0]
+        sharp = ImageStat.Stat(im.filter(ImageFilter.FIND_EDGES)).var[0]
+        p = max(0.0, (75 - lum) / 8)             # sombre : jusqu'à -9 si presque noire
+        if sharp < 60: p += 2                    # floue
+        return p
+    except Exception:
+        return 0.0
+
 def pick_images(meta, thumbs):
     """Chaque image reçoit une note de CHOC ; on prend les 3 meilleures, la plus choquante en slide 1."""
     prompt = f"""Voici {len(thumbs)} images du {'film' if meta['type']=='movie' else 'la série'} « {meta['title']} ».
 Note CHAQUE image pour un carrousel TikTok vertical. Le but n'est pas d'illustrer un texte : c'est d'ARRÊTER LE SCROLL.
 - choc (0 à 10) : intensité émotionnelle ou visuelle. 9-10 = visage en gros plan avec peur, colère, larmes, regard glaçant ou tension extrême, ou image spectaculaire et immédiatement compréhensible. 5-6 = plan correct mais neutre. 0-3 = plan large, personnages minuscules, scène calme, décor vide, foule.
-- lisible (0 à 10) : un sujet principal net, grand, plutôt dans la moitié haute de l'image, bien éclairé, couleurs contrastées.
+- lisible (0 à 10) : un sujet principal net, grand, plutôt dans la moitié haute de l'image, BIEN ÉCLAIRÉ et lumineux (une image sombre où l'on distingue mal le visage vaut moins de 4), couleurs contrastées.
 - texte (true/false) : vrai s'il y a un texte, un logo ou un sous-titre visible.
 - spoil (true/false) : vrai si l'image montre la fin, une mort décisive ou un retournement.
 - groupe : un entier ; donne le MÊME entier aux images quasi identiques (même scène, même plan).
@@ -208,6 +221,8 @@ JSON : [{{"image":1,"choc":0,"lisible":0,"texte":false,"spoil":false,"groupe":1,
             rows.append({"idx": idx, "score": score, "groupe": x.get("groupe", idx), "focus": min(max(float(x.get("focus_x", 0.5)), 0.0), 1.0)})
         except Exception:
             continue
+    for z in rows:                                   # pénalités mesurées : image trop sombre ou floue
+        z["score"] -= _penalty(thumbs[z["idx"]])
     rows.sort(key=lambda z: z["score"], reverse=True)
     out, used, groups = [], set(), set()
     for z in rows:                                   # d'abord : 3 images de scènes différentes
