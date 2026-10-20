@@ -1,5 +1,5 @@
 {
- "offset": 422725853,
+ "offset": 422725854,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,9 +9,9 @@
   "rating": 8.5,
   "platform": "Paramount+",
   "texts": [
-   "Un garçon est moqué à l'école pour son QI et ses jambes",
-   "Pourtant il devient héros du Vietnam puis roi de la crevette",
-   "Reçu à la Maison Blanche, il raconte sa vie sur un banc"
+   "Un garçon d'Alabama aux jambes paralysées devient vedette de football",
+   "Avec un QI sous la moyenne, il devient le symbole d'une époque",
+   "Au milieu de tout ça, il y a Jenny, son amie d'école"
   ],
   "poster_path": "/zi6RNYK1vXjIvpSBgjatXRcFYh2.jpg",
   "candidates": [
@@ -48,7 +48,7 @@
   "focus": [
    0.5,
    0.60625,
-   0.4
+   0.42
   ]
  },
  "last_propose": "2026-10-20"
