@@ -10,6 +10,7 @@ HELP = ("🍿 <b>PopcornLife Studio</b>\n\n"
         "• Tu peux aussi m'écrire un film : « Gone Girl » ou « Fais-moi un TikTok sur Dark ».\n"
         "• « propositions » : j'envoie 3 nouvelles idées.\n"
         "• « image 2 » : je change l'image de la slide 2 (1, 2 ou 3).\n"
+        "• « slide 2 plus choquant » ou « slide 2 : ta phrase » : je change le texte d'une seule slide.\n"
         "• « refais » : j'écris de nouveaux textes pour le dernier film. Tu peux préciser : « refais plus mystérieux ».")
 
 def load(name, default):
@@ -135,6 +136,24 @@ def produce(t, i):
     save("history", hist)
     state = load("state", {"offset": 0}); state["last"] = last; state["pending"] = []; save("state", state)
 
+def edit_slide(n, instruction):
+    state = load("state", {"offset": 0}); last = state.get("last")
+    if not last or not last.get("texts"):
+        tg.send("Je n'ai pas de post récent à modifier. Écris d'abord un titre de film."); return
+    meta = tmdb.details(last["type"], last["id"])
+    tg.send(f"✍️ Je réécris la slide {n}…")
+    new = ai.rewrite_slide(meta, last["texts"], n, instruction)
+    last["texts"][n - 1] = new
+    im = None
+    if last.get("candidates") and len(last.get("assign", [])) >= n:
+        im = tmdb.download(last["candidates"][last["assign"][n - 1]], "w1280")
+    fx = last["focus"][n - 1] if len(last.get("focus", [])) >= n else 0.5
+    os.makedirs("out", exist_ok=True); p = f"out/slide{n}.jpg"
+    render.text_slide(new, p, n, im, fx)
+    tg.send_files([p])
+    tg.send(f"Slide {n} : {e(new)}\n\nPas encore ça ? Écris par exemple « slide {n} plus choquant » ou « slide {n} : ta phrase exacte ».")
+    state["last"] = last; save("state", state)
+
 def redo_image(n):
     state = load("state", {"offset": 0}); last = state.get("last")
     if not last or not last["candidates"]:
@@ -192,6 +211,9 @@ def handle(u, state):
     elif low in ("a", "b", "c") and state.get("pending"):
         k = "abc".index(low)
         if k < len(state["pending"]): p = state["pending"][k]; produce(p["type"], p["id"])
+    elif re.match(r"(?i)^(slide|texte|phrase)\s*([1-3])\b", text):
+        mm = re.match(r"(?i)^(?:slide|texte|phrase)\s*([1-3])\b[\s:,\-]*(.*)$", text, re.S)
+        edit_slide(int(mm.group(1)), mm.group(2).strip())
     elif low.startswith("image") and low[5:].strip() in ("1", "2", "3"): redo_image(int(low[5:].strip()))
     elif re.match(r"(?i)^(refais|refait|autre hook|nouveau hook|nouveaux textes|change les phrases|change le hook)\b", text):
         rewrite(re.sub(r"(?i)^(refais|refait|autre hook|nouveau hook|nouveaux textes|change les phrases|change le hook)\b[\s:,\-]*", "", text).strip())
