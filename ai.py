@@ -194,6 +194,29 @@ def _penalty(b):
     except Exception:
         return 0.0
 
+def rewrite_slide(meta, texts, n, instruction):
+    """Réécrit UNE seule slide (n = 1, 2 ou 3) selon la demande, en gardant les deux autres."""
+    kind = "série" if meta["type"] == "tv" else "film"
+    prompt = f"""Œuvre : {meta['title']} ({meta['year']}), {kind}. Synopsis : {meta['overview']}
+Carrousel actuel :
+1. {texts[0]}
+2. {texts[1]}
+3. {texts[2]}
+
+Réécris UNIQUEMENT la slide {n}. Demande de la rédactrice : « {instruction or 'propose une autre version plus percutante'} ».
+- Si sa demande est déjà une phrase complète prête à afficher (entre guillemets ou clairement rédigée), reprends-la presque telle quelle (corrige seulement les fautes).
+- Sinon, applique sa consigne (ton, angle, élément à mettre en avant).
+- 7 à 12 mots, une seule phrase, en cohérence avec les deux autres slides (la suite doit rester logique), sans spoiler la fin, sans emoji, sans point d'exclamation. Mots sensibles masqués par un astérisque (t*er, m*urtre…).
+- Ne reprends pas la version actuelle.
+JSON : {{"texte":""}}"""
+    for _ in range(3):
+        r = as_dict(ask_json(prompt, max_tokens=400))
+        t = oral(str(r.get("texte", "")).strip().strip('"«» '))
+        if t and t != texts[n - 1] and len(t.split()) <= 16:
+            return t
+        prompt += "\n\nPropose une phrase différente de l'actuelle et de 12 mots maximum."
+    raise RuntimeError("Impossible de réécrire cette slide")
+
 def pick_images(meta, thumbs):
     """Chaque image reçoit une note de CHOC ; on prend les 3 meilleures, la plus choquante en slide 1."""
     prompt = f"""Voici {len(thumbs)} images du {'film' if meta['type']=='movie' else 'la série'} « {meta['title']} ».
