@@ -59,9 +59,11 @@ def propose(pool):
     prompt = f"""Voici une liste d'œuvres disponibles en streaming en France :
 {lines}
 
-Choisis 3 œuvres DIFFÉRENTES (pas 3 films du même genre ; 1 série maximum ; varie les pays si possible) qui ont le plus de potentiel pour un TikTok de recommandation qui fait swiper. Privilégie les sorties récentes et les œuvres dont le CONCEPT tient en une seule image. Ce qui marche le mieux sur le compte : une MENACE VENUE DU CERCLE FAMILIER (un père, une mère, un enfant, un proche qui n'est pas ce qu'il semble), une INJUSTICE ou un dilemme moral, un piège dans un lieu du quotidien (airbnb, concert, tunnel, aéroport, vacances en famille), un retournement. Préfère les films de découverte aux blockbusters déjà vus partout. Évite les décors lointains ou fantastiques (apocalypse, western, dystopie, monstres), les clichés de genre (cimetière, village maudit) et les concepts qu'il faut expliquer.
-Pour chacune : un angle éditorial, une idée de hook (une phrase), et pourquoi ça peut fonctionner sur TikTok (une phrase).
-JSON : [{{"ref":"movie:123","angle":"","hook":"","pourquoi":""}}, ...]"""
+Choisis les 3 œuvres qui vont FAIRE LE PLUS RÉAGIR sur TikTok, c'est-à-dire celles dont une seule phrase provoque une émotion forte (peur, choc, indignation, « c'est quoi ce film ? », « je dois le voir »). Note chaque œuvre de 1 à 10 sur son potentiel de réaction (score_reaction) et ne garde que les 3 meilleures scores, classées de la plus forte à la moins forte. Ne retiens qu'une œuvre à plus de 7 si tu peux la défendre avec une phrase choc ; refuse les œuvres tièdes même si elles sont bien notées.
+Ce qui fait le plus réagir : une MENACE VENUE DU CERCLE FAMILIER (un père, une mère, un frère, un enfant, un proche qui n'est pas ce qu'il semble), une INJUSTICE ou un dilemme moral (jusqu'où irais-tu ?), un enfant ou un proche en danger, un piège dans un lieu du quotidien (airbnb, concert, tunnel, aéroport, vacances en famille), un retournement, une situation où le lecteur se dit « et si c'était moi ? ». Privilégie les œuvres où le lecteur peut se mettre à la place d'un personnage.
+Varie (pas 3 films du même genre ; 1 série maximum ; varie les pays si possible), privilégie les sorties récentes et les films de découverte plutôt que les blockbusters vus partout. Évite les décors lointains ou fantastiques (apocalypse, western, dystopie, monstres), les clichés de genre (cimetière, village maudit) et les concepts qu'il faut expliquer.
+Pour chacune : un angle éditorial, une idée de hook (une phrase), et pourquoi ça peut faire réagir sur TikTok (une phrase).
+JSON : [{{"ref":"movie:123","score_reaction":8,"angle":"","hook":"","pourquoi":""}}, ...]"""
     return ask_json(prompt)
 
 EXEMPLES = """RÉFÉRENCES DE STYLE. Ne recopie jamais ces phrases ni ces idées : inspire-toi du RYTHME, de la STRUCTURE et du niveau de précision.
@@ -80,6 +82,13 @@ B) Idées à reprendre d'un très grand compte du même concept (@alorsonregarde
 - « la nuit tombe, alors le chef d'une station de ski décide d'arrêter les télésièges pendant 1 semaine, mais… » / « sans le savoir, il oublie 3 amis, suspendus en hauteur, la nuit dans le froid… »
 - « une femme se retrouve seule sur une surface glissante avec un trou sans fin… » / « un mouvement de travers, elle tombe… elle bouge, elle tombe… » (le même film reste à 309 K quand le texte dit seulement « dans cette position » : le détail concret gagne)
 - « un homme assiste à un procès pour m*urtre en tant que membre du jury » / « mais, en écoutant les preuves, il comprend qu'il est lui-même responsable du crime »
+
+C) ACCROCHE « IMAGINE… » (pour que le lecteur se sente concerné ; à utiliser quand l'occasion s'y prête) :
+- « Imagine que ton frère t'enferme dans sa cave pour 3 jours » / « Alors que ta famille te cherche, tu entends ses pas au-dessus de toi »
+- « Imagine que tu es père et que ta fille de 6 ans a disparu au supermarché » / « Le seul suspect est le voisin que tout le monde adore »
+- « Imagine ta mère qui change de visage du jour au lendemain » / « Plus le temps passe, plus tu doutes que ce soit vraiment elle »
+- « Imagine que tu es juré dans un procès pour m*urtre » / « Mais en écoutant les preuves, tu comprends que le coupable, c'est toi »
+Règles de l'accroche « Imagine » : elle ouvre la slide 1 (« Imagine que tu es… » ou « Imagine ton frère / ta mère / ton père / ta meilleure amie… »), suivie d'un FAIT CHOQUANT et concret du synopsis, jamais flou ; la slide 2 enchaîne au tutoiement ou à la 3e personne ; elle n'est pas une question. À utiliser dans environ 1 carrousel sur 3, uniquement quand le synopsis s'y prête (un proche, un enfant, une situation du quotidien qu'on peut se représenter). Pour une histoire lointaine ou fantastique, ne la force pas.
 
 CE QUI FAIT LA DIFFÉRENCE (à reproduire) :
 - UNE phrase par slide, 8 à 16 mots (environ 12), en langage parlé, peu de virgules. Parfois une seule phrase coupée sur deux slides : la slide 1 est une proposition incomplète (« Après une dispute dans les bouchons », « Alors que… ») que la slide 2 termine.
@@ -103,6 +112,7 @@ STRUCTURES RÉUTILISABLES (varie) :
 6. Injustice : « [Personne] est accusé(e), pourtant [aucune preuve / personne ne la croit] »
 7. Cadre idyllique qui bascule : « Un couple loue [logement] [isolé] » puis « Très vite, ils se rendent compte que [détail inquiétant] »
 8. Chiffre repris : la slide 1 pose un nombre, la slide 2 le reprend (« et parmi ces 30 000, il y a… »)
+9. Imagine : « Imagine ton frère / Imagine que tu es [situation choquante et concrète] » puis la conséquence qui laisse une zone d'ombre
 """
 
 def oral(t):
@@ -134,9 +144,9 @@ Synopsis : {meta['overview']}
 Les trois forment une progression : chacune donne envie de voir la suivante.
 
 MÉTHODE (c'est ce qui décide de la qualité) :
-1. "brouillons_s1" : 6 versions DIFFÉRENTES de la slide 1 : (a) une personne + une situation du quotidien (airbnb, vacances, trajet, concert, travail), (b) l'inversion : le héros est en réalité le méchant ou le piège est pour lui, (c) la menace vient d'un proche (père, mère, enfant, voisin), (d) une proposition coupée (« Après… », « Alors que… ») que la slide 2 terminera, (e) une injustice, (f) un objet ou un fait chiffré qui déclenche l'intrigue.
+1. "brouillons_s1" : 6 versions DIFFÉRENTES de la slide 1 : (a) une personne + une situation du quotidien (airbnb, vacances, trajet, concert, travail), (b) l'inversion : le héros est en réalité le méchant ou le piège est pour lui, (c) la menace vient d'un proche (père, mère, enfant, voisin), (d) une proposition coupée (« Après… », « Alors que… ») que la slide 2 terminera, (e) une injustice, (f) un objet ou un fait chiffré qui déclenche l'intrigue, (g) si le synopsis s'y prête, une accroche « Imagine ton frère… » ou « Imagine que tu es… » suivie d'un fait choquant et concret.
 2. "brouillons_s2" : 5 versions de la slide 2 : (a) la prise de conscience (« se rend compte que… »), (b) un retournement ou une ironie, (c) « plus le temps passe, plus… » ou « très vite… », (d) « il va devoir… », (e) l'injustice (« pourtant personne ne le croit »). Toutes basées sur un FAIT PRÉCIS du synopsis, qui laissent volontairement une zone d'ombre.
-3. Garde pour chaque slide la plus concrète et la plus intrigante.
+3. Garde pour chaque slide la plus concrète, la plus choquante et la plus intrigante. Si la version (g) « Imagine… » est la plus forte pour cette œuvre (et que ce n'est pas forcé), prends-la.
 Test final pour chaque phrase : (1) peut-on la coller telle quelle sur un autre film ? Alors elle est trop vague, recommence. (2) la slide 1 commence-t-elle par un décor ou un contexte (« Dans un monde… », « En pleine… ») ? Réécris-la avec une personne. (3) contient-elle un jugement ou une conclusion ? Supprime-le. (4) donne-t-elle envie de connaître la suite ? Sinon, recommence.
 INTERDIT : « quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu vas adorer », « d'un côté… de l'autre », « impossible de lâcher », « leurs vacances tournent au drame » et autres formules vagues, les points d'exclamation, les emojis, les superlatifs vides, un nom d'acteur. Une question n'est autorisée qu'en slide 2 (« Jusqu'où irais-tu… ? »), jamais en slide 1 ni 3.
 
@@ -170,32 +180,48 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
     raise RuntimeError("Impossible d'obtenir des textes valides")
 
 def pick_images(meta, thumbs):
+    """Chaque image reçoit une note de CHOC ; on prend les 3 meilleures, la plus choquante en slide 1."""
     prompt = f"""Voici {len(thumbs)} images du {'film' if meta['type']=='movie' else 'la série'} « {meta['title']} ».
-Choisis les 3 images les plus ACCROCHEUSES visuellement pour un carrousel TikTok vertical. Ne cherche PAS à illustrer un texte : cherche les images qui arrêtent le scroll et donnent envie de voir l'œuvre.
-Critères, par ordre d'importance :
-- un visage en gros plan ou plan rapproché, avec une émotion ou une intensité forte (regard, tension, peur, colère, sourire marquant), ou une image spectaculaire (décor, action) très lisible ;
-- UN sujet principal net, placé plutôt dans la moitié HAUTE de l'image (le texte occupera le bas) ;
-- couleurs et contrastes marqués, image nette et lumineuse ;
-- fuis : plans larges où les personnages sont minuscules, foule, flou, image sombre ou terne, texte ou logo visible, visage coupé, scène qui spoile la fin.
-L'image placée en n°1 doit être LA plus percutante de toutes (c'est elle qui décide si on continue). Utilise 3 images différentes.
-Pour chaque image choisie, donne focus_x : la position horizontale du visage ou du sujet principal (0 = bord gauche, 1 = bord droit), pour recadrer en vertical autour de lui.
-JSON : [{{"image":1,"focus_x":0.5}}, {{"image":2,"focus_x":0.5}}, {{"image":3,"focus_x":0.5}}] (dans l'ordre des slides 1, 2, 3)"""
-    r = ask_json(prompt, images=thumbs)
-    if isinstance(r, dict):                       # l'IA a enveloppé la liste dans un objet
+Note CHAQUE image pour un carrousel TikTok vertical. Le but n'est pas d'illustrer un texte : c'est d'ARRÊTER LE SCROLL.
+- choc (0 à 10) : intensité émotionnelle ou visuelle. 9-10 = visage en gros plan avec peur, colère, larmes, regard glaçant ou tension extrême, ou image spectaculaire et immédiatement compréhensible. 5-6 = plan correct mais neutre. 0-3 = plan large, personnages minuscules, scène calme, décor vide, foule.
+- lisible (0 à 10) : un sujet principal net, grand, plutôt dans la moitié haute de l'image, bien éclairé, couleurs contrastées.
+- texte (true/false) : vrai s'il y a un texte, un logo ou un sous-titre visible.
+- spoil (true/false) : vrai si l'image montre la fin, une mort décisive ou un retournement.
+- groupe : un entier ; donne le MÊME entier aux images quasi identiques (même scène, même plan).
+- focus_x : position horizontale du visage ou du sujet principal (0 = bord gauche, 1 = bord droit).
+Sois sévère : peu d'images méritent plus de 7.
+JSON : [{{"image":1,"choc":0,"lisible":0,"texte":false,"spoil":false,"groupe":1,"focus_x":0.5}}, ...] (une entrée par image)"""
+    r = ask_json(prompt, images=thumbs, max_tokens=3500)
+    if isinstance(r, dict):
         r = next((v for v in r.values() if isinstance(v, list)), [])
-    while r and isinstance(r, list) and isinstance(r[0], list):   # liste dans une liste
+    while r and isinstance(r, list) and isinstance(r[0], list):
         r = r[0]
-    r = [x for x in r if isinstance(x, dict)] if isinstance(r, list) else []
-    out, used = [], set()
-    for i in range(3):
+    rows = []
+    for x in (r if isinstance(r, list) else []):
         try:
-            idx = int(r[i]["image"]) - 1
-            if not 0 <= idx < len(thumbs) or idx in used: raise ValueError
-            out.append({"idx": idx, "focus": float(r[i].get("focus_x", 0.5))})
+            if not isinstance(x, dict): continue
+            idx = int(x["image"]) - 1
+            if not 0 <= idx < len(thumbs): continue
+            score = float(x.get("choc", 0)) * 0.7 + float(x.get("lisible", 0)) * 0.3
+            if x.get("texte"): score -= 4
+            if x.get("spoil"): score -= 6
+            rows.append({"idx": idx, "score": score, "groupe": x.get("groupe", idx), "focus": min(max(float(x.get("focus_x", 0.5)), 0.0), 1.0)})
         except Exception:
-            idx = next(k for k in range(len(thumbs)) if k not in used)
-            out.append({"idx": idx, "focus": 0.5})
-        used.add(out[-1]["idx"])
+            continue
+    rows.sort(key=lambda z: z["score"], reverse=True)
+    out, used, groups = [], set(), set()
+    for z in rows:                                   # d'abord : 3 images de scènes différentes
+        if z["idx"] in used or z["groupe"] in groups: continue
+        out.append({"idx": z["idx"], "focus": z["focus"]}); used.add(z["idx"]); groups.add(z["groupe"])
+        if len(out) == 3: break
+    for z in rows:                                   # si besoin : on complète
+        if len(out) == 3: break
+        if z["idx"] not in used:
+            out.append({"idx": z["idx"], "focus": z["focus"]}); used.add(z["idx"])
+    for k in range(len(thumbs)):                     # dernier recours
+        if len(out) == 3: break
+        if k not in used:
+            out.append({"idx": k, "focus": 0.5}); used.add(k)
     return out
 
 def extract_title(message):
