@@ -1,5 +1,5 @@
 {
- "offset": 422725852,
+ "offset": 422725853,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,9 +9,9 @@
   "rating": 8.5,
   "platform": "Paramount+",
   "texts": [
-   "Sur un banc public, un homme raconte sa vie à des inconnus",
-   "Raillé à l'école, ce garçon aux jambes paralysées devient vedette du football",
-   "Héros du Vietnam, roi de la crevette, puis reçu à la Maison Blanche"
+   "Un garçon est moqué à l'école pour son QI et ses jambes",
+   "Pourtant il devient héros du Vietnam puis roi de la crevette",
+   "Reçu à la Maison Blanche, il raconte sa vie sur un banc"
   ],
   "poster_path": "/zi6RNYK1vXjIvpSBgjatXRcFYh2.jpg",
   "candidates": [
@@ -43,12 +43,12 @@
   "assign": [
    18,
    14,
-   2
+   20
   ],
   "focus": [
-   0.45,
+   0.5,
    0.60625,
-   0.5609375
+   0.4
   ]
  },
  "last_propose": "2026-10-20"
