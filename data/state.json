@@ -1,6 +1,22 @@
 {
  "offset": 422725842,
- "pending": [],
+ "pending": [
+  {
+   "type": "movie",
+   "id": 1368166,
+   "title": "La Femme de ménage"
+  },
+  {
+   "type": "movie",
+   "id": 1621552,
+   "title": "La captura"
+  },
+  {
+   "type": "tv",
+   "id": 104877,
+   "title": "Love is in the Air"
+  }
+ ],
  "last": {
   "type": "movie",
   "id": 1339713,
@@ -41,5 +57,5 @@
    0.7796875
   ]
  },
- "last_propose": "2026-10-19"
+ "last_propose": "2026-10-20"
 }
