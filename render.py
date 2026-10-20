@@ -105,8 +105,14 @@ def text_slide(text, path, index, img=None, fx=0.5):
     if len(lines) * lh > box_h:
         raise ValueError(f"Texte trop long pour la slide {index}")
     y = S["text_bottom"] - len(lines) * lh; cx = sf["left"] + box_w // 2
+    bg = S.get("text_bg")
+    if bg:                                           # fond rouge derrière chaque ligne
+        for n, ln in enumerate(lines):
+            l, t, rr, b = d.textbbox((cx, y + n * lh), ln, font=f, anchor="ma")
+            d.rounded_rectangle([l - 30, t - 10, rr + 30, b + 10], radius=18, fill=bg)
     for ln in lines:
-        d.text((cx + 2, y + 2), ln, font=f, fill=(0, 0, 0), anchor="ma")   # ombre
+        if not bg:
+            d.text((cx + 2, y + 2), ln, font=f, fill=(0, 0, 0), anchor="ma")   # ombre
         d.text((cx, y), ln, font=f, fill=S["text_color"], anchor="ma"); y += lh
     d.rectangle([cx - 40, y + 30, cx + 40, y + 36], fill=S["accent"])
     if index < 3:
