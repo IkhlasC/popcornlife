@@ -1,70 +1,54 @@
 {
- "offset": 422725862,
- "pending": [
-  {
-   "type": "movie",
-   "id": 701387,
-   "title": "Bugonia"
-  },
-  {
-   "type": "movie",
-   "id": 593643,
-   "title": "Le Menu"
-  },
-  {
-   "type": "movie",
-   "id": 1220564,
-   "title": "L'Agent secret"
-  }
- ],
+ "offset": 422725865,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 1339713,
-  "title": "Obsession",
-  "year": "2026",
-  "rating": 8.2,
-  "platform": "",
+  "id": 701387,
+  "title": "Bugonia",
+  "year": "2025",
+  "rating": 7.3,
+  "platform": "Canal+",
   "texts": [
-   "Un jeune introverti trouve un objet capable d'exaucer n'importe quel souhait",
-   "Il fait le vœu que son crush tombe raide dingue de lui",
-   "Mais l'amour de son crush vire à l'obsession la plus totale"
+   "Deux jeunes hommes kidnappent la PDG d'une grande entreprise",
+   "Ils sont convaincus qu'elle est une extraterrestre qui veut détruire la Terre",
+   "Eux n'ont aucun doute, reste à savoir si elle est humaine"
   ],
-  "poster_path": "/mDCR1frpUvGfIKksuM440VLb7X9.jpg",
+  "poster_path": "/btKcDyCzPZO06OpySaAOcMFQKyA.jpg",
   "candidates": [
-   "/5lTZyuBTNOfawsfPT8Q0cIg6qAF.jpg",
-   "/uoTZOIXnkcTgJe1emITpsQq7sPu.jpg",
-   "/diOZbaDnB2CIilwd0527AB1qMvW.jpg",
-   "/r013C8Me2bZ0pUi0OWJRh0h7MzT.jpg",
-   "/4k99kV4R1bbbrsnjR205v91Xbin.jpg",
-   "/u5BkYDM5gfK4wINfoIFMAcEUKhx.jpg",
-   "/7xZCxnhIB7XNwbJDoaNocFzGOmO.jpg",
-   "/8Z4mNUnfhiOSYzcCw3yoGR7q2un.jpg",
-   "/qDmeLX1NTCD7B2IbDhCEReJgmO8.jpg",
-   "/eIw1YYdQ2ycsitUuiMa9ygzqgPm.jpg",
-   "/uXVj5lfXuUdXpDheQ9SHmwKuQta.jpg",
-   "/oICYZzr1arFtiaPrQfOTYZOOrCy.jpg",
-   "/d40SQY5TXCF8NJN2C6FnxFHsOD4.jpg",
-   "/fnASfC4pJ4NSzJ1ch7FBD99PiaZ.jpg",
-   "/8nnO9zr2jUH2qH2PysbRQ1TMaye.jpg",
-   "/reRGz6r9EMpJfU6dRhKCEyyVGdl.jpg",
-   "/15baaheTOxyJvnzFw8Xv8otes5g.jpg",
-   "/aJNHKRM5BiGroXGPDhrHeAnSWQ3.jpg",
-   "/ovFpatjBA43fsjcWo5RRpq6r6Ou.jpg",
-   "/5tb8XG7VtcATcbPduoixeL8mTiV.jpg",
-   "/jJUYB1WUZhP3NbbdxLeC3ERNGK.jpg",
-   "/3PIc1ToM2bNf19P2k1VlHC6i1Kt.jpg",
-   "/7RLcx2keJIwgtvIBBsdhHcJ2uGr.jpg",
-   "/eWhTP9eynbbJVyRLstsGxa3AUn9.jpg"
+   "/tN3pTxkQoP96wtaEahYuRVdUWb2.jpg",
+   "/jihTSrMksmU5ujqRZnc6SBFSyfq.jpg",
+   "/ulEVubPGxPXik31qcmBTt4oupgM.jpg",
+   "/yq4qnZrCwghyUMrdRfnDtHtafZy.jpg",
+   "/k1pjgp4LFLZTT2lUWS1fLlm0aL8.jpg",
+   "/inAdbqgyxY6Bx97DCGgmtlCQliU.jpg",
+   "/xUn15uJ83Vdhv8co75iZTTgQQoC.jpg",
+   "/npxKvZixuLzLYz4RNOGLGmE9Xui.jpg",
+   "/1ffIqSjUrfHbLMGcPavpZOc4C6P.jpg",
+   "/aKA2yY7EmDrGNGSJvnT7kK8HEIj.jpg",
+   "/16EHmLgyVwTCnX05SoI240qr3iR.jpg",
+   "/8NvAMVVgjesESIHoJYh6tBorwgI.jpg",
+   "/iW6ackYLGkOJ72BtSLYRrg6f0HW.jpg",
+   "/pmjYkHPq2esPM61N10voixSKPE6.jpg",
+   "/fRRSgQObvUduBZtc2ta8nH7iEVI.jpg",
+   "/cj2fug7Ayk0eaYOpW0npBaHXMCc.jpg",
+   "/plna0LjGMlfQkVwWTKXajHv1VxV.jpg",
+   "/4bf8B3lFQv9EyYt8eCfxsLlX1LC.jpg",
+   "/rxB4T6M1nFH2es5SX8Ytm9Q2f3d.jpg",
+   "/sukDxjiGCNkldfGpXePqJxNU8V8.jpg",
+   "/uv2QglfswUynxr1I0tAxELIcwt5.jpg",
+   "/cOhg4KhmIfSQsoAsEfR78EuLWr6.jpg",
+   "/4L9E7F3Jj0C3VXKxCMXkrqcMJF7.jpg",
+   "/5sKaG0sJpCOW0NbcQ373z2LrPXg.jpg"
   ],
   "assign": [
-   23,
-   5,
-   22
+   17,
+   6,
+   0
   ],
   "focus": [
-   0.40390625,
-   0.52578125,
-   0.47109375
+   0.5,
+   0.71796875,
+   0.60546875
   ]
  },
  "last_propose": "2026-10-20"
