@@ -75,7 +75,7 @@ def platforms(t, i):
         out[k] = names
     return out
 
-def backdrops(t, i, n=14):
+def backdrops(t, i, n=24):
     res = get(f"/{t}/{i}/images", include_image_language="null")["backdrops"]
     if len(res) < 4:
         res = get(f"/{t}/{i}/images", include_image_language="null,en,fr")["backdrops"]
