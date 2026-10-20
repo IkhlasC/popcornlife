@@ -19,6 +19,7 @@ STYLE = {
     "poster_dim": 0.58,          # assombrissement du fond flouté de la slide 4
     "bg_top": (14, 10, 12), "bg_bottom": (52, 14, 20),   # fond si aucune image
     "text_color": (255, 255, 255), "accent": (229, 9, 20),
+    "text_bg": (229, 9, 20),     # fond rouge derrière le texte des slides (mets None pour le retirer)
     "logo_text": "POPCORNLIFE",
     # Zones à laisser libres pour l'interface TikTok (en pixels)
     "safe": {"top": 200, "bottom": 420, "left": 90, "right": 150},
