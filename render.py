@@ -122,8 +122,8 @@ def text_slide(text, path, index, img=None, fx=0.5):
     if bg:                                           # le rouge épouse chaque ligne (sans trou entre les lignes)
         ov = Image.new("RGBA", im.size, (0, 0, 0, 0)); od = ImageDraw.Draw(ov); col = (*bg, int(255 * S.get("text_bg_alpha", 1)))
         for n, ln in enumerate(lines):
-            w = d.textlength(ln, font=f); top = y + n * lh - int((lh - size) / 2) - 6
-            od.rounded_rectangle([cx - w / 2 - 26, top, cx + w / 2 + 26, top + lh], radius=14, fill=col)
+            w = d.textlength(ln, font=f); top = y + n * lh - 16; bot = y + n * lh + lh + 22   # marge haute et surtout basse (jambages : g, p, q, y)
+            od.rounded_rectangle([cx - w / 2 - 30, top, cx + w / 2 + 30, bot], radius=16, fill=col)
         im = Image.alpha_composite(im.convert("RGBA"), ov).convert("RGB"); d = ImageDraw.Draw(im)
     for ln in lines:
         if not bg:
