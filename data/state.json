@@ -1,5 +1,5 @@
 {
- "offset": 422725872,
+ "offset": 422725873,
  "pending": [],
  "last": {
   "type": "tv",
@@ -9,9 +9,9 @@
   "rating": 8.4,
   "platform": "Netflix / Disney+",
   "texts": [
-   "Un jeune médecin idéaliste commence son premier jour avec un docteur blasé",
-   "Très vite, il comprend que pour son superviseur, l'éthique est désuète",
-   "Ici, des vies sont épargnées ou perdues, et les attentes toujours brisées"
+   "Imagine que le médecin qui te soigne pense que l'éthique est désuète",
+   "C'est lui qui supervise un jeune médecin idéaliste dès son premier jour",
+   "Sous leurs mains, une vie peut être sauvée ou perdue"
   ],
   "poster_path": "/40ilvxWont3r87T5cvZB3CI0lex.jpg",
   "candidates": [
@@ -42,13 +42,13 @@
   ],
   "assign": [
    16,
-   2,
-   15
+   15,
+   23
   ],
   "focus": [
    0.7,
-   0.4484375,
-   0.33359375
+   0.3328125,
+   0.39921875
   ]
  },
  "last_propose": "2026-10-21"
