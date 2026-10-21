@@ -1,55 +1,71 @@
 {
- "offset": 422725867,
- "pending": [],
+ "offset": 422725868,
+ "pending": [
+  {
+   "type": "movie",
+   "id": 1621552,
+   "title": "La captura"
+  },
+  {
+   "type": "movie",
+   "id": 574475,
+   "title": "Destination Finale : Bloodlines"
+  },
+  {
+   "type": "tv",
+   "id": 74016,
+   "title": "The Resident"
+  }
+ ],
  "last": {
   "type": "movie",
-  "id": 701387,
-  "title": "Bugonia",
-  "year": "2025",
-  "rating": 7.3,
-  "platform": "Canal+",
+  "id": 593643,
+  "title": "Le Menu",
+  "year": "2022",
+  "rating": 7.2,
+  "platform": "Disney+",
   "texts": [
-   "Deux jeunes hommes kidnappent la PDG d'une grande entreprise",
-   "Ils sont convaincus qu'elle est une extraterrestre qui veut détruire la Terre",
-   "Eux n'ont aucun doute, reste à savoir si elle est humaine"
+   "Un jeune couple arrive dans un restaurant gastronomique sur une île isolée",
+   "Très vite, ils comprennent que le menu du chef réserve des surprises",
+   "Le chef lance le menu et ils n'ont nulle part où fuir"
   ],
-  "poster_path": "/btKcDyCzPZO06OpySaAOcMFQKyA.jpg",
+  "poster_path": "/z9KjjwNcY6WhhA2HGCOzNOa0Lg6.jpg",
   "candidates": [
-   "/tN3pTxkQoP96wtaEahYuRVdUWb2.jpg",
-   "/jihTSrMksmU5ujqRZnc6SBFSyfq.jpg",
-   "/ulEVubPGxPXik31qcmBTt4oupgM.jpg",
-   "/yq4qnZrCwghyUMrdRfnDtHtafZy.jpg",
-   "/k1pjgp4LFLZTT2lUWS1fLlm0aL8.jpg",
-   "/inAdbqgyxY6Bx97DCGgmtlCQliU.jpg",
-   "/xUn15uJ83Vdhv8co75iZTTgQQoC.jpg",
-   "/npxKvZixuLzLYz4RNOGLGmE9Xui.jpg",
-   "/1ffIqSjUrfHbLMGcPavpZOc4C6P.jpg",
-   "/aKA2yY7EmDrGNGSJvnT7kK8HEIj.jpg",
-   "/16EHmLgyVwTCnX05SoI240qr3iR.jpg",
-   "/8NvAMVVgjesESIHoJYh6tBorwgI.jpg",
-   "/iW6ackYLGkOJ72BtSLYRrg6f0HW.jpg",
-   "/pmjYkHPq2esPM61N10voixSKPE6.jpg",
-   "/fRRSgQObvUduBZtc2ta8nH7iEVI.jpg",
-   "/cj2fug7Ayk0eaYOpW0npBaHXMCc.jpg",
-   "/plna0LjGMlfQkVwWTKXajHv1VxV.jpg",
-   "/4bf8B3lFQv9EyYt8eCfxsLlX1LC.jpg",
-   "/rxB4T6M1nFH2es5SX8Ytm9Q2f3d.jpg",
-   "/sukDxjiGCNkldfGpXePqJxNU8V8.jpg",
-   "/uv2QglfswUynxr1I0tAxELIcwt5.jpg",
-   "/cOhg4KhmIfSQsoAsEfR78EuLWr6.jpg",
-   "/4L9E7F3Jj0C3VXKxCMXkrqcMJF7.jpg",
-   "/5sKaG0sJpCOW0NbcQ373z2LrPXg.jpg"
+   "/4vSBj7BYsyuKCx96EJzGyp20WfY.jpg",
+   "/mSyQoValhBsJdq3JNGXJww2Q5yL.jpg",
+   "/sWRSwSl3EymyLyrUhb4RQH8lN4Q.jpg",
+   "/ulUbbGUE8g2IQRxmddfYPnpJFHM.jpg",
+   "/bCQgONhSFk88puRr3FaYIopT5Tz.jpg",
+   "/sawmVDi4RO7k9JkJNaN2SOb7e0f.jpg",
+   "/i7pwdlwMVv63Mv00mk2TrJ4L4Qe.jpg",
+   "/tKHiT9rBKKbu3F9TuBNKq621JiD.jpg",
+   "/vlBVkglm66XfpZnzN5hKZjekOCi.jpg",
+   "/21aqNI7u45TliNOQfKHliSywZ3e.jpg",
+   "/1AVgrULJOujYOCu1PzbhPeWCADk.jpg",
+   "/9q0e66c0cgaPAa9GQEgGCpEXJJ3.jpg",
+   "/o1k6zNKYVQuNx5DIyVpT9j6gwaQ.jpg",
+   "/mJyzygVctSKrWTdoexs86SD3row.jpg",
+   "/gkQoX62Sihlq7ga8PuYxxepsGXe.jpg",
+   "/twZcRs4LmOe54XkS9w87kjJC9Vg.jpg",
+   "/oj722chbPfgeKxt45B7WmJpzsEQ.jpg",
+   "/iwgwJsmUqAfRQkKs50oRFgo2Cr1.jpg",
+   "/yE8yPYQ2ejKUG5yu4o8TIq0FrpA.jpg",
+   "/n8kEEnWAomUfL5vTvDyQpdUaMFF.jpg",
+   "/7Nr7jpbbUoX9y3A8vrOudBMlR5H.jpg",
+   "/2IQnKN9ESubGRd9VSd2nmJCONxv.jpg",
+   "/ffqpc7d6izC1KGcRwesaFbI7mHd.jpg",
+   "/tosKn2ULGdIPiZjQxReJ986NGHm.jpg"
   ],
   "assign": [
-   19,
-   6,
-   0
+   0,
+   22,
+   11
   ],
   "focus": [
-   0.5,
-   0.71796875,
-   0.60546875
+   0.6890625,
+   0.48359375,
+   0.3
   ]
  },
- "last_propose": "2026-10-20"
+ "last_propose": "2026-10-21"
 }
