@@ -1,5 +1,5 @@
 {
- "offset": 422725875,
+ "offset": 422725876,
  "pending": [],
  "last": {
   "type": "tv",
@@ -9,9 +9,9 @@
   "rating": 8.4,
   "platform": "Netflix / Disney+",
   "texts": [
-   "Imagine que le médecin qui te soigne pense que l'éthique ne sert à rien",
-   "C'est lui qui supervise un jeune médecin idéaliste dès son premier jour",
-   "Sous leurs mains, une vie peut être sauvée ou perdue"
+   "Pour son premier jour, un jeune médecin croit encore en l'éthique",
+   "Il se rend compte que son superviseur la trouve complètement désuète",
+   "Des vies sont en jeu et il va devoir choisir son camp"
   ],
   "poster_path": "/40ilvxWont3r87T5cvZB3CI0lex.jpg",
   "candidates": [
@@ -41,14 +41,14 @@
    "/cLwXJwCiTA8p23RV1DKReh8qkkN.jpg"
   ],
   "assign": [
-   16,
    15,
-   23
+   16,
+   2
   ],
   "focus": [
+   0.33359375,
    0.7,
-   0.3328125,
-   0.39921875
+   0.4484375
   ]
  },
  "last_propose": "2026-10-21"
