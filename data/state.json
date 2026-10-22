@@ -1,64 +1,54 @@
 {
- "offset": 422725879,
- "pending": [
-  {
-   "type": "movie",
-   "id": 756999,
-   "title": "Black Phone"
-  },
-  {
-   "type": "movie",
-   "id": 1301421,
-   "title": "Les Moutons détectives"
-  },
-  {
-   "type": "movie",
-   "id": 582014,
-   "title": "Promising Young Woman"
-  }
- ],
+ "offset": 422725880,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 1400837,
-  "title": "Malfaisante",
-  "year": "2026",
-  "rating": 5.9,
-  "platform": "",
+  "id": 756999,
+  "title": "Black Phone",
+  "year": "2022",
+  "rating": 7.5,
+  "platform": "SFR Play / Universal+",
   "texts": [
-   "Une famille est harcelée par une présence qu'elle surnomme « l'autre maman »",
-   "Très vite, ils comprennent que c'est toute la famille qu'elle vise",
-   "Face à l'autre maman, une vraie mère ne suffit pas"
+   "Un garçon timide de 13 ans est enfermé dans un sous-sol insonorisé",
+   "Le téléphone accroché au mur, hors d'usage, se met à sonner",
+   "Au bout du fil, d'anciennes victimes m*rtes veulent l'empêcher de les rejoindre"
   ],
-  "poster_path": "/wAofwsldMDNAIzGSEfMJMoUn1KB.jpg",
+  "poster_path": "/1rVNiPMAHOyxjkdwyTtqUQs0i61.jpg",
   "candidates": [
-   "/ncm7djsVTHQQMX2HEbEVxMUFchG.jpg",
-   "/qHURF5fju9HYpnEdEj3D4HH8C7q.jpg",
-   "/AflbdtwHm1FOXKCFtn8wKaQsAjR.jpg",
-   "/oxnzKR0Ag5f35JYiYGs4lTqTG5Q.jpg",
-   "/fqK74DYEkAuvMJXozxiqSujCQU4.jpg",
-   "/smZ8BT4Vzw4iCEppTLCnN8jNYtn.jpg",
-   "/gy1RZonkd5CYWl64qCdIBcS4HjI.jpg",
-   "/wpx3J1ZuIZgWc9rzdfcj7fDru58.jpg",
-   "/4FwKIWZb8IPhitNO7TVqCiHVUWz.jpg",
-   "/nB1UScgKjwxksly6mHD4TqSX9Is.jpg",
-   "/u7fKxvdg5En0ezx5HxrhZL8tU5s.jpg",
-   "/kKuExGosULOouDF2GlKzSBoXlz7.jpg",
-   "/noyspWroNUpnFPNwp9eqjuLjF3s.jpg",
-   "/8KUmqPOx3qsq3iHBH4UaZhMAgz4.jpg",
-   "/6I4DbWAeutwwJYbZ3gNGLalnAdg.jpg",
-   "/vKIPhmBTOvIZkFNemcDJoqGxfKq.jpg",
-   "/j6B1f4qYBkRSuhc9SDraL91UYuU.jpg",
-   "/tQQz5g8iYAIdUOrveSnKFfKXoKs.jpg"
+   "/AfvIjhDu9p64jKcmohS4hsPG95Q.jpg",
+   "/syKiIOqEoOi1Hb0Oh0n9cImcBab.jpg",
+   "/jqVyOIz8jxH0NUlc0QUHmV0uOcn.jpg",
+   "/wAKN3MbzvuQb4136GmYKdi36TzY.jpg",
+   "/wXpAvb1e6TiQ1PBj9lHPzhaczmv.jpg",
+   "/voj4VaO5s85LyHq1B2Pgc3rSyFL.jpg",
+   "/7CvLcnCMG1rEsfZJcSBzzECA0u9.jpg",
+   "/daJBvdMiVkrQOaMc3XIEYQUBY8Q.jpg",
+   "/GLLgrghu7wSPaSjl2Rw4kjASOJ.jpg",
+   "/tsC3DRGAQvkoA88lQQfbQ40byFS.jpg",
+   "/h9zyS1LrufwLI9FyhiPjPWsppEK.jpg",
+   "/x4h6edL41GZ64RzqwTe2Mlw7Lj.jpg",
+   "/2FVSp7riHQaOdHBmSynHdRocEnE.jpg",
+   "/huhbJKm8p8TY6eyU80VSeNog9lw.jpg",
+   "/cw5snHBL1Dmig3mhcjhxx7aGxnl.jpg",
+   "/zg7QU1FNHJIhMgiTrjdPCtWKCG3.jpg",
+   "/6iw8ZVKPY6V0HADPMsVpPy67Wf4.jpg",
+   "/h1UlQ9e3zCRgX70SR9m5EWNX4Og.jpg",
+   "/j6gj1koROOsIj9t3qiQOi6bCQ1S.jpg",
+   "/mHmrvGY0TXfEoVxwXGCXJJVUHah.jpg",
+   "/dMsBEQu1N4Q1StYC8Nw9eEpjxOS.jpg",
+   "/vnpbsQFL0o2TphpHVikWx4opUk6.jpg",
+   "/1cduusjoScqqD1X5cg0TeDW88D5.jpg",
+   "/c2VHxzJ1jcPmdtvr8dE8tzNrfzX.jpg"
   ],
   "assign": [
-   8,
-   11,
-   3
+   9,
+   5,
+   18
   ],
   "focus": [
-   0.58125,
-   0.5515625,
-   0.5078125
+   0.5,
+   0.56171875,
+   0.6
   ]
  },
  "last_propose": "2026-10-22"
