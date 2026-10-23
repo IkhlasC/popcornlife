@@ -102,9 +102,9 @@ def rewrite(guidance=""):
     poster = tmdb.download(last["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, focus or [0.5] * 3, poster,
                               {"title": last["title"], "year": last["year"], "platform": last["platform"], "rating": last["rating"]}, "out")
-    tg.send_files(files[:3])
-    tg.send(f"1. {e(post['texts'][0])}\n2. {e(post['texts'][1])}\n3. {e(post['texts'][2])}\n\n"
-            "La slide 4 (affiche) ne change pas. Pas encore ça ? Écris « refais » suivi de ce que tu veux, "
+    tg.send_files(files[:-1])
+    tg.send("\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(post["texts"])) + "\n\n"
+            "L'affiche (dernière slide) ne change pas. Pas encore ça ? Écris « refais » suivi de ce que tu veux, "
             "par exemple « refais plus mystérieux, sans question ».")
     last.update(texts=post["texts"], assign=assign, focus=focus or [0.5] * 3)
     state["last"] = last; save("state", state)
@@ -129,9 +129,9 @@ def produce(t, i):
     tg.send_files(files)
     tg.send(f"<code>{e(meta['title'])}</code>")
     tg.send(f"<code>{e(post['hashtags'])}</code>")
-    tg.send(f"✅ <b>{e(meta['title'])}</b> est prêt.\n{e(plat_msg)}\n\n"
-            f"1. {e(post['texts'][0])}\n2. {e(post['texts'][1])}\n3. {e(post['texts'][2])}\n\n"
-            f"Une image ne te plaît pas ? Écris « image 1 », « image 2 » ou « image 3 ».\n{meta['url']}")
+    tg.send(f"✅ <b>{e(meta['title'])}</b> est prêt ({len(post['texts'])} slides + l'affiche).\n{e(plat_msg)}\n\n"
+            + "\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(post["texts"])) + "\n\n"
+            f"Une image ne te plaît pas ? Écris « image 1 », « image 2 »… (une par slide).\n{meta['url']}")
     hist = load("history", []); hist.append({"type": t, "id": i, "title": meta["title"], "date": datetime.date.today().isoformat()})
     save("history", hist)
     state = load("state", {"offset": 0}); state["last"] = last; state["pending"] = []; save("state", state)
@@ -140,6 +140,8 @@ def edit_slide(n, instruction):
     state = load("state", {"offset": 0}); last = state.get("last")
     if not last or not last.get("texts"):
         tg.send("Je n'ai pas de post récent à modifier. Écris d'abord un titre de film."); return
+    if n > len(last["texts"]):
+        tg.send(f"Ce carrousel n'a que {len(last['texts'])} slides de texte."); return
     meta = tmdb.details(last["type"], last["id"])
     tg.send(f"✍️ Je réécris la slide {n}…")
     new = ai.rewrite_slide(meta, last["texts"], n, instruction)
@@ -149,7 +151,7 @@ def edit_slide(n, instruction):
         im = tmdb.download(last["candidates"][last["assign"][n - 1]], "w1280")
     fx = last["focus"][n - 1] if len(last.get("focus", [])) >= n else 0.5
     os.makedirs("out", exist_ok=True); p = f"out/slide{n}.jpg"
-    render.text_slide(new, p, n, im, fx)
+    render.text_slide(new, p, n, im, fx, last=(n == len(last["texts"])))
     tg.send_files([p])
     tg.send(f"Slide {n} : {e(new)}\n\nPas encore ça ? Écris par exemple « slide {n} plus choquant » ou « slide {n} : ta phrase exacte ».")
     state["last"] = last; save("state", state)
@@ -158,6 +160,8 @@ def redo_image(n):
     state = load("state", {"offset": 0}); last = state.get("last")
     if not last or not last["candidates"]:
         tg.send("Je n'ai pas de post récent avec des images à modifier."); return
+    if n > len(last["texts"]):
+        tg.send(f"Ce carrousel n'a que {len(last['texts'])} slides de texte."); return
     cands, assign = last["candidates"], last["assign"]
     cur = assign[n - 1]
     nxt = next((k % len(cands) for k in range(cur + 1, cur + 1 + len(cands)) if (k % len(cands)) not in assign), (cur + 1) % len(cands))
@@ -165,7 +169,7 @@ def redo_image(n):
     im = tmdb.download(cands[nxt], "w1280")
     fx = render.face_focus(im); fx = 0.5 if fx is None else fx; last["focus"][n - 1] = fx
     os.makedirs("out", exist_ok=True); p = f"out/slide{n}.jpg"
-    render.text_slide(last["texts"][n - 1], p, n, im, fx)
+    render.text_slide(last["texts"][n - 1], p, n, im, fx, last=(n == len(last["texts"])))
     tg.send_files([p]); tg.send(f"Voilà la slide {n} avec une autre image. Écris « image {n} » pour en essayer une autre.")
     save("state", state)
 
