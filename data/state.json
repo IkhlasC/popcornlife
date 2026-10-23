@@ -1,5 +1,5 @@
 {
- "offset": 422725889,
+ "offset": 422725890,
  "pending": [],
  "last": {
   "type": "tv",
@@ -9,9 +9,9 @@
   "rating": 9.4,
   "platform": "Netflix",
   "texts": [
-   "Des inspecteurs arrivent dans une école où plus personne ne respecte rien",
-   "Mais ces inspecteurs d'un certain type viennent remettre de l'ordre",
-   "Ils vont rappeler sans détour ce qu'aucun manuel scolaire ne t'a appris"
+   "Ces élèves se croient intouchables, jusqu'à l'arrivée d'inspecteurs pas comme les autres",
+   "Très vite, ils comprennent que ces inspecteurs ne ménageront personne",
+   "Des leçons de vie qu'aucun programme scolaire n'a jamais osé donner"
   ],
   "poster_path": "/6FN0FAhkMeGmU3xAn4D1FmMJvtZ.jpg",
   "candidates": [
@@ -42,13 +42,13 @@
   ],
   "assign": [
    10,
-   16,
-   3
+   3,
+   16
   ],
   "focus": [
    0.48984375,
-   0.35390625,
-   0.4
+   0.45,
+   0.35390625
   ]
  },
  "last_propose": "2026-10-23"
