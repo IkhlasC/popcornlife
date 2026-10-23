@@ -137,11 +137,18 @@ Accroche officielle : {meta['tagline'] or '-'}
 Synopsis : {meta['overview']}
 {extra}
 {EXEMPLES}
-Écris un carrousel TikTok de 3 phrases (une par slide), UNE phrase chacune, 7 à 12 mots (environ 10). Le but : retenir l'attention dès la slide 1 et créer du SUSPENSE à chaque slide, pour qu'on ait envie de swiper.
-- slide 1 : UNE PERSONNE dans une situation du quotidien (ou l'inversion : le héros est en fait le méchant), avec le vrai hook dès cette slide ;
-- slide 2 : la prise de conscience ou le retournement (« se rend compte que… », « très vite… », « il va devoir… »), jamais la fin ;
-- slide 3 : l'enjeu ou le dilemme final, concret (un délai, un danger, un choix impossible), sans dire comment ça finit.
-Les trois forment une progression : chacune donne envie de voir la suivante.
+Écris un carrousel TikTok de 2 OU 3 slides (une phrase chacune). Le nombre de slides dépend de l'intrigue :
+- 2 slides si l'histoire tient en deux coups (situation + retournement). C'est souvent le mieux : DEUX slides bien faites valent mieux que TROIS moyennes. Ne rajoute JAMAIS une 3e slide pour remplir.
+- 3 slides seulement si la 3e apporte un vrai coup de plus (un enjeu, un choix impossible, un détail glaçant). Sinon, 2.
+Le but : stopper le scroll dès la slide 1, puis finir sur une ÉMOTION FORTE qui donne envie de savoir la suite. La dernière slide doit laisser le lecteur avec : de la PEUR, de la TRISTESSE, de la SURPRISE, ou une CURIOSITÉ qui brûle (une question qu'il ne peut pas laisser sans réponse). Jamais de conclusion tiède, jamais d'explication, jamais de morale. On s'arrête juste avant la réponse.
+- slide 1 : UNE PERSONNE dans une situation du quotidien, avec le vrai hook dès cette slide (ou l'inversion : le héros est en fait le méchant) ;
+- slide 2 (ou 3 s'il y en a 3) : le coup qui fait mal ou qui surprend, le fait précis qui glace ou qui serre la gorge, jamais la fin.
+
+STYLE DES MOTS (très important) :
+- Les mots les plus SIMPLES, courts et durs, comme on parle à un ami. Jamais de mot soutenu ou littéraire : écris « inutile » (pas « désuet »), « peur » (pas « appréhension »), « tuer » (masqué : t*er), « piège » (pas « stratagème »), « mentir » (pas « dissimuler »), « se rend compte » (pas « prend conscience »), « riche » (pas « fortuné »), « cacher » (pas « dissimuler »).
+- Phrases COURTES : 6 à 11 mots. On coupe tout ce qui ne sert pas. Un fait, un détail précis, c'est tout.
+- ZÉRO phrase bateau : pas de « tout bascule », « rien ne sera plus comme avant », « un secret terrible », « une histoire incroyable », « un destin hors du commun ». Si la phrase pourrait s'appliquer à 10 autres films, elle est mauvaise : remplace-la par un fait précis (chiffre, objet, lien familial, lieu).
+- N'hésite pas à employer des mots forts et directs (tuer, mourir, enfermer, disparaître, mentir, trahir), masqués par un astérisque quand ils sont sensibles.
 
 ÉTAPE 0, L'INTRIGUE (la plus importante, à faire avant d'écrire) : avant toute phrase, identifie ce qui rend cette œuvre EXTRAORDINAIRE et pousse la curiosité : le fait singulier, le contraste ou le destin hors norme qu'on ne voit pas ailleurs (ex. pour un film : un homme moqué pour sa bêtise qui devient, grâce à un don unique, une star nationale). Ce n'est PAS le simple résumé ni le point de départ banal : c'est le « comment est-ce possible ? » qui donne envie de voir. Remplis "intrigue_principale" (ce qui fait l'œuvre), "element_extraordinaire" (le fait le plus percutant, concret) et "question_curiosite" (la question que le lecteur se pose). Les 3 slides doivent TOUTES jouer sur cet élément : slide 1 = la personne + le contraste de départ, slide 2 = le fait extraordinaire qui intrigue, slide 3 = l'enjeu ou ce qui reste inexpliqué. N'écris jamais une slide sur un détail secondaire. Tu peux t'appuyer sur ta connaissance de l'œuvre pour repérer cet élément si tu en es certain ; sinon reste fidèle au synopsis.
 
@@ -156,19 +163,23 @@ RÈGLE SPOILER : tu peux raconter le point de départ et la première grande bas
 Reste fidèle au synopsis fourni : n'invente aucun fait.
 
 Ajoute 6 hashtags : #film (ou #serie), #cinema, #quoiregarder, un hashtag du genre (#thriller, #suspense, #horreur, #psychologique…), le hashtag du titre (sans espaces ni accents) et un hashtag lié à l'intrigue.
-JSON : {{"intrigue_principale":"","element_extraordinaire":"","question_curiosite":"","brouillons_s1":["","","","","",""],"brouillons_s2":["","","","",""],"s1":"","s2":"","s3":"","hashtags":["#..."],"spoiler_risk":false}}
+Mets nb_slides à 2 ou 3 ; si nb_slides = 2, laisse s3 vide.
+JSON : {{"intrigue_principale":"","element_extraordinaire":"","question_curiosite":"","brouillons_s1":["","","","","",""],"brouillons_s2":["","","","",""],"emotion_finale":"peur|tristesse|surprise|curiosité","nb_slides":2,"s1":"","s2":"","s3":"","hashtags":["#..."],"spoiler_risk":false}}
 Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retournement."""
     note = ""
     for _ in range(3):
         r = as_dict(ask_json(base + note, max_tokens=3000))
-        s = [r.get("s1", ""), r.get("s2", ""), r.get("s3", "")]
+        s = [str(r.get("s1", "")).strip(), str(r.get("s2", "")).strip(), str(r.get("s3", "")).strip()]
+        if not s[2] or int(r.get("nb_slides") or 3) == 2: s = s[:2]
         problems = []
         if any(not x.strip() for x in s): problems.append("une slide est vide")
-        if any(len(x.split()) > 14 for x in s): problems.append("une phrase est trop longue : 12 mots maximum, raccourcis en gardant le fait choquant")
+        if any(len(x.split()) > 12 for x in s): problems.append("une phrase dépasse 11 mots : raccourcis, garde seulement le fait choquant")
         if r.get("spoiler_risk"): problems.append("risque de spoiler sur la fin ou un retournement")
-        if len(set(s)) < 3: problems.append("phrases identiques")
-        if "?" in s[0] or "?" in s[2]: problems.append("une question en slide 1 ou 3 (réservée à la slide 2)")
+        if len(set(s)) < len(s): problems.append("phrases identiques")
+        if any("?" in x for x in s[:-1]) or (len(s) == 3 and "?" in s[0]): problems.append("une question hors dernière slide")
         if any("!" in x for x in s): problems.append("une phrase contient un point d'exclamation")
+        hard = [w for x in s for w in re.findall(r"[A-Za-zÀ-ÿ'-]+", x) if len(w) >= 13 or re.fullmatch(r"(?i)d[ée]su[eè]t[es]*|stratag[èe]mes?|dissimul\w*|appr[ée]hension|incontournables?|insoutenables?|tumultueu\w+|fallacieu\w+|machiav[ée]li\w+|inextricables?|inexorables?|ind[ée]niables?|abyssal\w*|vertigineu\w+", w)]
+        if hard: problems.append("mots trop soutenus ou trop longs (" + ", ".join(sorted(set(hard))) + ") : remplace-les par des mots simples et courts")
         vague = re.compile(r"impossible de (le |la |les |s'en )?(l[âa]cher|quitter|d[ée]crocher)|d'un c[ôo]t[ée]|de l'autre|tout (bascule|change)|rien ne sera plus|plus jamais comme|quelque chose cloche|personne ne s'y attend|tu vas adorer|tournent? au drame", re.I)
         if re.match(r"(?i)^(dans un (monde|futur|univers)|en pleine|dans un pays|dans une soci[ée]t[ée])", s[0].strip()): problems.append("la slide 1 commence par un décor : commence par une personne dans une situation")
         bad = [x for x in s if vague.search(x)]
@@ -199,20 +210,18 @@ def rewrite_slide(meta, texts, n, instruction):
     kind = "série" if meta["type"] == "tv" else "film"
     prompt = f"""Œuvre : {meta['title']} ({meta['year']}), {kind}. Synopsis : {meta['overview']}
 Carrousel actuel :
-1. {texts[0]}
-2. {texts[1]}
-3. {texts[2]}
+{chr(10).join(f"{k+1}. {t}" for k, t in enumerate(texts))}
 
 Réécris UNIQUEMENT la slide {n}. Demande de la rédactrice : « {instruction or 'propose une autre version plus percutante'} ».
 - Si sa demande est déjà une phrase complète prête à afficher (entre guillemets ou clairement rédigée), reprends-la presque telle quelle (corrige seulement les fautes).
 - Sinon, applique sa consigne (ton, angle, élément à mettre en avant).
-- 7 à 12 mots, une seule phrase, en cohérence avec les deux autres slides (la suite doit rester logique), sans spoiler la fin, sans emoji, sans point d'exclamation. Mots sensibles masqués par un astérisque (t*er, m*urtre…).
+- 6 à 11 mots, une seule phrase, mots très simples et courts (jamais de mot soutenu), aucune phrase bateau, en cohérence avec les deux autres slides (la suite doit rester logique), sans spoiler la fin, sans emoji, sans point d'exclamation. Mots sensibles masqués par un astérisque (t*er, m*urtre…).
 - Ne reprends pas la version actuelle.
 JSON : {{"texte":""}}"""
     for _ in range(3):
         r = as_dict(ask_json(prompt, max_tokens=400))
         t = oral(str(r.get("texte", "")).strip().strip('"«» '))
-        if t and t != texts[n - 1] and len(t.split()) <= 16:
+        if t and t != texts[n - 1] and len(t.split()) <= 13:
             return t
         prompt += "\n\nPropose une phrase différente de l'actuelle et de 12 mots maximum."
     raise RuntimeError("Impossible de réécrire cette slide")
