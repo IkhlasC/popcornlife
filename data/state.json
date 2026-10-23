@@ -1,6 +1,22 @@
 {
  "offset": 422725890,
- "pending": [],
+ "pending": [
+  {
+   "type": "movie",
+   "id": 1408208,
+   "title": "Exit 8"
+  },
+  {
+   "type": "tv",
+   "id": 117488,
+   "title": "Yellowjackets"
+  },
+  {
+   "type": "movie",
+   "id": 507089,
+   "title": "Five Nights at Freddy's"
+  }
+ ],
  "last": {
   "type": "tv",
   "id": 276161,
