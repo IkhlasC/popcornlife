@@ -1,70 +1,54 @@
 {
- "offset": 422725884,
- "pending": [
-  {
-   "type": "movie",
-   "id": 1114513,
-   "title": "Speak No Evil"
-  },
-  {
-   "type": "movie",
-   "id": 1242419,
-   "title": "Roofman"
-  },
-  {
-   "type": "tv",
-   "id": 276161,
-   "title": "Que ça vous serve de leçon !"
-  }
- ],
+ "offset": 422725885,
+ "pending": [],
  "last": {
-  "type": "movie",
-  "id": 1301421,
-  "title": "Les Moutons détectives",
+  "type": "tv",
+  "id": 276161,
+  "title": "Que ça vous serve de leçon !",
   "year": "2026",
-  "rating": 7.9,
-  "platform": "Prime Video",
+  "rating": 9.4,
+  "platform": "Netflix",
   "texts": [
-   "Des moutons retrouvent leur fermier adoré m*rt et décident d'enquêter eux-mêmes",
-   "Pour trouver le coupable, ils quittent leur pâturage pour la première fois",
-   "Le monde des humains est bien plus complexe que dans leurs livres"
+   "Alors que les élèves ne respectent plus rien dans leur école",
+   "Des inspecteurs pas comme les autres débarquent pour tout remettre en ordre",
+   "Ils rappellent sans détour ce que les manuels ne disent jamais"
   ],
-  "poster_path": "/5GjWHaN6XW9RbeUqqYbzfKSThqX.jpg",
+  "poster_path": "/6FN0FAhkMeGmU3xAn4D1FmMJvtZ.jpg",
   "candidates": [
-   "/a8uQvrplTkhGJQog6GZ6CqF8An6.jpg",
-   "/t6O6XWelu27BD0OmIDCCufZZT6d.jpg",
-   "/g6uEVedSBXsZ3QuXKP4WDCeSsOy.jpg",
-   "/nb12Y3qA9pj5yRhTmds0P6ASyud.jpg",
-   "/tWc6xpfwsaRR6iUWojr7MxqNhps.jpg",
-   "/b8QpeZ71OA8OMYQ4CefWfbSNwb4.jpg",
-   "/dYLoEbFOJbqboLNyFjgd9jub0K3.jpg",
-   "/h4qM9CniWxupCo82UxKUmhe9vrc.jpg",
-   "/uFt2iZalzdzNCCwqED4uqyKRInH.jpg",
-   "/n1DJt9PM8JGkAEAdfgVVxLwOQdH.jpg",
-   "/5yKC0m2xjcKpOmHtc0YEYdyyhrU.jpg",
-   "/ghHraOxB84T4IsV6G0SWvhU8Au7.jpg",
-   "/mb8G9VcUmCbDmQqK54743IQZy89.jpg",
-   "/vCvOSO6bgndEvsuiztNOe9MIN04.jpg",
-   "/sMlOR49i2xXL0ZA9AD1nZKfX1CX.jpg",
-   "/q7eygRsrWX9mboLFa1YdfmkATFk.jpg",
-   "/1ClHBEDWRtteMHclL8QKu0IWaOB.jpg",
-   "/zTPESZD2NCHdGsZJ4qiRTlTWdIL.jpg",
-   "/zlNReUgTv11qScyqoM0hYdX5jTB.jpg",
-   "/wQrDb0ygb2rXKnB3IY0QafSBvEq.jpg",
-   "/ptdSdYF2WxXmcBfxxEWw5b3qkqb.jpg",
-   "/q1LTUHLhqrFD6rmGx1cHaC357ko.jpg",
-   "/u5iFCyJMxU7UlQS7K6kSvzrYWyk.jpg",
-   "/74zNljqlRXLshvwXWImG9NnbDAt.jpg"
+   "/vyG93jhmPL7tBIhRtCLa5mdBKob.jpg",
+   "/sGitHICLzIQQBiwE67lZLy6W67u.jpg",
+   "/59RxNAp2OOQu01OQM1rjkdNECT8.jpg",
+   "/7I5o1pauNbi9fpp6Bq4OzRjaQfC.jpg",
+   "/fOV6dJGG6EghbeXkU7RVQpDhFyp.jpg",
+   "/wsfF3ASiJODTZ9hSlHkEYqJH6oN.jpg",
+   "/vAlyMWbVUWImy0SFsDdROjy23mK.jpg",
+   "/1wWMunRZNNy8YIs0pUE9lO3TJv2.jpg",
+   "/ueCAMPHlTcEkuSSxGBHX85zfvV9.jpg",
+   "/jkKoS3YtjdQbzNOWPmxY2bPLHlr.jpg",
+   "/mZAWkzC0oopXP9JzkzOlwLoSbgs.jpg",
+   "/wzJuniw680wrUB2ttjwyaherOzk.jpg",
+   "/dsFGPx3wBty7aIjqSbO3uAE0m6f.jpg",
+   "/rQRVOn65fWzSMBlxB4eyoAYbYNb.jpg",
+   "/uqo8PyQzeADoY4Mh1i6vcDMg9Mf.jpg",
+   "/pHvDihUypRTEKnV61rzyztBdpjM.jpg",
+   "/8jUfpHfzJXfrnDJ6yztj8jRWfYB.jpg",
+   "/6O4yJIe1F8tBbbeWT94Tjmazbbc.jpg",
+   "/fmF38GZkkWQ7b7r8tNtRz9biAfy.jpg",
+   "/5dzkLibkjUYsXuX0JhlKNdCqO6L.jpg",
+   "/iRJxkFbystyUeUTgg0KJfkRkWRa.jpg",
+   "/wRFM5S6ld67KYtpkEwWJfYdL4Di.jpg",
+   "/zncEdq61DXUPVpRkxKaAjuPuRxT.jpg",
+   "/tmoP6ZdPh25JA9YC5NgC0TA1IQM.jpg"
   ],
   "assign": [
-   7,
-   1,
-   12
+   10,
+   16,
+   14
   ],
   "focus": [
-   0.5,
-   0.5,
-   0.4
+   0.48984375,
+   0.35390625,
+   0.465625
   ]
  },
  "last_propose": "2026-10-23"
