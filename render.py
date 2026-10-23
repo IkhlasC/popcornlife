@@ -106,7 +106,7 @@ def wrap(d, text, f, max_w):
     lines.append(cur)
     return lines
 
-def text_slide(text, path, index, img=None, fx=0.5):
+def text_slide(text, path, index, img=None, fx=0.5, last=False):
     im = background(img, fx); d = ImageDraw.Draw(im); logo(d)
     sf = S["safe"]; box_w = W - sf["left"] - sf["right"]; box_h = H - sf["top"] - sf["bottom"]
     size = S["text_max_size"]
@@ -130,7 +130,7 @@ def text_slide(text, path, index, img=None, fx=0.5):
             d.text((cx + 2, y + 2), ln, font=f, fill=(0, 0, 0), anchor="ma")   # ombre
         d.text((cx, y), ln, font=f, fill=S["text_color"], anchor="ma"); y += lh
     d.rectangle([cx - 40, y + 30, cx + 40, y + 36], fill=S["accent"])
-    if index < 3:
+    if not last:
         d.text((cx, H - sf["bottom"] + 60), "›››", font=font("font_small", 44), fill=S["accent"], anchor="mm")
     im.save(path, "JPEG", quality=93)
 
@@ -151,8 +151,9 @@ def poster_slide(poster, meta, path):
 
 def render_all(texts, backdrops, focus, poster, meta, out_dir):
     os.makedirs(out_dir, exist_ok=True); paths = []
-    for i in range(3):
+    n = len(texts)
+    for i in range(n):
         p = f"{out_dir}/slide{i+1}.jpg"
-        text_slide(texts[i], p, i + 1, backdrops[i], focus[i]); paths.append(p)
-    p = f"{out_dir}/slide4.jpg"; poster_slide(poster, meta, p)
+        text_slide(texts[i], p, i + 1, backdrops[i], focus[i], last=(i == n - 1)); paths.append(p)
+    p = f"{out_dir}/slide{n+1}.jpg"; poster_slide(poster, meta, p)
     return paths + [p]
