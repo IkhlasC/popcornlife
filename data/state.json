@@ -1,69 +1,53 @@
 {
- "offset": 422725897,
- "pending": [
-  {
-   "type": "movie",
-   "id": 1078605,
-   "title": "Évanouis"
-  },
-  {
-   "type": "movie",
-   "id": 915935,
-   "title": "Anatomie d'une chute"
-  },
-  {
-   "type": "movie",
-   "id": 1290821,
-   "title": "Shelter"
-  }
- ],
+ "offset": 422725898,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 1408208,
-  "title": "Exit 8",
+  "id": 1078605,
+  "title": "Évanouis",
   "year": "2025",
-  "rating": 7.0,
+  "rating": 7.3,
   "platform": "Canal+",
   "texts": [
-   "Imagine que tu es piégé dans un couloir de métro sans fin",
-   "Si tu rates une seule anomalie, tu reviens au point de départ"
+   "Imagine que ton enfant se lève à 2h17 et s'enfuit en courant",
+   "Toute sa classe a disparu sauf un élève, la maîtresse est soupçonnée"
   ],
-  "poster_path": "/hJ9qCQ3Dx9vwet09Lbqs8eZTd8e.jpg",
+  "poster_path": "/3eRJV97oZDY6LORwPNdWlfdPLnd.jpg",
   "candidates": [
-   "/3cVrg7tzSf5AgEecYWDOSAzXAeX.jpg",
-   "/f5csnjqQj5qdqc0EZchon94hXZ6.jpg",
-   "/QatdbyzuyOq26q8kIRUnFm96za.jpg",
-   "/ie827c44beNPNnxIOi8EM9mCI4A.jpg",
-   "/vv5Zlkpaj9p76NvFxtFp0UJEEFc.jpg",
-   "/mL0Sj58I0uKRy9S4xofxXoMDDd7.jpg",
-   "/pLa4P2PstADdIFzqtVzT1s2gwab.jpg",
-   "/c0dH1vxtXzZSzJam5nPChNwIHqJ.jpg",
-   "/d611cPJxKnQF5nrDkVGIZ9q2pZW.jpg",
-   "/kaSp2L9ozzDgfIoQNowCUA0fwS9.jpg",
-   "/rh0sSq3RvjuVNjvNR899QQXQ5DD.jpg",
-   "/eNLJ9YgUxrrhlVbCN9B22fO87Og.jpg",
-   "/oSp05rYj9iFVeG7BlUMC4q8MaiF.jpg",
-   "/vFQeyJbC418yxdJ4dRALucNIVys.jpg",
-   "/8l5iLZnJPHMEEFp3sXJGOdU8RDf.jpg",
-   "/vugR0DzKy2waGDXCbOkngV0qENW.jpg",
-   "/qzg5oD2TXlndFoRrQlxXmVBz0dR.jpg",
-   "/bGrBdQarJM7E2XhIIVORCOLio0y.jpg",
-   "/254SYaon13LNirPEb5RFlA4KlB1.jpg",
-   "/8tr9JlGQ0KLOvcNRh0x6yayhADI.jpg",
-   "/jdcb3y1z1PgQv97CYQbVTZGDT8U.jpg",
-   "/wLcPH1D7gCkr6QabcYNiMyh7Lbw.jpg",
-   "/xujQrTTVON1L2hxDXypxi7IT3cS.jpg",
-   "/8vF75kK5PfNVjThxXg1QezSKdBw.jpg"
+   "/8VyTWJrNEyV2MTWvniDVp0MpOAe.jpg",
+   "/1UkoQ0cvWEIKY7uth2WswAxQinW.jpg",
+   "/wJ20rOZ1VgkCqv1jeOQB2Brny9k.jpg",
+   "/9mKhhHBfIAWy9TNVHAXqMEFokes.jpg",
+   "/yKWZIDo4ixcDUeelk2QGVA1EVmC.jpg",
+   "/vMGiCxW6biqLqdH77HtPbFDab0U.jpg",
+   "/f7eDuviLSMhHMY5J5o6Wf4lnxaf.jpg",
+   "/hFUa0wO4qfB9OVhpHelsMlobGRs.jpg",
+   "/rsfOVf2wzUr662Y0SANU4pFWaPj.jpg",
+   "/z7bX0zqnVD99cnSKBmXCxwwq8Iy.jpg",
+   "/2IUtIp7tV2h3d4UcV31np5IyLwE.jpg",
+   "/1aRrurCXirLWmz0lW4EW8yc49G3.jpg",
+   "/jgwEcVp12j2As7xWmbHxxoKbGn4.jpg",
+   "/wX39H6ZZa2tYj2C5PqyHpAflIPn.jpg",
+   "/mYQQQ6Y5Cq2JePQfqoesXCVVikj.jpg",
+   "/8ASH1sGCR6Bwuw9BdNl7X7QzS30.jpg",
+   "/jPSl3jwbaL9hzQjfzfWXdzZfP0k.jpg",
+   "/4dLdf7zi9FaZ7NDb3yI6iA7zeSg.jpg",
+   "/mDfBllDMu9c92bSCgqn4NtNDe81.jpg",
+   "/pwqzg0Hg3GicfFJFEjzj4s24Mzb.jpg",
+   "/fWL7xZjbO9CMdh0MnzTNzcgA6xK.jpg",
+   "/sUd6YxIqlWDmq56tz27YiGTwPFt.jpg",
+   "/hOk9ta7d7BKcZoYc6JjEx4EXj1D.jpg",
+   "/7iE6YpOuvTUpC4mLxYzYpJExTnh.jpg"
   ],
   "assign": [
-   18,
-   16,
-   17
+   9,
+   17,
+   10
   ],
   "focus": [
-   0.7,
-   0.43984375,
-   0.43984375
+   0.45,
+   0.4515625,
+   0.5
   ]
  },
  "last_propose": "2026-10-24"
