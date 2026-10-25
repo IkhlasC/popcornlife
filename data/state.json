@@ -1,70 +1,53 @@
 {
- "offset": 422725900,
- "pending": [
-  {
-   "type": "movie",
-   "id": 915935,
-   "title": "Anatomie d'une chute"
-  },
-  {
-   "type": "movie",
-   "id": 574475,
-   "title": "Destination Finale : Bloodlines"
-  },
-  {
-   "type": "movie",
-   "id": 615457,
-   "title": "Nobody"
-  }
- ],
+ "offset": 422725901,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 1290821,
-  "title": "Shelter",
-  "year": "2026",
-  "rating": 7.7,
+  "id": 615457,
+  "title": "Nobody",
+  "year": "2021",
+  "rating": 7.9,
   "platform": "Prime Video",
   "texts": [
-   "Un ermite sauve une jeune fille de la noyade",
-   "Repéré, le MI6 envoie une unité d'élite pour le t*er",
-   "Mais le MI6 n'est pas le seul à vouloir sa peau"
+   "Un père ne réagit pas quand deux cambrioleurs entrent chez lui",
+   "Son fils le prend pour un lâche, mais lui sait t*er"
   ],
-  "poster_path": "/y6HUdcc1cRLU0EuIhexsqZeZUOw.jpg",
+  "poster_path": "/jKRzh9y5YjYNISbeh55FQwetsSu.jpg",
   "candidates": [
-   "/nHxWyy18SvAZ8jJeemtS8k1UNjM.jpg",
-   "/rWXLPfw1mpsOd4f4yCVgYmOixcX.jpg",
-   "/o2W0WXq09P7WxcpMjTlhwI4Hpgi.jpg",
-   "/1vhPjuGLh51Lj3x5AVEddNGPDNk.jpg",
-   "/Zk52S8I1e0tsIWbx4VvzUpK8hW.jpg",
-   "/6YjnTRBz704LF1uJ3ZC4wsS9T8r.jpg",
-   "/uCGzI1EtQWXG5yRPB5PSyOdFNcC.jpg",
-   "/4ovxVsrV8RM7zzH1RJo5t94iVIC.jpg",
-   "/nYqSr1fsOXtY3y7y7YX8C3DNV3t.jpg",
-   "/ovEC9AOWAxSfm5iBQp7wzeNegAQ.jpg",
-   "/6ciBvzQRZmyvMoD4vowlMOH9Zkg.jpg",
-   "/32854PI7r6Jk5QP1Hwuk18aC4U4.jpg",
-   "/wsQPh8gz0sK3C3mAyaXcPSSOWUZ.jpg",
-   "/qfCZiuQRsgicqv8aR3gl94FRXYP.jpg",
-   "/zthwLGvWq5lfRix3n3K0EvbyGC8.jpg",
-   "/9RC1mKL0UAqwjmGb3JjhR8atIcK.jpg",
-   "/m0NsCzZipEVnhkk500m2t2D3xVm.jpg",
-   "/8yBb6u7lfabeL1HxDw9N7e6IsmR.jpg",
-   "/u6YE4rlEWOiYoqhPJuNvt5GHxgu.jpg",
-   "/1rRIGdkOKSa3w7gk4SpMu1HkhZr.jpg",
-   "/swz5YyOWYDV559rnKXjUv0CC9lq.jpg",
-   "/9wKOYkSiieRyRvXovrmSzWhUc8c.jpg",
-   "/movYph3hR6EK7H2pSEWnomvWNW9.jpg",
-   "/zFil7t8hr6vHe7gyny6EHKgTfcR.jpg"
+   "/61MrK5U4w4MVL1vfwoG12zYPJ8B.jpg",
+   "/6zbKgwgaaCyyBXE4Sun4oWQfQmi.jpg",
+   "/uWeffFhprUohUL5GO3YfQqdsVrI.jpg",
+   "/afExiUhpbY3FVR4W5QNROgWdHXt.jpg",
+   "/u2J7HxrT9QtzIy37S5q3RdrzxXD.jpg",
+   "/9libTUBvKJxE6TT84ZvpRJZZ0mr.jpg",
+   "/hV6Xq7EWS9Y3t95Ttawe4g7dxtb.jpg",
+   "/3ZPhulCTEFmiQSCIOhyMa8eHVlG.jpg",
+   "/5ihSHO4tBoc4KDsqcYG5U9pejHR.jpg",
+   "/sBwGOfJtSF6hlXaEgvFfBfeLqMk.jpg",
+   "/f4ltOKpVgcsMhRFFUhMzkQ2nUNz.jpg",
+   "/sgXYtcj7SUKnkUxXzEOMJTimAUn.jpg",
+   "/eTfPumtyAMax68YvJFd2c5leOOu.jpg",
+   "/4k9DEd4KxSgTnLyX6L1TluAOYwU.jpg",
+   "/pmwESzKvCCAVY06mX5f9eL7ABTk.jpg",
+   "/4rAu8E9khlvKBxJIIxDcx7FBWff.jpg",
+   "/y6i3vFMOlpPS8gymSYNak9Z4u6G.jpg",
+   "/bbsj4F5ioUD49eIut1uMpU8cyeR.jpg",
+   "/f1OBw4PbCEKTXLgg9SG7bJQT2Vb.jpg",
+   "/yTB2aIt5ihrJtorfDJOHGnAXpah.jpg",
+   "/pMcwEwJ4KgRpQE0BrbKxuHzmMf9.jpg",
+   "/phAwpeCQV57RwSEBcda7uU6oYhS.jpg",
+   "/aYU4RvdDulcBy4GNsCnEp4MIrUl.jpg",
+   "/90n6XdEjXgr5EXdnToevBlczMwd.jpg"
   ],
   "assign": [
    0,
-   12,
-   4
+   18,
+   8
   ],
   "focus": [
-   0.4921875,
-   0.74453125,
-   0.4
+   0.51796875,
+   0.36953125,
+   0.7421875
   ]
  },
  "last_propose": "2026-10-25"
