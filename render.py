@@ -17,9 +17,9 @@ def gradient():
         d.line([(0, y), (W, y)], fill=tuple(int(S["bg_top"][i] + (S["bg_bottom"][i] - S["bg_top"][i]) * t) for i in range(3)))
     return img
 
-def cover(im, fx=0.5, fy=0.5):
-    """Recadre en 9:16 en CENTRANT sur le sujet : fx = position du sujet dans l'image (0 = bord gauche, 1 = bord droit)."""
-    r = max(W / im.width, H / im.height)
+def cover(im, fx=0.5, fy=0.5, z=1.0):
+    """Recadre en 9:16 en CENTRANT sur le sujet : fx = position du sujet dans l'image (0 = bord gauche, 1 = bord droit). z > 1 = zoom plus serré."""
+    r = max(W / im.width, H / im.height) * max(z, 1.0)
     im = im.convert("RGB").resize((int(im.width * r) + 1, int(im.height * r) + 1), Image.LANCZOS)
     x = int(min(max(fx * im.width - W / 2, 0), max(im.width - W, 0)))
     y = int(min(max(fy * im.height - H / 2, 0), max(im.height - H, 0)))
@@ -43,12 +43,13 @@ def face_focus(im):
     except Exception:
         return None
 
-def scene(im, fx=0.5):
-    """Photo dézoomée : on voit plus de décor autour du sujet. Le bas se fond dans une version floue de la même photo."""
+def scene(im, fx=0.5, zoom=1.0):
+    """Photo dézoomée : on voit plus de décor autour du sujet. Le bas se fond dans une version floue de la même photo.
+    zoom = réglage de la rédactrice (« zoom + » / « zoom - ») : 1.0 = réglage normal."""
     full = cover(im, fx)
-    z = S.get("zoom", 1.0)
+    z = min(max(S.get("zoom", 1.0) * zoom, 0.45), 3.0)
     if z >= 1:
-        return full
+        return cover(im, fx, 0.4 if z > 1 else 0.5, z)
     im = im.convert("RGB"); rr = max(W / im.width, H / im.height) * z
     sw, sh = int(im.width * rr) + 1, int(im.height * rr) + 1
     if sw < W:
@@ -74,28 +75,9 @@ def _lift(im):
     except Exception:
         return im
 
-def custom_background(im):
-    """Image fournie par la rédactrice : plein cadre si elle est presque verticale, sinon centrée avec du noir en haut et en bas (rien n'est coupé)."""
-    im = im.convert("RGB"); ratio = im.width / im.height
-    if 0.5 <= ratio <= 0.68:
-        return background(im, 0.5)
-    black = (6, 4, 6); canvas = Image.new("RGB", (W, H), black)
-    scale = min(W / im.width, (H * 0.50) / im.height)
-    iw, ih = int(im.width * scale), int(im.height * scale)
-    fit = im.resize((iw, ih), Image.LANCZOS)
-    top, bottom = 250, int(H * 0.60)               # zone libre : sous le logo, au-dessus du texte
-    canvas.paste(fit, ((W - iw) // 2, top + max((bottom - top - ih) // 2, 0)))
-    return canvas
-
-def background(im=None, fx=0.5, blur=0, poster=False):
-    if im is None:
-        return gradient()
-    bg = scene(im, fx) if (not poster and not blur) else cover(im, fx)
-    if blur:
-        bg = bg.filter(ImageFilter.GaussianBlur(blur))
+def _finish(bg):
+    """Éclaircit si trop sombre, assombrit un peu, et fond le bas dans le noir pour que le texte reste lisible."""
     black = Image.new("RGB", (W, H), (6, 4, 6))
-    if poster:
-        return Image.blend(bg, black, S["poster_dim"])
     bg = _lift(bg)
     bg = Image.blend(bg, black, S["dim"])
     mask = Image.new("L", (W, H), 0); md = ImageDraw.Draw(mask)
@@ -104,6 +86,48 @@ def background(im=None, fx=0.5, blur=0, poster=False):
         t = (y - y0) / (H - y0)
         md.line([(0, y), (W, y)], fill=int(255 * S["fade_strength"] * min(1, t * 1.6) ** 1.3))
     return Image.composite(black, bg, mask)
+
+def background(im=None, fx=0.5, blur=0, poster=False, zoom=1.0):
+    if im is None:
+        return gradient()
+    bg = scene(im, fx, zoom) if (not poster and not blur) else cover(im, fx)
+    if blur:
+        bg = bg.filter(ImageFilter.GaussianBlur(blur))
+    if poster:
+        return Image.blend(bg, Image.new("RGB", (W, H), (6, 4, 6)), S["poster_dim"])
+    return _finish(bg)
+
+_ZONE_TOP, _ZONE_BOTTOM = 250, int(H * 0.60)      # zone libre : sous le logo, au-dessus du texte
+
+def _custom_scales(im):
+    """(échelle de départ, échelle « plein cadre ») pour une image fournie par la rédactrice."""
+    cs = max(W / im.width, H / im.height)
+    if 0.5 <= im.width / im.height <= 0.68:
+        return cs, cs                                  # presque verticale : déjà plein cadre
+    return min(W / im.width, (H * 0.50) / im.height), cs
+
+def fill_factor(im, custom=False):
+    """Valeur de zoom qui remplit tout le cadre (« plein cadre »)."""
+    if custom:
+        b, cs = _custom_scales(im.convert("RGB")); return cs / b
+    return 1.0 / S.get("zoom", 1.0)
+
+def custom_background(im, zoom=1.0, fx=0.5):
+    """Image fournie par la rédactrice. Presque verticale : plein cadre. Sinon : centrée avec du noir en haut et en bas (rien n'est coupé).
+    Avec zoom > 1 elle grossit peu à peu jusqu'à remplir toute la slide (les bords sont alors recadrés)."""
+    im = im.convert("RGB"); base, cs = _custom_scales(im)
+    if zoom == 1.0 and base == cs:
+        return background(im, 0.5)
+    s = min(max(base * zoom, base * 0.4), cs * 2.5)
+    iw, ih = int(im.width * s) + 1, int(im.height * s) + 1
+    fit = im.resize((iw, ih), Image.LANCZOS)
+    canvas = Image.new("RGB", (W, H), (6, 4, 6))
+    zc = (_ZONE_TOP + _ZONE_BOTTOM) / 2; zone_h = _ZONE_BOTTOM - _ZONE_TOP
+    t = min(max((ih - zone_h) / (H - zone_h), 0.0), 1.0)           # 0 = petite image sur fond noir, 1 = plein cadre
+    x0 = (W - iw) // 2 if iw <= W else -int(min(max(fx * iw - W / 2, 0), iw - W))
+    y0 = int(zc + (H / 2 - zc) * t - ih / 2) if ih < H else -int((ih - H) * 0.4)
+    canvas.paste(fit, (x0, y0))
+    return Image.blend(canvas, _finish(canvas), t) if t > 0 else canvas
 
 def logo(d):
     d.text((W // 2, S["safe"]["top"] - 50), S["logo_text"], font=font("font_small", 30), fill=S["accent"], anchor="mm")
@@ -119,8 +143,8 @@ def wrap(d, text, f, max_w):
     lines.append(cur)
     return lines
 
-def text_slide(text, path, index, img=None, fx=0.5, last=False, custom=False):
-    im = custom_background(img) if (custom and img is not None) else background(img, fx); d = ImageDraw.Draw(im); logo(d)
+def text_slide(text, path, index, img=None, fx=0.5, last=False, custom=False, zoom=1.0):
+    im = custom_background(img, zoom) if (custom and img is not None) else background(img, fx, zoom=zoom); d = ImageDraw.Draw(im); logo(d)
     sf = S["safe"]; box_w = W - sf["left"] - sf["right"]; box_h = H - sf["top"] - sf["bottom"]
     size = S["text_max_size"]
     while True:
