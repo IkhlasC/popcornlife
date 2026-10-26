@@ -33,3 +33,12 @@ def updates(offset):
 def answer(cb_id):
     try: _call("answerCallbackQuery", {"callback_query_id": cb_id})
     except Exception: pass
+
+def download_file(file_id, dest):
+    """Télécharge une photo ou un fichier envoyé au bot."""
+    info = _call("getFile", {"file_id": file_id})
+    r = requests.get(f"https://api.telegram.org/file/bot{os.environ['TELEGRAM_BOT_TOKEN']}/{info['file_path']}", timeout=90)
+    r.raise_for_status()
+    os.makedirs(os.path.dirname(dest) or ".", exist_ok=True)
+    with open(dest, "wb") as f: f.write(r.content)
+    return dest
