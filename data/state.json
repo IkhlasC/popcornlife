@@ -1,59 +1,52 @@
 {
- "offset": 422725921,
+ "offset": 422725922,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 915935,
-  "title": "Anatomie d'une chute",
-  "year": "2023",
-  "rating": 7.5,
-  "platform": "Netflix",
+  "id": 210577,
+  "title": "Gone Girl",
+  "year": "2014",
+  "rating": 7.9,
+  "platform": "Disney+ / HBO Max",
   "texts": [
-   "Imagine que ton mari est retrouvé m*rt dans la neige",
-   "La police parle de m*urtre et la principale suspecte, c'est toi",
-   "Au procès, on lave tout ton linge sale pour savoir si c'est toi qui l'as fait"
+   "Imagine ta femme disparue le jour de vos 5 ans de mariage",
+   "Tout t'accuse, et tu découvres qu'elle te cachait beaucoup de choses"
   ],
-  "poster_path": "/nSwQKCsDdj2S56mG7Yz2YGfrLT6.jpg",
+  "poster_path": "/7xkJ1ACu40BjzLHVPRILWjFvW7.jpg",
   "candidates": [
-   "/lDVl2jf6VB8ODl1olZ6FLvOV1gX.jpg",
-   "/kszooR7v1TLFM4pzx6IkKq2jDAN.jpg",
-   "/3Feq4UV4p2gU6dShAYfveqwWAEf.jpg",
-   "/8VjYcf8JCokm7mLn4wLKPLXNnNR.jpg",
-   "/5fOu0c3lcjNYdZF2UlJVScuiaML.jpg",
-   "/sxOGymHkRUfAhj63yLISFfyKARN.jpg",
-   "/xyR7MdyqWZRYkiraHPFHHi5KDmu.jpg",
-   "/zMHfN9EM6sk4RuXWuX4t6GBIOsZ.jpg",
-   "/pecCCwwLfCK0461DUF9eFTNIg0h.jpg",
-   "/hrLUowoEClVKMHbzok6cVo7x4Dp.jpg",
-   "/bC6fpaTIg7s2F3SU0S823zdM3P.jpg",
-   "/hDhUpy5XUgx810VWusV4alX9DFF.jpg",
-   "/1voXjhrFX9H75vMsX5aM7e1G9qW.jpg",
-   "/fFlQjYquRR1V0zBlla1MJTMMRmV.jpg",
-   "/jn5UxJZligF9EqUq9DA3jDCT9pb.jpg",
-   "/fyG3Bn2uEJsdbHG6jSKa63nEOEt.jpg",
-   "/786cfVrkVLQV7bZAN6KnPFaHMNP.jpg",
-   "/8yvbWHXJM8xH7XG7qs9PEeePvoR.jpg",
-   "/dcnhVQS66PfpwzUu4K4iEF5qfT8.jpg",
-   "/nP3x0zuVPHVSyYXP4Ye6dcm0GNz.jpg",
-   "/3hHmKcTn81zoTKFPqIlNNtp9tZ5.jpg",
-   "/wnCiwEQc7gZnItX9gPbt1RcYfzF.jpg",
-   "/4jpeg7uPYw2gg297E7MYLCJQWdK.jpg",
-   "/ljmoEpHaLA8Nqc7pkOst4YEDcOY.jpg"
+   "/iWak7wT0j6ycCc8lKr4NBz9c7n5.jpg",
+   "/1ufic9NSdolkgNkQSAVjlVp0uqn.jpg",
+   "/x9ezMgOtDPqHatHDvxEG0ILb6Ie.jpg",
+   "/h2JaQWLKhapm7AuSViJwGiv8ngC.jpg",
+   "/5s7y0ia1izCvFVjBRgHCgceHelf.jpg",
+   "/xISE4M4IhCFgd9oOEFKYfkknumg.jpg",
+   "/1mzisKntcKHEG3RoTGXIIHgmJV7.jpg",
+   "/pXQ0M1i2gkwSqagOPTniiR0fFtp.jpg",
+   "/2JXoeqbcXZxIb99zA4BTwmK1dDC.jpg",
+   "/6WUC6yVzfyZmlWPSgj0yB3WvrG3.jpg",
+   "/eSdl8ANr4BashmiBmcE6eitK74D.jpg",
+   "/7y8DnxJoUAbm7XPKh7nznKEhpnI.jpg",
+   "/wp71OrXrxj6R3L55p95Ib0OngrT.jpg",
+   "/4kqvPNdudzVq8OkWCa3sEEcYQdD.jpg",
+   "/znsgNAo52yCTtkHfmF1N0vIfj6D.jpg",
+   "/ti1KYVpKiuBCPtTVMDJ9aAyqXp3.jpg",
+   "/mfl6xZKlCTm2xM65V9zoZeNDEmU.jpg",
+   "/eBxcfxhPFUWpCUenAUaJunKLcBr.jpg",
+   "/mJjPyIIpIBCoB5VikuT0doxZh2k.jpg",
+   "/8gWZx3j2XJg5vCJjau4wfsGyRbE.jpg",
+   "/r5O5qtyjWfF7ybOHL4UmMFGrlQb.jpg",
+   "/5fKKMsGFiRg8GMCunB2YxYPUkOh.jpg",
+   "/pG5vm74ZhKftHxGwUXP2mjUDdR.jpg",
+   "/dHPeQJXmxBt7t6GBiszTea5MNK5.jpg"
   ],
   "assign": [
-   9,
-   17,
-   7
+   2,
+   22
   ],
   "focus": [
-   0.4,
-   0.56953125,
-   0.33125
-  ],
-  "last_slide": 3,
-  "custom": {
-   "3": "data/custom/915935_slide3.jpg"
-  }
+   0.2828125,
+   0.6515625
+  ]
  },
  "last_propose": "2026-10-26"
 }
