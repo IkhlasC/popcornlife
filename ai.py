@@ -230,11 +230,17 @@ Réécris UNIQUEMENT la slide {n}. Demande de la rédactrice : « {instruction o
 - Ne reprends pas la version actuelle.
 JSON : {{"texte":""}}"""
     for _ in range(3):
-        r = as_dict(ask_json(prompt, max_tokens=400))
-        t = oral(str(r.get("texte", "")).strip().strip('"«» '))
+        raw = ask(prompt, max_tokens=400)
+        r = parse_json(raw)
+        if isinstance(r, dict) and r.get("texte"):
+            t = str(r["texte"])
+        else:                                          # l'IA a répondu en texte simple ou en JSON cassé : on récupère la phrase
+            m = re.search(r'"texte"\s*:\s*"(.+?)"\s*[,}]', raw, re.S)
+            t = m.group(1) if m else raw.strip().splitlines()[-1] if raw.strip() else ""
+        t = oral(re.sub(r'^(?:texte|slide\s*\d)\s*:\s*', '', t.strip().strip('"«» ').strip(), flags=re.I).strip('"«» '))
         if t and t != texts[n - 1] and len(t.split()) <= 16:
             return t
-        prompt += "\n\nPropose une phrase différente de l'actuelle et de 14 mots maximum."
+        prompt += "\n\nPropose une phrase différente de l'actuelle et de 14 mots maximum. Réponds avec le JSON demandé."
     raise RuntimeError("Impossible de réécrire cette slide")
 
 def pick_images(meta, thumbs, texts=None):
@@ -305,7 +311,7 @@ def route(message, texts, title):
 La rédactrice écrit : « {message} »
 
 Traduis sa demande en actions, dans l'ordre où elle les demande. Actions possibles :
-- {{"action":"text","slide":N,"instruction":"..."}} : changer le texte de la slide N. instruction = sa consigne, ou sa phrase exacte si elle en donne une, ou "" si elle veut juste une autre version.
+- {{"action":"text","slide":N,"instruction":"...","exact":false}} : changer le texte de la slide N. Si elle DONNE elle-même la phrase à afficher (une phrase complète rédigée, avec ou sans guillemets), mets exact à true et recopie la phrase TELLE QUELLE dans instruction. Sinon instruction = sa consigne (ex. « plus dur »), ou "" si elle veut juste une autre version, et exact à false.
 - {{"action":"image","slide":N,"hint":"..."}} : changer l'image de la slide N. hint = ce qu'elle veut voir (ex. « plus de gros plan sur son visage »), ou "" pour simplement une autre image.
 - {{"action":"rewrite_all","instruction":"..."}} : refaire tous les textes.
 - {{"action":"new_film","title":"...","year":null}} : elle demande un AUTRE film ou série (elle cite un titre différent du dernier).
