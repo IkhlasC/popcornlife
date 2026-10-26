@@ -1,372 +1,336 @@
-import sys, os, io, re, json, html, datetime, traceback
-from zoneinfo import ZoneInfo
-import tmdb, ai, tg, render
+import os, io, re, json, base64
+from anthropic import Anthropic
 
-DATA = "data"
-RECENT_DAYS = 365
-SEND_HOUR = 8   # heure (Paris) à partir de laquelle les propositions du jour sont envoyées
-HELP = ("🍿 <b>PopcornLife Studio</b>\n\n"
-        "• Chaque matin je t'envoie 3 propositions : appuie sur A, B ou C.\n"
-        "• Tu peux aussi m'écrire un film : « Gone Girl » ou « Fais-moi un TikTok sur Dark ».\n"
-        "• « propositions » : j'envoie 3 nouvelles idées.\n"
-        "• « image 2 » : je change l'image de la slide 2 (1, 2 ou 3).\n"
-        "• Tu peux m'envoyer ta propre image : envoie-la avec la légende « 1 » (ou 2, 3). Si elle n'est pas verticale, je la centre avec du noir en haut et en bas.\n"
-        "• « zoom + » / « zoom - » : j'agrandis ou je réduis l'image de la dernière slide modifiée (« zoom + 2 » pour la slide 2). « plein cadre » : l'image remplit toute la slide.\n"
-        "• Après un post, dis-moi librement ce que tu veux changer, autant de fois que tu veux : « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 », « slide 2 : ta phrase exacte ».\n"
-        "• « refais » : j'écris de nouveaux textes pour le dernier film. Tu peux préciser : « refais plus mystérieux ».")
+MODEL = os.environ.get("MODEL_WRITE", "claude-sonnet-5-5")
+MODEL_FAST = os.environ.get("MODEL_FAST", "claude-haiku-5-5")
+_client = None
 
-def load(name, default):
-    try:
-        with open(f"{DATA}/{name}.json", encoding="utf-8") as f: return json.load(f)
-    except FileNotFoundError:
-        return default
+# Style des slides. False = ta voix PopcornLife (majuscule au début). True = style « tout en minuscules, sans point final » du compte @alorsonregardequoi.
+STYLE_ORAL = False
 
-def save(name, obj):
-    os.makedirs(DATA, exist_ok=True)
-    with open(f"{DATA}/{name}.json", "w", encoding="utf-8") as f: json.dump(obj, f, ensure_ascii=False, indent=1)
+SYSTEM = """Tu écris pour PopcornLife, compte TikTok de recommandations de films et séries. Tu écris comme une vraie cinéphile qui recommande personnellement une œuvre à une amie : naturel, direct, jamais pompeux.
+Interdits : les clichés d'IA (« plongez dans », « incontournable », « chef-d'œuvre », « préparez-vous », « embarquez », « voyage »...), les emojis dans les slides, les paragraphes, les spoilers (ne révèle jamais un retournement, une mort, la fin, une identité cachée), et toute information sur l'intrigue qui ne figure pas dans le synopsis fourni."""
 
-def e(s): return html.escape(str(s))
+def _c():
+    global _client
+    if _client is None: _client = Anthropic()
+    return _client
 
-def recent_ids():
-    limit = (datetime.date.today() - datetime.timedelta(days=RECENT_DAYS)).isoformat()
-    return {(h["type"], h["id"]) for h in load("history", []) if h["date"] >= limit}
+def ask(prompt, images=None, model=None, max_tokens=2500):
+    content = []
+    for i, b in enumerate(images or []):
+        content += [{"type": "text", "text": f"Image {i+1} :"},
+                    {"type": "image", "source": {"type": "base64", "media_type": "image/jpeg", "data": base64.b64encode(b).decode()}}]
+    content.append({"type": "text", "text": prompt})
+    r = _c().messages.create(model=model or MODEL, max_tokens=max_tokens, system=SYSTEM,
+                             messages=[{"role": "user", "content": content}])
+    return "".join(b.text for b in r.content if b.type == "text")
 
-def platform_info(t, i):
-    p = tmdb.platforms(t, i)
-    if p["flatrate"]:
-        return " / ".join(p["flatrate"][:2]), f"Disponible en France sur : {', '.join(p['flatrate'])}"
-    if p["rent"] or p["buy"]:
-        return "", "Pas en abonnement en France d'après TMDB (location/achat seulement). Vérifie avant de publier."
-    return "", "Plateforme en France introuvable : je n'en affiche aucune sur la slide 4."
-
-# ---------- propositions ----------
-def daily():
-    """Envoie les propositions une seule fois par jour, à partir de 8 h (heure de Paris), même si GitHub a du retard."""
-    now = datetime.datetime.now(ZoneInfo("Europe/Paris")); today = now.date().isoformat()
-    force = os.environ.get("FORCE") == "true"
-    state = load("state", {"offset": 0})
-    if not force and (state.get("last_propose") == today or now.hour < SEND_HOUR):
-        return
-    state["last_propose"] = today; save("state", state)   # on note d'abord, pour ne jamais envoyer deux fois
-    try:
-        propose()
-    except Exception as ex:
-        traceback.print_exc()
-        try: tg.send(f"⚠️ Je n'ai pas pu préparer les propositions du jour ({e(ex)}). Écris « propositions » pour réessayer.")
-        except Exception: pass
-
-def propose():
-    pool = tmdb.candidates(recent_ids())
-    if len(pool) < 6:
-        tg.send("⚠️ Je n'ai pas trouvé assez de films disponibles pour faire des propositions."); return
-    by_ref = {f'{p["type"]}:{p["id"]}': p for p in pool}
-    chosen = [c for c in ai.propose(pool) if c.get("ref") in by_ref][:3]
-    if not chosen:
-        tg.send("⚠️ L'IA n'a pas renvoyé de proposition utilisable. Écris « propositions » pour réessayer."); return
-    state = load("state", {"offset": 0}); state["pending"] = []
-    lines, buttons = ["🍿 <b>Voici les propositions PopcornLife du jour</b>\n"], []
-    for n, c in enumerate(chosen):
-        p = by_ref[c["ref"]]; letter = "ABC"[n]
-        plat, _ = platform_info(p["type"], p["id"])
-        kind = "Série" if p["type"] == "tv" else "Film"
-        lines.append(f"<b>{letter} — {e(p['title'])}</b> ({p['year']}) · {kind}{' · ' + e(plat) if plat else ''}\n"
-                     f"Angle : {e(c.get('angle', ''))}\nHook : {e(c.get('hook', ''))}\nPourquoi : {e(c.get('pourquoi', ''))}\n")
-        buttons.append({"text": f"{letter} — {p['title'][:25]}", "callback_data": f"pick:{p['type']}:{p['id']}"})
-        state["pending"].append({"type": p["type"], "id": p["id"], "title": p["title"]})
-    save("state", state)
-    tg.send("\n".join(lines), [[b] for b in buttons])
-
-# ---------- création d'un post ----------
-def choose_images(meta, paths, texts=None):
-    """Mélange choc + cohérence avec les textes ; la plus percutante en slide 1 ; recentrage sur le visage."""
-    if not paths:
-        return [], [], [None] * max(len(texts or []), 2)
-    thumbs = []
-    for p in paths:
-        im = tmdb.download(p, "w300"); b = io.BytesIO(); im.save(b, "JPEG", quality=80); thumbs.append(b.getvalue())
-    choice = ai.pick_images(meta, thumbs, texts)
-    cache, focus, bd = {}, [], []
-    for c in choice:
-        if c["idx"] not in cache:
-            cache[c["idx"]] = tmdb.download(paths[c["idx"]], "w1280")
-        im = cache[c["idx"]]; bd.append(im)
-        face = render.face_focus(im)   # on affine la position donnée par l'IA avec le vrai visage, s'il est détecté et cohérent
-        focus.append(face if face is not None and abs(face - c["focus"]) <= 0.25 else c["focus"])
-    return [c["idx"] for c in choice], focus, bd
-
-def rewrite(guidance=""):
-    state = load("state", {"offset": 0}); last = state.get("last")
-    if not last:
-        tg.send("Je n'ai pas de post récent à refaire. Écris d'abord un titre de film."); return
-    meta = tmdb.details(last["type"], last["id"])
-    tg.send(f"✍️ Je réécris les textes de <b>{e(last['title'])}</b>…" + (f"\nConsigne : {e(guidance)}" if guidance else ""))
-    post = ai.write_post(meta, guidance, avoid=last["texts"])
-    assign, focus, bd = choose_images(meta, last["candidates"], post["texts"])
-    poster = tmdb.download(last["poster_path"], "w780")
-    files = render.render_all(post["texts"], bd, focus or [0.5] * 3, poster,
-                              {"title": last["title"], "year": last["year"], "platform": last["platform"], "rating": last["rating"]}, "out")
-    tg.send_files(files[:-1])
-    tg.send("\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(post["texts"])) + "\n\n"
-            "L'affiche (dernière slide) ne change pas. Pas encore ça ? Écris « refais » suivi de ce que tu veux, "
-            "par exemple « refais plus mystérieux, sans question ».")
-    last.update(texts=post["texts"], assign=assign, focus=focus or [0.5] * 3)
-    state["last"] = last; save("state", state)
-
-def produce(t, i):
-    meta = tmdb.details(t, i)
-    if not meta["overview"] or not meta["poster_path"]:
-        tg.send(f"⚠️ TMDB n'a pas de synopsis ou d'affiche pour « {e(meta['title'])} ». Je ne veux pas inventer : choisis-en un autre."); return
-    warn = ""
-    if (t, i) in recent_ids():
-        warn = "\n⚠️ Tu as déjà fait ce titre il y a moins d'un an."
-    tg.send(f"⏳ Je prépare <b>{e(meta['title'])}</b> ({meta['year']})…{warn}")
-    plat, plat_msg = platform_info(t, i)
-    post = ai.write_post(meta)
-    paths = tmdb.backdrops(t, i)
-    last = {"type": t, "id": i, "title": meta["title"], "year": meta["year"], "rating": meta["rating"], "platform": plat,
-            "texts": post["texts"], "poster_path": meta["poster_path"], "candidates": paths, "assign": [], "focus": []}
-    last["assign"], last["focus"], bd = choose_images(meta, paths, post["texts"])
-    poster = tmdb.download(meta["poster_path"], "w780")
-    files = render.render_all(post["texts"], bd, last["focus"] or [0.5] * 3, poster,
-                              {"title": meta["title"], "year": meta["year"], "platform": plat, "rating": meta["rating"]}, "out")
-    tg.send_files(files)
-    tg.send(f"<code>{e(meta['title'])}</code>")
-    tg.send(f"<code>{e(post['hashtags'])}</code>")
-    tg.send(f"✅ <b>{e(meta['title'])}</b> est prêt ({len(post['texts'])} slides + l'affiche).\n{e(plat_msg)}\n\n"
-            + "\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(post["texts"])) + "\n\n"
-            f"Une image ne te plaît pas ? Écris « image 1 », « image 2 »… (une par slide).\n{meta['url']}")
-    hist = load("history", []); hist.append({"type": t, "id": i, "title": meta["title"], "date": datetime.date.today().isoformat()})
-    save("history", hist)
-    state = load("state", {"offset": 0}); state["last"] = last; state["pending"] = []; save("state", state)
-
-# ---------- modifications libres du dernier carrousel ----------
-def _ensure(last):
-    n = len(last["texts"])
-    last.setdefault("assign", []); last.setdefault("focus", [])
-    while len(last["focus"]) < n: last["focus"].append(0.5)
-
-def _slide_image(last, n):
-    im, custom = None, False
-    cp = (last.get("custom") or {}).get(str(n))
-    if cp and os.path.exists(cp):                    # image envoyée par la rédactrice
-        from PIL import Image
-        im, custom = Image.open(cp), True
-    elif last.get("candidates") and len(last["assign"]) >= n:
-        im = tmdb.download(last["candidates"][last["assign"][n - 1]], "w1280")
-    return im, custom
-
-def _render_slide(last, n):
-    im, custom = _slide_image(last, n)
-    zoom = float((last.get("zoom") or {}).get(str(n), 1.0))
-    os.makedirs("out", exist_ok=True); p = f"out/slide{n}.jpg"
-    render.text_slide(last["texts"][n - 1], p, n, im, last["focus"][n - 1], last=(n == len(last["texts"])), custom=custom, zoom=zoom)
-    return p
-
-def _do_zoom(last, n, direction):
-    im, custom = _slide_image(last, n)
-    if im is None:
-        raise ValueError("cette slide n'a pas d'image à zoomer")
-    k = str(n); zs = last.setdefault("zoom", {}); cur = float(zs.get(k, 1.0))
-    fill = render.fill_factor(im, custom); step = 1.4
-    if direction == "fill": new = fill
-    elif direction == "reset": new = 1.0
-    elif direction == "out":
-        new = cur / step
-        if cur > fill * 1.02 and new < fill: new = fill      # on s'arrête d'abord sur « plein cadre »
-    else:
-        new = cur * step
-        if cur < fill * 0.98 and new > fill: new = fill
-    zs[k] = round(min(max(new, 0.4), fill * 2.5), 3)
-
-def _do_image(last, n, hint=""):
-    (last.get("custom") or {}).pop(str(n), None)     # on remplace l'image envoyée par une image du film
-    (last.get("zoom") or {}).pop(str(n), None)       # et le zoom repart à zéro
-    cands, assign = last["candidates"], last["assign"]
-    if not cands or len(assign) < n:
-        raise ValueError("pas d'images disponibles pour ce film")
-    meta = tmdb.details(last["type"], last["id"])
-    if hint:
-        thumbs = []
-        for p in cands:
-            im = tmdb.download(p, "w300"); b = io.BytesIO(); im.save(b, "JPEG", quality=80); thumbs.append(b.getvalue())
-        r = ai.pick_image_hint(meta, thumbs, hint, last["texts"][n - 1], list(assign))
-    else:
-        cur = assign[n - 1]
-        nxt = next((k % len(cands) for k in range(cur + 1, cur + 1 + len(cands)) if (k % len(cands)) not in assign), (cur + 1) % len(cands))
-        r = {"idx": nxt, "focus": 0.5}
-    if r is None:
-        raise ValueError("je n'ai pas trouvé d'image qui correspond")
-    im = tmdb.download(cands[r["idx"]], "w1280")
-    face = render.face_focus(im)
-    if hint: focus = face if face is not None and abs(face - r["focus"]) <= 0.25 else r["focus"]
-    else: focus = face if face is not None else 0.5
-    assign[n - 1] = r["idx"]; last["focus"][n - 1] = focus
-
-def apply_actions(actions):
-    """Exécute dans l'ordre une ou plusieurs modifications, puis renvoie toutes les slides touchées."""
-    state = load("state", {"offset": 0}); last = state.get("last")
-    if not last or not last.get("texts"):
-        tg.send("Je n'ai pas de post récent à modifier. Écris d'abord un titre de film."); return
-    _ensure(last); total = len(last["texts"]); touched, notes = [], []
-    for a in actions:
-        kind = a.get("action")
-        try: n = int(a.get("slide") or 0)
-        except Exception: n = 0
-        if kind in ("text", "image", "custom", "zoom") and not 1 <= n <= total:
-            notes.append(f"Slide {n or '?'} : ce carrousel n'a que {total} slides de texte."); continue
+def parse_json(txt):
+    """Extrait le JSON d'une réponse, même entourée de texte ou de ```. Renvoie None si illisible."""
+    clean = re.sub(r"^```(?:json)?\s*|\s*```$", "", txt.strip(), flags=re.M).strip()
+    cands = [clean]
+    for pat in (r"\{.*\}", r"\[.*\]"):
+        m = re.search(pat, clean, re.S)
+        if m: cands.append(m.group(0))
+    for c in cands:
         try:
-            if kind == "text":
-                meta = tmdb.details(last["type"], last["id"])
-                ins = str(a.get("instruction") or "").strip()
-                if a.get("exact") and ins:                  # sa propre phrase : on l'affiche telle quelle
-                    last["texts"][n - 1] = ai.oral(ins.strip('"«» '))
-                else:
-                    last["texts"][n - 1] = ai.rewrite_slide(meta, last["texts"], n, ins)
-                touched.append(n)
-            elif kind == "image":
-                _do_image(last, n, str(a.get("hint") or "")); touched.append(n)
-            elif kind == "custom":
-                from PIL import Image, ImageOps
-                os.makedirs(f"{DATA}/custom", exist_ok=True); dst = f"{DATA}/custom/{last['id']}_slide{n}.jpg"
-                ImageOps.exif_transpose(Image.open(a["path"])).convert("RGB").save(dst, "JPEG", quality=92)
-                last.setdefault("custom", {})[str(n)] = dst; (last.get("zoom") or {}).pop(str(n), None); touched.append(n)
-            elif kind == "zoom":
-                d = str(a.get("direction") or "in")
-                _do_zoom(last, n, d if d in ("in", "out", "fill", "reset") else "in"); touched.append(n)
-            elif kind == "rewrite_all":
-                state["last"] = last; save("state", state)
-                rewrite(str(a.get("instruction") or "")); return
-            elif kind == "new_film":
-                state["last"] = last; save("state", state)
-                t = str(a.get("title") or "").strip()
-                found = tmdb.search(t, a.get("year")) or tmdb.search(t) if t else None
-                if not found: tg.send(f"Je ne trouve pas « {e(t)} » sur TMDB."); return
-                produce(*found[0]); return
-            elif kind == "propositions":
-                state["last"] = last; save("state", state); propose(); return
-            else:
-                notes.append("Je n'ai pas compris cette partie de ta demande.")
-        except Exception as ex:
-            traceback.print_exc(); notes.append(f"Slide {n or '?'} : {e(ex)}")
-    if touched: last["last_slide"] = touched[-1]
-    state["last"] = last; save("state", state)
-    slides = sorted(set(touched))
-    if slides:
-        tg.send_files([_render_slide(last, n) for n in slides])
-    tg.send(("\n".join(notes) + "\n\n" if notes else "") + "\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(last["texts"])) + "\n\n"
-            "Tu peux continuer : « zoom + », « zoom - », « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 »… "
-            "Dis-moi tout ce que tu veux, dans l'ordre.")
-
-def edit_slide(n, instruction):
-    apply_actions([{"action": "text", "slide": n, "instruction": instruction}])
-
-def redo_image(n, hint=""):
-    apply_actions([{"action": "image", "slide": n, "hint": hint}])
-
-def parse_request(message):
-    """Titre court = utilisé tel quel (avec année facultative). Phrase longue = l'IA extrait le titre."""
-    text = message.strip().strip('"«» ').strip()
-    title, year = text, None
-    mm = re.match(r"^(.*?)[\s,(]+((?:19|20)\d{2})\)?$", text)
-    if mm:
-        title, year = mm.group(1).strip(), mm.group(2)
-    long_request = len(title.split()) > 5 or re.match(r"(?i)^(fais|fait|cr[ée]e|peux|tiktok|un tiktok|je veux)", title)
-    if long_request:
-        try:
-            t, y = ai.extract_title(message)
-            if t:
-                title, year = t, (str(y) if y else year)
+            return json.loads(c)
         except Exception:
-            traceback.print_exc()
-            if " sur " in title:
-                title = title.rsplit(" sur ", 1)[1].strip(' .!?"«»')
-    return title, year
+            pass
+    return None
 
-def manual(message):
-    title, year = parse_request(message)
-    if not title:
-        tg.send(HELP); return
-    found = tmdb.search(title, year) or tmdb.search(title)
-    if not found:
-        tg.send(f"Je ne trouve pas « {e(title)} » sur TMDB. Vérifie l'orthographe, ou ajoute l'année : « {e(title)} 2026 »."); return
-    produce(*found[0])
+def ask_json(prompt, **kw):
+    for attempt in range(2):
+        r = parse_json(ask(prompt, **kw))
+        if r is not None:
+            return r
+        prompt += "\n\nRéponds UNIQUEMENT avec du JSON valide."
+    raise RuntimeError("Réponse IA illisible")
 
-# ---------- lecture des messages Telegram ----------
-def photo_received(file_id, caption):
-    state = load("state", {"offset": 0}); last = state.get("last")
-    if not last or not last.get("texts"):
-        tg.send("J'ai reçu ton image, mais je n'ai pas de carrousel en cours. Écris d'abord un titre de film."); return
-    os.makedirs(f"{DATA}/custom", exist_ok=True)
-    path = tg.download_file(file_id, f"{DATA}/custom/_waiting.jpg")
-    mm = re.search(r"([1-3])", caption)
-    if mm:
-        apply_actions([{"action": "custom", "slide": int(mm.group(1)), "path": path}])
-    else:
-        state["photo"] = path; save("state", state)
-        tg.send(f"📷 Image reçue. Pour quelle slide ? Réponds simplement 1, 2 ou 3 (le carrousel a {len(last['texts'])} slides de texte).")
+def as_dict(r):
+    """Si l'IA a renvoyé une liste contenant l'objet attendu, on prend l'objet."""
+    if isinstance(r, list):
+        r = next((x for x in r if isinstance(x, dict)), {})
+    return r if isinstance(r, dict) else {}
 
-def handle(u, state):
-    if "callback_query" in u:
-        cb = u["callback_query"]
-        if cb["message"]["chat"]["id"] != tg.chat_id(): return
-        tg.answer(cb["id"])
-        _, t, i = cb["data"].split(":"); produce(t, int(i)); return
-    msg = u.get("message")
-    if not msg or msg["chat"]["id"] != tg.chat_id(): return
-    fid = None
-    if msg.get("photo"): fid = msg["photo"][-1]["file_id"]
-    elif (msg.get("document") or {}).get("mime_type", "").startswith("image/"): fid = msg["document"]["file_id"]
-    if fid:                                          # une image envoyée par la rédactrice
-        photo_received(fid, (msg.get("caption") or "").strip()); return
-    if "text" not in msg: return
-    text = msg["text"].strip(); low = text.lower().strip(" .!")
-    ph = state.get("photo")
-    if ph and os.path.exists(ph) and re.search(r"(?i)\b(image|photo|slide|la|numéro)\s*([1-3])\b|^\s*([1-3])\s*$", text):
-        mm = re.search(r"([1-3])", text)
-        st = load("state", {"offset": 0}); st["photo"] = None; save("state", st)
-        apply_actions([{"action": "custom", "slide": int(mm.group(1)), "path": ph}]); return
-    elif ph:                                         # autre message : l'image en attente est abandonnée
-        st = load("state", {"offset": 0}); st["photo"] = None; save("state", st)
-    zm = re.match(r"^(zoom|d[eé]zoom|plein (?:cadre|[eé]cran)|remplis?(?: tout)?)\b(.*)$", low)
-    if zm and state.get("last") and state["last"].get("texts") and len(low.split()) <= 5:
-        rest = zm.group(2); sl = re.search(r"\b([1-3])\b", rest)
-        n = int(sl.group(1)) if sl else int(state["last"].get("last_slide") or 1)
-        w = zm.group(1)
-        if w.startswith(("plein", "rempli")): d = "fill"
-        elif w.startswith("d") or re.search(r"(-|moins|\bmoin\b)", rest): d = "out"
-        elif "reset" in rest or "normal" in rest: d = "reset"
-        else: d = "in"
-        apply_actions([{"action": "zoom", "slide": n, "direction": d}]); return
-    if low in ("/start", "aide", "/aide", "help"): tg.send(HELP)
-    elif low in ("a", "b", "c") and state.get("pending"):
-        k = "abc".index(low)
-        if k < len(state["pending"]): p = state["pending"][k]; produce(p["type"], p["id"])
-    elif low.startswith("image") and low[5:].strip() in ("1", "2", "3"): redo_image(int(low[5:].strip()))
-    elif re.match(r"(?i)^(refais|refait|autre hook|nouveau hook|nouveaux textes|change les phrases|change le hook)\b", text):
-        rewrite(re.sub(r"(?i)^(refais|refait|autre hook|nouveau hook|nouveaux textes|change les phrases|change le hook)\b[\s:,\-]*", "", text).strip())
-    elif low in ("propositions", "proposition", "/propositions", "idées", "idees"): propose()
-    else:
-        last = state.get("last")
-        if last and last.get("texts"):               # un carrousel est en cours : on comprend la demande libre
-            acts = [a for a in ai.route(text, last["texts"], last["title"]) if a.get("action") != "unknown"]
-            if acts:
-                apply_actions(acts); return
-            if len(text.split()) > 6:
-                tg.send("Je n'ai pas compris. Exemples : « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 », ou un autre titre de film."); return
-        manual(text)
+def as_list(r):
+    """Renvoie toujours une liste d'objets, même si l'IA a enveloppé la liste dans un objet ou renvoyé du texte."""
+    if isinstance(r, dict):
+        r = next((v for v in r.values() if isinstance(v, list)), [r] if "ref" in r else [])
+    return [x for x in r if isinstance(x, dict)] if isinstance(r, list) else []
 
-def poll():
-    state = load("state", {"offset": 0, "pending": [], "last": None})
-    for u in tg.updates(state["offset"]):
-        state = load("state", state); state["offset"] = u["update_id"] + 1; save("state", state)
+def propose(pool):
+    lines = "\n".join(f'{p["type"]}:{p["id"]} | {p["title"]} ({p["year"]}) | note {p["rating"]} | {", ".join(p["genres"])} | {p["overview"][:220]}' for p in pool)
+    prompt = f"""Voici une liste d'œuvres disponibles en streaming en France :
+{lines}
+
+Choisis les 3 œuvres qui vont FAIRE LE PLUS RÉAGIR sur TikTok, c'est-à-dire celles dont une seule phrase provoque une émotion forte (peur, choc, indignation, « c'est quoi ce film ? », « je dois le voir »). Note chaque œuvre de 1 à 10 sur son potentiel de réaction (score_reaction) et ne garde que les 3 meilleures scores, classées de la plus forte à la moins forte. Ne retiens qu'une œuvre à plus de 7 si tu peux la défendre avec une phrase choc ; refuse les œuvres tièdes même si elles sont bien notées.
+Ce qui fait le plus réagir : une MENACE VENUE DU CERCLE FAMILIER (un père, une mère, un frère, un enfant, un proche qui n'est pas ce qu'il semble), une INJUSTICE ou un dilemme moral (jusqu'où irais-tu ?), un enfant ou un proche en danger, un piège dans un lieu du quotidien (airbnb, concert, tunnel, aéroport, vacances en famille), un retournement, une situation où le lecteur se dit « et si c'était moi ? ». Privilégie les œuvres où le lecteur peut se mettre à la place d'un personnage.
+Varie (pas 3 films du même genre ; 1 série maximum ; varie les pays si possible), privilégie les sorties récentes et les films de découverte plutôt que les blockbusters vus partout. Évite les décors lointains ou fantastiques (apocalypse, western, dystopie, monstres), les clichés de genre (cimetière, village maudit) et les concepts qu'il faut expliquer.
+Pour chacune : un angle éditorial, une idée de hook (une phrase), et pourquoi ça peut faire réagir sur TikTok (une phrase).
+JSON : [{{"ref":"movie:123","score_reaction":8,"angle":"","hook":"","pourquoi":""}}, ...]"""
+    out = as_list(ask_json(prompt, max_tokens=3000))
+    out.sort(key=lambda c: -float(c.get("score_reaction", 0) or 0) if str(c.get("score_reaction", "0")).replace(".", "").isdigit() else 0)
+    return out
+
+EXEMPLES = """RÉFÉRENCES DE STYLE. Ne recopie jamais ces phrases ni ces idées : inspire-toi du RYTHME, de la STRUCTURE et du niveau de précision.
+
+A) TA VOIX PopcornLife (priorité : c'est le style du compte, majuscule au début, 9 à 12 mots par slide) :
+- Trap, 3,3 M de vues : « Ce t*eur en série se rend à un concert avec sa fille » / « Il se rend compte que le concert tout entier est un piège pour lui »
+- Le Monde de John, 2,1 M : « Un garçon de 13 ans découvre un bunker à côté de sa maison » / « Il décide de dr*guer toute sa famille et les enferme dedans »
+- Omar m'a tuer, 952 K : « Une vieille dame écrit le nom de son meurtrier avant de mourir » / « Omar, son jardinier, est jugé coupable, pourtant aucune preuve ne prouve sa culpabilité »
+- Prisoners, 895 K : « Et si ton enfant disparaissait… et que le seul suspect était intouchable » / « Jusqu'où irais-tu pour le faire parler ? »
+- Au nom de ma fille, 823 K : « Un père laisse sa fille partir en vacances chez une copine » / « Elle se fait t*er, son père accuse le père de sa copine mais personne ne le croit »
+- Goodnight Mommy, 647 K : « En rentrant, 2 jumeaux se rendent compte que leur mère a le visage bandé » / « Plus le temps passe, plus ils doutent de l'identité de cette femme »
+- Carry-On, 361 K : « Un agent de sécurité à l'aéroport trouve une oreillette à côté d'une valise » / « Pour sauver sa petite amie, il va devoir faire tout ce que lui dit la voix »
+- The Rental, 394 K : « Un couple loue un airbnb dans une maison isolée » / « Très vite, ils se rendent compte que la maison est truffée de caméras »
+
+B) Idées à reprendre d'un très grand compte du même concept (@alorsonregardequoi, jusqu'à 2,7 M de vues) : des détails encore plus concrets, des phrases coupées qui obligent à swiper.
+- « la nuit tombe, alors le chef d'une station de ski décide d'arrêter les télésièges pendant 1 semaine, mais… » / « sans le savoir, il oublie 3 amis, suspendus en hauteur, la nuit dans le froid… »
+- « une femme se retrouve seule sur une surface glissante avec un trou sans fin… » / « un mouvement de travers, elle tombe… elle bouge, elle tombe… » (le même film reste à 309 K quand le texte dit seulement « dans cette position » : le détail concret gagne)
+- « un homme assiste à un procès pour m*urtre en tant que membre du jury » / « mais, en écoutant les preuves, il comprend qu'il est lui-même responsable du crime »
+
+C) ACCROCHE « IMAGINE… » (pour que le lecteur se sente concerné ; à utiliser quand l'occasion s'y prête) :
+- « Imagine que ton frère t'enferme dans sa cave pour 3 jours » / « Alors que ta famille te cherche, tu entends ses pas au-dessus de toi »
+- « Imagine que tu es père et que ta fille de 6 ans a disparu au supermarché » / « Le seul suspect est le voisin que tout le monde adore »
+- « Imagine ta mère qui change de visage du jour au lendemain » / « Plus le temps passe, plus tu doutes que ce soit vraiment elle »
+- « Imagine que tu es juré dans un procès pour m*urtre » / « Mais en écoutant les preuves, tu comprends que le coupable, c'est toi »
+Règles de l'accroche « Imagine » : elle ouvre la slide 1 (« Imagine que tu es… » ou « Imagine ton frère / ta mère / ton père / ta meilleure amie… »), suivie d'un FAIT CHOQUANT et concret du synopsis, jamais flou ; la slide 2 enchaîne au tutoiement ou à la 3e personne ; elle n'est pas une question. À utiliser dans environ 1 carrousel sur 3, uniquement quand le synopsis s'y prête (un proche, un enfant, une situation du quotidien qu'on peut se représenter). Pour une histoire lointaine ou fantastique, ne la force pas.
+
+CE QUI FAIT LA DIFFÉRENCE (à reproduire) :
+- UNE phrase par slide, 7 à 12 mots (environ 10), en langage parlé, peu de virgules. Parfois une seule phrase coupée sur deux slides : la slide 1 est une proposition incomplète (« Après une dispute dans les bouchons », « Alors que… ») que la slide 2 termine.
+- La slide 1 met UNE PERSONNE DANS UNE SITUATION du quotidien (un père, une famille, un couple, un agent de sécurité), au présent. Elle ne commence JAMAIS par un décor ou un contexte (« Dans un monde où… », « En pleine apocalypse », « Alors qu'un tueur rôde en Amérique ») : le vrai hook doit être dans la slide 1.
+- Variantes qui marchent : l'inversion dès la slide 1 (le héros est en réalité le méchant : « Ce t*eur en série se rend à un concert avec sa fille »), le tutoiement « Et si ton… » (rarement), une phrase coupée par « mais… » ou « alors… ».
+- La MENACE VIENT DU CERCLE FAMILIER OU FAMILIER : un père, une mère qui n'est peut-être pas la mère, un enfant qui enferme sa famille, un logement loué. Pas un décor lointain.
+- La slide 2 montre la PRISE DE CONSCIENCE ou le retournement, jamais la fin : « se rend compte que… », « très vite… », « plus le temps passe, plus… », « il va devoir… ». Le meilleur : un retournement ou une ironie (le concert entier est un piège, le juré est le coupable).
+- Un sentiment d'INJUSTICE ou un dilemme moral fait réagir (on accuse le mauvais coupable, personne ne le croit, jusqu'où irait-on).
+- Détails utiles : un chiffre (13 ans, 2 jumeaux, 30 000 spectateurs, 1 semaine), un lieu clos du quotidien (airbnb, tunnel, aéroport, vacances), un objet qui déclenche l'intrigue (oreillette, valise, visage bandé, caméras), un lien familial (père, fille, mère, jumeaux).
+- Mots sensibles TOUJOURS masqués par un astérisque : t*eur, t*er, vi*ler, dr*guer, m*urtre, s*icide, m*rt.
+- Aucun jugement (« incroyable », « impossible de lâcher »), pas de point d'exclamation, pas d'emoji.
+
+CE QUI MARCHE MOINS (à éviter) : une slide 1 qui commence par un décor (« Alors qu'un t*eur rôde en Amérique ») ; une menace lointaine ou fantastique (apocalypse, dystopie, western, cimetière, monstres la nuit) ; une slide 2 qui EXPLIQUE au lieu de retourner (« en effet… », « le chemin va être périlleux ») ; une slide 2 vague (« leurs vacances tournent au drame ») ; un texte vague au lieu d'un détail précis (« dans cette position »).
+
+STRUCTURES RÉUTILISABLES (varie) :
+1. Proposition coupée : « Après [événement banal]… » puis « [Personnage] se rend compte que [menace] »
+2. Méchant en héros : « Ce [rôle inquiétant] fait [activité familiale banale] avec [proche] »
+3. Découverte + chiffre : « Un [enfant] de [N] ans découvre [lieu ou objet] près de chez lui »
+4. Prise de conscience progressive : « Plus le temps passe, plus [ils] doutent de [chose ou personne] »
+5. Objet déclencheur : « [Métier] trouve [petit objet] à côté de [lieu] » puis « Pour sauver [proche], il va devoir [obéir / faire] »
+6. Injustice : « [Personne] est accusé(e), pourtant [aucune preuve / personne ne la croit] »
+7. Cadre idyllique qui bascule : « Un couple loue [logement] [isolé] » puis « Très vite, ils se rendent compte que [détail inquiétant] »
+8. Chiffre repris : la slide 1 pose un nombre, la slide 2 le reprend (« et parmi ces 30 000, il y a… »)
+9. Imagine : « Imagine ton frère / Imagine que tu es [situation choquante et concrète] » puis la conséquence qui laisse une zone d'ombre
+"""
+
+def oral(t):
+    """Met la phrase au style oral : points de suspension propres, minuscule au début, pas de point final."""
+    t = re.sub(r"\.{3,}", "…", t.strip())
+    if not STYLE_ORAL:
+        return t
+    t = t.rstrip(". ")
+    if len(t) > 1 and t[0].isupper() and t[1].islower():
+        t = t[0].lower() + t[1:]
+    return t
+
+def write_post(meta, guidance="", avoid=None):
+    kind = "série" if meta["type"] == "tv" else "film"
+    extra = ""
+    if guidance:
+        extra += f"\nINSTRUCTION DE LA RÉDACTRICE (à respecter en priorité absolue) : {guidance}\n"
+    if avoid:
+        extra += "\nTextes déjà proposés et REFUSÉS (ne les reprends pas, change d'angle) :\n" + "\n".join(f"- {x}" for x in avoid) + "\n"
+    base = f"""Œuvre : {meta['title']} ({meta['year']}), {kind}. Genres : {', '.join(meta['genres'])}.
+Accroche officielle : {meta['tagline'] or '-'}
+Synopsis : {meta['overview']}
+{extra}
+{EXEMPLES}
+Écris un carrousel TikTok de 2 OU 3 slides (une phrase chacune). Le nombre de slides dépend de l'intrigue :
+- 2 slides si l'histoire tient en deux coups (situation + retournement). C'est souvent le mieux : DEUX slides bien faites valent mieux que TROIS moyennes. Ne rajoute JAMAIS une 3e slide pour remplir.
+- 3 slides seulement si la 3e apporte un vrai coup de plus (un enjeu, un choix impossible, un détail glaçant). Sinon, 2.
+Le but : stopper le scroll dès la slide 1, puis finir sur une ÉMOTION FORTE qui donne envie de savoir la suite. La dernière slide doit laisser le lecteur avec : de la PEUR, de la TRISTESSE, de la SURPRISE, ou une CURIOSITÉ qui brûle (une question qu'il ne peut pas laisser sans réponse). Jamais de conclusion tiède, jamais d'explication, jamais de morale. On s'arrête juste avant la réponse.
+- slide 1 : UNE PERSONNE dans une situation du quotidien, avec le vrai hook dès cette slide (ou l'inversion : le héros est en fait le méchant) ;
+- slide 2 (ou 3 s'il y en a 3) : le coup qui fait mal ou qui surprend, le fait précis qui glace ou qui serre la gorge, jamais la fin.
+
+STYLE DES MOTS (très important) :
+- Les mots les plus SIMPLES, courts et durs, comme on parle à un ami. Jamais de mot soutenu ou littéraire : écris « inutile » (pas « désuet »), « peur » (pas « appréhension »), « tuer » (masqué : t*er), « piège » (pas « stratagème »), « mentir » (pas « dissimuler »), « se rend compte » (pas « prend conscience »), « riche » (pas « fortuné »), « cacher » (pas « dissimuler »).
+- CONTEXTE D'ABORD : quelqu'un qui ne connaît PAS le film doit comprendre la situation : qui (un père, un employé…), où, et la règle ou l'enjeu. Si c'est un jeu ou un mécanisme, explique-le en quelques mots (« un jeu où il faut repérer les anomalies pour sortir d'un couloir sans fin »). Une slide trop vague (« une anomalie », « un objet magique » sans dire quoi) est mauvaise.
+- HÉROS SOUS-ESTIMÉ : joue le CONTRASTE entre ce que les autres croient de lui (lâche, bête, inutile, raté) et ce qu'il est vraiment, puis le DÉCLIC (l'événement qui va tout changer : cambrioleurs, accident, menace), sans dire ce qu'il fait ensuite.
+- Phrases courtes mais CLAIRES : 8 à 14 mots. Le contexte passe avant la brièveté, mais chaque mot doit servir. Coupe tout le reste.
+- ZÉRO phrase bateau : pas de « tout bascule », « rien ne sera plus comme avant », « un secret terrible », « une histoire incroyable », « un destin hors du commun ». Si la phrase pourrait s'appliquer à 10 autres films, elle est mauvaise : remplace-la par un fait précis (chiffre, objet, lien familial, lieu).
+- N'hésite pas à employer des mots forts et directs (tuer, mourir, enfermer, disparaître, mentir, trahir), masqués par un astérisque quand ils sont sensibles.
+
+ÉTAPE 0, L'INTRIGUE (la plus importante, à faire avant d'écrire) : avant toute phrase, identifie ce qui rend cette œuvre EXTRAORDINAIRE et pousse la curiosité : le fait singulier, le contraste ou le destin hors norme qu'on ne voit pas ailleurs (ex. pour un film : un homme moqué pour sa bêtise qui devient, grâce à un don unique, une star nationale). Ce n'est PAS le simple résumé ni le point de départ banal : c'est le « comment est-ce possible ? » qui donne envie de voir. Remplis "contexte_cle" (ce que le lecteur doit absolument savoir pour comprendre : la règle du jeu, le lien familial, le lieu, ce que les autres pensent du héros), "intrigue_principale" (ce qui fait l'œuvre), "element_extraordinaire" (le fait le plus percutant, concret) et "question_curiosite" (la question que le lecteur se pose). Les 3 slides doivent TOUTES jouer sur cet élément : slide 1 = la personne + le contraste de départ, slide 2 = le fait extraordinaire qui intrigue, slide 3 = l'enjeu ou ce qui reste inexpliqué. N'écris jamais une slide sur un détail secondaire. Tu peux t'appuyer sur ta connaissance de l'œuvre pour repérer cet élément si tu en es certain ; sinon reste fidèle au synopsis.
+
+MÉTHODE (c'est ce qui décide de la qualité) :
+1. "brouillons_s1" : 6 versions DIFFÉRENTES de la slide 1 : (a) une personne + une situation du quotidien (airbnb, vacances, trajet, concert, travail), (b) l'inversion : le héros est en réalité le méchant ou le piège est pour lui, (c) la menace vient d'un proche (père, mère, enfant, voisin), (d) une proposition coupée (« Après… », « Alors que… ») que la slide 2 terminera, (e) une injustice, (f) un objet ou un fait chiffré qui déclenche l'intrigue, (g) si le synopsis s'y prête, une accroche « Imagine ton frère… » ou « Imagine que tu es… » suivie d'un fait choquant et concret.
+2. "brouillons_s2" : 5 versions de la slide 2 : (a) la prise de conscience (« se rend compte que… »), (b) un retournement ou une ironie, (c) « plus le temps passe, plus… » ou « très vite… », (d) « il va devoir… », (e) l'injustice (« pourtant personne ne le croit »). Toutes basées sur un FAIT PRÉCIS du synopsis, qui laissent volontairement une zone d'ombre.
+3. Garde pour chaque slide la plus concrète, la plus choquante et la plus intrigante. Si la version (g) « Imagine… » est la plus forte pour cette œuvre (et que ce n'est pas forcé), prends-la.
+Test final pour chaque phrase : (1) peut-on la coller telle quelle sur un autre film ? Alors elle est trop vague, recommence. (2) la slide 1 commence-t-elle par un décor ou un contexte (« Dans un monde… », « En pleine… ») ? Réécris-la avec une personne. (3) contient-elle un jugement ou une conclusion ? Supprime-le. (4) donne-t-elle envie de connaître la suite ? Sinon, recommence.
+INTERDIT : « quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu vas adorer », « d'un côté… de l'autre », « impossible de lâcher », « leurs vacances tournent au drame » et autres formules vagues, les points d'exclamation, les emojis, les superlatifs vides, un nom d'acteur. Une question n'est autorisée qu'en slide 2 (« Jusqu'où irais-tu… ? »), jamais en slide 1 ni 3.
+
+RÈGLE SPOILER : tu peux raconter le point de départ et la première grande bascule de l'histoire (ce que dirait le résumé au dos du film), mais JAMAIS le retournement final, la fin, qui meurt à la fin, ni l'identité d'un personnage caché.
+Reste fidèle au synopsis fourni : n'invente aucun fait.
+
+Ajoute 6 hashtags : #film (ou #serie), #cinema, #quoiregarder, un hashtag du genre (#thriller, #suspense, #horreur, #psychologique…), le hashtag du titre (sans espaces ni accents) et un hashtag lié à l'intrigue.
+Mets nb_slides à 2 ou 3 ; si nb_slides = 2, laisse s3 vide.
+TEST DE COMPRÉHENSION avant de répondre : un inconnu qui ne sait rien du film comprend-il, avec tes slides seules, QUI est le héros, OÙ il est, quelle est la RÈGLE ou l'enjeu, et ce qui l'attend ? Sinon, ajoute le contexte manquant.
+JSON : {{"contexte_cle":"","intrigue_principale":"","element_extraordinaire":"","question_curiosite":"","brouillons_s1":["","","","","",""],"brouillons_s2":["","","","",""],"emotion_finale":"peur|tristesse|surprise|curiosité","nb_slides":2,"s1":"","s2":"","s3":"","hashtags":["#..."],"spoiler_risk":false}}
+Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retournement."""
+    note = ""
+    for _ in range(3):
+        r = as_dict(ask_json(base + note, max_tokens=3000))
+        s = [str(r.get("s1", "")).strip(), str(r.get("s2", "")).strip(), str(r.get("s3", "")).strip()]
+        if not s[2] or int(r.get("nb_slides") or 3) == 2: s = s[:2]
+        problems = []
+        if any(not x.strip() for x in s): problems.append("une slide est vide")
+        if any(len(x.split()) > 15 for x in s): problems.append("une phrase dépasse 14 mots : raccourcis sans perdre le contexte")
+        if r.get("spoiler_risk"): problems.append("risque de spoiler sur la fin ou un retournement")
+        if len(set(s)) < len(s): problems.append("phrases identiques")
+        if any("?" in x for x in s[:-1]) or (len(s) == 3 and "?" in s[0]): problems.append("une question hors dernière slide")
+        if any("!" in x for x in s): problems.append("une phrase contient un point d'exclamation")
+        hard = [w for x in s for w in re.findall(r"[A-Za-zÀ-ÿ'-]+", x) if len(w) >= 13 or re.fullmatch(r"(?i)d[ée]su[eè]t[es]*|stratag[èe]mes?|dissimul\w*|appr[ée]hension|incontournables?|insoutenables?|tumultueu\w+|fallacieu\w+|machiav[ée]li\w+|inextricables?|inexorables?|ind[ée]niables?|abyssal\w*|vertigineu\w+", w)]
+        if hard: problems.append("mots trop soutenus ou trop longs (" + ", ".join(sorted(set(hard))) + ") : remplace-les par des mots simples et courts")
+        vague = re.compile(r"impossible de (le |la |les |s'en )?(l[âa]cher|quitter|d[ée]crocher)|d'un c[ôo]t[ée]|de l'autre|tout (bascule|change)|rien ne sera plus|plus jamais comme|quelque chose cloche|personne ne s'y attend|tu vas adorer|tournent? au drame", re.I)
+        if re.match(r"(?i)^(dans un (monde|futur|univers)|en pleine|dans un pays|dans une soci[ée]t[ée])", s[0].strip()): problems.append("la slide 1 commence par un décor : commence par une personne dans une situation")
+        bad = [x for x in s if vague.search(x)]
+        if bad: problems.append("formule vague ou conclusion interdite dans : " + " / ".join(bad) + " (raconte un fait précis à la place)")
+        if avoid and oral(s[0]) in [x.strip() for x in avoid]: problems.append("la slide 1 reprend un texte refusé")
+        if not problems:
+            tags = r.get("hashtags", [])
+            tags = [t if t.startswith("#") else "#" + t for t in tags]
+            return {"texts": [oral(x) for x in s], "caption": "", "hashtags": " ".join(tags)}
+        note = "\n\nCorrige ce problème : " + ", ".join(problems) + "."
+    raise RuntimeError("Impossible d'obtenir des textes valides")
+
+def _penalty(b):
+    """Pénalité pour une image sombre ou floue (mesurée avec Pillow, indépendante de l'IA)."""
+    try:
+        from PIL import Image, ImageFilter, ImageStat
+        im = Image.open(io.BytesIO(b)).convert("L")
+        lum = ImageStat.Stat(im).mean[0]
+        sharp = ImageStat.Stat(im.filter(ImageFilter.FIND_EDGES)).var[0]
+        p = max(0.0, (75 - lum) / 8)             # sombre : jusqu'à -9 si presque noire
+        if sharp < 60: p += 2                    # floue
+        return p
+    except Exception:
+        return 0.0
+
+def rewrite_slide(meta, texts, n, instruction):
+    """Réécrit UNE seule slide (n = 1, 2 ou 3) selon la demande, en gardant les deux autres."""
+    kind = "série" if meta["type"] == "tv" else "film"
+    prompt = f"""Œuvre : {meta['title']} ({meta['year']}), {kind}. Synopsis : {meta['overview']}
+Carrousel actuel :
+{chr(10).join(f"{k+1}. {t}" for k, t in enumerate(texts))}
+
+Réécris UNIQUEMENT la slide {n}. Demande de la rédactrice : « {instruction or 'propose une autre version plus percutante'} ».
+- Si sa demande est déjà une phrase complète prête à afficher (entre guillemets ou clairement rédigée), reprends-la presque telle quelle (corrige seulement les fautes).
+- Sinon, applique sa consigne (ton, angle, élément à mettre en avant).
+- 8 à 14 mots, une seule phrase claire pour quelqu'un qui ne connaît pas le film, mots très simples et courts (jamais de mot soutenu), aucune phrase bateau, en cohérence avec les deux autres slides (la suite doit rester logique), sans spoiler la fin, sans emoji, sans point d'exclamation. Mots sensibles masqués par un astérisque (t*er, m*urtre…).
+- Ne reprends pas la version actuelle.
+JSON : {{"texte":""}}"""
+    for _ in range(3):
+        raw = ask(prompt, max_tokens=400)
+        r = parse_json(raw)
+        if isinstance(r, dict) and r.get("texte"):
+            t = str(r["texte"])
+        else:                                          # l'IA a répondu en texte simple ou en JSON cassé : on récupère la phrase
+            m = re.search(r'"texte"\s*:\s*"(.+?)"\s*[,}]', raw, re.S)
+            t = m.group(1) if m else raw.strip().splitlines()[-1] if raw.strip() else ""
+        t = oral(re.sub(r'^(?:texte|slide\s*\d)\s*:\s*', '', t.strip().strip('"«» ').strip(), flags=re.I).strip('"«» '))
+        if t and t != texts[n - 1] and len(t.split()) <= 16:
+            return t
+        prompt += "\n\nPropose une phrase différente de l'actuelle et de 14 mots maximum. Réponds avec le JSON demandé."
+    raise RuntimeError("Impossible de réécrire cette slide")
+
+def pick_images(meta, thumbs, texts=None):
+    """Mélange des deux méthodes : chaque image est notée sur le CHOC et sur sa COHÉRENCE avec chaque texte.
+    Slide 1 = surtout le choc (c'est elle qui arrête le scroll). Slides suivantes = cohérence et choc à parts égales."""
+    texts = [t for t in (texts or []) if t] or ["", "", ""]
+    k = len(texts)
+    liste = "\n".join(f"Slide {i+1} : « {t} »" for i, t in enumerate(texts) if t)
+    prompt = f"""Voici {len(thumbs)} images du {'film' if meta['type']=='movie' else 'la série'} « {meta['title']} ».
+Textes du carrousel TikTok :
+{liste or '(pas encore de texte)'}
+Note CHAQUE image :
+- choc (0 à 10) : intensité émotionnelle ou visuelle. 9-10 = visage en gros plan avec peur, colère, larmes, regard glaçant ou tension extrême, ou image spectaculaire immédiatement compréhensible. 5-6 = plan correct mais neutre. 0-3 = plan large, personnages minuscules, scène calme, décor vide, foule.
+- lisible (0 à 10) : un sujet principal net et grand, plutôt dans la moitié haute, BIEN ÉCLAIRÉ (une image sombre où l'on distingue mal le visage vaut moins de 4), couleurs contrastées.
+- coherence : une liste de {k} notes (0 à 10), une par slide : à quel point l'image illustre la phrase de cette slide (le bon personnage, la situation, le lieu, l'ambiance décrits). 8-10 = on voit exactement ce que dit la phrase ; 4-6 = même univers ; 0-2 = rien à voir.
+- texte (true/false) : texte, logo ou sous-titre visible.
+- spoil (true/false) : montre la fin, une mort décisive ou un retournement.
+- groupe : un entier ; le MÊME pour les images quasi identiques.
+- focus_x : position horizontale du visage ou sujet principal (0 = gauche, 1 = droite).
+Sois sévère : peu d'images méritent plus de 7.
+JSON : [{{"image":1,"choc":0,"lisible":0,"coherence":{[0]*k},"texte":false,"spoil":false,"groupe":1,"focus_x":0.5}}, ...] (une entrée par image)"""
+    rows = []
+    for x in as_list(ask_json(prompt, images=thumbs, max_tokens=4500)):
         try:
-            handle(u, load("state", state))
-        except Exception as ex:
-            traceback.print_exc()
-            try: tg.send(f"⚠️ Une erreur est survenue : {e(ex)}\nRéessaie, ou écris-moi le titre directement.")
-            except Exception: pass
-    daily()
+            idx = int(x["image"]) - 1
+            if not 0 <= idx < len(thumbs): continue
+            coh = [float(c) for c in (x.get("coherence") or [])][:k]; coh += [5.0] * (k - len(coh))
+            pen = (4 if x.get("texte") else 0) + (6 if x.get("spoil") else 0) + _penalty(thumbs[idx])
+            rows.append({"idx": idx, "choc": float(x.get("choc", 0)), "lis": float(x.get("lisible", 0)), "coh": coh, "pen": pen,
+                         "groupe": x.get("groupe", idx), "focus": min(max(float(x.get("focus_x", 0.5)), 0.0), 1.0)})
+        except Exception:
+            continue
+    out, used, groups = [], set(), set()
+    for s in range(k):
+        w = (0.55, 0.15, 0.30) if s == 0 else (0.35, 0.15, 0.50)
+        pool = [z for z in rows if z["idx"] not in used and z["groupe"] not in groups] or [z for z in rows if z["idx"] not in used]
+        if not pool: break
+        z = max(pool, key=lambda z: w[0] * z["choc"] + w[1] * z["lis"] + w[2] * z["coh"][s] - z["pen"])
+        out.append({"idx": z["idx"], "focus": z["focus"]}); used.add(z["idx"]); groups.add(z["groupe"])
+    for n in range(len(thumbs)):
+        if len(out) >= k: break
+        if n not in used: out.append({"idx": n, "focus": 0.5}); used.add(n)
+    return out
 
-if __name__ == "__main__":
-    cmd = sys.argv[1] if len(sys.argv) > 1 else "poll"
-    {"propose": propose, "daily": daily, "poll": poll}[cmd]()
+def pick_image_hint(meta, thumbs, hint, text, exclude):
+    """Choisit l'image qui correspond à la demande de la rédactrice (hors images déjà utilisées sur les autres slides)."""
+    ban = ", ".join(str(i + 1) for i in exclude)
+    prompt = f"""Voici {len(thumbs)} images du {'film' if meta['type']=='movie' else 'la série'} « {meta['title']} ».
+La slide affiche : « {text} ».
+La rédactrice veut cette image : « {hint} ».
+Choisis l'image qui correspond le mieux à sa demande, tout en restant accrocheuse, nette et lumineuse. {('Interdit : les images ' + ban + ' (déjà utilisées).') if ban else ''}
+focus_x : position horizontale du visage ou sujet principal (0 = gauche, 1 = droite).
+JSON : {{"image":1,"focus_x":0.5}}"""
+    raw = ask(prompt, images=thumbs, model=MODEL, max_tokens=300)
+    r = parse_json(raw)
+    try:
+        if isinstance(r, list): r = next((x for x in r if isinstance(x, dict)), {})
+        if isinstance(r, dict) and "image" in r:
+            idx, fx = int(r["image"]) - 1, float(r.get("focus_x", 0.5))
+        else:                                          # réponse en texte simple : on récupère les chiffres
+            m = re.search(r'"?image"?\s*[:=]?\s*(\d+)', raw, re.I) or re.search(r"(\d+)", raw)
+            f = re.search(r'focus_x"?\s*[:=]\s*([0-9.]+)', raw)
+            idx, fx = int(m.group(1)) - 1, float(f.group(1)) if f else 0.5
+        if not 0 <= idx < len(thumbs) or idx in exclude: raise ValueError
+        return {"idx": idx, "focus": min(max(fx, 0.0), 1.0)}
+    except Exception:
+        return None
+
+def route(message, texts, title):
+    """Comprend une demande libre (plusieurs actions possibles, dans l'ordre) sur le dernier carrousel."""
+    cur = "\n".join(f"{i+1}. {t}" for i, t in enumerate(texts))
+    prompt = f"""Un bot crée des carrousels TikTok. Dernier film traité : « {title} ». Slides de texte actuelles (la dernière slide, l'affiche, ne change pas) :
+{cur}
+
+La rédactrice écrit : « {message} »
+
+Traduis sa demande en actions, dans l'ordre où elle les demande. Actions possibles :
+- {{"action":"text","slide":N,"instruction":"...","exact":false}} : changer le texte de la slide N. Si elle DONNE elle-même la phrase à afficher (une phrase complète rédigée, avec ou sans guillemets), mets exact à true et recopie la phrase TELLE QUELLE dans instruction. Sinon instruction = sa consigne (ex. « plus dur »), ou "" si elle veut juste une autre version, et exact à false.
+- {{"action":"image","slide":N,"hint":"..."}} : changer l'image de la slide N. hint = ce qu'elle veut voir (ex. « plus de gros plan sur son visage »), ou "" pour simplement une autre image.
+- {{"action":"zoom","slide":N,"direction":"in"}} : agrandir l'image de la slide N (« zoom + », « zoome », « plus près », « plus gros »). direction = "in" ; "out" pour réduire (« zoom - », « dézoome », « on voit plus de décor ») ; "fill" pour qu'elle remplisse tout le cadre (« plein cadre », « plein écran », « enlève le noir ») ; "reset" pour revenir à la taille de départ.
+- {{"action":"rewrite_all","instruction":"..."}} : refaire tous les textes.
+- {{"action":"new_film","title":"...","year":null}} : elle demande un AUTRE film ou série (elle cite un titre différent du dernier).
+- {{"action":"propositions"}} : elle veut de nouvelles idées de films.
+- {{"action":"unknown"}} : tu ne comprends pas.
+Règles : « la 1 », « la première », « la couverture » = slide 1. « l'image », « la photo » = image. « le texte », « la phrase », « le hook » = text. « change la slide 2 » sans précision = text ET image. Elle peut enchaîner (« change l'image 1, puis le texte 2 »). Ignore une slide qui n'existe pas. Un message qui n'est qu'un titre de film différent = new_film.
+JSON : {{"actions":[...]}}"""
+    r = ask_json(prompt, model=MODEL_FAST, max_tokens=600)
+    acts = as_list(r.get("actions") if isinstance(r, dict) else r)
+    return acts
+
+def extract_title(message):
+    r = as_dict(ask_json(f'Message : « {message} »\nQuel film ou quelle série la personne demande-t-elle ? JSON : {{"titre":"","annee":null}} (titre vide si ce n\'est pas une demande de film/série).', model=MODEL_FAST, max_tokens=200))
+    return (r.get("titre") or "").strip(), r.get("annee")
