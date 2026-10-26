@@ -294,11 +294,18 @@ La rédactrice veut cette image : « {hint} ».
 Choisis l'image qui correspond le mieux à sa demande, tout en restant accrocheuse, nette et lumineuse. {('Interdit : les images ' + ban + ' (déjà utilisées).') if ban else ''}
 focus_x : position horizontale du visage ou sujet principal (0 = gauche, 1 = droite).
 JSON : {{"image":1,"focus_x":0.5}}"""
-    r = as_dict(ask_json(prompt, images=thumbs, model=MODEL, max_tokens=300))
+    raw = ask(prompt, images=thumbs, model=MODEL, max_tokens=300)
+    r = parse_json(raw)
     try:
-        idx = int(r["image"]) - 1
+        if isinstance(r, list): r = next((x for x in r if isinstance(x, dict)), {})
+        if isinstance(r, dict) and "image" in r:
+            idx, fx = int(r["image"]) - 1, float(r.get("focus_x", 0.5))
+        else:                                          # réponse en texte simple : on récupère les chiffres
+            m = re.search(r'"?image"?\s*[:=]?\s*(\d+)', raw, re.I) or re.search(r"(\d+)", raw)
+            f = re.search(r'focus_x"?\s*[:=]\s*([0-9.]+)', raw)
+            idx, fx = int(m.group(1)) - 1, float(f.group(1)) if f else 0.5
         if not 0 <= idx < len(thumbs) or idx in exclude: raise ValueError
-        return {"idx": idx, "focus": min(max(float(r.get("focus_x", 0.5)), 0.0), 1.0)}
+        return {"idx": idx, "focus": min(max(fx, 0.0), 1.0)}
     except Exception:
         return None
 
