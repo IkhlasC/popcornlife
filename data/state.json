@@ -1,55 +1,55 @@
 {
- "offset": 422725918,
+ "offset": 422725919,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 1236153,
-  "title": "Reconnu coupable",
-  "year": "2026",
-  "rating": 7.1,
-  "platform": "Canal+",
+  "id": 915935,
+  "title": "Anatomie d'une chute",
+  "year": "2023",
+  "rating": 7.5,
+  "platform": "Netflix",
   "texts": [
-   "Un détective accusé d'avoir t*é sa femme est jugé par une IA",
-   "Ce tribunal expéditif, c'est lui qui a grandement aidé à le créer",
-   "Il a 90 minutes pour se défendre sinon l'IA le condamne à m*rt"
+   "Imagine que ton mari est retrouvé m*rt dans la neige",
+   "La police parle de m*urtre et la principale suspecte, c'est toi",
+   "Au procès, on fouille ton couple pour savoir si tu l'as fait"
   ],
-  "poster_path": "/roKKWFRmFMRzv5NhBhCmDW5GdQr.jpg",
+  "poster_path": "/nSwQKCsDdj2S56mG7Yz2YGfrLT6.jpg",
   "candidates": [
-   "/gIClklFGYBe0uiOoiP2vtocJbss.jpg",
-   "/po1niVuud0tX86xOFegO5omQ2wX.jpg",
-   "/7HKpc11uQfxnw0Y8tRUYn1fsKqE.jpg",
-   "/vbI706C9s6QBgmJ9QQ0nA70Wi9W.jpg",
-   "/l0rY0RH64CXne5vW2Y3yHZpjmDy.jpg",
-   "/mHC8tSRYfAKGh2jaSNQMSzGdbOW.jpg",
-   "/16mDdz1ORTTHdO5nQylxFAEXa1G.jpg",
-   "/6eiPNevgFdbVVShQF8eWhBNx5T8.jpg",
-   "/d675LpJvS4n6xPTTbrIXvuHngUc.jpg",
-   "/9j8tHymrgfANwPh7iH1nbIH2ZZI.jpg",
-   "/pB8JtF0uedGERBV4FcPaKU5gh8u.jpg",
-   "/yF784aEHr899ClpGjqa3b8jUBlH.jpg",
-   "/e7KK3bqkxmgNYlpJwPGTKTb9VUK.jpg",
-   "/5GNbc6Pv8V9E4Z6sIdA84JnnazC.jpg",
-   "/24AmQwURM0UCTsRlBcvZLkbi5mi.jpg",
-   "/16LXO7THc6ZICm324aIk0Mfl58S.jpg",
-   "/qs5gxq3bF2I7rv4ehtsEZ3CkzJq.jpg",
-   "/chlcSU66Bokhj6KkWcchBcQ4Slt.jpg",
-   "/dnLbvzAvbPinvSBJkuHO8cqGW7S.jpg"
+   "/lDVl2jf6VB8ODl1olZ6FLvOV1gX.jpg",
+   "/kszooR7v1TLFM4pzx6IkKq2jDAN.jpg",
+   "/3Feq4UV4p2gU6dShAYfveqwWAEf.jpg",
+   "/8VjYcf8JCokm7mLn4wLKPLXNnNR.jpg",
+   "/5fOu0c3lcjNYdZF2UlJVScuiaML.jpg",
+   "/sxOGymHkRUfAhj63yLISFfyKARN.jpg",
+   "/xyR7MdyqWZRYkiraHPFHHi5KDmu.jpg",
+   "/zMHfN9EM6sk4RuXWuX4t6GBIOsZ.jpg",
+   "/pecCCwwLfCK0461DUF9eFTNIg0h.jpg",
+   "/hrLUowoEClVKMHbzok6cVo7x4Dp.jpg",
+   "/bC6fpaTIg7s2F3SU0S823zdM3P.jpg",
+   "/hDhUpy5XUgx810VWusV4alX9DFF.jpg",
+   "/1voXjhrFX9H75vMsX5aM7e1G9qW.jpg",
+   "/fFlQjYquRR1V0zBlla1MJTMMRmV.jpg",
+   "/jn5UxJZligF9EqUq9DA3jDCT9pb.jpg",
+   "/fyG3Bn2uEJsdbHG6jSKa63nEOEt.jpg",
+   "/786cfVrkVLQV7bZAN6KnPFaHMNP.jpg",
+   "/8yvbWHXJM8xH7XG7qs9PEeePvoR.jpg",
+   "/dcnhVQS66PfpwzUu4K4iEF5qfT8.jpg",
+   "/nP3x0zuVPHVSyYXP4Ye6dcm0GNz.jpg",
+   "/3hHmKcTn81zoTKFPqIlNNtp9tZ5.jpg",
+   "/wnCiwEQc7gZnItX9gPbt1RcYfzF.jpg",
+   "/4jpeg7uPYw2gg297E7MYLCJQWdK.jpg",
+   "/ljmoEpHaLA8Nqc7pkOst4YEDcOY.jpg"
   ],
   "assign": [
    9,
-   15,
-   6
+   17,
+   7
   ],
   "focus": [
-   0.5125,
-   0.5,
-   0.5375
-  ],
-  "custom": {
-   "1": "data/custom/1236153_slide1.jpg",
-   "2": "data/custom/1236153_slide2.jpg",
-   "3": "data/custom/1236153_slide3.jpg"
-  }
+   0.4,
+   0.56953125,
+   0.33125
+  ]
  },
  "last_propose": "2026-10-26"
 }
