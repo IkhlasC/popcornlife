@@ -1,5 +1,5 @@
 {
- "offset": 422725923,
+ "offset": 422725924,
  "pending": [
   {
    "type": "movie",
@@ -25,8 +25,8 @@
   "rating": 7.9,
   "platform": "Disney+ / HBO Max",
   "texts": [
-   "Imagine ta femme disparue le jour de vos 5 ans de mariage",
-   "Tout t'accuse, et tu découvres qu'elle te cachait beaucoup de choses"
+   "Imagine que tu rentres chez toi et que ta maison est saccagée",
+   "Ta femme a disparu et toute l'enquête te pointe du doigt"
   ],
   "poster_path": "/7xkJ1ACu40BjzLHVPRILWjFvW7.jpg",
   "candidates": [
@@ -56,12 +56,12 @@
    "/dHPeQJXmxBt7t6GBiszTea5MNK5.jpg"
   ],
   "assign": [
-   2,
-   22
+   1,
+   2
   ],
   "focus": [
-   0.2828125,
-   0.6515625
+   0.59453125,
+   0.2828125
   ]
  },
  "last_propose": "2026-10-26"
