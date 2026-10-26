@@ -74,6 +74,19 @@ def _lift(im):
     except Exception:
         return im
 
+def custom_background(im):
+    """Image fournie par la rédactrice : plein cadre si elle est presque verticale, sinon centrée avec du noir en haut et en bas (rien n'est coupé)."""
+    im = im.convert("RGB"); ratio = im.width / im.height
+    if 0.5 <= ratio <= 0.68:
+        return background(im, 0.5)
+    black = (6, 4, 6); canvas = Image.new("RGB", (W, H), black)
+    scale = min(W / im.width, (H * 0.50) / im.height)
+    iw, ih = int(im.width * scale), int(im.height * scale)
+    fit = im.resize((iw, ih), Image.LANCZOS)
+    top, bottom = 250, int(H * 0.60)               # zone libre : sous le logo, au-dessus du texte
+    canvas.paste(fit, ((W - iw) // 2, top + max((bottom - top - ih) // 2, 0)))
+    return canvas
+
 def background(im=None, fx=0.5, blur=0, poster=False):
     if im is None:
         return gradient()
@@ -106,8 +119,8 @@ def wrap(d, text, f, max_w):
     lines.append(cur)
     return lines
 
-def text_slide(text, path, index, img=None, fx=0.5, last=False):
-    im = background(img, fx); d = ImageDraw.Draw(im); logo(d)
+def text_slide(text, path, index, img=None, fx=0.5, last=False, custom=False):
+    im = custom_background(img) if (custom and img is not None) else background(img, fx); d = ImageDraw.Draw(im); logo(d)
     sf = S["safe"]; box_w = W - sf["left"] - sf["right"]; box_h = H - sf["top"] - sf["bottom"]
     size = S["text_max_size"]
     while True:
