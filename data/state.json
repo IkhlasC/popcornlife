@@ -1,51 +1,49 @@
 {
- "offset": 422725914,
+ "offset": 422725915,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 614945,
-  "title": "Si tu m'écoutes",
+  "id": 1236153,
+  "title": "Reconnu coupable",
   "year": "2026",
-  "rating": 8.3,
-  "platform": "Netflix",
+  "rating": 7.1,
+  "platform": "Canal+",
   "texts": [
-   "Imagine que ta sœur est m*rte, mais tu continues qd mm à lui envoyer des vocaux",
-   "c'est un inconnu qui les écoute et il commence à tomber amoureux de toi"
+   "Un détective accusé d'avoir t*é sa femme est jugé par une IA",
+   "Ce tribunal expéditif, c'est lui qui a grandement aidé à le créer",
+   "Il a 90 minutes pour se défendre sinon l'IA le condamne à m*rt"
   ],
-  "poster_path": "/gqnv5448y3R5KAelvhapSKtiU5z.jpg",
+  "poster_path": "/roKKWFRmFMRzv5NhBhCmDW5GdQr.jpg",
   "candidates": [
-   "/2WU6Y6aonzD6uAaCmNnEFlesxxJ.jpg",
-   "/nz6avJDkwKct3smKgrn6UmdO9TU.jpg",
-   "/7wwzkJ8it0LO76JBN2NCYqzrCZw.jpg",
-   "/7KOJh05UuCsrtj04rbbLNZBJclX.jpg",
-   "/42tC70C8ZnSsf5v4pBAMcio5DY7.jpg",
-   "/nM5bS9igsYpe4AIryRwwMYumtuS.jpg",
-   "/wtXZqHlAtsQmGgte9y40AkwhFLq.jpg",
-   "/57XHpPDN76oZ00JuI7X6ITyOXoP.jpg",
-   "/c1DQruoPf7S69GU72HiNxSrQ9Ho.jpg",
-   "/cZvOEqjzW2lKfzhYDG92OS3YtBK.jpg",
-   "/AaannV5L3OtV1iwG4e5YtachWvr.jpg",
-   "/c3248GWa2r9K086z1kdxbAXJiVG.jpg",
-   "/31YXqmtgUjFHDRaX4dzZ3O5vnbi.jpg",
-   "/91HrrBemocMwd9dlKs70e8nlXCM.jpg",
-   "/vOBCz46Ggc28fNrKOJohtB4EyUk.jpg",
-   "/6YR5b8G2F1K5Rh1Tg8ptLTEQDQe.jpg",
-   "/llCcR28DDlN3uiLfi8zXcz5jF9z.jpg",
-   "/a9yg0nYNbZTieR8cMYUj8rzFv7i.jpg",
-   "/cl9cWLHFaOJPPzEhsK1vKnEB40y.jpg",
-   "/1XmHWUjtZnMhIy8IwkdIVfeAM4J.jpg",
-   "/jEv5bNWpILFFDXehctQxx443f7Q.jpg",
-   "/hP3BqjxTDgE35ap5qa9OH8PmB2Z.jpg",
-   "/3lbARUmTrl1rClSWYQWdfYGtxrL.jpg",
-   "/xhhUSTRg5Kow6cQFYqUOn9C9XGM.jpg"
+   "/gIClklFGYBe0uiOoiP2vtocJbss.jpg",
+   "/po1niVuud0tX86xOFegO5omQ2wX.jpg",
+   "/7HKpc11uQfxnw0Y8tRUYn1fsKqE.jpg",
+   "/vbI706C9s6QBgmJ9QQ0nA70Wi9W.jpg",
+   "/l0rY0RH64CXne5vW2Y3yHZpjmDy.jpg",
+   "/mHC8tSRYfAKGh2jaSNQMSzGdbOW.jpg",
+   "/16mDdz1ORTTHdO5nQylxFAEXa1G.jpg",
+   "/6eiPNevgFdbVVShQF8eWhBNx5T8.jpg",
+   "/d675LpJvS4n6xPTTbrIXvuHngUc.jpg",
+   "/9j8tHymrgfANwPh7iH1nbIH2ZZI.jpg",
+   "/pB8JtF0uedGERBV4FcPaKU5gh8u.jpg",
+   "/yF784aEHr899ClpGjqa3b8jUBlH.jpg",
+   "/e7KK3bqkxmgNYlpJwPGTKTb9VUK.jpg",
+   "/5GNbc6Pv8V9E4Z6sIdA84JnnazC.jpg",
+   "/24AmQwURM0UCTsRlBcvZLkbi5mi.jpg",
+   "/16LXO7THc6ZICm324aIk0Mfl58S.jpg",
+   "/qs5gxq3bF2I7rv4ehtsEZ3CkzJq.jpg",
+   "/chlcSU66Bokhj6KkWcchBcQ4Slt.jpg",
+   "/dnLbvzAvbPinvSBJkuHO8cqGW7S.jpg"
   ],
   "assign": [
    9,
-   0
+   15,
+   6
   ],
   "focus": [
-   0.46484375,
-   0.5
+   0.5125,
+   0.5,
+   0.5375
   ]
  },
  "last_propose": "2026-10-26"
