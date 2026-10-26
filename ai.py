@@ -320,6 +320,7 @@ La rédactrice écrit : « {message} »
 Traduis sa demande en actions, dans l'ordre où elle les demande. Actions possibles :
 - {{"action":"text","slide":N,"instruction":"...","exact":false}} : changer le texte de la slide N. Si elle DONNE elle-même la phrase à afficher (une phrase complète rédigée, avec ou sans guillemets), mets exact à true et recopie la phrase TELLE QUELLE dans instruction. Sinon instruction = sa consigne (ex. « plus dur »), ou "" si elle veut juste une autre version, et exact à false.
 - {{"action":"image","slide":N,"hint":"..."}} : changer l'image de la slide N. hint = ce qu'elle veut voir (ex. « plus de gros plan sur son visage »), ou "" pour simplement une autre image.
+- {{"action":"zoom","slide":N,"direction":"in"}} : agrandir l'image de la slide N (« zoom + », « zoome », « plus près », « plus gros »). direction = "in" ; "out" pour réduire (« zoom - », « dézoome », « on voit plus de décor ») ; "fill" pour qu'elle remplisse tout le cadre (« plein cadre », « plein écran », « enlève le noir ») ; "reset" pour revenir à la taille de départ.
 - {{"action":"rewrite_all","instruction":"..."}} : refaire tous les textes.
 - {{"action":"new_film","title":"...","year":null}} : elle demande un AUTRE film ou série (elle cite un titre différent du dernier).
 - {{"action":"propositions"}} : elle veut de nouvelles idées de films.
