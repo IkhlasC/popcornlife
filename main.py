@@ -11,6 +11,7 @@ HELP = ("🍿 <b>PopcornLife Studio</b>\n\n"
         "• « propositions » : j'envoie 3 nouvelles idées.\n"
         "• « image 2 » : je change l'image de la slide 2 (1, 2 ou 3).\n"
         "• Tu peux m'envoyer ta propre image : envoie-la avec la légende « 1 » (ou 2, 3). Si elle n'est pas verticale, je la centre avec du noir en haut et en bas.\n"
+        "• « zoom + » / « zoom - » : j'agrandis ou je réduis l'image de la dernière slide modifiée (« zoom + 2 » pour la slide 2). « plein cadre » : l'image remplit toute la slide.\n"
         "• Après un post, dis-moi librement ce que tu veux changer, autant de fois que tu veux : « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 », « slide 2 : ta phrase exacte ».\n"
         "• « refais » : j'écris de nouveaux textes pour le dernier film. Tu peux préciser : « refais plus mystérieux ».")
 
@@ -144,7 +145,7 @@ def _ensure(last):
     last.setdefault("assign", []); last.setdefault("focus", [])
     while len(last["focus"]) < n: last["focus"].append(0.5)
 
-def _render_slide(last, n):
+def _slide_image(last, n):
     im, custom = None, False
     cp = (last.get("custom") or {}).get(str(n))
     if cp and os.path.exists(cp):                    # image envoyée par la rédactrice
@@ -152,12 +153,34 @@ def _render_slide(last, n):
         im, custom = Image.open(cp), True
     elif last.get("candidates") and len(last["assign"]) >= n:
         im = tmdb.download(last["candidates"][last["assign"][n - 1]], "w1280")
+    return im, custom
+
+def _render_slide(last, n):
+    im, custom = _slide_image(last, n)
+    zoom = float((last.get("zoom") or {}).get(str(n), 1.0))
     os.makedirs("out", exist_ok=True); p = f"out/slide{n}.jpg"
-    render.text_slide(last["texts"][n - 1], p, n, im, last["focus"][n - 1], last=(n == len(last["texts"])), custom=custom)
+    render.text_slide(last["texts"][n - 1], p, n, im, last["focus"][n - 1], last=(n == len(last["texts"])), custom=custom, zoom=zoom)
     return p
+
+def _do_zoom(last, n, direction):
+    im, custom = _slide_image(last, n)
+    if im is None:
+        raise ValueError("cette slide n'a pas d'image à zoomer")
+    k = str(n); zs = last.setdefault("zoom", {}); cur = float(zs.get(k, 1.0))
+    fill = render.fill_factor(im, custom); step = 1.4
+    if direction == "fill": new = fill
+    elif direction == "reset": new = 1.0
+    elif direction == "out":
+        new = cur / step
+        if cur > fill * 1.02 and new < fill: new = fill      # on s'arrête d'abord sur « plein cadre »
+    else:
+        new = cur * step
+        if cur < fill * 0.98 and new > fill: new = fill
+    zs[k] = round(min(max(new, 0.4), fill * 2.5), 3)
 
 def _do_image(last, n, hint=""):
     (last.get("custom") or {}).pop(str(n), None)     # on remplace l'image envoyée par une image du film
+    (last.get("zoom") or {}).pop(str(n), None)       # et le zoom repart à zéro
     cands, assign = last["candidates"], last["assign"]
     if not cands or len(assign) < n:
         raise ValueError("pas d'images disponibles pour ce film")
@@ -189,7 +212,7 @@ def apply_actions(actions):
         kind = a.get("action")
         try: n = int(a.get("slide") or 0)
         except Exception: n = 0
-        if kind in ("text", "image", "custom") and not 1 <= n <= total:
+        if kind in ("text", "image", "custom", "zoom") and not 1 <= n <= total:
             notes.append(f"Slide {n or '?'} : ce carrousel n'a que {total} slides de texte."); continue
         try:
             if kind == "text":
@@ -206,7 +229,10 @@ def apply_actions(actions):
                 from PIL import Image, ImageOps
                 os.makedirs(f"{DATA}/custom", exist_ok=True); dst = f"{DATA}/custom/{last['id']}_slide{n}.jpg"
                 ImageOps.exif_transpose(Image.open(a["path"])).convert("RGB").save(dst, "JPEG", quality=92)
-                last.setdefault("custom", {})[str(n)] = dst; touched.append(n)
+                last.setdefault("custom", {})[str(n)] = dst; (last.get("zoom") or {}).pop(str(n), None); touched.append(n)
+            elif kind == "zoom":
+                d = str(a.get("direction") or "in")
+                _do_zoom(last, n, d if d in ("in", "out", "fill", "reset") else "in"); touched.append(n)
             elif kind == "rewrite_all":
                 state["last"] = last; save("state", state)
                 rewrite(str(a.get("instruction") or "")); return
@@ -222,12 +248,13 @@ def apply_actions(actions):
                 notes.append("Je n'ai pas compris cette partie de ta demande.")
         except Exception as ex:
             traceback.print_exc(); notes.append(f"Slide {n or '?'} : {e(ex)}")
+    if touched: last["last_slide"] = touched[-1]
     state["last"] = last; save("state", state)
     slides = sorted(set(touched))
     if slides:
         tg.send_files([_render_slide(last, n) for n in slides])
     tg.send(("\n".join(notes) + "\n\n" if notes else "") + "\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(last["texts"])) + "\n\n"
-            "Tu peux continuer : « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 »… "
+            "Tu peux continuer : « zoom + », « zoom - », « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 »… "
             "Dis-moi tout ce que tu veux, dans l'ordre.")
 
 def edit_slide(n, instruction):
@@ -300,6 +327,16 @@ def handle(u, state):
         apply_actions([{"action": "custom", "slide": int(mm.group(1)), "path": ph}]); return
     elif ph:                                         # autre message : l'image en attente est abandonnée
         st = load("state", {"offset": 0}); st["photo"] = None; save("state", st)
+    zm = re.match(r"^(zoom|d[eé]zoom|plein (?:cadre|[eé]cran)|remplis?(?: tout)?)\b(.*)$", low)
+    if zm and state.get("last") and state["last"].get("texts") and len(low.split()) <= 5:
+        rest = zm.group(2); sl = re.search(r"\b([1-3])\b", rest)
+        n = int(sl.group(1)) if sl else int(state["last"].get("last_slide") or 1)
+        w = zm.group(1)
+        if w.startswith(("plein", "rempli")): d = "fill"
+        elif w.startswith("d") or re.search(r"(-|moins|\bmoin\b)", rest): d = "out"
+        elif "reset" in rest or "normal" in rest: d = "reset"
+        else: d = "in"
+        apply_actions([{"action": "zoom", "slide": n, "direction": d}]); return
     if low in ("/start", "aide", "/aide", "help"): tg.send(HELP)
     elif low in ("a", "b", "c") and state.get("pending"):
         k = "abc".index(low)
