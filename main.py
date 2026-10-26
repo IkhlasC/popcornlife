@@ -188,7 +188,11 @@ def apply_actions(actions):
         try:
             if kind == "text":
                 meta = tmdb.details(last["type"], last["id"])
-                last["texts"][n - 1] = ai.rewrite_slide(meta, last["texts"], n, str(a.get("instruction") or ""))
+                ins = str(a.get("instruction") or "").strip()
+                if a.get("exact") and ins:                  # sa propre phrase : on l'affiche telle quelle
+                    last["texts"][n - 1] = ai.oral(ins.strip('"«» '))
+                else:
+                    last["texts"][n - 1] = ai.rewrite_slide(meta, last["texts"], n, ins)
                 touched.append(n)
             elif kind == "image":
                 _do_image(last, n, str(a.get("hint") or "")); touched.append(n)
