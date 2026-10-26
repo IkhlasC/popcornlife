@@ -1,5 +1,5 @@
 {
- "offset": 422725919,
+ "offset": 422725920,
  "pending": [],
  "last": {
   "type": "movie",
@@ -11,7 +11,7 @@
   "texts": [
    "Imagine que ton mari est retrouvé m*rt dans la neige",
    "La police parle de m*urtre et la principale suspecte, c'est toi",
-   "Au procès, on fouille ton couple pour savoir si tu l'as fait"
+   "Au procès, on lave tout ton linge sale pour savoir si c'est toi qui l'as fait"
   ],
   "poster_path": "/nSwQKCsDdj2S56mG7Yz2YGfrLT6.jpg",
   "candidates": [
@@ -49,7 +49,8 @@
    0.4,
    0.56953125,
    0.33125
-  ]
+  ],
+  "last_slide": 3
  },
  "last_propose": "2026-10-26"
 }
