@@ -1,5 +1,5 @@
 {
- "offset": 422725916,
+ "offset": 422725917,
  "pending": [],
  "last": {
   "type": "movie",
@@ -46,7 +46,8 @@
    0.5375
   ],
   "custom": {
-   "1": "data/custom/1236153_slide1.jpg"
+   "1": "data/custom/1236153_slide1.jpg",
+   "2": "data/custom/1236153_slide2.jpg"
   }
  },
  "last_propose": "2026-10-26"
