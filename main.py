@@ -160,7 +160,7 @@ def _do_image(last, n, hint=""):
         thumbs = []
         for p in cands:
             im = tmdb.download(p, "w300"); b = io.BytesIO(); im.save(b, "JPEG", quality=80); thumbs.append(b.getvalue())
-        r = ai.pick_image_hint(meta, thumbs, hint, last["texts"][n - 1], [a for k, a in enumerate(assign) if k != n - 1])
+        r = ai.pick_image_hint(meta, thumbs, hint, last["texts"][n - 1], list(assign))
     else:
         cur = assign[n - 1]
         nxt = next((k % len(cands) for k in range(cur + 1, cur + 1 + len(cands)) if (k % len(cands)) not in assign), (cur + 1) % len(cands))
