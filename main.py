@@ -10,7 +10,7 @@ HELP = ("🍿 <b>PopcornLife Studio</b>\n\n"
         "• Tu peux aussi m'écrire un film : « Gone Girl » ou « Fais-moi un TikTok sur Dark ».\n"
         "• « propositions » : j'envoie 3 nouvelles idées.\n"
         "• « image 2 » : je change l'image de la slide 2 (1, 2 ou 3).\n"
-        "• « slide 2 plus choquant » ou « slide 2 : ta phrase » : je change le texte d'une seule slide.\n"
+        "• Après un post, dis-moi librement ce que tu veux changer, autant de fois que tu veux : « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 », « slide 2 : ta phrase exacte ».\n"
         "• « refais » : j'écris de nouveaux textes pour le dernier film. Tu peux préciser : « refais plus mystérieux ».")
 
 def load(name, default):
@@ -59,6 +59,8 @@ def propose():
         tg.send("⚠️ Je n'ai pas trouvé assez de films disponibles pour faire des propositions."); return
     by_ref = {f'{p["type"]}:{p["id"]}': p for p in pool}
     chosen = [c for c in ai.propose(pool) if c.get("ref") in by_ref][:3]
+    if not chosen:
+        tg.send("⚠️ L'IA n'a pas renvoyé de proposition utilisable. Écris « propositions » pour réessayer."); return
     state = load("state", {"offset": 0}); state["pending"] = []
     lines, buttons = ["🍿 <b>Voici les propositions PopcornLife du jour</b>\n"], []
     for n, c in enumerate(chosen):
@@ -66,28 +68,27 @@ def propose():
         plat, _ = platform_info(p["type"], p["id"])
         kind = "Série" if p["type"] == "tv" else "Film"
         lines.append(f"<b>{letter} — {e(p['title'])}</b> ({p['year']}) · {kind}{' · ' + e(plat) if plat else ''}\n"
-                     f"Angle : {e(c['angle'])}\nHook : {e(c['hook'])}\nPourquoi : {e(c['pourquoi'])}\n")
+                     f"Angle : {e(c.get('angle', ''))}\nHook : {e(c.get('hook', ''))}\nPourquoi : {e(c.get('pourquoi', ''))}\n")
         buttons.append({"text": f"{letter} — {p['title'][:25]}", "callback_data": f"pick:{p['type']}:{p['id']}"})
         state["pending"].append({"type": p["type"], "id": p["id"], "title": p["title"]})
     save("state", state)
     tg.send("\n".join(lines), [[b] for b in buttons])
 
 # ---------- création d'un post ----------
-def choose_images(meta, paths):
-    """L'IA choisit les 3 images les plus accrocheuses (la plus percutante en slide 1), puis on recentre sur le visage."""
-    bd = [None, None, None]
+def choose_images(meta, paths, texts=None):
+    """Mélange choc + cohérence avec les textes ; la plus percutante en slide 1 ; recentrage sur le visage."""
     if not paths:
-        return [], [], bd
+        return [], [], [None] * max(len(texts or []), 2)
     thumbs = []
     for p in paths:
         im = tmdb.download(p, "w300"); b = io.BytesIO(); im.save(b, "JPEG", quality=80); thumbs.append(b.getvalue())
-    choice = ai.pick_images(meta, thumbs)
-    cache, focus = {}, []
-    for n, c in enumerate(choice):
+    choice = ai.pick_images(meta, thumbs, texts)
+    cache, focus, bd = {}, [], []
+    for c in choice:
         if c["idx"] not in cache:
             cache[c["idx"]] = tmdb.download(paths[c["idx"]], "w1280")
-        bd[n] = cache[c["idx"]]
-        face = render.face_focus(bd[n])   # on affine la position donnée par l'IA avec le vrai visage, s'il est détecté et cohérent
+        im = cache[c["idx"]]; bd.append(im)
+        face = render.face_focus(im)   # on affine la position donnée par l'IA avec le vrai visage, s'il est détecté et cohérent
         focus.append(face if face is not None and abs(face - c["focus"]) <= 0.25 else c["focus"])
     return [c["idx"] for c in choice], focus, bd
 
@@ -98,7 +99,7 @@ def rewrite(guidance=""):
     meta = tmdb.details(last["type"], last["id"])
     tg.send(f"✍️ Je réécris les textes de <b>{e(last['title'])}</b>…" + (f"\nConsigne : {e(guidance)}" if guidance else ""))
     post = ai.write_post(meta, guidance, avoid=last["texts"])
-    assign, focus, bd = choose_images(meta, last["candidates"])
+    assign, focus, bd = choose_images(meta, last["candidates"], post["texts"])
     poster = tmdb.download(last["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, focus or [0.5] * 3, poster,
                               {"title": last["title"], "year": last["year"], "platform": last["platform"], "rating": last["rating"]}, "out")
@@ -122,7 +123,7 @@ def produce(t, i):
     paths = tmdb.backdrops(t, i)
     last = {"type": t, "id": i, "title": meta["title"], "year": meta["year"], "rating": meta["rating"], "platform": plat,
             "texts": post["texts"], "poster_path": meta["poster_path"], "candidates": paths, "assign": [], "focus": []}
-    last["assign"], last["focus"], bd = choose_images(meta, paths)
+    last["assign"], last["focus"], bd = choose_images(meta, paths, post["texts"])
     poster = tmdb.download(meta["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, last["focus"] or [0.5] * 3, poster,
                               {"title": meta["title"], "year": meta["year"], "platform": plat, "rating": meta["rating"]}, "out")
@@ -136,42 +137,89 @@ def produce(t, i):
     save("history", hist)
     state = load("state", {"offset": 0}); state["last"] = last; state["pending"] = []; save("state", state)
 
-def edit_slide(n, instruction):
+# ---------- modifications libres du dernier carrousel ----------
+def _ensure(last):
+    n = len(last["texts"])
+    last.setdefault("assign", []); last.setdefault("focus", [])
+    while len(last["focus"]) < n: last["focus"].append(0.5)
+
+def _render_slide(last, n):
+    im = None
+    if last.get("candidates") and len(last["assign"]) >= n:
+        im = tmdb.download(last["candidates"][last["assign"][n - 1]], "w1280")
+    os.makedirs("out", exist_ok=True); p = f"out/slide{n}.jpg"
+    render.text_slide(last["texts"][n - 1], p, n, im, last["focus"][n - 1], last=(n == len(last["texts"])))
+    return p
+
+def _do_image(last, n, hint=""):
+    cands, assign = last["candidates"], last["assign"]
+    if not cands or len(assign) < n:
+        raise ValueError("pas d'images disponibles pour ce film")
+    meta = tmdb.details(last["type"], last["id"])
+    if hint:
+        thumbs = []
+        for p in cands:
+            im = tmdb.download(p, "w300"); b = io.BytesIO(); im.save(b, "JPEG", quality=80); thumbs.append(b.getvalue())
+        r = ai.pick_image_hint(meta, thumbs, hint, last["texts"][n - 1], [a for k, a in enumerate(assign) if k != n - 1])
+    else:
+        cur = assign[n - 1]
+        nxt = next((k % len(cands) for k in range(cur + 1, cur + 1 + len(cands)) if (k % len(cands)) not in assign), (cur + 1) % len(cands))
+        r = {"idx": nxt, "focus": 0.5}
+    if r is None:
+        raise ValueError("je n'ai pas trouvé d'image qui correspond")
+    im = tmdb.download(cands[r["idx"]], "w1280")
+    face = render.face_focus(im)
+    if hint: focus = face if face is not None and abs(face - r["focus"]) <= 0.25 else r["focus"]
+    else: focus = face if face is not None else 0.5
+    assign[n - 1] = r["idx"]; last["focus"][n - 1] = focus
+
+def apply_actions(actions):
+    """Exécute dans l'ordre une ou plusieurs modifications, puis renvoie toutes les slides touchées."""
     state = load("state", {"offset": 0}); last = state.get("last")
     if not last or not last.get("texts"):
         tg.send("Je n'ai pas de post récent à modifier. Écris d'abord un titre de film."); return
-    if n > len(last["texts"]):
-        tg.send(f"Ce carrousel n'a que {len(last['texts'])} slides de texte."); return
-    meta = tmdb.details(last["type"], last["id"])
-    tg.send(f"✍️ Je réécris la slide {n}…")
-    new = ai.rewrite_slide(meta, last["texts"], n, instruction)
-    last["texts"][n - 1] = new
-    im = None
-    if last.get("candidates") and len(last.get("assign", [])) >= n:
-        im = tmdb.download(last["candidates"][last["assign"][n - 1]], "w1280")
-    fx = last["focus"][n - 1] if len(last.get("focus", [])) >= n else 0.5
-    os.makedirs("out", exist_ok=True); p = f"out/slide{n}.jpg"
-    render.text_slide(new, p, n, im, fx, last=(n == len(last["texts"])))
-    tg.send_files([p])
-    tg.send(f"Slide {n} : {e(new)}\n\nPas encore ça ? Écris par exemple « slide {n} plus choquant » ou « slide {n} : ta phrase exacte ».")
+    _ensure(last); total = len(last["texts"]); touched, notes = [], []
+    for a in actions:
+        kind = a.get("action")
+        try: n = int(a.get("slide") or 0)
+        except Exception: n = 0
+        if kind in ("text", "image") and not 1 <= n <= total:
+            notes.append(f"Slide {n or '?'} : ce carrousel n'a que {total} slides de texte."); continue
+        try:
+            if kind == "text":
+                meta = tmdb.details(last["type"], last["id"])
+                last["texts"][n - 1] = ai.rewrite_slide(meta, last["texts"], n, str(a.get("instruction") or ""))
+                touched.append(n)
+            elif kind == "image":
+                _do_image(last, n, str(a.get("hint") or "")); touched.append(n)
+            elif kind == "rewrite_all":
+                state["last"] = last; save("state", state)
+                rewrite(str(a.get("instruction") or "")); return
+            elif kind == "new_film":
+                state["last"] = last; save("state", state)
+                t = str(a.get("title") or "").strip()
+                found = tmdb.search(t, a.get("year")) or tmdb.search(t) if t else None
+                if not found: tg.send(f"Je ne trouve pas « {e(t)} » sur TMDB."); return
+                produce(*found[0]); return
+            elif kind == "propositions":
+                state["last"] = last; save("state", state); propose(); return
+            else:
+                notes.append("Je n'ai pas compris cette partie de ta demande.")
+        except Exception as ex:
+            traceback.print_exc(); notes.append(f"Slide {n or '?'} : {e(ex)}")
     state["last"] = last; save("state", state)
+    slides = sorted(set(touched))
+    if slides:
+        tg.send_files([_render_slide(last, n) for n in slides])
+    tg.send(("\n".join(notes) + "\n\n" if notes else "") + "\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(last["texts"])) + "\n\n"
+            "Tu peux continuer : « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 »… "
+            "Dis-moi tout ce que tu veux, dans l'ordre.")
 
-def redo_image(n):
-    state = load("state", {"offset": 0}); last = state.get("last")
-    if not last or not last["candidates"]:
-        tg.send("Je n'ai pas de post récent avec des images à modifier."); return
-    if n > len(last["texts"]):
-        tg.send(f"Ce carrousel n'a que {len(last['texts'])} slides de texte."); return
-    cands, assign = last["candidates"], last["assign"]
-    cur = assign[n - 1]
-    nxt = next((k % len(cands) for k in range(cur + 1, cur + 1 + len(cands)) if (k % len(cands)) not in assign), (cur + 1) % len(cands))
-    assign[n - 1] = nxt
-    im = tmdb.download(cands[nxt], "w1280")
-    fx = render.face_focus(im); fx = 0.5 if fx is None else fx; last["focus"][n - 1] = fx
-    os.makedirs("out", exist_ok=True); p = f"out/slide{n}.jpg"
-    render.text_slide(last["texts"][n - 1], p, n, im, fx, last=(n == len(last["texts"])))
-    tg.send_files([p]); tg.send(f"Voilà la slide {n} avec une autre image. Écris « image {n} » pour en essayer une autre.")
-    save("state", state)
+def edit_slide(n, instruction):
+    apply_actions([{"action": "text", "slide": n, "instruction": instruction}])
+
+def redo_image(n, hint=""):
+    apply_actions([{"action": "image", "slide": n, "hint": hint}])
 
 def parse_request(message):
     """Titre court = utilisé tel quel (avec année facultative). Phrase longue = l'IA extrait le titre."""
@@ -215,14 +263,19 @@ def handle(u, state):
     elif low in ("a", "b", "c") and state.get("pending"):
         k = "abc".index(low)
         if k < len(state["pending"]): p = state["pending"][k]; produce(p["type"], p["id"])
-    elif re.match(r"(?i)^(slide|texte|phrase)\s*([1-3])\b", text):
-        mm = re.match(r"(?i)^(?:slide|texte|phrase)\s*([1-3])\b[\s:,\-]*(.*)$", text, re.S)
-        edit_slide(int(mm.group(1)), mm.group(2).strip())
     elif low.startswith("image") and low[5:].strip() in ("1", "2", "3"): redo_image(int(low[5:].strip()))
     elif re.match(r"(?i)^(refais|refait|autre hook|nouveau hook|nouveaux textes|change les phrases|change le hook)\b", text):
         rewrite(re.sub(r"(?i)^(refais|refait|autre hook|nouveau hook|nouveaux textes|change les phrases|change le hook)\b[\s:,\-]*", "", text).strip())
     elif low in ("propositions", "proposition", "/propositions", "idées", "idees"): propose()
-    else: manual(text)
+    else:
+        last = state.get("last")
+        if last and last.get("texts"):               # un carrousel est en cours : on comprend la demande libre
+            acts = [a for a in ai.route(text, last["texts"], last["title"]) if a.get("action") != "unknown"]
+            if acts:
+                apply_actions(acts); return
+            if len(text.split()) > 6:
+                tg.send("Je n'ai pas compris. Exemples : « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 », ou un autre titre de film."); return
+        manual(text)
 
 def poll():
     state = load("state", {"offset": 0, "pending": [], "last": None})
