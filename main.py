@@ -10,6 +10,7 @@ HELP = ("🍿 <b>PopcornLife Studio</b>\n\n"
         "• Tu peux aussi m'écrire un film : « Gone Girl » ou « Fais-moi un TikTok sur Dark ».\n"
         "• « propositions » : j'envoie 3 nouvelles idées.\n"
         "• « image 2 » : je change l'image de la slide 2 (1, 2 ou 3).\n"
+        "• Tu peux m'envoyer ta propre image : envoie-la avec la légende « 1 » (ou 2, 3). Si elle n'est pas verticale, je la centre avec du noir en haut et en bas.\n"
         "• Après un post, dis-moi librement ce que tu veux changer, autant de fois que tu veux : « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 », « slide 2 : ta phrase exacte ».\n"
         "• « refais » : j'écris de nouveaux textes pour le dernier film. Tu peux préciser : « refais plus mystérieux ».")
 
@@ -144,14 +145,19 @@ def _ensure(last):
     while len(last["focus"]) < n: last["focus"].append(0.5)
 
 def _render_slide(last, n):
-    im = None
-    if last.get("candidates") and len(last["assign"]) >= n:
+    im, custom = None, False
+    cp = (last.get("custom") or {}).get(str(n))
+    if cp and os.path.exists(cp):                    # image envoyée par la rédactrice
+        from PIL import Image
+        im, custom = Image.open(cp), True
+    elif last.get("candidates") and len(last["assign"]) >= n:
         im = tmdb.download(last["candidates"][last["assign"][n - 1]], "w1280")
     os.makedirs("out", exist_ok=True); p = f"out/slide{n}.jpg"
-    render.text_slide(last["texts"][n - 1], p, n, im, last["focus"][n - 1], last=(n == len(last["texts"])))
+    render.text_slide(last["texts"][n - 1], p, n, im, last["focus"][n - 1], last=(n == len(last["texts"])), custom=custom)
     return p
 
 def _do_image(last, n, hint=""):
+    (last.get("custom") or {}).pop(str(n), None)     # on remplace l'image envoyée par une image du film
     cands, assign = last["candidates"], last["assign"]
     if not cands or len(assign) < n:
         raise ValueError("pas d'images disponibles pour ce film")
@@ -183,7 +189,7 @@ def apply_actions(actions):
         kind = a.get("action")
         try: n = int(a.get("slide") or 0)
         except Exception: n = 0
-        if kind in ("text", "image") and not 1 <= n <= total:
+        if kind in ("text", "image", "custom") and not 1 <= n <= total:
             notes.append(f"Slide {n or '?'} : ce carrousel n'a que {total} slides de texte."); continue
         try:
             if kind == "text":
@@ -196,6 +202,11 @@ def apply_actions(actions):
                 touched.append(n)
             elif kind == "image":
                 _do_image(last, n, str(a.get("hint") or "")); touched.append(n)
+            elif kind == "custom":
+                from PIL import Image, ImageOps
+                os.makedirs(f"{DATA}/custom", exist_ok=True); dst = f"{DATA}/custom/{last['id']}_slide{n}.jpg"
+                ImageOps.exif_transpose(Image.open(a["path"])).convert("RGB").save(dst, "JPEG", quality=92)
+                last.setdefault("custom", {})[str(n)] = dst; touched.append(n)
             elif kind == "rewrite_all":
                 state["last"] = last; save("state", state)
                 rewrite(str(a.get("instruction") or "")); return
@@ -254,6 +265,19 @@ def manual(message):
     produce(*found[0])
 
 # ---------- lecture des messages Telegram ----------
+def photo_received(file_id, caption):
+    state = load("state", {"offset": 0}); last = state.get("last")
+    if not last or not last.get("texts"):
+        tg.send("J'ai reçu ton image, mais je n'ai pas de carrousel en cours. Écris d'abord un titre de film."); return
+    os.makedirs(f"{DATA}/custom", exist_ok=True)
+    path = tg.download_file(file_id, f"{DATA}/custom/_waiting.jpg")
+    mm = re.search(r"([1-3])", caption)
+    if mm:
+        apply_actions([{"action": "custom", "slide": int(mm.group(1)), "path": path}])
+    else:
+        state["photo"] = path; save("state", state)
+        tg.send(f"📷 Image reçue. Pour quelle slide ? Réponds simplement 1, 2 ou 3 (le carrousel a {len(last['texts'])} slides de texte).")
+
 def handle(u, state):
     if "callback_query" in u:
         cb = u["callback_query"]
@@ -261,8 +285,21 @@ def handle(u, state):
         tg.answer(cb["id"])
         _, t, i = cb["data"].split(":"); produce(t, int(i)); return
     msg = u.get("message")
-    if not msg or msg["chat"]["id"] != tg.chat_id() or "text" not in msg: return
+    if not msg or msg["chat"]["id"] != tg.chat_id(): return
+    fid = None
+    if msg.get("photo"): fid = msg["photo"][-1]["file_id"]
+    elif (msg.get("document") or {}).get("mime_type", "").startswith("image/"): fid = msg["document"]["file_id"]
+    if fid:                                          # une image envoyée par la rédactrice
+        photo_received(fid, (msg.get("caption") or "").strip()); return
+    if "text" not in msg: return
     text = msg["text"].strip(); low = text.lower().strip(" .!")
+    ph = state.get("photo")
+    if ph and os.path.exists(ph) and re.search(r"(?i)\b(image|photo|slide|la|numéro)\s*([1-3])\b|^\s*([1-3])\s*$", text):
+        mm = re.search(r"([1-3])", text)
+        st = load("state", {"offset": 0}); st["photo"] = None; save("state", st)
+        apply_actions([{"action": "custom", "slide": int(mm.group(1)), "path": ph}]); return
+    elif ph:                                         # autre message : l'image en attente est abandonnée
+        st = load("state", {"offset": 0}); st["photo"] = None; save("state", st)
     if low in ("/start", "aide", "/aide", "help"): tg.send(HELP)
     elif low in ("a", "b", "c") and state.get("pending"):
         k = "abc".index(low)
