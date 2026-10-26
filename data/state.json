@@ -1,22 +1,6 @@
 {
- "offset": 422725904,
- "pending": [
-  {
-   "type": "tv",
-   "id": 117488,
-   "title": "Yellowjackets"
-  },
-  {
-   "type": "movie",
-   "id": 812583,
-   "title": "Wake Up Dead Man : Une histoire à couteaux tirés"
-  },
-  {
-   "type": "movie",
-   "id": 508947,
-   "title": "Alerte rouge"
-  }
- ],
+ "offset": 422725905,
+ "pending": [],
  "last": {
   "type": "movie",
   "id": 614945,
@@ -25,8 +9,8 @@
   "rating": 8.3,
   "platform": "Netflix",
   "texts": [
-   "Imagine que tu envoies des vocaux à ta sœur m*rte",
-   "Mais ils arrivent chez un inconnu, qui tombe amoureux de toi"
+   "Imagine que tu envoies tes confessions en vocal à ta sœur décédée",
+   "Mais ses vocaux finissent chez un inconnu, qui tombe sous son charme"
   ],
   "poster_path": "/gqnv5448y3R5KAelvhapSKtiU5z.jpg",
   "candidates": [
@@ -56,12 +40,10 @@
    "/xhhUSTRg5Kow6cQFYqUOn9C9XGM.jpg"
   ],
   "assign": [
-   0,
    9,
-   1
+   0
   ],
   "focus": [
-   0.4,
    0.46484375,
    0.5
   ]
