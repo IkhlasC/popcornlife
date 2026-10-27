@@ -1,77 +1,52 @@
 {
- "offset": 422725940,
- "pending": [
-  {
-   "type": "movie",
-   "id": 1242419,
-   "title": "Roofman"
-  },
-  {
-   "type": "movie",
-   "id": 1306368,
-   "title": "The Rip"
-  },
-  {
-   "type": "movie",
-   "id": 906126,
-   "title": "Le Cercle des neiges"
-  }
- ],
+ "offset": 422725941,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 210577,
-  "title": "Gone Girl",
-  "year": "2014",
-  "rating": 7.9,
-  "platform": "Disney+ / HBO Max",
+  "id": 1242419,
+  "title": "Roofman",
+  "year": "2025",
+  "rating": 7.1,
+  "platform": "Prime Video",
   "texts": [
-   "imagine que tu était promise à un avenir incroyable mais que tu as tout sacrifié pour lui",
-   "Mais après des années de dévouement, tu découvres qu’il te trompe"
+   "Ce père perce le toit des McDonald's pour les cambrioler",
+   "Évadé, il vit 6 mois caché dans un magasin Toys R Us"
   ],
-  "poster_path": "/7xkJ1ACu40BjzLHVPRILWjFvW7.jpg",
+  "poster_path": "/p1HTuYJvK9qEeK0gbPijCJ18RQ9.jpg",
   "candidates": [
-   "/iWak7wT0j6ycCc8lKr4NBz9c7n5.jpg",
-   "/1ufic9NSdolkgNkQSAVjlVp0uqn.jpg",
-   "/x9ezMgOtDPqHatHDvxEG0ILb6Ie.jpg",
-   "/h2JaQWLKhapm7AuSViJwGiv8ngC.jpg",
-   "/5s7y0ia1izCvFVjBRgHCgceHelf.jpg",
-   "/xISE4M4IhCFgd9oOEFKYfkknumg.jpg",
-   "/1mzisKntcKHEG3RoTGXIIHgmJV7.jpg",
-   "/pXQ0M1i2gkwSqagOPTniiR0fFtp.jpg",
-   "/2JXoeqbcXZxIb99zA4BTwmK1dDC.jpg",
-   "/6WUC6yVzfyZmlWPSgj0yB3WvrG3.jpg",
-   "/eSdl8ANr4BashmiBmcE6eitK74D.jpg",
-   "/7y8DnxJoUAbm7XPKh7nznKEhpnI.jpg",
-   "/wp71OrXrxj6R3L55p95Ib0OngrT.jpg",
-   "/4kqvPNdudzVq8OkWCa3sEEcYQdD.jpg",
-   "/znsgNAo52yCTtkHfmF1N0vIfj6D.jpg",
-   "/ti1KYVpKiuBCPtTVMDJ9aAyqXp3.jpg",
-   "/mfl6xZKlCTm2xM65V9zoZeNDEmU.jpg",
-   "/eBxcfxhPFUWpCUenAUaJunKLcBr.jpg",
-   "/mJjPyIIpIBCoB5VikuT0doxZh2k.jpg",
-   "/8gWZx3j2XJg5vCJjau4wfsGyRbE.jpg",
-   "/r5O5qtyjWfF7ybOHL4UmMFGrlQb.jpg",
-   "/5fKKMsGFiRg8GMCunB2YxYPUkOh.jpg",
-   "/pG5vm74ZhKftHxGwUXP2mjUDdR.jpg",
-   "/dHPeQJXmxBt7t6GBiszTea5MNK5.jpg"
+   "/E7hhuSZ1U5xymN2Olg2EOr4N4P.jpg",
+   "/2YOnE2qmoyyOUqQsFit12gDSauk.jpg",
+   "/ou8knRlOJZAOlnkT4iHf4HT266m.jpg",
+   "/8OozRm2DdIFQCVdc5MUu2qSq0AQ.jpg",
+   "/q7rYSzl7jp4xdvmZqJEMgBOwtsQ.jpg",
+   "/mK8LGSaoOkcuKiLvi4slpzonBFC.jpg",
+   "/rvZxcTgQh9R33kRc3xT9EXOKQLI.jpg",
+   "/9QgJTHAHXqRuUjuHWYyMqh3T8Pw.jpg",
+   "/kDd5g6xqsKXQpMHhyQ4gyfW8mTU.jpg",
+   "/77q3kBUwSMNoInX8AqlbUCLlhJ5.jpg",
+   "/6kfP6PIxUVqtkJeBxkFGQ8UHZLS.jpg",
+   "/4TP8wF7Yf5pg4ypjF0bjN1c6yN2.jpg",
+   "/dX0BryV00EXRmuYTSxm51dLYVAq.jpg",
+   "/t2XIMAhoX9fbwJmfZl7a4XDFkRF.jpg",
+   "/YuROOrqkQFKJQYcEHPhu9BowOO.jpg",
+   "/joihCFqBeMeyiNql27VzwZBU5j8.jpg",
+   "/8kU0RXr5eZ57hs8bYlAlrK33r5A.jpg",
+   "/eR0UrQK5DrE4k9u9Bda7QXOr0TZ.jpg",
+   "/3Gr1cVHjCj3oUb7kJwPkRbwNWs9.jpg",
+   "/cyh9hV3SDceiY1WJQdqM6kYpuPf.jpg",
+   "/w75jTgauJKedUstXZr9PvjGK40M.jpg",
+   "/qKi1Pny0quo7m0cvFZs7ITeq5f7.jpg",
+   "/xN8RrYnbNiahKkd2UhjjsaX3AfB.jpg",
+   "/aQRIg0QpKZJNduDVroFVMqauS1o.jpg"
   ],
   "assign": [
-   1,
-   2
+   0,
+   11
   ],
   "focus": [
-   0.59453125,
-   0.2828125
-  ],
-  "custom": {
-   "1": "data/custom/210577_slide1.jpg",
-   "2": "data/custom/210577_slide2.jpg"
-  },
-  "last_slide": 2,
-  "zoom": {
-   "1": 1.4,
-   "2": 1.4
-  }
+   0.55,
+   0.15
+  ]
  },
  "last_propose": "2026-10-27",
  "photo": null
