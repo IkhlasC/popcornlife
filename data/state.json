@@ -3,18 +3,18 @@
  "pending": [
   {
    "type": "movie",
-   "id": 1124566,
-   "title": "Valeur sentimentale"
+   "id": 1242419,
+   "title": "Roofman"
   },
   {
    "type": "movie",
-   "id": 1168190,
-   "title": "Team Démolition"
+   "id": 1306368,
+   "title": "The Rip"
   },
   {
    "type": "movie",
-   "id": 466420,
-   "title": "Killers of the Flower Moon"
+   "id": 906126,
+   "title": "Le Cercle des neiges"
   }
  ],
  "last": {
@@ -73,6 +73,6 @@
    "2": 1.4
   }
  },
- "last_propose": "2026-10-26",
+ "last_propose": "2026-10-27",
  "photo": null
 }
