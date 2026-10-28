@@ -1,67 +1,51 @@
 {
- "offset": 422725941,
- "pending": [
-  {
-   "type": "tv",
-   "id": 127529,
-   "title": "La Traque dans le sang"
-  },
-  {
-   "type": "movie",
-   "id": 49046,
-   "title": "À l'ouest rien de nouveau"
-  },
-  {
-   "type": "movie",
-   "id": 1171145,
-   "title": "Crime 101"
-  }
- ],
+ "offset": 422725942,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 1242419,
-  "title": "Roofman",
-  "year": "2025",
-  "rating": 7.1,
-  "platform": "Prime Video",
+  "id": 49046,
+  "title": "À l'ouest rien de nouveau",
+  "year": "2022",
+  "rating": 7.7,
+  "platform": "Netflix",
   "texts": [
-   "Ce père perce le toit des McDonald's pour les cambrioler",
-   "Évadé, il vit 6 mois caché dans un magasin Toys R Us"
+   "Un jeune soldat allemand part au front avec ses camarades, euphorique",
+   "Mais au fond des tranchées, ils ne se battent plus que pour survivre"
   ],
-  "poster_path": "/p1HTuYJvK9qEeK0gbPijCJ18RQ9.jpg",
+  "poster_path": "/qS6lVMc53jiEtlOAFSRxFGSa5pN.jpg",
   "candidates": [
-   "/E7hhuSZ1U5xymN2Olg2EOr4N4P.jpg",
-   "/2YOnE2qmoyyOUqQsFit12gDSauk.jpg",
-   "/ou8knRlOJZAOlnkT4iHf4HT266m.jpg",
-   "/8OozRm2DdIFQCVdc5MUu2qSq0AQ.jpg",
-   "/q7rYSzl7jp4xdvmZqJEMgBOwtsQ.jpg",
-   "/mK8LGSaoOkcuKiLvi4slpzonBFC.jpg",
-   "/rvZxcTgQh9R33kRc3xT9EXOKQLI.jpg",
-   "/9QgJTHAHXqRuUjuHWYyMqh3T8Pw.jpg",
-   "/kDd5g6xqsKXQpMHhyQ4gyfW8mTU.jpg",
-   "/77q3kBUwSMNoInX8AqlbUCLlhJ5.jpg",
-   "/6kfP6PIxUVqtkJeBxkFGQ8UHZLS.jpg",
-   "/4TP8wF7Yf5pg4ypjF0bjN1c6yN2.jpg",
-   "/dX0BryV00EXRmuYTSxm51dLYVAq.jpg",
-   "/t2XIMAhoX9fbwJmfZl7a4XDFkRF.jpg",
-   "/YuROOrqkQFKJQYcEHPhu9BowOO.jpg",
-   "/joihCFqBeMeyiNql27VzwZBU5j8.jpg",
-   "/8kU0RXr5eZ57hs8bYlAlrK33r5A.jpg",
-   "/eR0UrQK5DrE4k9u9Bda7QXOr0TZ.jpg",
-   "/3Gr1cVHjCj3oUb7kJwPkRbwNWs9.jpg",
-   "/cyh9hV3SDceiY1WJQdqM6kYpuPf.jpg",
-   "/w75jTgauJKedUstXZr9PvjGK40M.jpg",
-   "/qKi1Pny0quo7m0cvFZs7ITeq5f7.jpg",
-   "/xN8RrYnbNiahKkd2UhjjsaX3AfB.jpg",
-   "/aQRIg0QpKZJNduDVroFVMqauS1o.jpg"
+   "/xBwtP27cx8WfjHJVFkpuV6F1RES.jpg",
+   "/zbOlpFM306PHE7EP1OELCH5qSmS.jpg",
+   "/kZZ9JuZ5CMvH0Y2LwboekvXIHqQ.jpg",
+   "/e3h0knvtz4qPg9dwYdWynALrW9s.jpg",
+   "/sRnfZo5QuWo63khQsdEbd4oEvcJ.jpg",
+   "/h30gpZLPTMbQ8qS0nV6pRZo8Yco.jpg",
+   "/tdVlOqviP9LMIXntXZJgu2xnllI.jpg",
+   "/9argwmXnStxPJK1OPAbXeAtqWcA.jpg",
+   "/pT6GpQw3qdEH7fjG0Eiu0kwvART.jpg",
+   "/yFEhiouMzPw5opHgSj1DquiZQUt.jpg",
+   "/2BJQbxxXwHvOjhHespaSV6BghRo.jpg",
+   "/n5lNDFwh3D3HzCwSCuOi6aA3CYy.jpg",
+   "/cEBr4f5hj0dlWSu217craDJJ2Kz.jpg",
+   "/ly4WP4LB63acUCyZAZjVo160FJM.jpg",
+   "/ubaYFJHOfeupvOYhkIBf0kStuMX.jpg",
+   "/lqtwpcqApnsNF9wS7PGmbHtqpix.jpg",
+   "/iF9t7ErELtCZ3VFQKSq2Drqd4DX.jpg",
+   "/d0ym7yrSoeT4WRLwgiJL3Wdnrts.jpg",
+   "/eLr70WonEW2KG8vrsdHS0yFX2VW.jpg",
+   "/nMB3R9witwKPMnkHGonkggLLTuJ.jpg",
+   "/k2HRPmICpaGuS2MVdbQTyCqJlUT.jpg",
+   "/ywLvlcqzGM1E7rV9d8SvmnLxltZ.jpg",
+   "/kT7OsORBt2hpKNrXHLi2yyLWory.jpg",
+   "/lbpbqvBQj3Kr4qyimC4cOmZeQeM.jpg"
   ],
   "assign": [
-   0,
-   11
+   8,
+   6
   ],
   "focus": [
-   0.55,
-   0.15
+   0.50625,
+   0.54453125
   ]
  },
  "last_propose": "2026-10-28",
