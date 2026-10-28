@@ -1,6 +1,22 @@
 {
  "offset": 422725941,
- "pending": [],
+ "pending": [
+  {
+   "type": "tv",
+   "id": 127529,
+   "title": "La Traque dans le sang"
+  },
+  {
+   "type": "movie",
+   "id": 49046,
+   "title": "À l'ouest rien de nouveau"
+  },
+  {
+   "type": "movie",
+   "id": 1171145,
+   "title": "Crime 101"
+  }
+ ],
  "last": {
   "type": "movie",
   "id": 1242419,
@@ -48,6 +64,6 @@
    0.15
   ]
  },
- "last_propose": "2026-10-27",
+ "last_propose": "2026-10-28",
  "photo": null
 }
