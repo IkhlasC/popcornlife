@@ -1,50 +1,35 @@
 {
- "offset": 422725944,
+ "offset": 422725945,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 1032823,
-  "title": "Trap",
-  "year": "2024",
-  "rating": 6.2,
-  "platform": "",
+  "id": 682532,
+  "title": "Le Monde de John",
+  "year": "2021",
+  "rating": 5.4,
+  "platform": "Prime Video",
   "texts": [
-   "Un père emmène sa fille ado à un concert avec 30 000 spectateurs",
-   "Ils se rendent compte que 300 policiers traquent 1 t*eur en série"
+   "Imagine que ton frère de 13 ans dr*gue toute ta famille",
+   "Puis il vous laisse tomber dans un bunker découvert chez vous, sans explication"
   ],
-  "poster_path": "/7JndZXpRQAvI2hQHwkJUlxd38Vu.jpg",
+  "poster_path": "/vwia9Y1jEi9NHqG3rvIklaaVC2I.jpg",
   "candidates": [
-   "/dCgrFY6uTqhEpyhe8MzP1oExyLt.jpg",
-   "/nra0mwygGORHlD0Rd84DhQ9jkdf.jpg",
-   "/p5kpFS0P3lIwzwzHBOULQovNWyj.jpg",
-   "/fSLrQ0TyUYeoF1bhB8g9hORBQZk.jpg",
-   "/qr69tjjXcZLKjqD48aAq6FzBjf9.jpg",
-   "/iAlsYg6dlv1fvOBypM7SldIS1Wl.jpg",
-   "/jpDDNs7QOIZrwUCvoJn2oiS4DAT.jpg",
-   "/g4k5OwR66fEeLCLHN80NfTrxlC2.jpg",
-   "/aGY68eWcfLHZ9kdnkwsrYOyzsaV.jpg",
-   "/kJleMve6S08CFeaIQGzZzz3gAP0.jpg",
-   "/tvGb3t6c5EaFMKuCwTnRcypZn0s.jpg",
-   "/urYVY89hnAfkk4rdiOuuV36N3oU.jpg",
-   "/wG6bfl54uBBbvIYipDKtb2xyFef.jpg",
-   "/tLsieC1axjeg3Q48b2yyQPXt2GB.jpg",
-   "/huCQ6WoozPu5jSpyirJa14Pdu61.jpg",
-   "/5yj3fvMotNN3Fc5NE8KjEkmDEtJ.jpg",
-   "/jGWP0nWeWhSa3r4vustjtr9E9lK.jpg",
-   "/9HlGarlL9T6yEERQ5VvBmdB8XF2.jpg",
-   "/yzqFqCrwf6hER4uXbS3HoCQ32mC.jpg",
-   "/qrCJa7CTZVWB66oPyFS6C4olZ0W.jpg",
-   "/5XizKuGDTcvzgsMTBRhGmTbyBN8.jpg",
-   "/ct2PZjeDNhFByxJgflVYWbJlBIP.jpg",
-   "/aR0gLC7IedBfos7jU02DULHNDmE.jpg",
-   "/cax5gQUcvImCDH2X9bgA9PONLgr.jpg"
+   "/hwrR53NC0rQV24ESbqsQxj4nmht.jpg",
+   "/crs4Qy2qfNMvYzu6TYgkpVKrJp.jpg",
+   "/ky4bep9wQPi225VRBnCySPz0sV.jpg",
+   "/qZQDcvptE7h82ePDztnWVodFysr.jpg",
+   "/jGxdLFLFKTih24zTbezdWLNzcDS.jpg",
+   "/4qI8jP8HL4GVbn7hi1Msr7SplIi.jpg",
+   "/oBG7WtSTtcbZ6Wh8VVErsCA1vTQ.jpg",
+   "/nEFsZkJ2ViFQiWdOGd2W2FbWSO8.jpg",
+   "/7bQXyiSjPdk0iEnj6N6KeqORVk1.jpg"
   ],
   "assign": [
-   4,
-   23
+   0,
+   2
   ],
   "focus": [
-   0.47109375,
+   0.5,
    0.5
   ]
  },
