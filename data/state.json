@@ -1,35 +1,34 @@
 {
- "offset": 422725946,
+ "offset": 422725947,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 68178,
-  "title": "Omar m'a tuer",
-  "year": "2011",
+  "id": 381262,
+  "title": "Au nom de ma fille",
+  "year": "2016",
   "rating": 6.7,
   "platform": "",
   "texts": [
-   "Imagine que ta patronne est retrouvée morte avec ton nom écrit en sang",
-   "Tu comprends mal le français, alors pour tout le monde tu es le coupable",
-   "Tu sors 7 ans plus tard, gracié, mais toujours coupable pour la justice"
+   "Imagine que ta fille de 14 ans est m*rte chez son beau-père",
+   "Son attitude et l'autopsie te troublent, ton combat va durer 27 ans"
   ],
-  "poster_path": "/u1Sw8A9Q0ELant5JuDqfCk9eMNQ.jpg",
+  "poster_path": "/h7BcatAkUC8pc0k5txyNaA3Gtav.jpg",
   "candidates": [
-   "/6VKEXPLseV14mOJIKoxg9UtGtOr.jpg",
-   "/vsvgiJLV9DkksmhhI1kqkeUOuWI.jpg",
-   "/IRpZaDMS1DXzJqYKyaQO3bxcFZ.jpg",
-   "/siNBJVEGHgGDcBC2J15LI14hFGk.jpg",
-   "/b94zPGMcO0wlg8knme4dzrv40uP.jpg"
+   "/rSWv4coph16vM5yOaOFXE1Y6qgY.jpg",
+   "/ooBFAAWDYM6l7w6AHgjeAZCXuiK.jpg",
+   "/hECa9MwY9z0jYN7lYiR8W3Va3GX.jpg",
+   "/gy4D22BlQ9nmrIMhOcfKWsuDAbI.jpg",
+   "/nHV6UgJPpqSIVx3liFFPFIiGXSt.jpg",
+   "/fPFVBQE2hrvt6wbpfrdoqKq6CjZ.jpg",
+   "/qS2KgVgKkuMcfNe7r8d24HLW9xq.jpg"
   ],
   "assign": [
-   1,
    3,
-   0
+   2
   ],
   "focus": [
-   0.42,
-   0.57265625,
-   0.52578125
+   0.66953125,
+   0.24609375
   ]
  },
  "last_propose": "2026-10-29",
