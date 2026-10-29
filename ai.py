@@ -133,6 +133,18 @@ def oral(t):
         t = t[0].lower() + t[1:]
     return t
 
+def corrections_block(limit=8):
+    """Les corrections que la rédactrice a faites elle-même (« slide 2 : sa phrase ») : ce sont ses meilleurs exemples."""
+    try:
+        with open("data/corrections.json", encoding="utf-8") as f: items = json.load(f)
+    except Exception:
+        return ""
+    items = [c for c in items if c.get("avant") and c.get("apres")][-limit:]
+    if not items: return ""
+    lines = [f"- {c.get('film','?')} : le bot avait écrit « {c['avant']} » → elle a écrit « {c['apres']} »" for c in items]
+    return ("\nCORRECTIONS DE LA RÉDACTRICE (PRIORITÉ MAXIMALE : elle a réécrit elle-même ces phrases, c'est EXACTEMENT sa voix. Compare l'avant et l'après : "
+            "longueur, choix des mots, fait concret, ordre de l'information, façon de couper la phrase. Applique la même différence à ta nouvelle écriture, sans recopier) :\n" + "\n".join(lines) + "\n")
+
 def write_post(meta, guidance="", avoid=None):
     kind = "série" if meta["type"] == "tv" else "film"
     extra = ""
@@ -145,6 +157,7 @@ Accroche officielle : {meta['tagline'] or '-'}
 Synopsis : {meta['overview']}
 {extra}
 {EXEMPLES}
+{corrections_block()}
 Écris un carrousel TikTok de 2 OU 3 slides (une phrase chacune). Le nombre de slides dépend de l'intrigue :
 - 2 slides si l'histoire tient en deux coups (situation + retournement). C'est souvent le mieux : DEUX slides bien faites valent mieux que TROIS moyennes. Ne rajoute JAMAIS une 3e slide pour remplir.
 - 3 slides seulement si la 3e apporte un vrai coup de plus (un enjeu, un choix impossible, un détail glaçant). Sinon, 2.
