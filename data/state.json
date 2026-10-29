@@ -1,6 +1,22 @@
 {
  "offset": 422725942,
- "pending": [],
+ "pending": [
+  {
+   "type": "movie",
+   "id": 466420,
+   "title": "Killers of the Flower Moon"
+  },
+  {
+   "type": "tv",
+   "id": 111803,
+   "title": "The White Lotus"
+  },
+  {
+   "type": "movie",
+   "id": 1214931,
+   "title": "Nuremberg"
+  }
+ ],
  "last": {
   "type": "movie",
   "id": 49046,
@@ -48,6 +64,6 @@
    0.54453125
   ]
  },
- "last_propose": "2026-10-28",
+ "last_propose": "2026-10-29",
  "photo": null
 }
