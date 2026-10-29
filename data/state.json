@@ -1,36 +1,35 @@
 {
- "offset": 422725945,
+ "offset": 422725946,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 682532,
-  "title": "Le Monde de John",
-  "year": "2021",
-  "rating": 5.4,
-  "platform": "Prime Video",
+  "id": 68178,
+  "title": "Omar m'a tuer",
+  "year": "2011",
+  "rating": 6.7,
+  "platform": "",
   "texts": [
-   "Imagine que ton frère de 13 ans dr*gue toute ta famille",
-   "Puis il vous laisse tomber dans un bunker découvert chez vous, sans explication"
+   "Imagine que ta patronne est retrouvée morte avec ton nom écrit en sang",
+   "Tu comprends mal le français, alors pour tout le monde tu es le coupable",
+   "Tu sors 7 ans plus tard, gracié, mais toujours coupable pour la justice"
   ],
-  "poster_path": "/vwia9Y1jEi9NHqG3rvIklaaVC2I.jpg",
+  "poster_path": "/u1Sw8A9Q0ELant5JuDqfCk9eMNQ.jpg",
   "candidates": [
-   "/hwrR53NC0rQV24ESbqsQxj4nmht.jpg",
-   "/crs4Qy2qfNMvYzu6TYgkpVKrJp.jpg",
-   "/ky4bep9wQPi225VRBnCySPz0sV.jpg",
-   "/qZQDcvptE7h82ePDztnWVodFysr.jpg",
-   "/jGxdLFLFKTih24zTbezdWLNzcDS.jpg",
-   "/4qI8jP8HL4GVbn7hi1Msr7SplIi.jpg",
-   "/oBG7WtSTtcbZ6Wh8VVErsCA1vTQ.jpg",
-   "/nEFsZkJ2ViFQiWdOGd2W2FbWSO8.jpg",
-   "/7bQXyiSjPdk0iEnj6N6KeqORVk1.jpg"
+   "/6VKEXPLseV14mOJIKoxg9UtGtOr.jpg",
+   "/vsvgiJLV9DkksmhhI1kqkeUOuWI.jpg",
+   "/IRpZaDMS1DXzJqYKyaQO3bxcFZ.jpg",
+   "/siNBJVEGHgGDcBC2J15LI14hFGk.jpg",
+   "/b94zPGMcO0wlg8knme4dzrv40uP.jpg"
   ],
   "assign": [
-   0,
-   2
+   1,
+   3,
+   0
   ],
   "focus": [
-   0.5,
-   0.5
+   0.42,
+   0.57265625,
+   0.52578125
   ]
  },
  "last_propose": "2026-10-29",
