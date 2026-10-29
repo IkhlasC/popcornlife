@@ -1,34 +1,39 @@
 {
- "offset": 422725947,
+ "offset": 422725970,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 381262,
-  "title": "Au nom de ma fille",
-  "year": "2016",
-  "rating": 6.7,
+  "id": 764686,
+  "title": "La Fracture",
+  "year": "2021",
+  "rating": 6.6,
   "platform": "",
   "texts": [
-   "Imagine que ta fille de 14 ans est m*rte chez son beau-père",
-   "Son attitude et l'autopsie te troublent, ton combat va durer 27 ans"
+   "Un couple presque séparé se retrouve aux urgences un soir de manif",
+   "Des Gilets Jaunes blessés arrivent en colère, dehors l'hôpital est encerclé"
   ],
-  "poster_path": "/h7BcatAkUC8pc0k5txyNaA3Gtav.jpg",
+  "poster_path": "/tLiYB8nXz7jvUX1myNTUycfkMxf.jpg",
   "candidates": [
-   "/rSWv4coph16vM5yOaOFXE1Y6qgY.jpg",
-   "/ooBFAAWDYM6l7w6AHgjeAZCXuiK.jpg",
-   "/hECa9MwY9z0jYN7lYiR8W3Va3GX.jpg",
-   "/gy4D22BlQ9nmrIMhOcfKWsuDAbI.jpg",
-   "/nHV6UgJPpqSIVx3liFFPFIiGXSt.jpg",
-   "/fPFVBQE2hrvt6wbpfrdoqKq6CjZ.jpg",
-   "/qS2KgVgKkuMcfNe7r8d24HLW9xq.jpg"
+   "/9bAwRoTEjXf7nnSnFr79jBtMhKw.jpg",
+   "/tnZbdQ9d9gwV39FGuhzCtb1loNK.jpg",
+   "/42WBk4jjcc1iEDATR502SOg7pno.jpg",
+   "/qRihZxOxtsZoaFQZH8raU8neZ8.jpg",
+   "/8Kwokgp72rJat7pA3ZZCJ2vxKKz.jpg",
+   "/jpcQokaY5VOesISMskGAqD18ywe.jpg",
+   "/1V7HXUQaJ36EbcNyRVu8WH214Ql.jpg",
+   "/v6TzC85CIbUzrKd8SWHCqGDqUND.jpg",
+   "/mgr57JDARiELnI0NaKH5ovID5Jc.jpg",
+   "/oz3ENwJ8glZdZgMhjR1DIIFiuNm.jpg",
+   "/dzkICI2lyb36xBZ1Mi8okxuyHco.jpg",
+   "/7KmbyXTJZUJLwbNFe07UcEUbdAQ.jpg"
   ],
   "assign": [
    3,
-   2
+   9
   ],
   "focus": [
-   0.66953125,
-   0.24609375
+   0.69609375,
+   0.5
   ]
  },
  "last_propose": "2026-10-29",
