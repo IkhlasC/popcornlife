@@ -1,67 +1,51 @@
 {
- "offset": 422725942,
- "pending": [
-  {
-   "type": "movie",
-   "id": 466420,
-   "title": "Killers of the Flower Moon"
-  },
-  {
-   "type": "tv",
-   "id": 111803,
-   "title": "The White Lotus"
-  },
-  {
-   "type": "movie",
-   "id": 1214931,
-   "title": "Nuremberg"
-  }
- ],
+ "offset": 422725943,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 49046,
-  "title": "À l'ouest rien de nouveau",
-  "year": "2022",
-  "rating": 7.7,
-  "platform": "Netflix",
+  "id": 1214931,
+  "title": "Nuremberg",
+  "year": "2025",
+  "rating": 7.6,
+  "platform": "Canal+",
   "texts": [
-   "Un jeune soldat allemand part au front avec ses camarades, euphorique",
-   "Mais au fond des tranchées, ils ne se battent plus que pour survivre"
+   "Un psychiatre américain doit examiner 22 nazis avant leur procès",
+   "Mais Göring, le plus haut gradé, joue au chat et à la souris"
   ],
-  "poster_path": "/qS6lVMc53jiEtlOAFSRxFGSa5pN.jpg",
+  "poster_path": "/6iYLH0TjqCyEkCYadpLUMHr9S8J.jpg",
   "candidates": [
-   "/xBwtP27cx8WfjHJVFkpuV6F1RES.jpg",
-   "/zbOlpFM306PHE7EP1OELCH5qSmS.jpg",
-   "/kZZ9JuZ5CMvH0Y2LwboekvXIHqQ.jpg",
-   "/e3h0knvtz4qPg9dwYdWynALrW9s.jpg",
-   "/sRnfZo5QuWo63khQsdEbd4oEvcJ.jpg",
-   "/h30gpZLPTMbQ8qS0nV6pRZo8Yco.jpg",
-   "/tdVlOqviP9LMIXntXZJgu2xnllI.jpg",
-   "/9argwmXnStxPJK1OPAbXeAtqWcA.jpg",
-   "/pT6GpQw3qdEH7fjG0Eiu0kwvART.jpg",
-   "/yFEhiouMzPw5opHgSj1DquiZQUt.jpg",
-   "/2BJQbxxXwHvOjhHespaSV6BghRo.jpg",
-   "/n5lNDFwh3D3HzCwSCuOi6aA3CYy.jpg",
-   "/cEBr4f5hj0dlWSu217craDJJ2Kz.jpg",
-   "/ly4WP4LB63acUCyZAZjVo160FJM.jpg",
-   "/ubaYFJHOfeupvOYhkIBf0kStuMX.jpg",
-   "/lqtwpcqApnsNF9wS7PGmbHtqpix.jpg",
-   "/iF9t7ErELtCZ3VFQKSq2Drqd4DX.jpg",
-   "/d0ym7yrSoeT4WRLwgiJL3Wdnrts.jpg",
-   "/eLr70WonEW2KG8vrsdHS0yFX2VW.jpg",
-   "/nMB3R9witwKPMnkHGonkggLLTuJ.jpg",
-   "/k2HRPmICpaGuS2MVdbQTyCqJlUT.jpg",
-   "/ywLvlcqzGM1E7rV9d8SvmnLxltZ.jpg",
-   "/kT7OsORBt2hpKNrXHLi2yyLWory.jpg",
-   "/lbpbqvBQj3Kr4qyimC4cOmZeQeM.jpg"
+   "/mxKVTRDApGP2vtsruji4cNGXioD.jpg",
+   "/bf5TG9RODkPXmtJSgf8Iymof1wl.jpg",
+   "/xsO1Qgru8sETLTcVla8MrqxOVr0.jpg",
+   "/iwYpdArGgrpFgE2rf6nFAkM1mRG.jpg",
+   "/ygj87qrAEYpAHftOYs4eS62ZK40.jpg",
+   "/7EZKgUeLNRsLFqGQbBwRJUxQN5.jpg",
+   "/sPsWnZEEeLiQZnSIloxSkmgZE8S.jpg",
+   "/8oDpQAvIuysT8rw5ESlP1GzX91d.jpg",
+   "/cMd8O2gFDavXggq0XqM6VRrAcyM.jpg",
+   "/wa0uK4tTdjeSGX2i0hSQPABTHCt.jpg",
+   "/rGrkloxIZMHpIlwCYk8lHFbWrcE.jpg",
+   "/m37G9DwzwDZi79X51nxoRF6N9o4.jpg",
+   "/lKTkyIg2n85BbBok33yF6k7aLWy.jpg",
+   "/c06UTfct0IYw5Im0XwZ4kct47TD.jpg",
+   "/Ajysn2r6bRayTnA35rfBYkAIfXm.jpg",
+   "/pXrCM2vB8GmVuilm555QDyYqaIs.jpg",
+   "/qVQguQY6shMa9xAzG0WjK6dqmn3.jpg",
+   "/mH9VNgWacHLSuQbbKqZCgMQhmcY.jpg",
+   "/2TzAXNYv2yZvKa5x2uJBiIr9jDx.jpg",
+   "/uV8zgR1MK38fHbDxpyHUycFbc6w.jpg",
+   "/v3YmdR0T1mRhAo71TsAhTVEWMMw.jpg",
+   "/bSTm9e2v3qvTzj90S91NI8E0t3B.jpg",
+   "/wVZv66irT4FxGbPAQNoMH0UeLFn.jpg",
+   "/tophDkACtdKFvHjMuVJdAIvYs2x.jpg"
   ],
   "assign": [
-   8,
-   6
+   3,
+   11
   ],
   "focus": [
-   0.50625,
-   0.54453125
+   0.50234375,
+   0.5
   ]
  },
  "last_propose": "2026-10-29",
