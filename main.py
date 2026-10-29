@@ -162,6 +162,14 @@ def _render_slide(last, n):
     render.text_slide(last["texts"][n - 1], p, n, im, last["focus"][n - 1], last=(n == len(last["texts"])), custom=custom, zoom=zoom)
     return p
 
+def _remember_correction(last, n, old, new):
+    """Garde « ce que le bot avait écrit » → « ce qu'elle a écrit » : le bot s'en sert ensuite comme exemples de sa voix."""
+    if not old or not new or old.strip() == new.strip(): return
+    items = load("corrections", [])
+    items = [c for c in items if not (c.get("film") == last.get("title") and c.get("slide") == n)]   # une seule version par slide : la dernière
+    items.append({"film": last.get("title", ""), "slide": n, "avant": old, "apres": new, "date": datetime.date.today().isoformat()})
+    save("corrections", items[-40:])
+
 def _do_zoom(last, n, direction):
     im, custom = _slide_image(last, n)
     if im is None:
@@ -219,7 +227,8 @@ def apply_actions(actions):
                 meta = tmdb.details(last["type"], last["id"])
                 ins = str(a.get("instruction") or "").strip()
                 if a.get("exact") and ins:                  # sa propre phrase : on l'affiche telle quelle
-                    last["texts"][n - 1] = ai.oral(ins.strip('"«» '))
+                    old = last["texts"][n - 1]; last["texts"][n - 1] = ai.oral(ins.strip('"«» '))
+                    _remember_correction(last, n, old, last["texts"][n - 1])
                 else:
                     last["texts"][n - 1] = ai.rewrite_slide(meta, last["texts"], n, ins)
                 touched.append(n)
@@ -361,7 +370,11 @@ def handle(u, state):
 
 def poll():
     state = load("state", {"offset": 0, "pending": [], "last": None})
-    for u in tg.updates(state["offset"]):
+    ups = tg.updates(state["offset"])
+    print(f"[poll] version maj21b - offset {state.get('offset')} - {len(ups)} message(s) a lire - carrousel en cours : {bool((state.get('last') or {}).get('texts'))}", flush=True)
+    for u in ups:
+        mm_ = u.get("message") or {}
+        print(f"[poll] message {u['update_id']} : {str(mm_.get('text') or ('<photo>' if mm_.get('photo') or mm_.get('document') else u.keys()))[:80]}", flush=True)
         state = load("state", state); state["offset"] = u["update_id"] + 1; save("state", state)
         try:
             handle(u, load("state", state))
