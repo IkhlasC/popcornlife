@@ -86,10 +86,19 @@ A) TA VOIX PopcornLife (priorité : c'est le style du compte, majuscule au débu
 - Carry-On, 361 K : « Un agent de sécurité à l'aéroport trouve une oreillette à côté d'une valise » / « Pour sauver sa petite amie, il va devoir faire tout ce que lui dit la voix »
 - The Rental, 394 K : « Un couple loue un airbnb dans une maison isolée » / « Très vite, ils se rendent compte que la maison est truffée de caméras »
 
-B) Idées à reprendre d'un très grand compte du même concept (@alorsonregardequoi, jusqu'à 2,7 M de vues) : des détails encore plus concrets, des phrases coupées qui obligent à swiper.
-- « la nuit tombe, alors le chef d'une station de ski décide d'arrêter les télésièges pendant 1 semaine, mais… » / « sans le savoir, il oublie 3 amis, suspendus en hauteur, la nuit dans le froid… »
-- « une femme se retrouve seule sur une surface glissante avec un trou sans fin… » / « un mouvement de travers, elle tombe… elle bouge, elle tombe… » (le même film reste à 309 K quand le texte dit seulement « dans cette position » : le détail concret gagne)
-- « un homme assiste à un procès pour m*urtre en tant que membre du jury » / « mais, en écoutant les preuves, il comprend qu'il est lui-même responsable du crime »
+B) Idées d'un très grand compte du même concept (@alorsonregardequoi, jusqu'à 2,7 M de vues) : phrases coupées qui obligent à swiper, MAIS seulement quand ce qui est coupé est CONCRET. Une phrase coupée vague échoue (leur version de Carry-On : « sous la menace d'un passager mystérieux… / forcé de laisser passer une valise dangereuse » = 15 200 vues ; celle de la rédactrice, avec l'oreillette et la petite amie en danger = 361 000).
+- « la nuit tombe, alors le chef d'une station de ski décide d'arrêter les télésièges pendant 1 semaine, mais… » / « sans le savoir, il oublie 3 amis, suspendus en hauteur, la nuit dans le froid… » (2,7 M)
+- « imaginez louer un airbnb, et vous trouvez un sous-sol caché… » (2,6 M) : un lieu du quotidien + un objet précis
+- « un homme assiste à un procès pour m*urtre en tant que membre du jury » / « mais, en écoutant les preuves, il comprend qu'il est lui-même responsable du crime » (2,3 M)
+- « une femme se retrouve seule sur une surface glissante avec un trou sans fin… » / « un mouvement de travers, elle tombe… elle bouge, elle tombe… »
+
+CE QUE MONTRENT LES VRAIES STATISTIQUES (467 publications relevées) :
+- Les textes de la rédactrice qui ont le plus marché (3,3 M, 2,1 M, 950 K, 895 K, 823 K) ont presque tous 2 slides de texte : un fait de la vie de tous les jours qui dérape, puis un RETOURNEMENT net ou une INJUSTICE. Trois slides marchent aussi (From, 747 K) quand chaque slide apporte un fait nouveau. Jamais plus de 3 slides de texte.
+- Un CHIFFRE ou un OBJET précis dans la slide 1 aide (médiane x1,5 à x1,8) : 13 ans, 30 000 spectateurs, 2h17, une oreillette, un bunker.
+- La slide 2 qui commence par « Très vite… », « Plus le temps passe… », « Il se rend compte que… » ou « Mais… » fait presque 2 fois mieux.
+- Mettre le lecteur dans la situation (« Imagine… ») marche SEULEMENT avec un danger précis et un lieu du quotidien (un airbnb, un concert, la chambre de ton enfant). « Imagine que tu es piégé dans un couloir sans fin » est trop vague, « Imagine que ton mari est retrouvé m*rt dans la neige » aussi.
+- Les mots génériques sont mauvais : « cauchemar », « mystérieux », « tout bascule », « quelque chose cloche ». Les mots concrets sont bons : un objet, un lieu, un chiffre, un lien familial.
+- Les commentaires explosent avec : une injustice (« personne ne le croit »), une question morale qui donne envie de répondre « moi à sa place je… » (« Jusqu'où irais-tu ? », « qui mérite de survivre ? »), ou une zone d'ombre qui pousse à demander « pourquoi ? ». Termine donc sur un dilemme, une injustice ou un détail qui demande une explication.
 
 C) ACCROCHE « IMAGINE… » (pour que le lecteur se sente concerné ; à utiliser quand l'occasion s'y prête) :
 - « Imagine que ton frère t'enferme dans sa cave pour 3 jours » / « Alors que ta famille te cherche, tu entends ses pas au-dessus de toi »
@@ -133,6 +142,62 @@ def oral(t):
         t = t[0].lower() + t[1:]
     return t
 
+REFERENCES_REDACTRICE = [
+    ("À l'ouest, rien de nouveau",
+     ["Un jeune soldat allemand part au front avec ses camarades, euphorique", "Mais au fond des tranchées, ils ne se battent plus que pour survivre"],
+     ["Cet adolescent a menti à ses parents pour pouvoir partir à la guerre avec ses copains", "Il pensait qu'ils allaient tous s'amuser pendant quelques semaines avant de gagner la guerre...", "L'histoire en a décidé autrement"]),
+    ("Reconnu coupable",
+     ["Un détective accusé d'avoir t*é sa femme est jugé par une IA", "Ce tribunal expéditif, c'est lui qui a grandement aidé à le créer", "Il a 90 minutes pour se défendre sinon l'IA le condamne à m*rt"],
+     ["Un homme accusé d'avoir t*é sa femme est jugé par une IA.", "C'est lui qui a créé ce tribunal.", "Il a 90 minutes pour se défendre, sinon l'IA le t*e."]),
+    ("Si tu m'écoutes",
+     ["Imagine que tu envoies tes confessions en vocal à ta sœur décédée", "Mais ses vocaux finissent chez un inconnu, qui tombe sous son charme"],
+     ["Imagine que ta sœur est morte. Mais elle te manque tellement que tu continues de lui laisser des messages vocaux.", "Le truc, c'est que maintenant, ils arrivent sur le répondeur d'un inconnu", "Par curiosité, il écoute tous tes messages et tombe amoureux de toi.", "Il force carrément le destin et décide de te rencontrer sans te dire qui il est."]),
+    ("Nobody",
+     ["Un père ne réagit pas quand deux cambrioleurs entrent chez lui", "Son fils le prend pour un lâche, mais lui sait t*er"],
+     ["Cet homme ne réagit pas quand deux cambrioleurs rentrent chez lui.", "Du coup, son fils le prend pour un lâche.", "Il ne sait pas que son père est un a*sassin redoutable."]),
+    ("Exit 8",
+     ["Imagine que tu es piégé dans un couloir de métro sans fin", "Si tu rates une seule anomalie, tu reviens au point de départ"],
+     ["Imagine que tu prends le métro, mais après quelques minutes, tu te rends compte que la station est vide.", "Tu te rends compte que tu es dans un jeu. Et qu'à chaque intersection, il faut faire un choix.", "Si tu te trompes, tu reviens au point de départ."]),
+    ("Nuremberg",
+     ["Un psychiatre américain doit examiner 22 nazis avant leur procès", "Mais Göring, le plus haut gradé, joue au chat et à la souris"],
+     ["Imagine que tu dois examiner psychologiquement le bras droit d'Hitler avant son procès.", "Mais tu te rends compte que psychologiquement, il est tout à fait normal.", "Tu te demandes s'il mérite vraiment la peine de mort."]),
+    ("Trap (3,3 M de vues)",
+     ["Un père emmène sa fille ado à un concert avec 30 000 spectateurs", "Ils se rendent compte que 300 policiers traquent 1 t*eur en série"],
+     ["Ce t*eur en série se rend à un concert avec sa fille", "Il se rend compte que le concert tout entier est un piège pour lui"]),
+    ("Le Monde de John (2,1 M de vues ; elle préfère sa version)",
+     ["Imagine que ton frère de 13 ans dr*gue toute ta famille", "Puis il vous laisse tomber dans un bunker découvert chez vous, sans explication"],
+     ["Un garçon de 13 ans découvre un bunker à côté de sa maison", "Il décide de dr*guer toute sa famille et les enferme dedans"]),
+    ("Omar m'a tuer (952 K de vues)",
+     ["Imagine que ta patronne est retrouvée morte avec ton nom écrit en sang", "Tu comprends mal le français, alors pour tout le monde tu es le coupable", "Tu sors 7 ans plus tard, gracié, mais toujours coupable pour la justice"],
+     ["Une vieille dame écrit le nom de son meurtrier avant de mourir", "Omar, son jardinier, est jugé coupable, pourtant aucune preuve ne prouve sa culpabilité"]),
+    ("Carry-On (361 K de vues)",
+     ["La veille de Noël, un agent de sécurité est forcé par un inconnu…", "de laisser passer un objet dangereux, alors qu'il court pour l'arrêter"],
+     ["Un agent de sécurité à l'aéroport trouve une oreillette à côté d'une valise", "Pour sauver sa petite amie, il va devoir faire tout ce que lui dit la voix"]),
+    ("Gone Girl",
+     ["Le jour de leurs 5 ans de mariage, sa femme disparaît", "Tout l'accuse, alors il enquête et découvre qu'elle lui cachait beaucoup de choses"],
+     ["Une femme disparaît dans d'étranges circonstances et son mari est le suspect n°1", "Il n'imagine pas le vaste piège qui va se refermer sur lui"]),
+    ("Speak No Evil",
+     ["Imagine que tu passes le week-end chez une famille rencontrée en vacances", "Leur maison est parfaite, mais très vite le week-end devient un cauchemar"],
+     ["2 couples d'inconnus sympathisent et l'un invite l'autre pour le week-end", "Pendant le week-end les hôtes commencent à être très malséants"]),
+    ("Downsizing (241 K de vues)",
+     ["Pour fuir son stress à Omaha, Paul accepte de mesurer 12 cm", "Sa femme et lui quittent tout, convaincus d'avoir une vie meilleure"],
+     ["Il voulait une meilleure vie… il ne savait pas ce qui l'attendait", "Il décide de se faire rétrécir pour faire 12 cm"]),
+    ("Évanouis",
+     None,
+     ["Imagine que tu te lèves et que tu te rends compte que ton enfant de 8 ans n'est plus dans son lit.", "Quand tu regardes les caméras, tu te rends compte qu'il s'est enfui en courant à 2h17.", "Et la police t'annonce que tous les enfants de sa classe ont fait exactement la même chose à la même heure."]),
+]
+
+def references_block():
+    """Les textes que la rédactrice aurait écrits à la place du bot : c'est sa vraie voix (à imiter dans le rythme, pas à recopier)."""
+    out = ["\nTEXTES DE RÉFÉRENCE DE LA RÉDACTRICE (PRIORITÉ MAXIMALE : c'est EXACTEMENT ce qu'elle veut. Pour certains films, tu vois ce que le bot avait écrit (À ÉVITER) puis sa version (À IMITER). Observe la différence et reproduis-la : "
+           "le fait précis et un peu choquant dès la slide 1 (il a MENTI à ses parents, il ne réagit PAS, ta sœur est MORTE), une seule information nouvelle par slide, des liens parlés (« Du coup », « Le truc, c'est que », « Par curiosité », « Quand tu regardes… »), "
+           "des détails chiffrés (2h17, 8 ans, 90 minutes), souvent le « tu » du début à la fin, et une DERNIÈRE SLIDE qui touche (menace, ironie, dilemme moral ou conséquence) au lieu d'expliquer) :"]
+    for film, bot, her in REFERENCES_REDACTRICE:
+        out.append(f"* {film}")
+        if bot: out.append("   ❌ bot : " + " / ".join(bot))
+        out.append("   ✅ elle : " + " / ".join(her))
+    return "\n".join(out) + "\n"
+
 def corrections_block(limit=8):
     """Les corrections que la rédactrice a faites elle-même (« slide 2 : sa phrase ») : ce sont ses meilleurs exemples."""
     try:
@@ -157,7 +222,7 @@ Accroche officielle : {meta['tagline'] or '-'}
 Synopsis : {meta['overview']}
 {extra}
 {EXEMPLES}
-{corrections_block()}
+{references_block()}{corrections_block()}
 Écris un carrousel TikTok de 2 OU 3 slides (une phrase chacune). Le nombre de slides dépend de l'intrigue :
 - 2 slides si l'histoire tient en deux coups (situation + retournement). C'est souvent le mieux : DEUX slides bien faites valent mieux que TROIS moyennes. Ne rajoute JAMAIS une 3e slide pour remplir.
 - 3 slides seulement si la 3e apporte un vrai coup de plus (un enjeu, un choix impossible, un détail glaçant). Sinon, 2.
@@ -181,6 +246,9 @@ MÉTHODE (c'est ce qui décide de la qualité) :
 3. Garde pour chaque slide la plus concrète, la plus choquante et la plus intrigante. Si la version (g) « Imagine… » est la plus forte pour cette œuvre (et que ce n'est pas forcé), prends-la.
 Test final pour chaque phrase : (1) peut-on la coller telle quelle sur un autre film ? Alors elle est trop vague, recommence. (2) la slide 1 commence-t-elle par un décor ou un contexte (« Dans un monde… », « En pleine… ») ? Réécris-la avec une personne. (3) contient-elle un jugement ou une conclusion ? Supprime-le. (4) donne-t-elle envie de connaître la suite ? Sinon, recommence.
 INTERDIT : « quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu vas adorer », « d'un côté… de l'autre », « impossible de lâcher », « leurs vacances tournent au drame » et autres formules vagues, les points d'exclamation, les emojis, les superlatifs vides, un nom d'acteur. Une question n'est autorisée qu'en slide 2 (« Jusqu'où irais-tu… ? »), jamais en slide 1 ni 3.
+
+CE QUI DÉRANGE, À PETITES GOUTTES (règle de la rédactrice) : n'écris JAMAIS « il cache un secret », « elle cache des choses », « un secret terrible », « quelque chose de dérangeant », « un passé sombre », « un truc qu'on ne devrait pas savoir ». Ces formules ne disent rien et n'intriguent pas. À la place, NOMME le fait dérangeant, précis et concret, mais UN SEUL par slide, sans jamais révéler la fin. Exemples de la différence : « sa femme lui cachait beaucoup de choses » ❌ → « il découvre qu'elle a ouvert un compte à son nom sans le lui dire » ✅ ; « ce père a un passé sombre » ❌ → « ce père de famille tranquille a déjà t*é des hommes » ✅ ; « ce voisin si gentil cache un secret » ❌ → « ce voisin si gentil garde les clés de toutes les maisons du quartier » ✅ (ces exemples sont inventés pour montrer la méthode : ne les réutilise pas ; n'invente jamais un fait, prends le plus précis du synopsis ou de ce que tu connais avec certitude).
+Chaque slide apporte UNE information nouvelle, plus dérangeante que la précédente.
 
 RÈGLE SPOILER : tu peux raconter le point de départ et la première grande bascule de l'histoire (ce que dirait le résumé au dos du film), mais JAMAIS le retournement final, la fin, qui meurt à la fin, ni l'identité d'un personnage caché.
 Reste fidèle au synopsis fourni : n'invente aucun fait.
@@ -206,6 +274,9 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
         if hard: problems.append("mots trop soutenus ou trop longs (" + ", ".join(sorted(set(hard))) + ") : remplace-les par des mots simples et courts")
         vague = re.compile(r"impossible de (le |la |les |s'en )?(l[âa]cher|quitter|d[ée]crocher)|d'un c[ôo]t[ée]|de l'autre|tout (bascule|change)|rien ne sera plus|plus jamais comme|quelque chose cloche|personne ne s'y attend|tu vas adorer|tournent? au drame", re.I)
         if re.match(r"(?i)^(dans un (monde|futur|univers)|en pleine|dans un pays|dans une soci[ée]t[ée])", s[0].strip()): problems.append("la slide 1 commence par un décor : commence par une personne dans une situation")
+        secret = re.compile(r"cach(e|ent|er|ait|aient|é|ée|és|ées) (un|une|des|plein|beaucoup|quelque|tout|bien|de) ?(de )?(secrets?|choses?|trucs?|chose|dérangeant|lourd|sombre|terrible|mensonges?)|un secret (terrible|sombre|inavouable|dérangeant|lourd)|secrets? (terribles?|sombres?|inavouables?|dérangeants?)|quelque chose de (terrible|dérangeant|sombre|inquiétant|louche|étrange)|passé sombre|\bcauchemar|myst[ée]rieu[xs]e?s?\b|ne devrait pas (savoir|voir)", re.I)
+        bad_s = [x for x in s if secret.search(x)]
+        if bad_s: problems.append("formule floue (« cache un secret », « cauchemar », « mystérieux », « quelque chose de dérangeant ») dans : " + " / ".join(bad_s) + ". NOMME le fait précis et concret qui dérange (un objet, un geste, un chiffre), sans révéler la fin")
         bad = [x for x in s if vague.search(x)]
         if bad: problems.append("formule vague ou conclusion interdite dans : " + " / ".join(bad) + " (raconte un fait précis à la place)")
         if avoid and oral(s[0]) in [x.strip() for x in avoid]: problems.append("la slide 1 reprend un texte refusé")
