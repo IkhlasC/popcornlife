@@ -1,67 +1,43 @@
 {
- "offset": 422725995,
- "pending": [
-  {
-   "type": "tv",
-   "id": 220542,
-   "title": "Les Carnets de l'apothicaire"
-  },
-  {
-   "type": "movie",
-   "id": 1054867,
-   "title": "Une Bataille après l'autre"
-  },
-  {
-   "type": "movie",
-   "id": 1122573,
-   "title": "Les Spécialistes"
-  }
- ],
+ "offset": 422725996,
+ "pending": [],
  "last": {
-  "type": "movie",
-  "id": 496243,
-  "title": "Parasite",
-  "year": "2019",
-  "rating": 8.5,
-  "platform": "",
+  "type": "tv",
+  "id": 249042,
+  "title": "Adolescence",
+  "year": "2025",
+  "rating": 7.8,
+  "platform": "Netflix",
   "texts": [
-   "Ce chômeur se fait passer pour prof d'anglais chez une famille riche",
-   "Très vite, il fait embaucher toute sa famille sans que les Park le sachent"
+   "Imagine que la police arrête ton fils de 13 ans chez vous à l'aube",
+   "Il est accusé d'avoir t*é une fille de sa classe. Tu le crois coupable ?"
   ],
-  "poster_path": "/7hLSzZX2jROmEXz2aEoh6JKUFy2.jpg",
+  "poster_path": "/v2Hb2UhkN73OEUd3fsmQOtiZqqs.jpg",
   "candidates": [
-   "/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg",
-   "/8eihUxjQsJ7WvGySkVMC0EwbPAD.jpg",
-   "/cM0pnzCF6T7u1AAEYgyCG6Sua6k.jpg",
-   "/ny5aCtglk2kceGAuAdiyqbhBBAf.jpg",
-   "/wCuUKiRaz0wEESsYqmQy005xvTE.jpg",
-   "/p0giX7IG8hXv6lr1KE3jFn0VqXA.jpg",
-   "/25tz24hlrqAbjhpHx1FhmfPH8Qf.jpg",
-   "/xOXIXRH6F2CDeEPwVSBe6y2v25V.jpg",
-   "/uG3m6jBwU8jUkt0jbUOj8Vb2Y11.jpg",
-   "/2MBBuXBE26AjRRTmj8poSFHLhhS.jpg",
-   "/hAtRKAi24kw4wyGB2IyvmFdVGHC.jpg",
-   "/ApiBzeaa95TNYliSbQ8pJv4Fje7.jpg",
-   "/2MtpR7lLmLKfH1v5Etniucu18Wm.jpg",
-   "/x6skktR5OS99lAX4JhmjCQYq490.jpg",
-   "/fjPhDdmJJNK68cx19X0QQuNuHNY.jpg",
-   "/cI1RBfqXbWaITTjcKGYLhd9F083.jpg",
-   "/1dVsHtkf8tNNwSfIQSTLnv741AJ.jpg",
-   "/6LVpyYSTQdyRtJKOv8CtY4RW6us.jpg",
-   "/zujv4xmQrwDGdJ4YGl9TxUnrFcF.jpg",
-   "/oa1NfODv0U1cz0jtgmKccv2bmAv.jpg",
-   "/bERQoM81bIewmVbffRYAVnUoEqP.jpg",
-   "/otp5YXXxHvPR9z26RXgW0lAo10w.jpg",
-   "/8K001T1pcEDQSOYwEI1wKps1qcA.jpg",
-   "/fsTiM8pMGex2V8uiJpUxu2rR1i3.jpg"
+   "/llZodlkVKRkTdUsiRxvn8h80hhx.jpg",
+   "/87SmEt5cI4iiVw860ew21xgRogH.jpg",
+   "/m4BumioMHsq0Qfa5KoN7MA2vXmu.jpg",
+   "/pCT3WLNrBBQeY7DRMw2CD1Pii05.jpg",
+   "/ismIWl5aHXoJuDs9GxYyH1g7mn6.jpg",
+   "/eFsS6vnEdR1cIoFFVOfLopqJWrG.jpg",
+   "/9SUiZcIuDa8SxwrDsjtm1JEgjR4.jpg",
+   "/t3GpBAtJjQLJcipSN5wv9OqJNHr.jpg",
+   "/tOe1qaOmwm2eLwH7zgzDfA4cvee.jpg",
+   "/ae3EWmfOT1ykM4ZBmK9CWDIjHo7.jpg",
+   "/9Q1wGIRefLTAondBT1Fqp6XQpVP.jpg",
+   "/sTSzYIE9itbGWvgrElrTco7zZBC.jpg",
+   "/6wXWA8Y6kcNI9ADl4FQvN5Rh5WT.jpg",
+   "/5oQWq9B5fSDgA57DTLm0EchFaVA.jpg",
+   "/zSmGA4ZXssYr40d15PedH5PeRrM.jpg",
+   "/ytfAsDAlAXs3EJwpygiKIJFimif.jpg"
   ],
   "assign": [
-   22,
-   10
+   2,
+   0
   ],
   "focus": [
-   0.50078125,
-   0.546875
+   0.3,
+   0.5
   ]
  },
  "last_propose": "2026-10-30",
