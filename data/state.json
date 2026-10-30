@@ -1,22 +1,6 @@
 {
- "offset": 422725982,
- "pending": [
-  {
-   "type": "tv",
-   "id": 196322,
-   "title": "Dark Matter"
-  },
-  {
-   "type": "movie",
-   "id": 1168190,
-   "title": "Team Démolition"
-  },
-  {
-   "type": "movie",
-   "id": 792307,
-   "title": "Pauvres créatures"
-  }
- ],
+ "offset": 422725994,
+ "pending": [],
  "last": {
   "type": "movie",
   "id": 496243,
@@ -25,8 +9,8 @@
   "rating": 8.5,
   "platform": "",
   "texts": [
-   "Une famille au chômage observe de près la vie d'une famille richissime",
-   "Mais un incident les mêle, sans le savoir, à une étrange histoire"
+   "Ce chômeur se fait passer pour prof d'anglais chez une famille riche",
+   "Très vite, il fait embaucher toute sa famille sans que les Park le sachent"
   ],
   "poster_path": "/7hLSzZX2jROmEXz2aEoh6JKUFy2.jpg",
   "candidates": [
@@ -57,11 +41,11 @@
   ],
   "assign": [
    22,
-   1
+   10
   ],
   "focus": [
    0.50078125,
-   0.47734375
+   0.546875
   ]
  },
  "last_propose": "2026-10-30",
