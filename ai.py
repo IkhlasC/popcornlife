@@ -210,6 +210,24 @@ def corrections_block(limit=8):
     return ("\nCORRECTIONS DE LA RÉDACTRICE (PRIORITÉ MAXIMALE : elle a réécrit elle-même ces phrases, c'est EXACTEMENT sa voix. Compare l'avant et l'après : "
             "longueur, choix des mots, fait concret, ordre de l'information, façon de couper la phrase. Applique la même différence à ta nouvelle écriture, sans recopier) :\n" + "\n".join(lines) + "\n")
 
+def precision_check(meta, s):
+    """Deuxième regard : chaque phrase contient-elle un fait précis qu'on peut filmer ? Renvoie la liste des phrases trop floues avec une piste."""
+    num = "\n".join(f"slide {i+1} : {x}" for i, x in enumerate(s))
+    prompt = f"""Œuvre : {meta['title']} ({meta['year']}). Synopsis : {meta['overview']}
+Voici les slides d'un carrousel TikTok :
+{num}
+
+Pour CHAQUE slide, réponds à la question : contient-elle un fait précis qu'une caméra pourrait montrer (un geste, un objet, un chiffre, une phrase prononcée, une règle, un lieu précis) et qui fait ressentir quelque chose (peur, malaise, tristesse, injustice, curiosité) ?
+Elle est "vague" si elle décrit un état, un sentiment ou une situation abstraite (« il ne la connaissait pas », « moins de chances de rentrer chez eux », « tout se complique », « la situation devient dangereuse », « il cache des choses », « tout bascule ») au lieu d'un fait. Le contexte nécessaire à la compréhension (qui, où, la règle) n'est PAS vague.
+Si une slide est vague, propose dans "fait_precis" le fait concret le plus fort que tu connais avec CERTITUDE de cette œuvre (scène, objet, chiffre, règle), sans révéler la fin. N'invente rien.
+JSON : {{"slides":[{{"vague":false,"raison":"","fait_precis":""}}]}} (une entrée par slide, dans l'ordre)"""
+    r = as_dict(ask_json(prompt, max_tokens=700))
+    out = []
+    for i, e_ in enumerate(as_list(r.get("slides"))[:len(s)]):
+        if e_.get("vague"):
+            out.append((i, s[i], str(e_.get("fait_precis") or "").strip()))
+    return out
+
 def write_post(meta, guidance="", avoid=None):
     kind = "série" if meta["type"] == "tv" else "film"
     extra = ""
@@ -247,6 +265,12 @@ MÉTHODE (c'est ce qui décide de la qualité) :
 Test final pour chaque phrase : (1) peut-on la coller telle quelle sur un autre film ? Alors elle est trop vague, recommence. (2) la slide 1 commence-t-elle par un décor ou un contexte (« Dans un monde… », « En pleine… ») ? Réécris-la avec une personne. (3) contient-elle un jugement ou une conclusion ? Supprime-le. (4) donne-t-elle envie de connaître la suite ? Sinon, recommence.
 INTERDIT : « quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu vas adorer », « d'un côté… de l'autre », « impossible de lâcher », « leurs vacances tournent au drame » et autres formules vagues, les points d'exclamation, les emojis, les superlatifs vides, un nom d'acteur. Une question n'est autorisée qu'en slide 2 (« Jusqu'où irais-tu… ? »), jamais en slide 1 ni 3.
 
+UN FAIT QU'ON PEUT FILMER (règle n°1 de la rédactrice) : chaque slide doit contenir un FAIT PRÉCIS qu'une caméra pourrait montrer : un geste, un objet, un chiffre, une phrase prononcée, une règle, un lieu précis. Les phrases qui décrivent un ÉTAT ou un SENTIMENT abstrait sont refusées : « il ne la connaissait pas », « tout est faux », « ils ont de moins en moins de chances de rentrer chez eux », « la situation devient dangereuse », « il comprend que quelque chose ne va pas ». Remplace-les par ce qui se passe VRAIMENT dans le film. Prends, dans l'ordre, la scène ou le détail le plus choquant, le plus triste ou le plus inquiétant que tu connais avec certitude (même s'il n'est pas dans le synopsis), à condition qu'il ne révèle pas la fin. Le fait précis doit faire ressentir quelque chose : peur, malaise, tristesse, injustice, curiosité qui brûle.
+Exemples de la différence (tirés de vrais films : ne les réutilise que pour ces films) :
+- Gone Girl : « en enquêtant, il se rend compte qu'il ne la connaissait pas » ❌ → « il découvre dans son journal intime qu'elle écrivait avoir peur de lui » ✅
+- The Visit (deux enfants chez leurs grands-parents) : « plus les jours passent, moins ils ont de chances de rentrer chez eux » ❌ → « mamie les prévient : ne sortez jamais de votre chambre après 21h30 » ✅
+- Un détail vague (« quelque chose de louche chez les voisins ») ❌ → un acte (« les voisins enterrent un sac dans leur jardin à 3h du matin ») ✅
+
 CE QUI DÉRANGE, À PETITES GOUTTES (règle de la rédactrice) : n'écris JAMAIS « il cache un secret », « elle cache des choses », « un secret terrible », « quelque chose de dérangeant », « un passé sombre », « un truc qu'on ne devrait pas savoir ». Ces formules ne disent rien et n'intriguent pas. À la place, NOMME le fait dérangeant, précis et concret, mais UN SEUL par slide, sans jamais révéler la fin. Exemples de la différence : « sa femme lui cachait beaucoup de choses » ❌ → « il découvre qu'elle a ouvert un compte à son nom sans le lui dire » ✅ ; « ce père a un passé sombre » ❌ → « ce père de famille tranquille a déjà t*é des hommes » ✅ ; « ce voisin si gentil cache un secret » ❌ → « ce voisin si gentil garde les clés de toutes les maisons du quartier » ✅ (ces exemples sont inventés pour montrer la méthode : ne les réutilise pas ; n'invente jamais un fait, prends le plus précis du synopsis ou de ce que tu connais avec certitude).
 Chaque slide apporte UNE information nouvelle, plus dérangeante que la précédente.
 
@@ -259,7 +283,7 @@ TEST DE COMPRÉHENSION avant de répondre : un inconnu qui ne sait rien du film 
 JSON : {{"contexte_cle":"","intrigue_principale":"","element_extraordinaire":"","question_curiosite":"","brouillons_s1":["","","","","",""],"brouillons_s2":["","","","",""],"emotion_finale":"peur|tristesse|surprise|curiosité","nb_slides":2,"s1":"","s2":"","s3":"","hashtags":["#..."],"spoiler_risk":false}}
 Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retournement."""
     note = ""
-    for _ in range(3):
+    for attempt in range(3):
         r = as_dict(ask_json(base + note, max_tokens=3000))
         s = [str(r.get("s1", "")).strip(), str(r.get("s2", "")).strip(), str(r.get("s3", "")).strip()]
         if not s[2] or int(r.get("nb_slides") or 3) == 2: s = s[:2]
@@ -280,6 +304,12 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
         bad = [x for x in s if vague.search(x)]
         if bad: problems.append("formule vague ou conclusion interdite dans : " + " / ".join(bad) + " (raconte un fait précis à la place)")
         if avoid and oral(s[0]) in [x.strip() for x in avoid]: problems.append("la slide 1 reprend un texte refusé")
+        if not problems and attempt < 2:
+            try:
+                for i, x, idee in precision_check(meta, s):
+                    problems.append(f"la slide {i+1} (« {x} ») est trop floue : elle décrit un état ou un sentiment au lieu d'un FAIT précis qu'on peut filmer" + (f". Piste : {idee}" if idee else "") + ". Remplace-la par le fait le plus précis, choquant ou triste que tu connais avec certitude, sans révéler la fin")
+            except Exception:
+                pass
         if not problems:
             tags = r.get("hashtags", [])
             tags = [t if t.startswith("#") else "#" + t for t in tags]
