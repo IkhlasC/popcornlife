@@ -1,72 +1,44 @@
 {
- "offset": 422726000,
- "pending": [
-  {
-   "type": "movie",
-   "id": 1306368,
-   "title": "The Rip"
-  },
-  {
-   "type": "movie",
-   "id": 776503,
-   "title": "CODA"
-  },
-  {
-   "type": "movie",
-   "id": 466420,
-   "title": "Killers of the Flower Moon"
-  }
- ],
+ "offset": 422726001,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 1368166,
-  "title": "La Femme de ménage",
-  "year": "2025",
-  "rating": 7.3,
-  "platform": "Canal+",
+  "id": 523936,
+  "title": "Méandre",
+  "year": "2021",
+  "rating": 5.8,
+  "platform": "",
   "texts": [
-   "imagine que t’es femme de ménage pour un couple hyper riche",
-   "le truc c’est que tu te rends compte que la porte de ta chambre se ferme à clef que de l’extérieur"
+   "Cette femme se réveille dans un tube rempli de pièges mortels",
+   "Le truc, c'est qu'elle meurt si elle arrête d'avancer"
   ],
-  "poster_path": "/naFRoBTiHycN71wO02BA1NyLJ28.jpg",
+  "poster_path": "/7BxOvgGtwbu2FK7gAivBJRc2nfs.jpg",
   "candidates": [
-   "/zTnAnYIn0Iv3cn0ZHlzLhou3ybm.jpg",
-   "/sK3z0Naed3H1Wuh7a21YRVMxYqt.jpg",
-   "/8lgSWWrpS75Hwdm0TZlL1dK7VDD.jpg",
-   "/OUEBvYMdrqrTgcJAhrRBef8Gjg.jpg",
-   "/gEHDCtR9PNZvLG70sFBYJCFznRY.jpg",
-   "/bEcRxVHyCmwTYYlVVLLgGz2GdWW.jpg",
-   "/wkBM1RsOKgXyZ7vdAyqIO6VWmfs.jpg",
-   "/ncY1mPmuefm08B5h7XEzVoYEm0H.jpg",
-   "/xSEDS9KPpaTYRN1rQAXO61ikIlz.jpg",
-   "/nMMkDyUqVTZcOsvqWZOzYlv1PUz.jpg",
-   "/gFHimE7YaNOKbYPgTIrhXJW9PJa.jpg",
-   "/3CTxjBNIWx8qZm36ZT29yTBQcFe.jpg",
-   "/qIGH3UUqvM5BOr7YPR47I5eCZJq.jpg",
-   "/ae0p8SqtMNNxbmbUHyCaE20D2aQ.jpg",
-   "/9Hp7kMV9qYEUTFZbTU2w8FkUxk9.jpg",
-   "/iSWamRUORPucCpZMPiqPxoC0uzX.jpg",
-   "/uSRcAlmH6XMFWjCf18XMpIqolZd.jpg",
-   "/bK1U7TsPuHB8lL5IgeBfeHAlTea.jpg",
-   "/1DPHG98xWF7sKbm0jT070j6aluI.jpg",
-   "/5ZOZaeaQinHjKtJ4ObpO1hJKKIz.jpg",
-   "/susDQFbdW3ERKWcviY00dBQCuXa.jpg",
-   "/bRvElwsFpzeypcBkh6Lrie92bIq.jpg",
-   "/gAThwg1drLIGiK0qjAVcEtrzeZS.jpg",
-   "/ytVheMn1G3DDXHdDS3RZQwzGmKS.jpg"
+   "/w7kxkSSQy3sZWDC4K8y0m2GYZ2.jpg",
+   "/qOnLuCJDFhRzbWzhpA4aoK75vfY.jpg",
+   "/uC28VuVqqLuayOqapowmklcQvol.jpg",
+   "/jQdjGWPXXCAxVJc0EXtBiyG3K4g.jpg",
+   "/sgYvrv6w6VsKhdsnH7NyuW4oWGU.jpg",
+   "/pe75Rmi80MmdJyV5s66D5f868Bh.jpg",
+   "/A7UrglCuCz5INgNjPD9fcgtL2rk.jpg",
+   "/hCoUTcq4crYQxcE2hL3ojRoVcvU.jpg",
+   "/7JSyZ1z64e8ClkwfM8GjrDVBYsG.jpg",
+   "/sdQxytiCPWlCRe2G4rBDEyMfiax.jpg",
+   "/sAQ93w3Z4v5YJaUq2X6WU8ZrZCR.jpg",
+   "/vOI9GDbtB7WTAF2XKkZyzS7c1qY.jpg",
+   "/8BSFhKXVVQB4wNKC7j6U7PAwjnW.jpg",
+   "/yTtDW2ssBLR48cz3LV0nqmD0kkZ.jpg",
+   "/JPSwCxTcA3S2vYcypuMJWfu5IJ.jpg",
+   "/g4eqdMPXe1jswqEshuOfckD92RY.jpg"
   ],
   "assign": [
-   3,
+   13,
    6
   ],
   "focus": [
-   0.23828125,
-   0.80390625
-  ],
-  "last_slide": 2,
-  "custom": {
-   "2": "data/custom/1368166_slide2.jpg"
-  }
+   0.6265625,
+   0.45
+  ]
  },
  "last_propose": "2026-10-31",
  "photo": null
