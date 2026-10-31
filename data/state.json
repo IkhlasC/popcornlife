@@ -1,45 +1,69 @@
 {
- "offset": 422725996,
- "pending": [],
+ "offset": 422725997,
+ "pending": [
+  {
+   "type": "movie",
+   "id": 1306368,
+   "title": "The Rip"
+  },
+  {
+   "type": "movie",
+   "id": 776503,
+   "title": "CODA"
+  },
+  {
+   "type": "movie",
+   "id": 466420,
+   "title": "Killers of the Flower Moon"
+  }
+ ],
  "last": {
-  "type": "tv",
-  "id": 249042,
-  "title": "Adolescence",
+  "type": "movie",
+  "id": 1368166,
+  "title": "La Femme de ménage",
   "year": "2025",
-  "rating": 7.8,
-  "platform": "Netflix",
+  "rating": 7.3,
+  "platform": "Canal+",
   "texts": [
-   "Imagine que la police arrête ton fils de 13 ans chez vous à l'aube",
-   "Il est accusé d'avoir t*é une fille de sa classe. Tu le crois coupable ?"
+   "Imagine que tu deviens femme de ménage à demeure chez un couple très riche",
+   "Très vite, tu te rends compte que ta chambre se ferme à clé de l'extérieur"
   ],
-  "poster_path": "/v2Hb2UhkN73OEUd3fsmQOtiZqqs.jpg",
+  "poster_path": "/naFRoBTiHycN71wO02BA1NyLJ28.jpg",
   "candidates": [
-   "/llZodlkVKRkTdUsiRxvn8h80hhx.jpg",
-   "/87SmEt5cI4iiVw860ew21xgRogH.jpg",
-   "/m4BumioMHsq0Qfa5KoN7MA2vXmu.jpg",
-   "/pCT3WLNrBBQeY7DRMw2CD1Pii05.jpg",
-   "/ismIWl5aHXoJuDs9GxYyH1g7mn6.jpg",
-   "/eFsS6vnEdR1cIoFFVOfLopqJWrG.jpg",
-   "/9SUiZcIuDa8SxwrDsjtm1JEgjR4.jpg",
-   "/t3GpBAtJjQLJcipSN5wv9OqJNHr.jpg",
-   "/tOe1qaOmwm2eLwH7zgzDfA4cvee.jpg",
-   "/ae3EWmfOT1ykM4ZBmK9CWDIjHo7.jpg",
-   "/9Q1wGIRefLTAondBT1Fqp6XQpVP.jpg",
-   "/sTSzYIE9itbGWvgrElrTco7zZBC.jpg",
-   "/6wXWA8Y6kcNI9ADl4FQvN5Rh5WT.jpg",
-   "/5oQWq9B5fSDgA57DTLm0EchFaVA.jpg",
-   "/zSmGA4ZXssYr40d15PedH5PeRrM.jpg",
-   "/ytfAsDAlAXs3EJwpygiKIJFimif.jpg"
+   "/zTnAnYIn0Iv3cn0ZHlzLhou3ybm.jpg",
+   "/sK3z0Naed3H1Wuh7a21YRVMxYqt.jpg",
+   "/8lgSWWrpS75Hwdm0TZlL1dK7VDD.jpg",
+   "/OUEBvYMdrqrTgcJAhrRBef8Gjg.jpg",
+   "/gEHDCtR9PNZvLG70sFBYJCFznRY.jpg",
+   "/bEcRxVHyCmwTYYlVVLLgGz2GdWW.jpg",
+   "/wkBM1RsOKgXyZ7vdAyqIO6VWmfs.jpg",
+   "/ncY1mPmuefm08B5h7XEzVoYEm0H.jpg",
+   "/xSEDS9KPpaTYRN1rQAXO61ikIlz.jpg",
+   "/nMMkDyUqVTZcOsvqWZOzYlv1PUz.jpg",
+   "/gFHimE7YaNOKbYPgTIrhXJW9PJa.jpg",
+   "/3CTxjBNIWx8qZm36ZT29yTBQcFe.jpg",
+   "/qIGH3UUqvM5BOr7YPR47I5eCZJq.jpg",
+   "/ae0p8SqtMNNxbmbUHyCaE20D2aQ.jpg",
+   "/9Hp7kMV9qYEUTFZbTU2w8FkUxk9.jpg",
+   "/iSWamRUORPucCpZMPiqPxoC0uzX.jpg",
+   "/uSRcAlmH6XMFWjCf18XMpIqolZd.jpg",
+   "/bK1U7TsPuHB8lL5IgeBfeHAlTea.jpg",
+   "/1DPHG98xWF7sKbm0jT070j6aluI.jpg",
+   "/5ZOZaeaQinHjKtJ4ObpO1hJKKIz.jpg",
+   "/susDQFbdW3ERKWcviY00dBQCuXa.jpg",
+   "/bRvElwsFpzeypcBkh6Lrie92bIq.jpg",
+   "/gAThwg1drLIGiK0qjAVcEtrzeZS.jpg",
+   "/ytVheMn1G3DDXHdDS3RZQwzGmKS.jpg"
   ],
   "assign": [
-   2,
-   0
+   3,
+   6
   ],
   "focus": [
-   0.3,
-   0.5
+   0.23828125,
+   0.80390625
   ]
  },
- "last_propose": "2026-10-30",
+ "last_propose": "2026-10-31",
  "photo": null
 }
