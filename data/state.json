@@ -1,5 +1,5 @@
 {
- "offset": 422725998,
+ "offset": 422725999,
  "pending": [
   {
    "type": "movie",
@@ -26,7 +26,7 @@
   "platform": "Canal+",
   "texts": [
    "imagine que t’es femme de ménage pour un couple hyper riche",
-   "Très vite, tu te rends compte que ta chambre se ferme à clé de l'extérieur"
+   "le truc c’est que tu te rends compte que la porte de ta chambre se ferme à clef que de l’extérieur"
   ],
   "poster_path": "/naFRoBTiHycN71wO02BA1NyLJ28.jpg",
   "candidates": [
@@ -63,7 +63,7 @@
    0.23828125,
    0.80390625
   ],
-  "last_slide": 1
+  "last_slide": 2
  },
  "last_propose": "2026-10-31",
  "photo": null
