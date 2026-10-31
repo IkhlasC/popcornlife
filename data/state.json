@@ -1,5 +1,5 @@
 {
- "offset": 422725997,
+ "offset": 422725998,
  "pending": [
   {
    "type": "movie",
@@ -25,7 +25,7 @@
   "rating": 7.3,
   "platform": "Canal+",
   "texts": [
-   "Imagine que tu deviens femme de ménage à demeure chez un couple très riche",
+   "imagine que t’es femme de ménage pour un couple hyper riche",
    "Très vite, tu te rends compte que ta chambre se ferme à clé de l'extérieur"
   ],
   "poster_path": "/naFRoBTiHycN71wO02BA1NyLJ28.jpg",
@@ -62,7 +62,8 @@
   "focus": [
    0.23828125,
    0.80390625
-  ]
+  ],
+  "last_slide": 1
  },
  "last_propose": "2026-10-31",
  "photo": null
