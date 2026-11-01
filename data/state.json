@@ -1,6 +1,22 @@
 {
  "offset": 422726001,
- "pending": [],
+ "pending": [
+  {
+   "type": "tv",
+   "id": 196322,
+   "title": "Dark Matter"
+  },
+  {
+   "type": "movie",
+   "id": 1233413,
+   "title": "Sinners"
+  },
+  {
+   "type": "movie",
+   "id": 501929,
+   "title": "Les Mitchell contre les machines"
+  }
+ ],
  "last": {
   "type": "movie",
   "id": 523936,
@@ -40,6 +56,6 @@
    0.45
   ]
  },
- "last_propose": "2026-10-31",
+ "last_propose": "2026-11-01",
  "photo": null
 }
