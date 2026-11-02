@@ -1,61 +1,52 @@
 {
- "offset": 422726011,
+ "offset": 422726012,
  "pending": [],
  "last": {
-  "type": "movie",
-  "id": 567609,
-  "title": "Wedding Nightmare",
-  "year": "2019",
-  "rating": 7.1,
-  "platform": "Disney+",
+  "type": "tv",
+  "id": 200709,
+  "title": "Héros fragile",
+  "year": "2022",
+  "rating": 8.7,
+  "platform": "Netflix / Kocowa",
   "texts": [
-   "Pour sa nuit de noces, une mariée doit jouer à cache-cache avec sa belle-famille",
-   "Mais elle se rend compte que s'ils la trouvent, ils vont devoir la tuer"
+   "Ce lycéen classé parmi les meilleurs de son école passe pour un faible",
+   "Mais pour stopper la violence de son lycée, il utilise sa psychologie"
   ],
-  "poster_path": "/iI53NwzcNpkImU346bV866G7G46.jpg",
+  "poster_path": "/qWY4cFftaZxvtHet3S9p7NYTZeD.jpg",
   "candidates": [
-   "/oJ1MIABA0WF0a7MDVQnnMvBdex8.jpg",
-   "/5clwbYVMmV5FytxYO8KZ5LpJcQZ.jpg",
-   "/aNrNi5QExO6b8MnEGsfpgp21NIY.jpg",
-   "/oKX8t52F25bkWUWVXiAUfTXFnLA.jpg",
-   "/j8uPZSPjKYzHlN2B4NhPQVWWZ5x.jpg",
-   "/ubqaGfwYxZMaTEVfhPghF87tzYm.jpg",
-   "/ya4hXbxKUx5oWEWJmVVN09Rm5Gt.jpg",
-   "/1RGaOOAnZuiepWzjPg286Hxfu2S.jpg",
-   "/lg6umZ6dzD39zyiYamktfvJCFzs.jpg",
-   "/qkwx1zZEkSfotNw10tlENar9ef9.jpg",
-   "/7RbINGEODD8u73Z7CfDJ3HRrWOv.jpg",
-   "/oGfCXSVgutkNIF0K1iXoyQ8w1fs.jpg",
-   "/2kPSGkmd5d9CYtOz1jWtiIoXdkS.jpg",
-   "/e8FGDVWE0VCRWYOEcG1g3CAN7XV.jpg",
-   "/9TeBySE1ITki3iCAyHqUNHH7oPr.jpg",
-   "/cfcUfKXmhY6QkWD5RjP9Hyz6uey.jpg",
-   "/foEFNjIe9j3fb5QqxWrEIW5mact.jpg",
-   "/nStVuai1iz8dp0ZZqmskdFUWNFG.jpg",
-   "/vkGytvxZzvw9i3UffC4TwardIky.jpg",
-   "/y3XBQL53Ks0FMH6ewPrK6tghTHN.jpg",
-   "/tJXF1z6G73MVVFQZVIIfv9M2oug.jpg",
-   "/3erUO4naNH7hTPGPXyyBHYUx74C.jpg",
-   "/eW8KegNl5QGm9jdCdLCONVDgofM.jpg",
-   "/6Fcm1fMz7OhqeVLDIWtve1OLbpX.jpg"
+   "/cLTAda6fMRirkCY1xfO4pmcHVkk.jpg",
+   "/q5mJ4oKfGc6Cr9reIHFzD0pQzre.jpg",
+   "/hj2YSkoqHB2FPHeoALfdd4eufue.jpg",
+   "/qpDzeZ41Sr7P59RSh9U4SVnMRUs.jpg",
+   "/daYC0g7xZRYvcuJF11tWHBJZh1u.jpg",
+   "/hEz2hitfSgaqbvzjFHyh5pGZcOK.jpg",
+   "/S7TQr7bMslFzHkDzLmaSKUCkNm.jpg",
+   "/5RG8vtb5P74uYJVF8PworXigtlL.jpg",
+   "/91PXrS12GgMvvBdqvEzEqArdkVY.jpg",
+   "/mTUMOiX8RHuNgR1Nn1Z8slDxXDU.jpg",
+   "/pzi864QnrsS6NnuP8Wk7n3u2Sve.jpg",
+   "/rjgowb36TQLvCXmMSmJgfKo2B6V.jpg",
+   "/x1NohmmmysAlemG4cROhqUEgTqy.jpg",
+   "/641nYPY1w3QjazumgbfHoP923x.jpg",
+   "/oLwotnApTObF5bMRrNHCaqpaZce.jpg",
+   "/oNaoUbvM6SCxdnAiBtyUitdg25K.jpg",
+   "/fm16cgsJpSJUJx5ujkhd7kkDaQP.jpg",
+   "/2iJPLvDmiQ3eMTEmLipRiisC0cq.jpg",
+   "/8IvNYiDBowzYtL5zcOzEfFbDIU5.jpg",
+   "/ickU9hqU1wERlZAusBNaZd3pWIO.jpg",
+   "/wMLYpYJmokX5CC84dthTLEbN0Vb.jpg",
+   "/kFK5EpZckhLG6uhlZypJIlZ0Mbm.jpg",
+   "/kmxtfYUA6d2ul0ofSSIMo1dkdoc.jpg",
+   "/fjKA188dEWrDacSTKSb5u9N1Pdz.jpg"
   ],
   "assign": [
-   3,
-   18
+   11,
+   12
   ],
   "focus": [
-   0.5015625,
-   0.27890625
-  ],
-  "last_slide": 2,
-  "custom": {
-   "1": "data/custom/567609_slide1.jpg",
-   "2": "data/custom/567609_slide2.jpg"
-  },
-  "zoom": {
-   "1": 1.4,
-   "2": 1.4
-  }
+   0.35,
+   0.5515625
+  ]
  },
  "last_propose": "2026-11-02",
  "photo": null
