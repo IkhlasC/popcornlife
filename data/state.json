@@ -1,45 +1,40 @@
 {
- "offset": 422726029,
+ "offset": 422726030,
  "pending": [],
  "last": {
-  "type": "tv",
-  "id": 128676,
-  "title": "Silent Cargo",
-  "year": "2022",
-  "rating": null,
-  "platform": "Lionsgate+",
+  "type": "movie",
+  "id": 425972,
+  "title": "Cargo",
+  "year": "2017",
+  "rating": 6.4,
+  "platform": "Netflix",
   "texts": [
-   "Un jeune boxeur traverse l'Atlantique avec 3 tonnes de dr*gue",
-   "Il est enfermé 1 mois avec un t*eur à gages dans un bateau fait maison"
+   "Un père part dans la nature australienne chercher un gardien pour sa fille",
+   "Mais l'épidémie tue de plus en plus de gens, à qui peut-il se fier ?"
   ],
-  "poster_path": "/9ElfVoAsUMdp3fHHTbsEb9psIP1.jpg",
+  "poster_path": "/cdPSUck4tBRvRu6DFk6XciDrssn.jpg",
   "candidates": [
-   "/9JkWP8cFeEF5eUTragMhLX9It4c.jpg",
-   "/8emZYNgNG5OsGS9mFL4IywoTVyp.jpg",
-   "/zNjq4bK9PWW0pIJJDmB3vihrY92.jpg",
-   "/7WBLQ0rR99itvxOhttqVK36nOJY.jpg",
-   "/fXs8FCiVqJsmLENvaKl9r3RYUNz.jpg",
-   "/ka8gUPOzbk6W7KgE8hbaxccd2dV.jpg",
-   "/sKTPWbR18wKWrovezIbJccOfqjR.jpg",
-   "/AjaZFsvqaEFQvAjI0AHIqo9wC7b.jpg",
-   "/dZEBxZhnyCcuBweiMzEqV0ebub1.jpg",
-   "/dJZBlsEesoNbDmkWgolBeH4Poj9.jpg",
-   "/cB02cbli4nRn4dy3F9vAcPqsChi.jpg",
-   "/nb3PAPWiv8x4J67Ze2XTwQ9ksTH.jpg",
-   "/zIJhpRFYUwk2wMXfxbJisEME1UW.jpg",
-   "/Av3GwTUZgdNpFilsVagPHMDz3Zb.jpg",
-   "/zPsIW4e5uq5mWtyRRrcnqKmujir.jpg",
-   "/SolabR9Ts6rfLbi8lzpYNQZWWi.jpg",
-   "/tMtq4gaKWka1Cb8k7VXOKUUBsqZ.jpg",
-   "/iZfTz1qoXPGA1c4stxvMlg8LxPu.jpg"
+   "/tiIpajUBpLMNWMEzpjRBxo0jCbD.jpg",
+   "/vHBt6ZOIreWqo3iERxINL6V39NL.jpg",
+   "/kegRj8Zc6NJeD7VdtaGMEwmTmRW.jpg",
+   "/3zZjTcu6jX424a4l5WdQQVE8beh.jpg",
+   "/4WSy35AQsEzqWWPqkKImxQVrp6M.jpg",
+   "/q9bTbOin3XWoJVAMBgmukI6etUi.jpg",
+   "/cmgcqy89rB2wWnAmgC79LviSzoI.jpg",
+   "/4960jMJLrgnEDp4hEmoKKEkFGMu.jpg",
+   "/aWUzsVZ8ByrC5gDzEx1tywL0Tji.jpg",
+   "/uEJvNBVLpzc8FuaKntpT0t83GmU.jpg",
+   "/xtPtOy1zfunGvwKagomJ0bKvcfr.jpg",
+   "/3SwjHffglRA15vzvqQipxixZlm0.jpg",
+   "/1iy73DoAlSXnDP8mGTNrJmEu31I.jpg"
   ],
   "assign": [
-   17,
-   4
+   8,
+   10
   ],
   "focus": [
-   0.51484375,
-   0.7046875
+   0.47109375,
+   0.4484375
   ]
  },
  "last_propose": "2026-11-02",
