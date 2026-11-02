@@ -1,5 +1,5 @@
 {
- "offset": 422726013,
+ "offset": 422726014,
  "pending": [],
  "last": {
   "type": "movie",
@@ -10,7 +10,7 @@
   "platform": "Apple TV",
   "texts": [
    "Cette fille de 17 ans est la seule à entendre dans sa famille",
-   "Elle traduit tout pour ses parents sourds, même sur leur bateau de pêche",
+   "c'est elle qui traduit tout pour ses parents",
    "Mais elle découvre le chant, et doit choisir entre ses rêves et eux"
   ],
   "poster_path": "/ycgjiTDsO5mQAqyYGNiinAVO04t.jpg",
@@ -42,7 +42,8 @@
    0.45,
    0.67890625,
    0.6
-  ]
+  ],
+  "last_slide": 2
  },
  "last_propose": "2026-11-02",
  "photo": null
