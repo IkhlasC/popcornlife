@@ -47,5 +47,12 @@
   "avant": "Mais elle découvre le chant, et doit choisir entre ses rêves et eux",
   "apres": "mais elle découvre le chant et doit choisir entre ses rêves ou aider sa famille",
   "date": "2026-11-02"
+ },
+ {
+  "film": "Barbare",
+  "slide": 1,
+  "avant": "Imagine que tu arrives de nuit dans ton airbnb et qu'un homme y vit déjà",
+  "apres": "Imagine que tu arrives tard la nuit dans ton Airbnb, mais tu vois qu'un homme y vit déjà",
+  "date": "2026-11-02"
  }
 ]

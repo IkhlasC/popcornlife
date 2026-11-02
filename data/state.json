@@ -1,5 +1,5 @@
 {
- "offset": 422726021,
+ "offset": 422726022,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,7 +9,7 @@
   "rating": 6.9,
   "platform": "",
   "texts": [
-   "Imagine que tu arrives de nuit dans ton airbnb et qu'un homme y vit déjà",
+   "Imagine que tu arrives tard la nuit dans ton Airbnb, mais tu vois qu'un homme y vit déjà",
    "Tu n'as nulle part d'autre où dormir avant ton entretien à Détroit, alors tu restes"
   ],
   "poster_path": "/rJS3o7TgR0pvdtD045kQJQpHXMd.jpg",
@@ -46,7 +46,8 @@
   "focus": [
    0.45,
    0.5
-  ]
+  ],
+  "last_slide": 1
  },
  "last_propose": "2026-11-02",
  "photo": null
