@@ -1,5 +1,5 @@
 {
- "offset": 422726039,
+ "offset": 422726040,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,8 +9,8 @@
   "rating": 7.3,
   "platform": "",
   "texts": [
-   "Un homme rentre retrouver sa famille, mais le tunnel s'effondre sur lui",
-   "Tout le pays le regarde à la télé, mais combien de temps tiendra-t-il ?"
+   "Coincé sous un tunnel, il a 2 bouteilles d'eau et le gâteau de sa fille",
+   "Dehors, les médias et les politiques débattent de son sauvetage pendant qu'il rationne son eau"
   ],
   "poster_path": "/8LhuD8oiHZWhWa2Gkj77l1s4HiI.jpg",
   "candidates": [
@@ -32,11 +32,11 @@
   ],
   "assign": [
    7,
-   6
+   10
   ],
   "focus": [
-   0.62,
-   0.5
+   0.5,
+   0.53984375
   ]
  },
  "last_propose": "2026-11-02",
