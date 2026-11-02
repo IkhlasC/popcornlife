@@ -1,5 +1,5 @@
 {
- "offset": 422726017,
+ "offset": 422726018,
  "pending": [],
  "last": {
   "type": "movie",
@@ -43,9 +43,10 @@
    0.67890625,
    0.6
   ],
-  "last_slide": 1,
+  "last_slide": 2,
   "custom": {
-   "1": "data/custom/776503_slide1.jpg"
+   "1": "data/custom/776503_slide1.jpg",
+   "2": "data/custom/776503_slide2.jpg"
   },
   "zoom": {
    "1": 1.4
