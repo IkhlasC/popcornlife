@@ -1,61 +1,46 @@
 {
- "offset": 422726028,
+ "offset": 422726029,
  "pending": [],
  "last": {
-  "type": "movie",
-  "id": 913290,
-  "title": "Barbare",
+  "type": "tv",
+  "id": 128676,
+  "title": "Silent Cargo",
   "year": "2022",
-  "rating": 6.9,
-  "platform": "",
+  "rating": null,
+  "platform": "Lionsgate+",
   "texts": [
-   "Imagine que tu arrives tard la nuit dans ton Airbnb, mais tu vois qu'un homme y vit déjà",
-   "T'as nulle part où aller avant ton entretien, alors t'es obligé de rester"
+   "Un jeune boxeur traverse l'Atlantique avec 3 tonnes de dr*gue",
+   "Il est enfermé 1 mois avec un t*eur à gages dans un bateau fait maison"
   ],
-  "poster_path": "/rJS3o7TgR0pvdtD045kQJQpHXMd.jpg",
+  "poster_path": "/9ElfVoAsUMdp3fHHTbsEb9psIP1.jpg",
   "candidates": [
-   "/kSeU4uk19t82k6Cao7hc6ktDYhF.jpg",
-   "/2SEGjVLy7fYbovIyDR7IntH1jT2.jpg",
-   "/b5Sq1p2qnLNlaU9XOwjNNdbWmkP.jpg",
-   "/dtB2vYSDCmbbqgjqt5sK0TEeAKc.jpg",
-   "/xtKUTXAWQvet4i0HRA5v0iO3iL5.jpg",
-   "/jg4y9J4GrbXgzEL24sLd2ohfn8K.jpg",
-   "/d7vxxLfRxZ99J7J88Zaw08mrSfo.jpg",
-   "/71h1IVvqJejV4IRM695al8ojt51.jpg",
-   "/mJHCtPkbBlDc6TQRk0nxK9HFwZ9.jpg",
-   "/67kTU8DU5YZYrBybH4gppqptZK9.jpg",
-   "/bUjPcNS8GweBh5Nxp8oq9Dy712Z.jpg",
-   "/yiqIKDhdsqZokB74YrCdH1Gbud1.jpg",
-   "/iSFEvCmC49t7Y68laEN5UDX62gP.jpg",
-   "/ei8cWMcGZ5lfvDsiBwhQsms1Ac4.jpg",
-   "/pI0jE0VXLxNlPrGsH5z8qd5SR2f.jpg",
-   "/ibfPbAeXH74B8dq899bI6KAGwEA.jpg",
-   "/6PMw0GvojGln9SOS3G2LzqEByYn.jpg",
-   "/a9E6VcCNGfPx6Is7re77XzUiEjU.jpg",
-   "/9JHPGpeRmbgO8x5gLX0SFEW7hL2.jpg",
-   "/nW1II4psqUndLjQtk9PQidBjPOY.jpg",
-   "/hnIKO9wtkA5o9PhlK40trjih0Tw.jpg",
-   "/wIG4nXC1WHUzQtlrSokL5zlfnJG.jpg",
-   "/cm014CuvWUMSyPV40jWts1QkZyL.jpg",
-   "/8tiQMoBJ4gJXiCTA4rZ8doIimBX.jpg"
+   "/9JkWP8cFeEF5eUTragMhLX9It4c.jpg",
+   "/8emZYNgNG5OsGS9mFL4IywoTVyp.jpg",
+   "/zNjq4bK9PWW0pIJJDmB3vihrY92.jpg",
+   "/7WBLQ0rR99itvxOhttqVK36nOJY.jpg",
+   "/fXs8FCiVqJsmLENvaKl9r3RYUNz.jpg",
+   "/ka8gUPOzbk6W7KgE8hbaxccd2dV.jpg",
+   "/sKTPWbR18wKWrovezIbJccOfqjR.jpg",
+   "/AjaZFsvqaEFQvAjI0AHIqo9wC7b.jpg",
+   "/dZEBxZhnyCcuBweiMzEqV0ebub1.jpg",
+   "/dJZBlsEesoNbDmkWgolBeH4Poj9.jpg",
+   "/cB02cbli4nRn4dy3F9vAcPqsChi.jpg",
+   "/nb3PAPWiv8x4J67Ze2XTwQ9ksTH.jpg",
+   "/zIJhpRFYUwk2wMXfxbJisEME1UW.jpg",
+   "/Av3GwTUZgdNpFilsVagPHMDz3Zb.jpg",
+   "/zPsIW4e5uq5mWtyRRrcnqKmujir.jpg",
+   "/SolabR9Ts6rfLbi8lzpYNQZWWi.jpg",
+   "/tMtq4gaKWka1Cb8k7VXOKUUBsqZ.jpg",
+   "/iZfTz1qoXPGA1c4stxvMlg8LxPu.jpg"
   ],
   "assign": [
-   4,
-   22
+   17,
+   4
   ],
   "focus": [
-   0.45,
-   0.5
-  ],
-  "last_slide": 2,
-  "custom": {
-   "1": "data/custom/913290_slide1.jpg",
-   "2": "data/custom/913290_slide2.jpg"
-  },
-  "zoom": {
-   "1": 1.4,
-   "2": 1.96
-  }
+   0.51484375,
+   0.7046875
+  ]
  },
  "last_propose": "2026-11-02",
  "photo": null
