@@ -1,5 +1,5 @@
 {
- "offset": 422726030,
+ "offset": 422726031,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,8 +9,9 @@
   "rating": 6.4,
   "platform": "Netflix",
   "texts": [
-   "Un père part dans la nature australienne chercher un gardien pour sa fille",
-   "Mais l'épidémie tue de plus en plus de gens, à qui peut-il se fier ?"
+   "Ce père vient d'être infecté, il lui reste 48 heures",
+   "Il traverse la nature australienne avec sa fille attachée dans son dos",
+   "Il doit lui trouver un gardien avant de devenir un danger pour elle"
   ],
   "poster_path": "/cdPSUck4tBRvRu6DFk6XciDrssn.jpg",
   "candidates": [
@@ -30,11 +31,13 @@
   ],
   "assign": [
    8,
-   10
+   10,
+   3
   ],
   "focus": [
    0.47109375,
-   0.4484375
+   0.4484375,
+   0.5
   ]
  },
  "last_propose": "2026-11-02",
