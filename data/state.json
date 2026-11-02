@@ -1,53 +1,43 @@
 {
- "offset": 422726038,
+ "offset": 422726039,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 425972,
-  "title": "Cargo",
-  "year": "2017",
-  "rating": 6.4,
-  "platform": "Netflix",
+  "id": 390497,
+  "title": "Tunnel",
+  "year": "2016",
+  "rating": 7.3,
+  "platform": "",
   "texts": [
-   "Ce père vient d'être mordu, il lui reste 48 heures",
-   "Il traverse la nature australienne avec sa fille attachée dans son dos",
-   "il doit lui trouver un gardien avant de lui refiler le virus"
+   "Un homme rentre retrouver sa famille, mais le tunnel s'effondre sur lui",
+   "Tout le pays le regarde à la télé, mais combien de temps tiendra-t-il ?"
   ],
-  "poster_path": "/cdPSUck4tBRvRu6DFk6XciDrssn.jpg",
+  "poster_path": "/8LhuD8oiHZWhWa2Gkj77l1s4HiI.jpg",
   "candidates": [
-   "/tiIpajUBpLMNWMEzpjRBxo0jCbD.jpg",
-   "/vHBt6ZOIreWqo3iERxINL6V39NL.jpg",
-   "/kegRj8Zc6NJeD7VdtaGMEwmTmRW.jpg",
-   "/3zZjTcu6jX424a4l5WdQQVE8beh.jpg",
-   "/4WSy35AQsEzqWWPqkKImxQVrp6M.jpg",
-   "/q9bTbOin3XWoJVAMBgmukI6etUi.jpg",
-   "/cmgcqy89rB2wWnAmgC79LviSzoI.jpg",
-   "/4960jMJLrgnEDp4hEmoKKEkFGMu.jpg",
-   "/aWUzsVZ8ByrC5gDzEx1tywL0Tji.jpg",
-   "/uEJvNBVLpzc8FuaKntpT0t83GmU.jpg",
-   "/xtPtOy1zfunGvwKagomJ0bKvcfr.jpg",
-   "/3SwjHffglRA15vzvqQipxixZlm0.jpg",
-   "/1iy73DoAlSXnDP8mGTNrJmEu31I.jpg"
+   "/37dC684Q6a4o83oAx8KEyNSuBV3.jpg",
+   "/cOxzMDB0870m66LAhFrPRcgzvsP.jpg",
+   "/iAZKxXcc6Ou2ZNh8VrTz1D1Mtex.jpg",
+   "/7VyCAPnpxggdJC4caiolNMeZcXh.jpg",
+   "/4xYXRY4sbGpnfQY9SeJeolK8JED.jpg",
+   "/pbWeINsD1r7ddwNjrYcsgHSR5lf.jpg",
+   "/upyknDxiL8oAO1g5zJi2QqvBGoY.jpg",
+   "/1kGGZuAZpwcYRNJ6NHdlpz5GZZa.jpg",
+   "/fwh6SnJXU7ON3JsiQ33BXPZgKxm.jpg",
+   "/m06t7xVlSaCnqaNcs2SBBPeOzrk.jpg",
+   "/oaMiXLNW5gK1tz7TPkmGTe8l932.jpg",
+   "/c6ALHkCzVkF404gdXkJfzr8Uh7g.jpg",
+   "/kkJra66NUQGrtqGoD0DsY8gti1g.jpg",
+   "/u6TI81M76PVfNM389YExLKTpYV0.jpg",
+   "/r3sFW94aGelfMYTrs2tasREHvxm.jpg"
   ],
   "assign": [
-   8,
-   10,
-   3
+   7,
+   6
   ],
   "focus": [
-   0.47109375,
-   0.4484375,
+   0.62,
    0.5
-  ],
-  "last_slide": 2,
-  "custom": {
-   "1": "data/custom/425972_slide1.jpg",
-   "2": "data/custom/425972_slide2.jpg"
-  },
-  "zoom": {
-   "1": 1.4,
-   "2": 1.4
-  }
+  ]
  },
  "last_propose": "2026-11-02",
  "photo": null
