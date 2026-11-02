@@ -61,5 +61,12 @@
   "avant": "Tu n'as nulle part d'autre où dormir avant ton entretien à Détroit, alors tu restes",
   "apres": "T'as nulle part où aller avant ton entretien, alors t'es obligé de rester",
   "date": "2026-11-02"
+ },
+ {
+  "film": "Cargo",
+  "slide": 1,
+  "avant": "Ce père vient d'être infecté, il lui reste 48 heures",
+  "apres": "Ce père vient d'être mordu, il lui reste 48 heures,\nslide 3 : il doit lui trouver un gardien avant de lui refiler le virus",
+  "date": "2026-11-02"
  }
 ]
