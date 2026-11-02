@@ -1,54 +1,52 @@
 {
- "offset": 422726004,
+ "offset": 422726005,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 489999,
-  "title": "Searching : Portée disparue",
-  "year": "2018",
-  "rating": 7.6,
-  "platform": "",
+  "id": 567609,
+  "title": "Wedding Nightmare",
+  "year": "2019",
+  "rating": 7.1,
+  "platform": "Disney+",
   "texts": [
-   "Imagine que ta fille de 16 ans disparaît et que la police n'a aucun indice",
-   "Du coup, tu ouvres son ordinateur, le seul endroit où personne n'a regardé",
-   "Tu appelles ses contacts, et ils disent à peine la connaître"
+   "Pour sa nuit de noces, une mariée doit jouer à cache-cache",
+   "Très vite, elle se rend compte qu'ils veulent tous la t*er"
   ],
-  "poster_path": "/hsXFadgegUygPqMrW8McvmNWGpX.jpg",
+  "poster_path": "/iI53NwzcNpkImU346bV866G7G46.jpg",
   "candidates": [
-   "/jOqOduY1tLhXgVZo7ypCtDVr0mM.jpg",
-   "/a3ay4lYVIbgXY9QdWveWqtS1lVx.jpg",
-   "/3CCfgSvtvN3HwVs5hbcC1NhOAzw.jpg",
-   "/3e6jRzdfaek911G6Mth6sh76HMu.jpg",
-   "/efy2NsyMUEDOnZW0hHA8VrCNsoU.jpg",
-   "/yiBv9ZjCaD7MRjKAKVGALgfHkfM.jpg",
-   "/9JP8s8NdrtZE1GbV0fqDqs5IGTt.jpg",
-   "/ceIrH4VVtXz4NZwnC0iw32QCD6A.jpg",
-   "/91A8wgjgzG9y8D1Z6Mk7Bbd82z4.jpg",
-   "/gPReikm36WQ4W3x30kc7UCpxuIh.jpg",
-   "/ufcvW6ex4s9ivrkCqOzt0v2O9yX.jpg",
-   "/qu2IPnFyDztlUOYhCkPptXP1vnv.jpg",
-   "/mEvWDeW459Yu28H5bnpqRiWDq2o.jpg",
-   "/5A5aNqZbfki4CDT93TUxjNRszhS.jpg",
-   "/o6HLQwOp4aMh0j68m5vN6PWRqZE.jpg",
-   "/Ar9eJotg5j43c0kACGhl9I14cxL.jpg",
-   "/5AVP4q2PNuTnGepptRWOwbuLVcJ.jpg",
-   "/aymkupjfNi8lEDeDVXIHmzLNDVZ.jpg",
-   "/tUObjBKrcrET4treEasvzQfXSUo.jpg"
+   "/oJ1MIABA0WF0a7MDVQnnMvBdex8.jpg",
+   "/5clwbYVMmV5FytxYO8KZ5LpJcQZ.jpg",
+   "/aNrNi5QExO6b8MnEGsfpgp21NIY.jpg",
+   "/oKX8t52F25bkWUWVXiAUfTXFnLA.jpg",
+   "/j8uPZSPjKYzHlN2B4NhPQVWWZ5x.jpg",
+   "/ubqaGfwYxZMaTEVfhPghF87tzYm.jpg",
+   "/ya4hXbxKUx5oWEWJmVVN09Rm5Gt.jpg",
+   "/1RGaOOAnZuiepWzjPg286Hxfu2S.jpg",
+   "/lg6umZ6dzD39zyiYamktfvJCFzs.jpg",
+   "/qkwx1zZEkSfotNw10tlENar9ef9.jpg",
+   "/7RbINGEODD8u73Z7CfDJ3HRrWOv.jpg",
+   "/oGfCXSVgutkNIF0K1iXoyQ8w1fs.jpg",
+   "/2kPSGkmd5d9CYtOz1jWtiIoXdkS.jpg",
+   "/e8FGDVWE0VCRWYOEcG1g3CAN7XV.jpg",
+   "/9TeBySE1ITki3iCAyHqUNHH7oPr.jpg",
+   "/cfcUfKXmhY6QkWD5RjP9Hyz6uey.jpg",
+   "/foEFNjIe9j3fb5QqxWrEIW5mact.jpg",
+   "/nStVuai1iz8dp0ZZqmskdFUWNFG.jpg",
+   "/vkGytvxZzvw9i3UffC4TwardIky.jpg",
+   "/y3XBQL53Ks0FMH6ewPrK6tghTHN.jpg",
+   "/tJXF1z6G73MVVFQZVIIfv9M2oug.jpg",
+   "/3erUO4naNH7hTPGPXyyBHYUx74C.jpg",
+   "/eW8KegNl5QGm9jdCdLCONVDgofM.jpg",
+   "/6Fcm1fMz7OhqeVLDIWtve1OLbpX.jpg"
   ],
   "assign": [
-   1,
-   17,
-   4
+   3,
+   18
   ],
   "focus": [
-   0.52109375,
-   0.61484375,
-   0.5
-  ],
-  "last_slide": 2,
-  "custom": {
-   "2": "data/custom/489999_slide2.jpg"
-  }
+   0.5015625,
+   0.27890625
+  ]
  },
  "last_propose": "2026-11-02",
  "photo": null
