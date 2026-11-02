@@ -1,5 +1,5 @@
 {
- "offset": 422726014,
+ "offset": 422726015,
  "pending": [],
  "last": {
   "type": "movie",
@@ -11,7 +11,7 @@
   "texts": [
    "Cette fille de 17 ans est la seule à entendre dans sa famille",
    "c'est elle qui traduit tout pour ses parents",
-   "Mais elle découvre le chant, et doit choisir entre ses rêves et eux"
+   "mais elle découvre le chant et doit choisir entre ses rêves ou aider sa famille"
   ],
   "poster_path": "/ycgjiTDsO5mQAqyYGNiinAVO04t.jpg",
   "candidates": [
@@ -43,7 +43,7 @@
    0.67890625,
    0.6
   ],
-  "last_slide": 2
+  "last_slide": 3
  },
  "last_propose": "2026-11-02",
  "photo": null
