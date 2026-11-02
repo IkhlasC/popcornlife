@@ -19,5 +19,19 @@
   "avant": "Très vite, tu te rends compte que ta chambre se ferme à clé de l'extérieur",
   "apres": "le truc c’est que tu te rends compte que la porte de ta chambre se ferme à clef que de l’extérieur",
   "date": "2026-10-31"
+ },
+ {
+  "film": "Wedding Nightmare",
+  "slide": 1,
+  "avant": "Pour sa nuit de noces, une mariée doit jouer à cache-cache",
+  "apres": "Pour sa nuit de noces, une mariée doit jouer à cache-cache avec sa belle-famille",
+  "date": "2026-11-02"
+ },
+ {
+  "film": "Wedding Nightmare",
+  "slide": 2,
+  "avant": "Très vite, elle se rend compte qu'ils veulent tous la t*er",
+  "apres": "Mais elle se rend compte que s'ils la trouvent, ils vont devoir la tuer",
+  "date": "2026-11-02"
  }
 ]

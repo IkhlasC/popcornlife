@@ -1,5 +1,5 @@
 {
- "offset": 422726005,
+ "offset": 422726007,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,8 +9,8 @@
   "rating": 7.1,
   "platform": "Disney+",
   "texts": [
-   "Pour sa nuit de noces, une mariée doit jouer à cache-cache",
-   "Très vite, elle se rend compte qu'ils veulent tous la t*er"
+   "Pour sa nuit de noces, une mariée doit jouer à cache-cache avec sa belle-famille",
+   "Mais elle se rend compte que s'ils la trouvent, ils vont devoir la tuer"
   ],
   "poster_path": "/iI53NwzcNpkImU346bV866G7G46.jpg",
   "candidates": [
@@ -46,7 +46,8 @@
   "focus": [
    0.5015625,
    0.27890625
-  ]
+  ],
+  "last_slide": 2
  },
  "last_propose": "2026-11-02",
  "photo": null
