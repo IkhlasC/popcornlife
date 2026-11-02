@@ -1,59 +1,49 @@
 {
- "offset": 422726001,
- "pending": [
-  {
-   "type": "movie",
-   "id": 567609,
-   "title": "Wedding Nightmare"
-  },
-  {
-   "type": "movie",
-   "id": 776503,
-   "title": "CODA"
-  },
-  {
-   "type": "tv",
-   "id": 200709,
-   "title": "Héros fragile"
-  }
- ],
+ "offset": 422726002,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 523936,
-  "title": "Méandre",
-  "year": "2021",
-  "rating": 5.8,
+  "id": 489999,
+  "title": "Searching : Portée disparue",
+  "year": "2018",
+  "rating": 7.6,
   "platform": "",
   "texts": [
-   "Cette femme se réveille dans un tube rempli de pièges mortels",
-   "Le truc, c'est qu'elle meurt si elle arrête d'avancer"
+   "Imagine que ta fille de 16 ans disparaît et que la police n'a aucun indice",
+   "Du coup, tu ouvres son ordinateur, le seul endroit où personne n'a regardé",
+   "Tu appelles ses contacts, et ils disent à peine la connaître"
   ],
-  "poster_path": "/7BxOvgGtwbu2FK7gAivBJRc2nfs.jpg",
+  "poster_path": "/hsXFadgegUygPqMrW8McvmNWGpX.jpg",
   "candidates": [
-   "/w7kxkSSQy3sZWDC4K8y0m2GYZ2.jpg",
-   "/qOnLuCJDFhRzbWzhpA4aoK75vfY.jpg",
-   "/uC28VuVqqLuayOqapowmklcQvol.jpg",
-   "/jQdjGWPXXCAxVJc0EXtBiyG3K4g.jpg",
-   "/sgYvrv6w6VsKhdsnH7NyuW4oWGU.jpg",
-   "/pe75Rmi80MmdJyV5s66D5f868Bh.jpg",
-   "/A7UrglCuCz5INgNjPD9fcgtL2rk.jpg",
-   "/hCoUTcq4crYQxcE2hL3ojRoVcvU.jpg",
-   "/7JSyZ1z64e8ClkwfM8GjrDVBYsG.jpg",
-   "/sdQxytiCPWlCRe2G4rBDEyMfiax.jpg",
-   "/sAQ93w3Z4v5YJaUq2X6WU8ZrZCR.jpg",
-   "/vOI9GDbtB7WTAF2XKkZyzS7c1qY.jpg",
-   "/8BSFhKXVVQB4wNKC7j6U7PAwjnW.jpg",
-   "/yTtDW2ssBLR48cz3LV0nqmD0kkZ.jpg",
-   "/JPSwCxTcA3S2vYcypuMJWfu5IJ.jpg",
-   "/g4eqdMPXe1jswqEshuOfckD92RY.jpg"
+   "/jOqOduY1tLhXgVZo7ypCtDVr0mM.jpg",
+   "/a3ay4lYVIbgXY9QdWveWqtS1lVx.jpg",
+   "/3CCfgSvtvN3HwVs5hbcC1NhOAzw.jpg",
+   "/3e6jRzdfaek911G6Mth6sh76HMu.jpg",
+   "/efy2NsyMUEDOnZW0hHA8VrCNsoU.jpg",
+   "/yiBv9ZjCaD7MRjKAKVGALgfHkfM.jpg",
+   "/9JP8s8NdrtZE1GbV0fqDqs5IGTt.jpg",
+   "/ceIrH4VVtXz4NZwnC0iw32QCD6A.jpg",
+   "/91A8wgjgzG9y8D1Z6Mk7Bbd82z4.jpg",
+   "/gPReikm36WQ4W3x30kc7UCpxuIh.jpg",
+   "/ufcvW6ex4s9ivrkCqOzt0v2O9yX.jpg",
+   "/qu2IPnFyDztlUOYhCkPptXP1vnv.jpg",
+   "/mEvWDeW459Yu28H5bnpqRiWDq2o.jpg",
+   "/5A5aNqZbfki4CDT93TUxjNRszhS.jpg",
+   "/o6HLQwOp4aMh0j68m5vN6PWRqZE.jpg",
+   "/Ar9eJotg5j43c0kACGhl9I14cxL.jpg",
+   "/5AVP4q2PNuTnGepptRWOwbuLVcJ.jpg",
+   "/aymkupjfNi8lEDeDVXIHmzLNDVZ.jpg",
+   "/tUObjBKrcrET4treEasvzQfXSUo.jpg"
   ],
   "assign": [
-   13,
-   6
+   1,
+   16,
+   4
   ],
   "focus": [
-   0.6265625,
-   0.45
+   0.52109375,
+   0.52734375,
+   0.5
   ]
  },
  "last_propose": "2026-11-02",
