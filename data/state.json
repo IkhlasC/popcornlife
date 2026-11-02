@@ -1,57 +1,52 @@
 {
- "offset": 422726020,
+ "offset": 422726021,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 776503,
-  "title": "CODA",
-  "year": "2021",
-  "rating": 7.9,
-  "platform": "Apple TV",
+  "id": 913290,
+  "title": "Barbare",
+  "year": "2022",
+  "rating": 6.9,
+  "platform": "",
   "texts": [
-   "Cette fille de 17 ans est la seule à entendre dans sa famille",
-   "c'est elle qui traduit tout pour ses parents",
-   "mais elle découvre le chant et doit choisir entre ses rêves ou aider sa famille"
+   "Imagine que tu arrives de nuit dans ton airbnb et qu'un homme y vit déjà",
+   "Tu n'as nulle part d'autre où dormir avant ton entretien à Détroit, alors tu restes"
   ],
-  "poster_path": "/ycgjiTDsO5mQAqyYGNiinAVO04t.jpg",
+  "poster_path": "/rJS3o7TgR0pvdtD045kQJQpHXMd.jpg",
   "candidates": [
-   "/v85FlkbMYKa5du1glm0YfYNsL2n.jpg",
-   "/4Tz8V8aRim8cFgKEWprSUjBy8tY.jpg",
-   "/2ktD7aMGkIytVRYwahAuktAQ3hO.jpg",
-   "/7Sh4Pgzx6fIhblBlcp0LmhbnVr3.jpg",
-   "/d1dOyUuBH921koRKLz3z2zUagPQ.jpg",
-   "/qJFuVrGG35PrAnQHi5EJNL088DR.jpg",
-   "/ogVzrLvBcoVvifLN8p1Pcm4TfQ0.jpg",
-   "/muX45R7R2DpSASSh7I2ALQAQx9I.jpg",
-   "/yln6Go8bx8fnnYoWot6Q2llguYH.jpg",
-   "/1XYDrwBK053WgButzrFtXfbdcVA.jpg",
-   "/b2q9EUM66lI3XYfUeLJpKzIRlsM.jpg",
-   "/9i7U51bFpanwEkx9Rhe1sSlu2wj.jpg",
-   "/wXAZjXhfpeLrevVlkBdSF3ewZEp.jpg",
-   "/z5DE27UJpVQgZanEkJV9e0iFGrF.jpg",
-   "/eC6kZL98zhikSuobbqNj83FtCgJ.jpg",
-   "/nhaFK1gJZ5zr7xkQMPm9dFrSKHh.jpg",
-   "/5Cnh3yiBHEjtaK5iCi6NowtYJ3c.jpg"
+   "/kSeU4uk19t82k6Cao7hc6ktDYhF.jpg",
+   "/2SEGjVLy7fYbovIyDR7IntH1jT2.jpg",
+   "/b5Sq1p2qnLNlaU9XOwjNNdbWmkP.jpg",
+   "/dtB2vYSDCmbbqgjqt5sK0TEeAKc.jpg",
+   "/xtKUTXAWQvet4i0HRA5v0iO3iL5.jpg",
+   "/jg4y9J4GrbXgzEL24sLd2ohfn8K.jpg",
+   "/d7vxxLfRxZ99J7J88Zaw08mrSfo.jpg",
+   "/71h1IVvqJejV4IRM695al8ojt51.jpg",
+   "/mJHCtPkbBlDc6TQRk0nxK9HFwZ9.jpg",
+   "/67kTU8DU5YZYrBybH4gppqptZK9.jpg",
+   "/bUjPcNS8GweBh5Nxp8oq9Dy712Z.jpg",
+   "/yiqIKDhdsqZokB74YrCdH1Gbud1.jpg",
+   "/iSFEvCmC49t7Y68laEN5UDX62gP.jpg",
+   "/ei8cWMcGZ5lfvDsiBwhQsms1Ac4.jpg",
+   "/pI0jE0VXLxNlPrGsH5z8qd5SR2f.jpg",
+   "/ibfPbAeXH74B8dq899bI6KAGwEA.jpg",
+   "/6PMw0GvojGln9SOS3G2LzqEByYn.jpg",
+   "/a9E6VcCNGfPx6Is7re77XzUiEjU.jpg",
+   "/9JHPGpeRmbgO8x5gLX0SFEW7hL2.jpg",
+   "/nW1II4psqUndLjQtk9PQidBjPOY.jpg",
+   "/hnIKO9wtkA5o9PhlK40trjih0Tw.jpg",
+   "/wIG4nXC1WHUzQtlrSokL5zlfnJG.jpg",
+   "/cm014CuvWUMSyPV40jWts1QkZyL.jpg",
+   "/8tiQMoBJ4gJXiCTA4rZ8doIimBX.jpg"
   ],
   "assign": [
-   0,
-   2,
-   8
+   4,
+   22
   ],
   "focus": [
    0.45,
-   0.67890625,
-   0.6
-  ],
-  "last_slide": 3,
-  "custom": {
-   "1": "data/custom/776503_slide1.jpg",
-   "2": "data/custom/776503_slide2.jpg"
-  },
-  "zoom": {
-   "1": 1.4,
-   "2": 1.4
-  }
+   0.5
+  ]
  },
  "last_propose": "2026-11-02",
  "photo": null
