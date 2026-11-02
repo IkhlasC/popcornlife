@@ -1,5 +1,5 @@
 {
- "offset": 422726032,
+ "offset": 422726034,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,9 +9,9 @@
   "rating": 6.4,
   "platform": "Netflix",
   "texts": [
-   "Ce père vient d'être mordu, il lui reste 48 heures,\nslide 3 : il doit lui trouver un gardien avant de lui refiler le virus",
+   "Ce père vient d'être mordu, il lui reste 48 heures",
    "Il traverse la nature australienne avec sa fille attachée dans son dos",
-   "Il doit lui trouver un gardien avant de devenir un danger pour elle"
+   "il doit lui trouver un gardien avant de lui refiler le virus"
   ],
   "poster_path": "/cdPSUck4tBRvRu6DFk6XciDrssn.jpg",
   "candidates": [
@@ -39,7 +39,7 @@
    0.4484375,
    0.5
   ],
-  "last_slide": 1
+  "last_slide": 3
  },
  "last_propose": "2026-11-02",
  "photo": null

@@ -65,8 +65,15 @@
  {
   "film": "Cargo",
   "slide": 1,
-  "avant": "Ce père vient d'être infecté, il lui reste 48 heures",
-  "apres": "Ce père vient d'être mordu, il lui reste 48 heures,\nslide 3 : il doit lui trouver un gardien avant de lui refiler le virus",
+  "avant": "Ce père vient d'être mordu, il lui reste 48 heures,\nslide 3 : il doit lui trouver un gardien avant de lui refiler le virus",
+  "apres": "Ce père vient d'être mordu, il lui reste 48 heures",
+  "date": "2026-11-02"
+ },
+ {
+  "film": "Cargo",
+  "slide": 3,
+  "avant": "Il doit lui trouver un gardien avant de devenir un danger pour elle",
+  "apres": "il doit lui trouver un gardien avant de lui refiler le virus",
   "date": "2026-11-02"
  }
 ]
