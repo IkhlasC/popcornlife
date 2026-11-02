@@ -2,19 +2,19 @@
  "offset": 422726001,
  "pending": [
   {
+   "type": "movie",
+   "id": 567609,
+   "title": "Wedding Nightmare"
+  },
+  {
+   "type": "movie",
+   "id": 776503,
+   "title": "CODA"
+  },
+  {
    "type": "tv",
-   "id": 196322,
-   "title": "Dark Matter"
-  },
-  {
-   "type": "movie",
-   "id": 1233413,
-   "title": "Sinners"
-  },
-  {
-   "type": "movie",
-   "id": 501929,
-   "title": "Les Mitchell contre les machines"
+   "id": 200709,
+   "title": "Héros fragile"
   }
  ],
  "last": {
@@ -56,6 +56,6 @@
    0.45
   ]
  },
- "last_propose": "2026-11-01",
+ "last_propose": "2026-11-02",
  "photo": null
 }
