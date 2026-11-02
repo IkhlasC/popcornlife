@@ -9,9 +9,21 @@ def _call(method, data=None, files=None):
 
 def chat_id(): return int(os.environ["TELEGRAM_CHAT_ID"])
 
+def lire_url():
+    """Lien du bouton « Lire mes réponses » (fichier data/lire_url.txt). Vide : pas de bouton."""
+    try:
+        with open("data/lire_url.txt", encoding="utf-8") as f:
+            u = f.read().strip()
+        return u if u.startswith("http") else ""
+    except OSError:
+        return ""
+
 def send(text, buttons=None):
     data = {"chat_id": chat_id(), "text": text, "parse_mode": "HTML", "disable_web_page_preview": "true"}
-    if buttons: data["reply_markup"] = json.dumps({"inline_keyboard": buttons})
+    rows = list(buttons or [])
+    u = lire_url()
+    if u: rows.append([{"text": "🔄 Lire mes réponses", "url": u}])      # un clic lance le bot, sans passer par GitHub
+    if rows: data["reply_markup"] = json.dumps({"inline_keyboard": rows})
     return _call("sendMessage", data)
 
 def send_files(paths):
