@@ -54,5 +54,12 @@
   "avant": "Imagine que tu arrives de nuit dans ton airbnb et qu'un homme y vit déjà",
   "apres": "Imagine que tu arrives tard la nuit dans ton Airbnb, mais tu vois qu'un homme y vit déjà",
   "date": "2026-11-02"
+ },
+ {
+  "film": "Barbare",
+  "slide": 2,
+  "avant": "Tu n'as nulle part d'autre où dormir avant ton entretien à Détroit, alors tu restes",
+  "apres": "T'as nulle part où aller avant ton entretien, alors t'es obligé de rester",
+  "date": "2026-11-02"
  }
 ]
