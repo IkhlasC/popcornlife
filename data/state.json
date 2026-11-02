@@ -1,5 +1,5 @@
 {
- "offset": 422726041,
+ "offset": 422726042,
  "pending": [],
  "last": {
   "type": "movie",
@@ -10,7 +10,7 @@
   "platform": "",
   "texts": [
    "Imagine que tu rentres avec le gâteau d'anniversaire de ta fille sur le siège passager",
-   "Dehors, les médias et les politiques débattent de son sauvetage pendant qu'il rationne son eau"
+   "Mais sur la route, un tunnel s'effondre sur toi"
   ],
   "poster_path": "/8LhuD8oiHZWhWa2Gkj77l1s4HiI.jpg",
   "candidates": [
@@ -38,7 +38,7 @@
    0.5,
    0.53984375
   ],
-  "last_slide": 1
+  "last_slide": 2
  },
  "last_propose": "2026-11-02",
  "photo": null
