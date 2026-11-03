@@ -1,5 +1,5 @@
 {
- "offset": 422726072,
+ "offset": 422726075,
  "pending": [],
  "last": {
   "type": "movie",
@@ -43,7 +43,17 @@
   ],
   "hashtags": "#film #quoiregarder #horreur #countdown #application",
   "comment": "Tu télécharges l'appli pour connaître ta date, ou tu préfères ne jamais savoir ?",
-  "last_slide": 3
+  "last_slide": 3,
+  "custom": {
+   "1": "data/custom/599975_slide1.jpg",
+   "2": "data/custom/599975_slide2.jpg",
+   "3": "data/custom/599975_slide3.jpg"
+  },
+  "zoom": {
+   "1": 1.4,
+   "2": 1.4,
+   "3": 1.4
+  }
  },
  "last_propose": "2026-11-03",
  "photo": null
