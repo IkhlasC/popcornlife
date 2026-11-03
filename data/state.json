@@ -1,5 +1,5 @@
 {
- "offset": 422726070,
+ "offset": 422726072,
  "pending": [],
  "last": {
   "type": "movie",
@@ -10,7 +10,8 @@
   "platform": "",
   "texts": [
    "Imagine que tu télécharges une appli qui prédit l'heure de ta m*rt",
-   "Elle te donne 3 jours à vivre, et une silhouette se met à te suivre"
+   "Tu la télécharges pour rigoler, mais elle t'annonce qu'il te reste 3 jours",
+   "mais tu te rends compte que les prédictions des autres ont vraiment marché.."
   ],
   "poster_path": "/t8QRsxslOvrmmzExSKThxOz0T2t.jpg",
   "candidates": [
@@ -32,14 +33,17 @@
   ],
   "assign": [
    3,
-   0
+   0,
+   1
   ],
   "focus": [
    0.44375,
-   0.690625
+   0.690625,
+   0.5
   ],
   "hashtags": "#film #quoiregarder #horreur #countdown #application",
-  "comment": "Tu télécharges l'appli pour connaître ta date, ou tu préfères ne jamais savoir ?"
+  "comment": "Tu télécharges l'appli pour connaître ta date, ou tu préfères ne jamais savoir ?",
+  "last_slide": 3
  },
  "last_propose": "2026-11-03",
  "photo": null
