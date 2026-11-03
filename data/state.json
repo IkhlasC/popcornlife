@@ -1,5 +1,5 @@
 {
- "offset": 422726061,
+ "offset": 422726062,
  "pending": [],
  "last": {
   "type": "movie",
@@ -39,12 +39,14 @@
   "hashtags": "#film #quoiregarder #horreur #vivarium #huisclos",
   "comment": "Un agent qui te parle d'éternité pendant une visite : tu signes ou tu pars en courant ?",
   "custom": {
-   "1": "data/custom/458305_slide1.jpg"
+   "1": "data/custom/458305_slide1.jpg",
+   "2": "data/custom/458305_slide2.jpg"
   },
   "zoom": {
-   "1": 1.4
+   "1": 1.4,
+   "2": 1.4
   },
-  "last_slide": 1
+  "last_slide": 2
  },
  "last_propose": "2026-11-03",
  "photo": null
