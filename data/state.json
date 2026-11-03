@@ -1,59 +1,43 @@
 {
- "offset": 422726058,
+ "offset": 422726059,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 441183,
-  "title": "Light of My Life",
+  "id": 458305,
+  "title": "Vivarium",
   "year": "2019",
-  "rating": 6.5,
-  "platform": "",
+  "rating": 6.1,
+  "platform": "Disney+ / HBO Max",
   "texts": [
-   "Imagine que tu es obligé de couper les cheveux de ta fille et de l'habiller en garçon",
-   "Elle est la seule femme encore en vie et personne ne doit le savoir"
+   "Imagine que tu visites ta première maison avec un agent immobilier",
+   "Mais tu te rends compte que tu ne peux plus sortir du lotissement"
   ],
-  "poster_path": "/oDQ2zatc9tiRwEy4Oj8ZWXKLvPi.jpg",
+  "poster_path": "/2SAH6napkUWibaAJ4oXr8dAVTIm.jpg",
   "candidates": [
-   "/aBqbubKhglCkD8riJddlXsQDF2N.jpg",
-   "/vJd6D5KbiCC7GYFynHHOV9KLXOr.jpg",
-   "/b7d9LkbGDUlBE3B9z8YZdDXNYl1.jpg",
-   "/d5UjzgdCoI1jNcvTU9pzgSGiEnC.jpg",
-   "/wOkBmQUO5RcifmxmY42XEKD4GBO.jpg",
-   "/ccZGd8mtyDBrd0jnA5wnpKAOA13.jpg",
-   "/xZAw99Le9dygXTWvAickmZoja65.jpg",
-   "/pSbjKZPgyvvM7ZiBkPr4T5d1ePj.jpg",
-   "/ltKJZ3DL2lEEvmhyd4IOAVvgvzX.jpg",
-   "/kjVBRN1HqmcBfBAUJNzF3kWvCNl.jpg",
-   "/rWDUiCYwSMDxVzxwacY9fnWQZig.jpg",
-   "/cxenDGtHLCPwBnZrvfTgpmriRue.jpg",
-   "/9yRcf264USew5E7T7ss4rsp1UDa.jpg",
-   "/vNPv5aMHimu1hm8AY2TNaom6Bi.jpg",
-   "/92JFNpOrqRzN1wTlo799gmdHirj.jpg",
-   "/6zSFMAJGe7mFnQWlXfJ6f0OKv62.jpg",
-   "/vmtXATpYZwYSrtOVF7FwkZeeyiF.jpg",
-   "/vop8BmElEdGVPtlP5kw0hrQPh3H.jpg",
-   "/43GmHJCyDAm7hvS6sY3Cj4O9IBU.jpg",
-   "/6Tfl4653gVcXpe0s5Eb6nuZlOAb.jpg",
-   "/pc9nABhC465JtIIvks9H1C2NY5j.jpg",
-   "/OOFF3aNqNNNSXMs6OGtdcx9Lts.jpg"
+   "/zLa8fA7boGtNoNH7n6iYi9UqoaH.jpg",
+   "/gzrxB8PLoSZhzKi1t5mKYGFZT3s.jpg",
+   "/ux9s3gwuA2qgoTNFFom2QOHeK9w.jpg",
+   "/i1kmEj4oPLuSXwlBfwgCqqdEkjY.jpg",
+   "/eCcJkBqqGhjswDtadLmRmZVXpoj.jpg",
+   "/apzuJXA9RVfMEWXmv80fZv5Yof2.jpg",
+   "/inlg8EsXowlP2SpfyZkj9xwpsdD.jpg",
+   "/jZ4YdDCnfK4cO13do9J4JaT8d2O.jpg",
+   "/jg675a839JrP0DSrriUPP9KBiBe.jpg",
+   "/mPAnIUerw9OUsIR0rMqI2SEbMge.jpg",
+   "/3KbXRhzg5pITV70MEwWLf4jaiZp.jpg",
+   "/7601ez9A07THOeilJYouYFLvruo.jpg",
+   "/pKl47OwPiuDqPEGkrsiqwAmTpBT.jpg"
   ],
   "assign": [
-   1,
-   6
+   0,
+   7
   ],
   "focus": [
-   0.45859375,
-   0.5921875
+   0.7109375,
+   0.5
   ],
-  "last_slide": 2,
-  "custom": {
-   "1": "data/custom/441183_slide1.jpg",
-   "2": "data/custom/441183_slide2.jpg"
-  },
-  "zoom": {
-   "1": 1.96,
-   "2": 1.4
-  }
+  "hashtags": "#film #quoiregarder #horreur #vivarium #huisclos",
+  "comment": "Acheter la maison de tes rêves pour l'éternité : le rêve ou la pire des prisons ?"
  },
  "last_propose": "2026-11-03",
  "photo": null
