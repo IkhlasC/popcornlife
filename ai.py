@@ -80,7 +80,7 @@ A) TA VOIX PopcornLife (priorité : c'est le style du compte, majuscule au débu
 - Trap, 3,3 M de vues : « Ce t*eur en série se rend à un concert avec sa fille » / « Il se rend compte que le concert tout entier est un piège pour lui »
 - Le Monde de John, 2,1 M : « Un garçon de 13 ans découvre un bunker à côté de sa maison » / « Il décide de dr*guer toute sa famille et les enferme dedans »
 - Omar m'a tuer, 952 K : « Une vieille dame écrit le nom de son meurtrier avant de mourir » / « Omar, son jardinier, est jugé coupable, pourtant aucune preuve ne prouve sa culpabilité »
-- Prisoners, 895 K : « Et si ton enfant disparaissait… et que le seul suspect était intouchable » / « Jusqu'où irais-tu pour le faire parler ? »
+- Prisoners, 895 K : « Et si ton enfant disparaissait… et que le seul suspect était intouchable » / « Jusqu'où irais-tu pour le faire parler ? » (ici la question a marché, mais aujourd'hui la règle est : AUCUNE question dans les slides, tourne le même dilemme en affirmation)
 - Au nom de ma fille, 823 K : « Un père laisse sa fille partir en vacances chez une copine » / « Elle se fait t*er, son père accuse le père de sa copine mais personne ne le croit »
 - Goodnight Mommy, 647 K : « En rentrant, 2 jumeaux se rendent compte que leur mère a le visage bandé » / « Plus le temps passe, plus ils doutent de l'identité de cette femme »
 - Carry-On, 361 K : « Un agent de sécurité à l'aéroport trouve une oreillette à côté d'une valise » / « Pour sauver sa petite amie, il va devoir faire tout ce que lui dit la voix »
@@ -210,6 +210,27 @@ def corrections_block(limit=8):
     return ("\nCORRECTIONS DE LA RÉDACTRICE (PRIORITÉ MAXIMALE : elle a réécrit elle-même ces phrases, c'est EXACTEMENT sa voix. Compare l'avant et l'après : "
             "longueur, choix des mots, fait concret, ordre de l'information, façon de couper la phrase. Applique la même différence à ta nouvelle écriture, sans recopier) :\n" + "\n".join(lines) + "\n")
 
+def clean_tags(tags, meta, limit=5):
+    """5 hashtags maximum (limite TikTok) : propres (sans accents ni espaces), uniques, avec toujours le hashtag du titre."""
+    import unicodedata
+    def norm(t):
+        t = unicodedata.normalize("NFKD", str(t)).encode("ascii", "ignore").decode().lower()
+        t = re.sub(r"[^a-z0-9]", "", t)
+        return "#" + t if t else ""
+    out = []
+    for t in tags if isinstance(tags, list) else str(tags).split():
+        t = norm(t)
+        if t and t not in out: out.append(t)
+    title = norm(meta.get("title", ""))
+    if title and title != "#":                      # une variante fautive du titre (#herofragile) est remplacée par la bonne
+        import difflib
+        out = [t for t in out if t == title or difflib.SequenceMatcher(None, t, title).ratio() < 0.8]
+    if title and title != "#" and title not in out:
+        out.insert(min(len(out), limit - 1), title)
+    elif title in out and out.index(title) >= limit:
+        out.remove(title); out.insert(limit - 1, title)
+    return out[:limit]
+
 def precision_check(meta, s):
     """Deuxième regard : chaque phrase contient-elle un fait précis qu'on peut filmer ? Renvoie la liste des phrases trop floues avec une piste."""
     num = "\n".join(f"slide {i+1} : {x}" for i, x in enumerate(s))
@@ -263,7 +284,7 @@ MÉTHODE (c'est ce qui décide de la qualité) :
 2. "brouillons_s2" : 5 versions de la slide 2 : (a) la prise de conscience (« se rend compte que… »), (b) un retournement ou une ironie, (c) « plus le temps passe, plus… » ou « très vite… », (d) « il va devoir… », (e) l'injustice (« pourtant personne ne le croit »). Toutes basées sur un FAIT PRÉCIS du synopsis, qui laissent volontairement une zone d'ombre.
 3. Garde pour chaque slide la plus concrète, la plus choquante et la plus intrigante. Si la version (g) « Imagine… » est la plus forte pour cette œuvre (et que ce n'est pas forcé), prends-la.
 Test final pour chaque phrase : (1) peut-on la coller telle quelle sur un autre film ? Alors elle est trop vague, recommence. (2) la slide 1 commence-t-elle par un décor ou un contexte (« Dans un monde… », « En pleine… ») ? Réécris-la avec une personne. (3) contient-elle un jugement ou une conclusion ? Supprime-le. (4) donne-t-elle envie de connaître la suite ? Sinon, recommence.
-INTERDIT : « quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu vas adorer », « d'un côté… de l'autre », « impossible de lâcher », « leurs vacances tournent au drame » et autres formules vagues, les points d'exclamation, les emojis, les superlatifs vides, un nom d'acteur. Une question n'est autorisée qu'en slide 2 (« Jusqu'où irais-tu… ? »), jamais en slide 1 ni 3.
+INTERDIT : « quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu vas adorer », « d'un côté… de l'autre », « impossible de lâcher », « leurs vacances tournent au drame » et autres formules vagues, les points d'exclamation, les emojis, les superlatifs vides, un nom d'acteur. AUCUNE question dans les slides (ni « jusqu'où irais-tu ? », ni « et toi ? ») : le lecteur doit avoir envie de réagir sans qu'on le lui demande.
 
 UN FAIT QU'ON PEUT FILMER (règle n°1 de la rédactrice) : chaque slide doit contenir un FAIT PRÉCIS qu'une caméra pourrait montrer : un geste, un objet, un chiffre, une phrase prononcée, une règle, un lieu précis. Les phrases qui décrivent un ÉTAT ou un SENTIMENT abstrait sont refusées : « il ne la connaissait pas », « tout est faux », « ils ont de moins en moins de chances de rentrer chez eux », « la situation devient dangereuse », « il comprend que quelque chose ne va pas ». Remplace-les par ce qui se passe VRAIMENT dans le film. Prends, dans l'ordre, la scène ou le détail le plus choquant, le plus triste ou le plus inquiétant que tu connais avec certitude (même s'il n'est pas dans le synopsis), à condition qu'il ne révèle pas la fin. Le fait précis doit faire ressentir quelque chose : peur, malaise, tristesse, injustice, curiosité qui brûle.
 Exemples de la différence (tirés de vrais films : ne les réutilise que pour ces films) :
@@ -271,16 +292,26 @@ Exemples de la différence (tirés de vrais films : ne les réutilise que pour c
 - The Visit (deux enfants chez leurs grands-parents) : « plus les jours passent, moins ils ont de chances de rentrer chez eux » ❌ → « mamie les prévient : ne sortez jamais de votre chambre après 21h30 » ✅
 - Un détail vague (« quelque chose de louche chez les voisins ») ❌ → un acte (« les voisins enterrent un sac dans leur jardin à 3h du matin ») ✅
 
+FAIRE COMMENTER SANS POSER DE QUESTION (règle de la rédactrice) : les publications qui marchent le mieux sont celles où les commentaires arrivent dès les premières minutes. Écris donc des slides qui donnent envie de réagir, sans jamais demander quoi que ce soit. Ce qui pousse à commenter :
+- une INJUSTICE flagrante (« jugé coupable alors qu'aucune preuve ne le prouve ») : les gens veulent dire que c'est révoltant ;
+- un CHOIX ou un acte qui DIVISE (un père qui fait quelque chose d'extrême pour son enfant, un personnage qu'on peut juger de deux façons) : les gens veulent dire « moi j'aurais fait pareil / jamais » ;
+- un détail ÉNORME ou CHIFFRÉ qui choque (« tous les enfants de sa classe », « 90 minutes ») ;
+- une situation où chacun pense à SA vie ou à QUELQU'UN de précis (ta mère, ton frère, un airbnb, ton enfant) : les gens taguent un proche ;
+- une zone d'ombre ou une ironie qui donne envie de dire « j'ai deviné » ou « pourquoi ? » (sans donner la fin).
+La dernière slide doit laisser une opinion à prendre, pas une question à répondre.
+
 CE QUI DÉRANGE, À PETITES GOUTTES (règle de la rédactrice) : n'écris JAMAIS « il cache un secret », « elle cache des choses », « un secret terrible », « quelque chose de dérangeant », « un passé sombre », « un truc qu'on ne devrait pas savoir ». Ces formules ne disent rien et n'intriguent pas. À la place, NOMME le fait dérangeant, précis et concret, mais UN SEUL par slide, sans jamais révéler la fin. Exemples de la différence : « sa femme lui cachait beaucoup de choses » ❌ → « il découvre qu'elle a ouvert un compte à son nom sans le lui dire » ✅ ; « ce père a un passé sombre » ❌ → « ce père de famille tranquille a déjà t*é des hommes » ✅ ; « ce voisin si gentil cache un secret » ❌ → « ce voisin si gentil garde les clés de toutes les maisons du quartier » ✅ (ces exemples sont inventés pour montrer la méthode : ne les réutilise pas ; n'invente jamais un fait, prends le plus précis du synopsis ou de ce que tu connais avec certitude).
 Chaque slide apporte UNE information nouvelle, plus dérangeante que la précédente.
 
 RÈGLE SPOILER : tu peux raconter le point de départ et la première grande bascule de l'histoire (ce que dirait le résumé au dos du film), mais JAMAIS le retournement final, la fin, qui meurt à la fin, ni l'identité d'un personnage caché.
 Reste fidèle au synopsis fourni : n'invente aucun fait.
 
-Ajoute 6 hashtags : #film (ou #serie), #cinema, #quoiregarder, un hashtag du genre (#thriller, #suspense, #horreur, #psychologique…), le hashtag du titre (sans espaces ni accents) et un hashtag lié à l'intrigue.
+HASHTAGS : EXACTEMENT 5 hashtags, pas un de plus (TikTok n'en accepte pas davantage), choisis les plus pertinents pour CETTE œuvre : #film (ou #serie), #quoiregarder, un hashtag du genre (#thriller, #horreur, #suspense, #drame, #comedie…), le hashtag du titre (sans espaces ni accents) et un hashtag précis lié à l'intrigue ou au thème (#disparition, #survie, #huisclos, #injustice, #famille…). Pas de hashtag vague ou inutile.
+
+PREMIER COMMENTAIRE ("commentaire") : écris le commentaire que la rédactrice postera elle-même sous sa publication pour faire démarrer les réponses. Il doit être incitateur et SPÉCIFIQUE à cette œuvre (jamais « Vous avez aimé ? » ni « Dites-moi en commentaire »). 1 ou 2 phrases courtes, en français parlé, sans spoiler, sans emoji en excès (1 maximum). Formules qui marchent : un dilemme précis (« Un père qui enferme son fils pour le protéger : héros ou monstre ? »), une provocation douce (« Je parie que personne ne devine ce qu'il cache dans la cave »), un défi (« Dis-moi en un mot ce que tu aurais fait à sa place »), un tag (« Tag la personne que tu ne laisserais jamais garder tes enfants »). Pour une question, prends toujours un CHOIX concret entre deux options, pas une question ouverte.
 Mets nb_slides à 2 ou 3 ; si nb_slides = 2, laisse s3 vide.
 TEST DE COMPRÉHENSION avant de répondre : un inconnu qui ne sait rien du film comprend-il, avec tes slides seules, QUI est le héros, OÙ il est, quelle est la RÈGLE ou l'enjeu, et ce qui l'attend ? Sinon, ajoute le contexte manquant.
-JSON : {{"contexte_cle":"","intrigue_principale":"","element_extraordinaire":"","question_curiosite":"","brouillons_s1":["","","","","",""],"brouillons_s2":["","","","",""],"emotion_finale":"peur|tristesse|surprise|curiosité","nb_slides":2,"s1":"","s2":"","s3":"","hashtags":["#..."],"spoiler_risk":false}}
+JSON : {{"contexte_cle":"","intrigue_principale":"","element_extraordinaire":"","question_curiosite":"","brouillons_s1":["","","","","",""],"brouillons_s2":["","","","",""],"emotion_finale":"peur|tristesse|surprise|curiosité","nb_slides":2,"s1":"","s2":"","s3":"","hashtags":["#...","#...","#...","#...","#..."],"commentaire":"","spoiler_risk":false}}
 Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retournement."""
     note = ""
     for attempt in range(3):
@@ -292,7 +323,7 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
         if any(len(x.split()) > 15 for x in s): problems.append("une phrase dépasse 14 mots : raccourcis sans perdre le contexte")
         if r.get("spoiler_risk"): problems.append("risque de spoiler sur la fin ou un retournement")
         if len(set(s)) < len(s): problems.append("phrases identiques")
-        if any("?" in x for x in s[:-1]) or (len(s) == 3 and "?" in s[0]): problems.append("une question hors dernière slide")
+        if any("?" in x for x in s): problems.append("une slide contient une question : aucune question dans les slides, reformule en affirmation qui donne envie de réagir")
         if any("!" in x for x in s): problems.append("une phrase contient un point d'exclamation")
         hard = [w for x in s for w in re.findall(r"[A-Za-zÀ-ÿ'-]+", x) if len(w) >= 13 or re.fullmatch(r"(?i)d[ée]su[eè]t[es]*|stratag[èe]mes?|dissimul\w*|appr[ée]hension|incontournables?|insoutenables?|tumultueu\w+|fallacieu\w+|machiav[ée]li\w+|inextricables?|inexorables?|ind[ée]niables?|abyssal\w*|vertigineu\w+", w)]
         if hard: problems.append("mots trop soutenus ou trop longs (" + ", ".join(sorted(set(hard))) + ") : remplace-les par des mots simples et courts")
@@ -304,6 +335,9 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
         bad = [x for x in s if vague.search(x)]
         if bad: problems.append("formule vague ou conclusion interdite dans : " + " / ".join(bad) + " (raconte un fait précis à la place)")
         if avoid and oral(s[0]) in [x.strip() for x in avoid]: problems.append("la slide 1 reprend un texte refusé")
+        com = str(r.get("commentaire") or "").strip()
+        if (not com or len(com) > 220 or re.search(r"(?i)vous avez aim|dites[- ]moi en commentaire|likez|abonn", com)) and attempt < 2:
+            problems.append("le champ commentaire est vide, trop long (220 caractères max) ou générique : écris un vrai premier commentaire incitateur, spécifique à l'œuvre")
         if not problems and attempt < 2:
             try:
                 for i, x, idee in precision_check(meta, s):
@@ -311,9 +345,7 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
             except Exception:
                 pass
         if not problems:
-            tags = r.get("hashtags", [])
-            tags = [t if t.startswith("#") else "#" + t for t in tags]
-            return {"texts": [oral(x) for x in s], "caption": "", "hashtags": " ".join(tags)}
+            return {"texts": [oral(x) for x in s], "caption": "", "hashtags": " ".join(clean_tags(r.get("hashtags", []), meta)), "comment": com}
         note = "\n\nCorrige ce problème : " + ", ".join(problems) + "."
     raise RuntimeError("Impossible d'obtenir des textes valides")
 
