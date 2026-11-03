@@ -1,57 +1,35 @@
 {
- "offset": 422726068,
+ "offset": 422726069,
  "pending": [],
  "last": {
-  "type": "movie",
-  "id": 458305,
-  "title": "Vivarium",
-  "year": "2019",
-  "rating": 6.1,
-  "platform": "Disney+ / HBO Max",
+  "type": "tv",
+  "id": 256317,
+  "title": "Countdown",
+  "year": "2025",
+  "rating": 7.3,
+  "platform": "Prime Video",
   "texts": [
-   "Imagine que tu visites la maison de tes rêves",
-   "Mais quand tu veux repartir, tu vois que t'es coincé, tu peux pas t'échapper",
-   "le truc c'est que cet enfant est complètement taré"
+   "Un flic du LAPD rejoint une unité secrète après le m*urtre d'un agent fédéral",
+   "Très vite, il se rend compte qu'un complot menace une ville de millions d'habitants"
   ],
-  "poster_path": "/2SAH6napkUWibaAJ4oXr8dAVTIm.jpg",
+  "poster_path": "/nWZr61chRY6Lfy78VK7WzKopX7y.jpg",
   "candidates": [
-   "/zLa8fA7boGtNoNH7n6iYi9UqoaH.jpg",
-   "/gzrxB8PLoSZhzKi1t5mKYGFZT3s.jpg",
-   "/ux9s3gwuA2qgoTNFFom2QOHeK9w.jpg",
-   "/i1kmEj4oPLuSXwlBfwgCqqdEkjY.jpg",
-   "/eCcJkBqqGhjswDtadLmRmZVXpoj.jpg",
-   "/apzuJXA9RVfMEWXmv80fZv5Yof2.jpg",
-   "/inlg8EsXowlP2SpfyZkj9xwpsdD.jpg",
-   "/jZ4YdDCnfK4cO13do9J4JaT8d2O.jpg",
-   "/jg675a839JrP0DSrriUPP9KBiBe.jpg",
-   "/mPAnIUerw9OUsIR0rMqI2SEbMge.jpg",
-   "/3KbXRhzg5pITV70MEwWLf4jaiZp.jpg",
-   "/7601ez9A07THOeilJYouYFLvruo.jpg",
-   "/pKl47OwPiuDqPEGkrsiqwAmTpBT.jpg"
+   "/hPluvztO5rqRWC02SUJ7Iob7xWh.jpg",
+   "/1GMyouDLET9zjA4ZCPpzvLBkY1B.jpg",
+   "/4pxGvtwxDlATy9nvJMvYL8u25LZ.jpg",
+   "/z7iZdCakCV2n0Pr1ns40uDWQB8S.jpg",
+   "/zM8fRxPZTDstxVNEccx6BfjkYVA.jpg"
   ],
   "assign": [
-   5,
-   0,
-   1
+   3,
+   0
   ],
   "focus": [
-   0.5,
-   0.7109375,
-   0.5
+   0.63984375,
+   0.478125
   ],
-  "hashtags": "#film #quoiregarder #horreur #vivarium #huisclos",
-  "comment": "Un agent qui te parle d'éternité pendant une visite : tu signes ou tu pars en courant ?",
-  "custom": {
-   "1": "data/custom/458305_slide1.jpg",
-   "2": "data/custom/458305_slide2.jpg",
-   "3": "data/custom/458305_slide3.jpg"
-  },
-  "zoom": {
-   "1": 1.4,
-   "2": 1.4,
-   "3": 1.4
-  },
-  "last_slide": 3
+  "hashtags": "#serie #quoiregarder #thriller #countdown #complot",
+  "comment": "Du jour au lendemain, on te propose d'entrer dans une unité secrète : tu dis oui ou tu refuses ?"
  },
  "last_propose": "2026-11-03",
  "photo": null
