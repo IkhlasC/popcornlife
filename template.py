@@ -10,7 +10,7 @@ STYLE = {
     "font_small": ["small.ttf", "fonts/small.ttf", "title.ttf",
                    "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
                    "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", "C:/Windows/Fonts/arial.ttf"],
-    "text_max_size": 80, "text_min_size": 50, "line_spacing": 1.18,
+    "text_max_size": 70, "text_min_size": 46, "line_spacing": 1.18,
     "text_bottom": 1430,         # position du BAS du texte (plus le chiffre est petit, plus le texte monte ; max 1920)
     "zoom": 0.80,                # zoom des photos : 1.0 = plein cadre (très zoomé) ; plus le chiffre est petit, plus on voit de décor (ex. 0.7)
     "dim": 0.06,                 # assombrissement général de l'image (0 = aucun, 1 = noir)
