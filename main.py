@@ -12,6 +12,7 @@ HELP = ("🍿 <b>PopcornLife Studio</b>\n\n"
         "• « image 2 » : je change l'image de la slide 2 (1, 2 ou 3).\n"
         "• Tu peux m'envoyer ta propre image : envoie-la avec la légende « 1 » (ou 2, 3). Si elle n'est pas verticale, je la centre avec du noir en haut et en bas.\n"
         "• « zoom + » / « zoom - » : j'agrandis ou je réduis l'image de la dernière slide modifiée (« zoom + 2 » pour la slide 2). « plein cadre » : l'image remplit toute la slide.\n"
+        "• Ajouter une 3e slide : envoie ton image avec la légende « 3 : ton texte », ou écris « slide 3 : ton texte » (image du film).\n"
         "• Après un post, dis-moi librement ce que tu veux changer, autant de fois que tu veux : « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 », « slide 2 : ta phrase exacte ».\n"
         "• « refais » : j'écris de nouveaux textes pour le dernier film. Tu peux préciser : « refais plus mystérieux ».")
 
@@ -173,6 +174,36 @@ def _remember_correction(last, n, old, new):
     items.append({"film": last.get("title", ""), "slide": n, "avant": old, "apres": new, "date": datetime.date.today().isoformat()})
     save("corrections", items[-40:])
 
+def _save_custom(last, n, src):
+    """Enregistre l'image envoyée par la rédactrice pour la slide n (avec 1 « zoom + » si elle est en bandes noires)."""
+    from PIL import Image, ImageOps
+    os.makedirs(f"{DATA}/custom", exist_ok=True); dst = f"{DATA}/custom/{last['id']}_slide{n}.jpg"
+    ImageOps.exif_transpose(Image.open(src)).convert("RGB").save(dst, "JPEG", quality=92)
+    last.setdefault("custom", {})[str(n)] = dst; (last.get("zoom") or {}).pop(str(n), None)
+    try: _do_zoom(last, n, "in", only_if_boxed=True)
+    except Exception: traceback.print_exc()
+
+def _add_slide(last, text, path=None):
+    """Ajoute une 3e slide de texte (avant l'affiche), avec l'image envoyée par la rédactrice ou une image du film."""
+    if len(last["texts"]) >= 3: raise ValueError("ce carrousel a déjà 3 slides de texte, c'est le maximum")
+    text = ai.oral(str(text or "").strip().strip('"«» '))
+    if not text: raise ValueError("il me faut le texte de la nouvelle slide")
+    n = len(last["texts"]) + 1
+    last["texts"].append(text); last["focus"].append(0.5)
+    cands = last.get("candidates") or []
+    if cands: last["assign"].append(next((k for k in range(len(cands)) if k not in last["assign"]), 0))
+    if path: _save_custom(last, n, path)
+    elif cands:
+        try: _do_image(last, n, text)
+        except Exception: traceback.print_exc()
+    return n
+
+def _render_poster(last):
+    poster = tmdb.download(last["poster_path"], "w780")
+    os.makedirs("out", exist_ok=True); p = f"out/slide{len(last['texts'])+1}.jpg"
+    render.poster_slide(poster, {"title": last["title"], "year": last["year"], "platform": last["platform"], "rating": last["rating"]}, p)
+    return p
+
 def _do_zoom(last, n, direction, only_if_boxed=False):
     im, custom = _slide_image(last, n)
     if only_if_boxed and custom and render.fill_factor(im, True) <= 1.01:
@@ -220,15 +251,24 @@ def apply_actions(actions):
     state = load("state", {"offset": 0}); last = state.get("last")
     if not last or not last.get("texts"):
         tg.send("Je n'ai pas de post récent à modifier. Écris d'abord un titre de film."); return
-    _ensure(last); total = len(last["texts"]); touched, notes = [], []
+    _ensure(last); total = len(last["texts"]); touched, notes = [], []; added = False
     for a in actions:
         kind = a.get("action")
         try: n = int(a.get("slide") or 0)
         except Exception: n = 0
         if kind in ("text", "image", "custom", "zoom") and not 1 <= n <= total:
-            notes.append(f"Slide {n or '?'} : ce carrousel n'a que {total} slides de texte."); continue
+            if total == 2 and n == 3 and kind == "text" and str(a.get("instruction") or "").strip():
+                kind, a = "add_slide", {"text": a.get("instruction")}                       # « slide 3 : ton texte » = on ajoute une 3e slide
+            elif total == 2 and n == 3 and kind == "custom" and a.get("text"):
+                kind, a = "add_slide", {"text": a["text"], "path": a["path"]}
+            else:
+                notes.append(f"Slide {n or '?'} : ce carrousel n'a que {total} slides de texte." + (" Pour en ajouter une 3e : « slide 3 : ton texte », ou envoie une image avec la légende « 3 : ton texte »." if total == 2 and n == 3 else "")); continue
         try:
-            if kind == "text":
+            if kind == "add_slide":
+                n_new = _add_slide(last, a.get("text") or a.get("instruction"), a.get("path"))
+                total = len(last["texts"]); touched += [n_new - 1, n_new]; added = True
+                notes.append(f"✅ Slide {n_new} ajoutée. L'affiche devient maintenant slide{n_new+1}.jpg : je te renvoie la slide {n_new-1} (les flèches changent) et l'affiche.")
+            elif kind == "text":
                 meta = tmdb.details(last["type"], last["id"])
                 ins = str(a.get("instruction") or "").strip()
                 if a.get("exact") and ins:                  # sa propre phrase : on l'affiche telle quelle
@@ -240,13 +280,7 @@ def apply_actions(actions):
             elif kind == "image":
                 _do_image(last, n, str(a.get("hint") or "")); touched.append(n)
             elif kind == "custom":
-                from PIL import Image, ImageOps
-                os.makedirs(f"{DATA}/custom", exist_ok=True); dst = f"{DATA}/custom/{last['id']}_slide{n}.jpg"
-                ImageOps.exif_transpose(Image.open(a["path"])).convert("RGB").save(dst, "JPEG", quality=92)
-                last.setdefault("custom", {})[str(n)] = dst; (last.get("zoom") or {}).pop(str(n), None)
-                try: _do_zoom(last, n, "in", only_if_boxed=True)    # sa photo démarre déjà avec 1 « zoom + »
-                except Exception: traceback.print_exc()
-                touched.append(n)
+                _save_custom(last, n, a["path"]); touched.append(n)
             elif kind == "zoom":
                 d = str(a.get("direction") or "in")
                 _do_zoom(last, n, d if d in ("in", "out", "fill", "reset") else "in"); touched.append(n)
@@ -269,7 +303,9 @@ def apply_actions(actions):
     state["last"] = last; save("state", state)
     slides = sorted(set(touched))
     if slides:
-        tg.send_files([_render_slide(last, n) for n in slides])
+        files = [_render_slide(last, n) for n in slides]
+        if added: files.append(_render_poster(last))
+        tg.send_files(files)
     tg.send(("\n".join(notes) + "\n\n" if notes else "") + "\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(last["texts"])) + "\n\n"
             "Tu peux continuer : « zoom + », « zoom - », « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 »… "
             "Dis-moi tout ce que tu veux, dans l'ordre.")
@@ -309,18 +345,35 @@ def manual(message):
     produce(*found[0])
 
 # ---------- lecture des messages Telegram ----------
+CAPTION = re.compile(r"(?is)^\s*(?:slide|image|photo|la|n°|numéro)?\s*([1-3])\s*(?:[:：\-–—]\s*(.+))?$")
+
+def _photo_for(path, n, text, last):
+    """Image reçue pour la slide n (avec éventuellement son texte). Slide 3 sur un carrousel de 2 = on l'ajoute."""
+    total = len(last["texts"])
+    if n == total + 1 and total == 2:
+        if text:
+            apply_actions([{"action": "add_slide", "text": text, "path": path}])
+        else:
+            st = load("state", {"offset": 0}); st["add_slide"] = {"path": path}; save("state", st)
+            tg.send("📷 Image reçue pour la nouvelle slide 3. Écris maintenant son texte (ou « annule »).")
+        return
+    acts = [{"action": "custom", "slide": n, "path": path}]
+    if text: acts.append({"action": "text", "slide": n, "instruction": text, "exact": True})
+    apply_actions(acts)
+
 def photo_received(file_id, caption):
     state = load("state", {"offset": 0}); last = state.get("last")
     if not last or not last.get("texts"):
         tg.send("J'ai reçu ton image, mais je n'ai pas de carrousel en cours. Écris d'abord un titre de film."); return
     os.makedirs(f"{DATA}/custom", exist_ok=True)
     path = tg.download_file(file_id, f"{DATA}/custom/_waiting.jpg")
-    mm = re.search(r"([1-3])", caption)
+    mm = CAPTION.match(caption or "")
     if mm:
-        apply_actions([{"action": "custom", "slide": int(mm.group(1)), "path": path}])
+        _photo_for(path, int(mm.group(1)), (mm.group(2) or "").strip(), last)
     else:
         state["photo"] = path; save("state", state)
-        tg.send(f"📷 Image reçue. Pour quelle slide ? Réponds simplement 1, 2 ou 3 (le carrousel a {len(last['texts'])} slides de texte).")
+        total = len(last["texts"])
+        tg.send(f"📷 Image reçue. Pour quelle slide ? Réponds 1 ou 2 pour remplacer l'image d'une slide" + (", ou « 3 : ton texte » pour ajouter une 3e slide avec cette image." if total == 2 else " ou 3."))
 
 def handle(u, state):
     if "callback_query" in u:
@@ -338,12 +391,18 @@ def handle(u, state):
     if "text" not in msg: return
     text = msg["text"].strip(); low = text.lower().strip(" .!")
     ph = state.get("photo")
-    if ph and os.path.exists(ph) and re.search(r"(?i)\b(image|photo|slide|la|numéro)\s*([1-3])\b|^\s*([1-3])\s*$", text):
-        mm = re.search(r"([1-3])", text)
+    mm = CAPTION.match(text) if ph and os.path.exists(ph) else None
+    if mm:
         st = load("state", {"offset": 0}); st["photo"] = None; save("state", st)
-        apply_actions([{"action": "custom", "slide": int(mm.group(1)), "path": ph}]); return
+        _photo_for(ph, int(mm.group(1)), (mm.group(2) or "").strip(), state.get("last") or {"texts": []}); return
     elif ph:                                         # autre message : l'image en attente est abandonnée
         st = load("state", {"offset": 0}); st["photo"] = None; save("state", st)
+    ad = state.get("add_slide")
+    if ad:                                           # on attend le texte de la nouvelle slide 3
+        st = load("state", {"offset": 0}); st["add_slide"] = None; save("state", st)
+        if low in ("annule", "annuler", "non", "stop"):
+            tg.send("D'accord, j'annule l'ajout de la slide."); return
+        apply_actions([{"action": "add_slide", "text": text, "path": ad.get("path")}]); return
     zm = re.match(r"^(zoom|d[eé]zoom|plein (?:cadre|[eé]cran)|remplis?(?: tout)?)\b(.*)$", low)
     if zm and state.get("last") and state["last"].get("texts") and len(low.split()) <= 5:
         rest = zm.group(2); sl = re.search(r"\b([1-3])\b", rest)
@@ -354,9 +413,15 @@ def handle(u, state):
         elif "reset" in rest or "normal" in rest: d = "reset"
         else: d = "in"
         apply_actions([{"action": "zoom", "slide": n, "direction": d}]); return
-    ex = re.match(r"(?is)^\s*(?:slide|texte|phrase|la)\s*([1-3])\s*[:：]\s*(.{4,})$", text)
+    ex = re.match(r"(?is)^\s*(?:(?:ajoute|rajoute|ajouter|rajouter)\s+(?:une\s+)?)?(?:slide|texte|phrase|la)\s*([1-3])\s*[:：]\s*(.{4,})$", text)
     if ex and state.get("last") and state["last"].get("texts"):    # « slide 2 : ta phrase » : sa phrase telle quelle, sans passer par l'IA
         apply_actions([{"action": "text", "slide": int(ex.group(1)), "instruction": ex.group(2).strip(), "exact": True}]); return
+    if re.match(r"(?i)^(ajoute|rajoute|ajouter|rajouter)\b.*\bslide\b", text) and ":" not in text and state.get("last") and state["last"].get("texts"):
+        if len(state["last"]["texts"]) >= 3:
+            tg.send("Ce carrousel a déjà 3 slides de texte, c'est le maximum.")
+        else:
+            tg.send("Pour ajouter une 3e slide :\n• avec TON image : envoie l'image avec la légende « 3 : ton texte » (ou envoie l'image seule, puis écris « 3 : ton texte »).\n• avec une image du film : écris « slide 3 : ton texte ».")
+        return
     if low in ("/start", "aide", "/aide", "help"): tg.send(HELP)
     elif low in ("a", "b", "c") and state.get("pending"):
         k = "abc".index(low)
