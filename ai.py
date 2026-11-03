@@ -471,7 +471,7 @@ Traduis sa demande en actions, dans l'ordre où elle les demande. Actions possib
 - {{"action":"new_film","title":"...","year":null}} : elle demande un AUTRE film ou série (elle cite un titre différent du dernier).
 - {{"action":"propositions"}} : elle veut de nouvelles idées de films.
 - {{"action":"unknown"}} : tu ne comprends pas.
-Règles : « la 1 », « la première », « la couverture » = slide 1. « l'image », « la photo » = image. « le texte », « la phrase », « le hook » = text. « change la slide 2 » sans précision = text ET image. Elle peut enchaîner (« change l'image 1, puis le texte 2 »). Ignore une slide qui n'existe pas. Un message qui n'est qu'un titre de film différent = new_film.
+Règles : « la 1 », « la première », « la couverture » = slide 1. « l'image », « la photo » = image. « le texte », « la phrase », « le hook » = text. « change la slide 2 » sans précision = text ET image. Elle peut enchaîner (« change l'image 1, puis le texte 2 »). Ignore une slide qui n'existe pas, SAUF la slide 3 quand il n'y a que 2 slides : « ajoute une 3e slide : sa phrase » = {{"action":"text","slide":3,"instruction":"sa phrase","exact":true}}. Un message qui n'est qu'un titre de film différent = new_film.
 JSON : {{"actions":[...]}}"""
     r = ask_json(prompt, model=MODEL_FAST, max_tokens=600)
     acts = as_list(r.get("actions") if isinstance(r, dict) else r)
