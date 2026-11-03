@@ -1,5 +1,5 @@
 {
- "offset": 422726059,
+ "offset": 422726060,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,8 +9,8 @@
   "rating": 6.1,
   "platform": "Disney+ / HBO Max",
   "texts": [
-   "Imagine que tu visites ta première maison avec un agent immobilier",
-   "Mais tu te rends compte que tu ne peux plus sortir du lotissement"
+   "Un agent immobilier promet à un couple la maison de ses rêves… pour l'éternité",
+   "Très vite, ils comprennent que « pour l'éternité » n'est pas une façon de parler"
   ],
   "poster_path": "/2SAH6napkUWibaAJ4oXr8dAVTIm.jpg",
   "candidates": [
@@ -29,15 +29,15 @@
    "/pKl47OwPiuDqPEGkrsiqwAmTpBT.jpg"
   ],
   "assign": [
-   0,
-   7
+   5,
+   0
   ],
   "focus": [
-   0.7109375,
-   0.5
+   0.5,
+   0.7109375
   ],
   "hashtags": "#film #quoiregarder #horreur #vivarium #huisclos",
-  "comment": "Acheter la maison de tes rêves pour l'éternité : le rêve ou la pire des prisons ?"
+  "comment": "Un agent qui te parle d'éternité pendant une visite : tu signes ou tu pars en courant ?"
  },
  "last_propose": "2026-11-03",
  "photo": null
