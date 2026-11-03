@@ -1,5 +1,5 @@
 {
- "offset": 422726067,
+ "offset": 422726068,
  "pending": [],
  "last": {
   "type": "movie",
@@ -11,7 +11,7 @@
   "texts": [
    "Imagine que tu visites la maison de tes rêves",
    "Mais quand tu veux repartir, tu vois que t'es coincé, tu peux pas t'échapper",
-   "Un jour, tu trouves un bébé devant ta porte avec un mot : \"Élevez-le et vous serez libre"
+   "le truc c'est que cet enfant est complètement taré"
   ],
   "poster_path": "/2SAH6napkUWibaAJ4oXr8dAVTIm.jpg",
   "candidates": [
@@ -51,7 +51,7 @@
    "2": 1.4,
    "3": 1.4
   },
-  "last_slide": 2
+  "last_slide": 3
  },
  "last_propose": "2026-11-03",
  "photo": null
