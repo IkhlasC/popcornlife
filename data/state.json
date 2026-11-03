@@ -1,53 +1,51 @@
 {
- "offset": 422726048,
+ "offset": 422726049,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 390497,
-  "title": "Tunnel",
-  "year": "2016",
-  "rating": 7.3,
+  "id": 441183,
+  "title": "Light of My Life",
+  "year": "2019",
+  "rating": 6.5,
   "platform": "",
   "texts": [
-   "Imagine que tu rentres avec le gâteau d'anniversaire de ta fille sur le siège passager",
-   "Mais sur la route, un tunnel s'effondre sur toi"
+   "Ce père coupe les cheveux de sa fille et l'habille en garçon",
+   "Elle est la seule femme encore en vie et personne ne doit savoir"
   ],
-  "poster_path": "/8LhuD8oiHZWhWa2Gkj77l1s4HiI.jpg",
+  "poster_path": "/oDQ2zatc9tiRwEy4Oj8ZWXKLvPi.jpg",
   "candidates": [
-   "/37dC684Q6a4o83oAx8KEyNSuBV3.jpg",
-   "/cOxzMDB0870m66LAhFrPRcgzvsP.jpg",
-   "/iAZKxXcc6Ou2ZNh8VrTz1D1Mtex.jpg",
-   "/7VyCAPnpxggdJC4caiolNMeZcXh.jpg",
-   "/4xYXRY4sbGpnfQY9SeJeolK8JED.jpg",
-   "/pbWeINsD1r7ddwNjrYcsgHSR5lf.jpg",
-   "/upyknDxiL8oAO1g5zJi2QqvBGoY.jpg",
-   "/1kGGZuAZpwcYRNJ6NHdlpz5GZZa.jpg",
-   "/fwh6SnJXU7ON3JsiQ33BXPZgKxm.jpg",
-   "/m06t7xVlSaCnqaNcs2SBBPeOzrk.jpg",
-   "/oaMiXLNW5gK1tz7TPkmGTe8l932.jpg",
-   "/c6ALHkCzVkF404gdXkJfzr8Uh7g.jpg",
-   "/kkJra66NUQGrtqGoD0DsY8gti1g.jpg",
-   "/u6TI81M76PVfNM389YExLKTpYV0.jpg",
-   "/r3sFW94aGelfMYTrs2tasREHvxm.jpg"
+   "/aBqbubKhglCkD8riJddlXsQDF2N.jpg",
+   "/vJd6D5KbiCC7GYFynHHOV9KLXOr.jpg",
+   "/b7d9LkbGDUlBE3B9z8YZdDXNYl1.jpg",
+   "/d5UjzgdCoI1jNcvTU9pzgSGiEnC.jpg",
+   "/wOkBmQUO5RcifmxmY42XEKD4GBO.jpg",
+   "/ccZGd8mtyDBrd0jnA5wnpKAOA13.jpg",
+   "/xZAw99Le9dygXTWvAickmZoja65.jpg",
+   "/pSbjKZPgyvvM7ZiBkPr4T5d1ePj.jpg",
+   "/ltKJZ3DL2lEEvmhyd4IOAVvgvzX.jpg",
+   "/kjVBRN1HqmcBfBAUJNzF3kWvCNl.jpg",
+   "/rWDUiCYwSMDxVzxwacY9fnWQZig.jpg",
+   "/cxenDGtHLCPwBnZrvfTgpmriRue.jpg",
+   "/9yRcf264USew5E7T7ss4rsp1UDa.jpg",
+   "/vNPv5aMHimu1hm8AY2TNaom6Bi.jpg",
+   "/92JFNpOrqRzN1wTlo799gmdHirj.jpg",
+   "/6zSFMAJGe7mFnQWlXfJ6f0OKv62.jpg",
+   "/vmtXATpYZwYSrtOVF7FwkZeeyiF.jpg",
+   "/vop8BmElEdGVPtlP5kw0hrQPh3H.jpg",
+   "/43GmHJCyDAm7hvS6sY3Cj4O9IBU.jpg",
+   "/6Tfl4653gVcXpe0s5Eb6nuZlOAb.jpg",
+   "/pc9nABhC465JtIIvks9H1C2NY5j.jpg",
+   "/OOFF3aNqNNNSXMs6OGtdcx9Lts.jpg"
   ],
   "assign": [
-   7,
-   10
+   1,
+   6
   ],
   "focus": [
-   0.5,
-   0.53984375
-  ],
-  "last_slide": 2,
-  "custom": {
-   "1": "data/custom/390497_slide1.jpg",
-   "2": "data/custom/390497_slide2.jpg"
-  },
-  "zoom": {
-   "1": 1.4,
-   "2": 1.4
-  }
+   0.45859375,
+   0.5921875
+  ]
  },
- "last_propose": "2026-11-02",
+ "last_propose": "2026-11-03",
  "photo": null
 }
