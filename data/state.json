@@ -1,5 +1,5 @@
 {
- "offset": 422726063,
+ "offset": 422726065,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,8 +9,8 @@
   "rating": 6.1,
   "platform": "Disney+ / HBO Max",
   "texts": [
-   "Un agent immobilier promet à un couple la maison de ses rêves… pour l'éternité",
-   "Très vite, ils comprennent que « pour l'éternité » n'est pas une façon de parler",
+   "Imagine que tu visites la maison de tes rêves",
+   "Mais quand tu veux repartir, tu vois que t'es coincé, tu peux pas t'échapper",
    "Un jour, tu trouves un bébé devant ta porte avec un mot : \"Élevez-le et vous serez libre"
   ],
   "poster_path": "/2SAH6napkUWibaAJ4oXr8dAVTIm.jpg",
@@ -51,7 +51,7 @@
    "2": 1.4,
    "3": 1.4
   },
-  "last_slide": 3
+  "last_slide": 2
  },
  "last_propose": "2026-11-03",
  "photo": null
