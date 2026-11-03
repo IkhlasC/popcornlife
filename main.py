@@ -106,10 +106,12 @@ def rewrite(guidance=""):
     files = render.render_all(post["texts"], bd, focus or [0.5] * 3, poster,
                               {"title": last["title"], "year": last["year"], "platform": last["platform"], "rating": last["rating"]}, "out")
     tg.send_files(files[:-1])
+    tg.send(f"<code>{e(post['hashtags'])}</code>")
+    if post.get("comment"): tg.send("💬 <b>1er commentaire à poster</b> :\n<code>" + e(post["comment"]) + "</code>")
     tg.send("\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(post["texts"])) + "\n\n"
             "L'affiche (dernière slide) ne change pas. Pas encore ça ? Écris « refais » suivi de ce que tu veux, "
             "par exemple « refais plus mystérieux, sans question ».")
-    last.update(texts=post["texts"], assign=assign, focus=focus or [0.5] * 3)
+    last.update(texts=post["texts"], assign=assign, focus=focus or [0.5] * 3, hashtags=post["hashtags"], comment=post.get("comment", ""))
     state["last"] = last; save("state", state)
 
 def produce(t, i):
@@ -124,7 +126,7 @@ def produce(t, i):
     post = ai.write_post(meta)
     paths = tmdb.backdrops(t, i)
     last = {"type": t, "id": i, "title": meta["title"], "year": meta["year"], "rating": meta["rating"], "platform": plat,
-            "texts": post["texts"], "poster_path": meta["poster_path"], "candidates": paths, "assign": [], "focus": []}
+            "texts": post["texts"], "poster_path": meta["poster_path"], "candidates": paths, "assign": [], "focus": [], "hashtags": post["hashtags"], "comment": post.get("comment", "")}
     last["assign"], last["focus"], bd = choose_images(meta, paths, post["texts"])
     poster = tmdb.download(meta["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, last["focus"] or [0.5] * 3, poster,
@@ -132,6 +134,7 @@ def produce(t, i):
     tg.send_files(files)
     tg.send(f"<code>{e(meta['title'])}</code>")
     tg.send(f"<code>{e(post['hashtags'])}</code>")
+    if post.get("comment"): tg.send("💬 <b>1er commentaire à poster</b> (copie-le sous ta publication) :\n<code>" + e(post["comment"]) + "</code>")
     tg.send(f"✅ <b>{e(meta['title'])}</b> est prêt ({len(post['texts'])} slides + l'affiche).\n{e(plat_msg)}\n\n"
             + "\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(post["texts"])) + "\n\n"
             f"Une image ne te plaît pas ? Écris « image 1 », « image 2 »… (une par slide).\n{meta['url']}")
@@ -170,8 +173,10 @@ def _remember_correction(last, n, old, new):
     items.append({"film": last.get("title", ""), "slide": n, "avant": old, "apres": new, "date": datetime.date.today().isoformat()})
     save("corrections", items[-40:])
 
-def _do_zoom(last, n, direction):
+def _do_zoom(last, n, direction, only_if_boxed=False):
     im, custom = _slide_image(last, n)
+    if only_if_boxed and custom and render.fill_factor(im, True) <= 1.01:
+        return                                       # image déjà plein cadre : rien à agrandir
     if im is None:
         raise ValueError("cette slide n'a pas d'image à zoomer")
     k = str(n); zs = last.setdefault("zoom", {}); cur = float(zs.get(k, 1.0))
@@ -238,7 +243,10 @@ def apply_actions(actions):
                 from PIL import Image, ImageOps
                 os.makedirs(f"{DATA}/custom", exist_ok=True); dst = f"{DATA}/custom/{last['id']}_slide{n}.jpg"
                 ImageOps.exif_transpose(Image.open(a["path"])).convert("RGB").save(dst, "JPEG", quality=92)
-                last.setdefault("custom", {})[str(n)] = dst; (last.get("zoom") or {}).pop(str(n), None); touched.append(n)
+                last.setdefault("custom", {})[str(n)] = dst; (last.get("zoom") or {}).pop(str(n), None)
+                try: _do_zoom(last, n, "in", only_if_boxed=True)    # sa photo démarre déjà avec 1 « zoom + »
+                except Exception: traceback.print_exc()
+                touched.append(n)
             elif kind == "zoom":
                 d = str(a.get("direction") or "in")
                 _do_zoom(last, n, d if d in ("in", "out", "fill", "reset") else "in"); touched.append(n)
