@@ -1,35 +1,45 @@
 {
- "offset": 422726069,
+ "offset": 422726070,
  "pending": [],
  "last": {
-  "type": "tv",
-  "id": 256317,
+  "type": "movie",
+  "id": 599975,
   "title": "Countdown",
-  "year": "2025",
-  "rating": 7.3,
-  "platform": "Prime Video",
+  "year": "2019",
+  "rating": 6.2,
+  "platform": "",
   "texts": [
-   "Un flic du LAPD rejoint une unité secrète après le m*urtre d'un agent fédéral",
-   "Très vite, il se rend compte qu'un complot menace une ville de millions d'habitants"
+   "Imagine que tu télécharges une appli qui prédit l'heure de ta m*rt",
+   "Elle te donne 3 jours à vivre, et une silhouette se met à te suivre"
   ],
-  "poster_path": "/nWZr61chRY6Lfy78VK7WzKopX7y.jpg",
+  "poster_path": "/t8QRsxslOvrmmzExSKThxOz0T2t.jpg",
   "candidates": [
-   "/hPluvztO5rqRWC02SUJ7Iob7xWh.jpg",
-   "/1GMyouDLET9zjA4ZCPpzvLBkY1B.jpg",
-   "/4pxGvtwxDlATy9nvJMvYL8u25LZ.jpg",
-   "/z7iZdCakCV2n0Pr1ns40uDWQB8S.jpg",
-   "/zM8fRxPZTDstxVNEccx6BfjkYVA.jpg"
+   "/jGq40i1j9lrxt6HVKLFKSqREjXj.jpg",
+   "/zETkzgle7c6wAeW11snnVUBp67S.jpg",
+   "/vb9luxoqiCogWxyeZoveTANa8P6.jpg",
+   "/hzL2P0tcU62A6JHPhprI8ZyBI73.jpg",
+   "/4NIcyBjlILPIMnWNrGCSia12Gsa.jpg",
+   "/fHzZmwnktFyWHb53YxzFL5fkusV.jpg",
+   "/hueiCaHbtzvUEOSx7LSmXxFKbIq.jpg",
+   "/2fK7vLcnb8J04LpVMPQMM5pLAnB.jpg",
+   "/vFwqxWPo5FoiYaAh5q1YflXRFjD.jpg",
+   "/9PU2OUto2sKOIz7pQScv9ZvI5mh.jpg",
+   "/91QgyLfJHAMpw7EUdHdflbJoZGu.jpg",
+   "/7aXvNyGX2P7Vr5xUn0aKDOpoWar.jpg",
+   "/4Ao2j3JrQdkdPghfEQs6VM0Oxs5.jpg",
+   "/8RqHRDQ40lZ96z8F4A1t0i93iK3.jpg",
+   "/7f3EdDdLV7r8XH3EEti3FKCr5je.jpg"
   ],
   "assign": [
    3,
    0
   ],
   "focus": [
-   0.63984375,
-   0.478125
+   0.44375,
+   0.690625
   ],
-  "hashtags": "#serie #quoiregarder #thriller #countdown #complot",
-  "comment": "Du jour au lendemain, on te propose d'entrer dans une unité secrète : tu dis oui ou tu refuses ?"
+  "hashtags": "#film #quoiregarder #horreur #countdown #application",
+  "comment": "Tu télécharges l'appli pour connaître ta date, ou tu préfères ne jamais savoir ?"
  },
  "last_propose": "2026-11-03",
  "photo": null
