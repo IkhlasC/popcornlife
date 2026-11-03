@@ -1,5 +1,5 @@
 {
- "offset": 422726062,
+ "offset": 422726063,
  "pending": [],
  "last": {
   "type": "movie",
@@ -10,7 +10,8 @@
   "platform": "Disney+ / HBO Max",
   "texts": [
    "Un agent immobilier promet à un couple la maison de ses rêves… pour l'éternité",
-   "Très vite, ils comprennent que « pour l'éternité » n'est pas une façon de parler"
+   "Très vite, ils comprennent que « pour l'éternité » n'est pas une façon de parler",
+   "Un jour, tu trouves un bébé devant ta porte avec un mot : \"Élevez-le et vous serez libre"
   ],
   "poster_path": "/2SAH6napkUWibaAJ4oXr8dAVTIm.jpg",
   "candidates": [
@@ -30,23 +31,27 @@
   ],
   "assign": [
    5,
-   0
+   0,
+   1
   ],
   "focus": [
    0.5,
-   0.7109375
+   0.7109375,
+   0.5
   ],
   "hashtags": "#film #quoiregarder #horreur #vivarium #huisclos",
   "comment": "Un agent qui te parle d'éternité pendant une visite : tu signes ou tu pars en courant ?",
   "custom": {
    "1": "data/custom/458305_slide1.jpg",
-   "2": "data/custom/458305_slide2.jpg"
+   "2": "data/custom/458305_slide2.jpg",
+   "3": "data/custom/458305_slide3.jpg"
   },
   "zoom": {
    "1": 1.4,
-   "2": 1.4
+   "2": 1.4,
+   "3": 1.4
   },
-  "last_slide": 2
+  "last_slide": 3
  },
  "last_propose": "2026-11-03",
  "photo": null
