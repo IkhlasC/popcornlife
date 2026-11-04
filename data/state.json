@@ -1,6 +1,22 @@
 {
  "offset": 422726075,
- "pending": [],
+ "pending": [
+  {
+   "type": "tv",
+   "id": 120089,
+   "title": "SPY x FAMILY"
+  },
+  {
+   "type": "movie",
+   "id": 1306368,
+   "title": "The Rip"
+  },
+  {
+   "type": "movie",
+   "id": 1156593,
+   "title": "À contre-sens 2"
+  }
+ ],
  "last": {
   "type": "movie",
   "id": 599975,
@@ -55,6 +71,6 @@
    "3": 1.4
   }
  },
- "last_propose": "2026-11-03",
+ "last_propose": "2026-11-04",
  "photo": null
 }
