@@ -1,5 +1,5 @@
 {
- "offset": 422726076,
+ "offset": 422726080,
  "pending": [
   {
    "type": "movie",
@@ -25,8 +25,8 @@
   "rating": 7.1,
   "platform": "Netflix",
   "texts": [
-   "Des flics de Miami trouvent des millions en cash dans une planque",
-   "Très vite, plus aucun flic de l'équipe ne fait confiance aux autres"
+   "imagine que t’es flic et tu trouves des millions en cash dans une planque",
+   "tu regardes tes collègues, et vous avez la même idée…"
   ],
   "poster_path": "/hMoQlTlUlesatqxOtzVLZjkU9Wm.jpg",
   "candidates": [
@@ -64,7 +64,16 @@
    0.40703125
   ],
   "hashtags": "#film #quoiregarder #thriller #therip #argent",
-  "comment": "Des millions en cash trouvés avec tes collègues : tu appelles ta hiérarchie ou tu te tais ?"
+  "comment": "Des millions en cash trouvés avec tes collègues : tu appelles ta hiérarchie ou tu te tais ?",
+  "custom": {
+   "1": "data/custom/1306368_slide1.jpg",
+   "2": "data/custom/1306368_slide2.jpg"
+  },
+  "zoom": {
+   "1": 1.4,
+   "2": 1.4
+  },
+  "last_slide": 2
  },
  "last_propose": "2026-11-05",
  "photo": null

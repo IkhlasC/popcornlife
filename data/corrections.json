@@ -131,5 +131,19 @@
   "avant": "Elle te donne 3 jours à vivre, et une silhouette se met à te suivre",
   "apres": "Tu la télécharges pour rigoler, mais elle t'annonce qu'il te reste 3 jours",
   "date": "2026-11-03"
+ },
+ {
+  "film": "The Rip",
+  "slide": 1,
+  "avant": "Des flics de Miami trouvent des millions en cash dans une planque",
+  "apres": "imagine que t’es flic et tu trouves des millions en cash dans une planque",
+  "date": "2026-11-05"
+ },
+ {
+  "film": "The Rip",
+  "slide": 2,
+  "avant": "Très vite, plus aucun flic de l'équipe ne fait confiance aux autres",
+  "apres": "tu regardes tes collègues, et vous avez la même idée…",
+  "date": "2026-11-05"
  }
 ]
