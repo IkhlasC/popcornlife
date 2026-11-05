@@ -1,76 +1,71 @@
 {
- "offset": 422726075,
+ "offset": 422726076,
  "pending": [
   {
-   "type": "tv",
-   "id": 120089,
-   "title": "SPY x FAMILY"
-  },
-  {
    "type": "movie",
-   "id": 1306368,
-   "title": "The Rip"
+   "id": 682507,
+   "title": "Là où chantent les écrevisses"
   },
   {
    "type": "movie",
    "id": 1156593,
    "title": "À contre-sens 2"
+  },
+  {
+   "type": "tv",
+   "id": 107113,
+   "title": "Only Murders in the Building"
   }
  ],
  "last": {
   "type": "movie",
-  "id": 599975,
-  "title": "Countdown",
-  "year": "2019",
-  "rating": 6.2,
-  "platform": "",
+  "id": 1306368,
+  "title": "The Rip",
+  "year": "2026",
+  "rating": 7.1,
+  "platform": "Netflix",
   "texts": [
-   "Imagine que tu télécharges une appli qui prédit l'heure de ta m*rt",
-   "Tu la télécharges pour rigoler, mais elle t'annonce qu'il te reste 3 jours",
-   "mais tu te rends compte que les prédictions des autres ont vraiment marché.."
+   "Des flics de Miami trouvent des millions en cash dans une planque",
+   "Très vite, plus aucun flic de l'équipe ne fait confiance aux autres"
   ],
-  "poster_path": "/t8QRsxslOvrmmzExSKThxOz0T2t.jpg",
+  "poster_path": "/hMoQlTlUlesatqxOtzVLZjkU9Wm.jpg",
   "candidates": [
-   "/jGq40i1j9lrxt6HVKLFKSqREjXj.jpg",
-   "/zETkzgle7c6wAeW11snnVUBp67S.jpg",
-   "/vb9luxoqiCogWxyeZoveTANa8P6.jpg",
-   "/hzL2P0tcU62A6JHPhprI8ZyBI73.jpg",
-   "/4NIcyBjlILPIMnWNrGCSia12Gsa.jpg",
-   "/fHzZmwnktFyWHb53YxzFL5fkusV.jpg",
-   "/hueiCaHbtzvUEOSx7LSmXxFKbIq.jpg",
-   "/2fK7vLcnb8J04LpVMPQMM5pLAnB.jpg",
-   "/vFwqxWPo5FoiYaAh5q1YflXRFjD.jpg",
-   "/9PU2OUto2sKOIz7pQScv9ZvI5mh.jpg",
-   "/91QgyLfJHAMpw7EUdHdflbJoZGu.jpg",
-   "/7aXvNyGX2P7Vr5xUn0aKDOpoWar.jpg",
-   "/4Ao2j3JrQdkdPghfEQs6VM0Oxs5.jpg",
-   "/8RqHRDQ40lZ96z8F4A1t0i93iK3.jpg",
-   "/7f3EdDdLV7r8XH3EEti3FKCr5je.jpg"
+   "/kwNIQW7egAmI66sb0zIugMbpCfU.jpg",
+   "/3F2EXWF1thX0BdrVaKvnm6mAhqh.jpg",
+   "/efn8xMa9Y6IpxjNYC2TyR9LRjD.jpg",
+   "/kEZOMElotWMdZRVH3VX7wN8mNrS.jpg",
+   "/boiZW1aTSyCjPei0YRqFTbvjT5C.jpg",
+   "/9vmopVx652CAjdHuAQcFYIV1qzj.jpg",
+   "/xoG4tYHRsrWcUkW7lTWPmXMEKCB.jpg",
+   "/czgD9XCKS6NFMoWwDnbHDN6eORb.jpg",
+   "/gFph0uq6i9gLwtvCKTYu41PoxoQ.jpg",
+   "/tFxuAlSOVAqagLPYjJZqPcJLoLK.jpg",
+   "/rNqUTHoi8zU9atDyUx31vjYi8fF.jpg",
+   "/kZlFVbEzCCgCkalMx12ilQV51dK.jpg",
+   "/4CJK07HNY7OpgPRd6DFhR8fdrLA.jpg",
+   "/nuJBvLGx3KdsOCKS38utqNp4g6z.jpg",
+   "/dXNqqJQkjArLeiAAFZrsDDE828n.jpg",
+   "/dx5ZI2Mfa2U4aBB1oM7MyK965fu.jpg",
+   "/9qzAKt3q3dEAnmG93Bkk3Y5vPH8.jpg",
+   "/lEcbbw8mvbOhIuRBeVE7PpYrxO5.jpg",
+   "/AqRxKMDEU4aJLYRIiJc3GI4f4Ar.jpg",
+   "/6AG73KR1S8Pj44rMFKXh3Cb6LZV.jpg",
+   "/okrDFPlTEoVFzBwRFhk1MRX113E.jpg",
+   "/zbzLf8Se5zuxCOtPd8B8UDbHfB2.jpg",
+   "/90sfnYWHRDYrEYnrZtD7sbxmiel.jpg",
+   "/eDmgIAs3WQs6Z7rqt0AkSB9ASTw.jpg"
   ],
   "assign": [
-   3,
-   0,
-   1
+   7,
+   20
   ],
   "focus": [
-   0.44375,
-   0.690625,
-   0.5
+   0.5,
+   0.40703125
   ],
-  "hashtags": "#film #quoiregarder #horreur #countdown #application",
-  "comment": "Tu télécharges l'appli pour connaître ta date, ou tu préfères ne jamais savoir ?",
-  "last_slide": 3,
-  "custom": {
-   "1": "data/custom/599975_slide1.jpg",
-   "2": "data/custom/599975_slide2.jpg",
-   "3": "data/custom/599975_slide3.jpg"
-  },
-  "zoom": {
-   "1": 1.4,
-   "2": 1.4,
-   "3": 1.4
-  }
+  "hashtags": "#film #quoiregarder #thriller #therip #argent",
+  "comment": "Des millions en cash trouvés avec tes collègues : tu appelles ta hiérarchie ou tu te tais ?"
  },
- "last_propose": "2026-11-04",
+ "last_propose": "2026-11-05",
  "photo": null
 }
