@@ -3,18 +3,18 @@
  "pending": [
   {
    "type": "movie",
-   "id": 682507,
-   "title": "Là où chantent les écrevisses"
-  },
-  {
-   "type": "movie",
-   "id": 1156593,
-   "title": "À contre-sens 2"
+   "id": 1156594,
+   "title": "À contre-sens 3"
   },
   {
    "type": "tv",
-   "id": 107113,
-   "title": "Only Murders in the Building"
+   "id": 80350,
+   "title": "New Amsterdam"
+  },
+  {
+   "type": "movie",
+   "id": 522627,
+   "title": "The Gentlemen"
   }
  ],
  "last": {
@@ -75,6 +75,6 @@
   },
   "last_slide": 2
  },
- "last_propose": "2026-11-05",
+ "last_propose": "2026-11-06",
  "photo": null
 }
