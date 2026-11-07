@@ -3,18 +3,18 @@
  "pending": [
   {
    "type": "movie",
-   "id": 1156594,
-   "title": "À contre-sens 3"
-  },
-  {
-   "type": "tv",
-   "id": 80350,
-   "title": "New Amsterdam"
+   "id": 870028,
+   "title": "Mr Wolff 2"
   },
   {
    "type": "movie",
-   "id": 522627,
-   "title": "The Gentlemen"
+   "id": 1233413,
+   "title": "Sinners"
+  },
+  {
+   "type": "movie",
+   "id": 531428,
+   "title": "Portrait de la jeune fille en feu"
   }
  ],
  "last": {
@@ -75,6 +75,6 @@
   },
   "last_slide": 2
  },
- "last_propose": "2026-11-06",
+ "last_propose": "2026-11-07",
  "photo": null
 }
