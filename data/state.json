@@ -3,13 +3,13 @@
  "pending": [
   {
    "type": "movie",
-   "id": 870028,
-   "title": "Mr Wolff 2"
+   "id": 475557,
+   "title": "Joker"
   },
   {
-   "type": "movie",
-   "id": 1233413,
-   "title": "Sinners"
+   "type": "tv",
+   "id": 76669,
+   "title": "Élite"
   },
   {
    "type": "movie",
@@ -75,6 +75,6 @@
   },
   "last_slide": 2
  },
- "last_propose": "2026-11-07",
+ "last_propose": "2026-11-08",
  "photo": null
 }
