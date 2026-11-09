@@ -145,5 +145,19 @@
   "avant": "Très vite, plus aucun flic de l'équipe ne fait confiance aux autres",
   "apres": "tu regardes tes collègues, et vous avez la même idée…",
   "date": "2026-11-05"
+ },
+ {
+  "film": "Dans leur regard",
+  "slide": 2,
+  "avant": "Après des heures sans toi, il avoue un crime qu'il n'a pas commis",
+  "apres": "Les policiers te disent que si tu signes des aveux, tu pourras rentrer chez toi",
+  "date": "2026-11-09"
+ },
+ {
+  "film": "Dans leur regard",
+  "slide": 3,
+  "avant": "Slide 1 : Imagine que t'as 13 ans et qu'on t'accuse d'avoir agressé et tué une femme",
+  "apres": "Alors tu les crois…",
+  "date": "2026-11-09"
  }
 ]

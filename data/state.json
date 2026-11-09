@@ -1,5 +1,5 @@
 {
- "offset": 422726081,
+ "offset": 422726087,
  "pending": [
   {
    "type": "tv",
@@ -26,7 +26,8 @@
   "platform": "Netflix",
   "texts": [
    "Imagine que ton fils de 14 ans est accusé d'une agression à Central Park",
-   "Après des heures sans toi, il avoue un crime qu'il n'a pas commis"
+   "Les policiers te disent que si tu signes des aveux, tu pourras rentrer chez toi",
+   "Alors tu les crois…"
   ],
   "poster_path": "/wARtDgBwhs3jNiQdIVaKMirpSIi.jpg",
   "candidates": [
@@ -49,15 +50,29 @@
   ],
   "assign": [
    7,
-   5
+   5,
+   0
   ],
   "focus": [
    0.47109375,
+   0.5,
    0.5
   ],
   "hashtags": "#serie #quoiregarder #drame #dansleurregard #injustice",
-  "comment": "Un enfant de 14 ans qui avoue pour qu'on le laisse rentrer chez lui : tu le blâmes ou tu le comprends ?"
+  "comment": "Un enfant de 14 ans qui avoue pour qu'on le laisse rentrer chez lui : tu le blâmes ou tu le comprends ?",
+  "custom": {
+   "1": "data/custom/81355_slide1.jpg",
+   "2": "data/custom/81355_slide2.jpg",
+   "3": "data/custom/81355_slide3.jpg"
+  },
+  "zoom": {
+   "1": 1.4,
+   "2": 1.4,
+   "3": 1.4
+  },
+  "last_slide": 3
  },
  "last_propose": "2026-11-09",
- "photo": null
+ "photo": null,
+ "add_slide": null
 }
