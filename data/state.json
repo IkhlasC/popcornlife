@@ -1,5 +1,5 @@
 {
- "offset": 422726087,
+ "offset": 422726088,
  "pending": [
   {
    "type": "tv",
@@ -25,7 +25,7 @@
   "rating": 8.2,
   "platform": "Netflix",
   "texts": [
-   "Imagine que ton fils de 14 ans est accusé d'une agression à Central Park",
+   "Imagine que t'as 13 ans et qu'on t'accuse d'avoir agressé et tué une femme",
    "Les policiers te disent que si tu signes des aveux, tu pourras rentrer chez toi",
    "Alors tu les crois…"
   ],
@@ -70,7 +70,7 @@
    "2": 1.4,
    "3": 1.4
   },
-  "last_slide": 3
+  "last_slide": 1
  },
  "last_propose": "2026-11-09",
  "photo": null,
