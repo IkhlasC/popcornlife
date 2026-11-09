@@ -1,15 +1,15 @@
 {
- "offset": 422726080,
+ "offset": 422726081,
  "pending": [
   {
-   "type": "movie",
-   "id": 475557,
-   "title": "Joker"
+   "type": "tv",
+   "id": 79696,
+   "title": "Manifest"
   },
   {
-   "type": "tv",
-   "id": 76669,
-   "title": "Élite"
+   "type": "movie",
+   "id": 508883,
+   "title": "Le Garçon et le Héron"
   },
   {
    "type": "movie",
@@ -18,63 +18,46 @@
   }
  ],
  "last": {
-  "type": "movie",
-  "id": 1306368,
-  "title": "The Rip",
-  "year": "2026",
-  "rating": 7.1,
+  "type": "tv",
+  "id": 81355,
+  "title": "Dans leur regard",
+  "year": "2019",
+  "rating": 8.2,
   "platform": "Netflix",
   "texts": [
-   "imagine que t’es flic et tu trouves des millions en cash dans une planque",
-   "tu regardes tes collègues, et vous avez la même idée…"
+   "Imagine que ton fils de 14 ans est accusé d'une agression à Central Park",
+   "Après des heures sans toi, il avoue un crime qu'il n'a pas commis"
   ],
-  "poster_path": "/hMoQlTlUlesatqxOtzVLZjkU9Wm.jpg",
+  "poster_path": "/wARtDgBwhs3jNiQdIVaKMirpSIi.jpg",
   "candidates": [
-   "/kwNIQW7egAmI66sb0zIugMbpCfU.jpg",
-   "/3F2EXWF1thX0BdrVaKvnm6mAhqh.jpg",
-   "/efn8xMa9Y6IpxjNYC2TyR9LRjD.jpg",
-   "/kEZOMElotWMdZRVH3VX7wN8mNrS.jpg",
-   "/boiZW1aTSyCjPei0YRqFTbvjT5C.jpg",
-   "/9vmopVx652CAjdHuAQcFYIV1qzj.jpg",
-   "/xoG4tYHRsrWcUkW7lTWPmXMEKCB.jpg",
-   "/czgD9XCKS6NFMoWwDnbHDN6eORb.jpg",
-   "/gFph0uq6i9gLwtvCKTYu41PoxoQ.jpg",
-   "/tFxuAlSOVAqagLPYjJZqPcJLoLK.jpg",
-   "/rNqUTHoi8zU9atDyUx31vjYi8fF.jpg",
-   "/kZlFVbEzCCgCkalMx12ilQV51dK.jpg",
-   "/4CJK07HNY7OpgPRd6DFhR8fdrLA.jpg",
-   "/nuJBvLGx3KdsOCKS38utqNp4g6z.jpg",
-   "/dXNqqJQkjArLeiAAFZrsDDE828n.jpg",
-   "/dx5ZI2Mfa2U4aBB1oM7MyK965fu.jpg",
-   "/9qzAKt3q3dEAnmG93Bkk3Y5vPH8.jpg",
-   "/lEcbbw8mvbOhIuRBeVE7PpYrxO5.jpg",
-   "/AqRxKMDEU4aJLYRIiJc3GI4f4Ar.jpg",
-   "/6AG73KR1S8Pj44rMFKXh3Cb6LZV.jpg",
-   "/okrDFPlTEoVFzBwRFhk1MRX113E.jpg",
-   "/zbzLf8Se5zuxCOtPd8B8UDbHfB2.jpg",
-   "/90sfnYWHRDYrEYnrZtD7sbxmiel.jpg",
-   "/eDmgIAs3WQs6Z7rqt0AkSB9ASTw.jpg"
+   "/5IIg0PhE764qVuKICgmSAE0Jotx.jpg",
+   "/gbBktSktuOXQVK43yTvrZzwx5wy.jpg",
+   "/ps9bE3tlJGf5rMvRzgZ9nc9RhaU.jpg",
+   "/jngCp5vDL0J6rHNemDJ6hAlarDn.jpg",
+   "/4USLMQ37REMoNqeT2HZMTVrODsf.jpg",
+   "/11qismtEQZ2Z98Yuki968nuQP3u.jpg",
+   "/ce9UOwy5IHSi4oyTExe8lN2JcEy.jpg",
+   "/kkNIbDPr2fA6iGgpkgowRzo9Bdy.jpg",
+   "/pbw2o0H8Jc2bxz9hpB3RUMqNwIQ.jpg",
+   "/jRSIdj3dAdRiHwOh7TfKU3inlEG.jpg",
+   "/kVnbwZyJ4NxH7dBAh1GqEM4JTVu.jpg",
+   "/4qXrm1Gv2bYol1VBG82HY3njql4.jpg",
+   "/9OklB3VuPPnZHVmZmKaJwqJ0GYL.jpg",
+   "/dAdDELvMbN7ryolqtcqRA6waiNi.jpg",
+   "/o6JuaDiKZCpJhLSSlH13T7nKKeq.jpg",
+   "/bsv2VTj83F9AVLkDifmxWtiezA7.jpg"
   ],
   "assign": [
    7,
-   20
+   5
   ],
   "focus": [
-   0.5,
-   0.40703125
+   0.47109375,
+   0.5
   ],
-  "hashtags": "#film #quoiregarder #thriller #therip #argent",
-  "comment": "Des millions en cash trouvés avec tes collègues : tu appelles ta hiérarchie ou tu te tais ?",
-  "custom": {
-   "1": "data/custom/1306368_slide1.jpg",
-   "2": "data/custom/1306368_slide2.jpg"
-  },
-  "zoom": {
-   "1": 1.4,
-   "2": 1.4
-  },
-  "last_slide": 2
+  "hashtags": "#serie #quoiregarder #drame #dansleurregard #injustice",
+  "comment": "Un enfant de 14 ans qui avoue pour qu'on le laisse rentrer chez lui : tu le blâmes ou tu le comprends ?"
  },
- "last_propose": "2026-11-08",
+ "last_propose": "2026-11-09",
  "photo": null
 }
