@@ -2,19 +2,19 @@
  "offset": 422726088,
  "pending": [
   {
-   "type": "tv",
-   "id": 79696,
-   "title": "Manifest"
+   "type": "movie",
+   "id": 1168190,
+   "title": "Team Démolition"
   },
   {
    "type": "movie",
-   "id": 508883,
-   "title": "Le Garçon et le Héron"
+   "id": 574475,
+   "title": "Destination Finale : Bloodlines"
   },
   {
    "type": "movie",
-   "id": 531428,
-   "title": "Portrait de la jeune fille en feu"
+   "id": 1171145,
+   "title": "Crime 101"
   }
  ],
  "last": {
@@ -72,7 +72,7 @@
   },
   "last_slide": 1
  },
- "last_propose": "2026-11-09",
+ "last_propose": "2026-11-10",
  "photo": null,
  "add_slide": null
 }
