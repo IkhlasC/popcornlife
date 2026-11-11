@@ -3,18 +3,18 @@
  "pending": [
   {
    "type": "movie",
-   "id": 1168190,
-   "title": "Team Démolition"
+   "id": 1621552,
+   "title": "La captura"
+  },
+  {
+   "type": "tv",
+   "id": 110316,
+   "title": "Alice in Borderland"
   },
   {
    "type": "movie",
-   "id": 574475,
-   "title": "Destination Finale : Bloodlines"
-  },
-  {
-   "type": "movie",
-   "id": 1171145,
-   "title": "Crime 101"
+   "id": 812583,
+   "title": "Wake Up Dead Man : Une histoire à couteaux tirés"
   }
  ],
  "last": {
@@ -72,7 +72,7 @@
   },
   "last_slide": 1
  },
- "last_propose": "2026-11-10",
+ "last_propose": "2026-11-11",
  "photo": null,
  "add_slide": null
 }
