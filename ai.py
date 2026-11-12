@@ -60,14 +60,42 @@ def as_list(r):
         r = next((v for v in r.values() if isinstance(v, list)), [r] if "ref" in r else [])
     return [x for x in r if isinstance(x, dict)] if isinstance(r, list) else []
 
+def actualite():
+    """Titres dont on parle MAINTENANT en France (Top 10 Netflix, nouveautés, tendances), trouvés par recherche web. Renvoie [] si la recherche web est indisponible."""
+    import datetime
+    today = datetime.date.today().strftime("%d/%m/%Y")
+    prompt = f"""Nous sommes le {today}. Fais une recherche web et dresse la liste des films et séries DONT ON PARLE LE PLUS EN CE MOMENT EN FRANCE :
+1) le Top 10 Netflix France de cette semaine (films et séries) ;
+2) les nouveautés qui font le buzz : séries qui viennent d'arriver (ou de revenir) sur Netflix ou une autre plateforme, films qui viennent de sortir en streaming ou au cinéma ;
+Ne tiens PAS compte des fêtes (Halloween, Noël, Saint-Valentin…) : seulement la popularité et l'actualité. Réponds UNIQUEMENT avec du JSON : [{{"titre":"titre français ou original","annee":2024,"raison":"pourquoi on en parle, en 6 mots","netflix":true}}]. 15 titres maximum, uniquement des titres dont tu as trouvé la mention dans tes recherches."""
+    try:
+        r = _c().messages.create(model=MODEL, max_tokens=2500, system=SYSTEM, messages=[{"role": "user", "content": prompt}],
+                                 tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 4}])
+        txt = "".join(b.text for b in r.content if getattr(b, "type", "") == "text")
+        m = re.search(r"\[.*\]", txt, re.S)
+        try: data = json.loads(m.group(0)) if m else parse_json(txt)
+        except Exception: data = parse_json(txt)
+        out = [x for x in (data if isinstance(data, list) else [data]) if isinstance(x, dict)]
+        return [x for x in out if x.get("titre")]
+    except Exception as ex:
+        print(f"[actualite] recherche web indisponible : {ex}", flush=True)
+        return []
+
 def propose(pool):
-    lines = "\n".join(f'{p["type"]}:{p["id"]} | {p["title"]} ({p["year"]}) | note {p["rating"]} | {", ".join(p["genres"])} | {p["overview"][:220]}' for p in pool)
-    prompt = f"""Voici une liste d'œuvres disponibles en streaming en France :
+    import datetime
+    def line(p):
+        flags = ("[NETFLIX] " if p.get("netflix") else "") + (f"[ACTU : {p['buzz']}] " if p.get("buzz") else "")
+        return f'{p["type"]}:{p["id"]} | {flags}{p["title"]} ({p["year"]}) | note {p["rating"]} | {", ".join(p["genres"])} | {p["overview"][:220]}'
+    lines = "\n".join(line(p) for p in pool)
+    prompt = f"""Nous sommes le {datetime.date.today().strftime("%d/%m/%Y")}. Voici une liste d'œuvres disponibles en streaming en France ([NETFLIX] = disponible sur Netflix ; [ACTU] = on en parle en ce moment) :
 {lines}
 
 Choisis les 3 œuvres qui vont FAIRE LE PLUS RÉAGIR sur TikTok, c'est-à-dire celles dont une seule phrase provoque une émotion forte (peur, choc, indignation, « c'est quoi ce film ? », « je dois le voir »). Note chaque œuvre de 1 à 10 sur son potentiel de réaction (score_reaction) et ne garde que les 3 meilleures scores, classées de la plus forte à la moins forte. Ne retiens qu'une œuvre à plus de 7 si tu peux la défendre avec une phrase choc ; refuse les œuvres tièdes même si elles sont bien notées.
-Ce qui fait le plus réagir : une MENACE VENUE DU CERCLE FAMILIER (un père, une mère, un frère, un enfant, un proche qui n'est pas ce qu'il semble), une INJUSTICE ou un dilemme moral (jusqu'où irais-tu ?), un enfant ou un proche en danger, un piège dans un lieu du quotidien (airbnb, concert, tunnel, aéroport, vacances en famille), un retournement, une situation où le lecteur se dit « et si c'était moi ? ». Privilégie les œuvres où le lecteur peut se mettre à la place d'un personnage.
-Varie (pas 3 films du même genre ; 1 série maximum ; varie les pays si possible), privilégie les sorties récentes et les films de découverte plutôt que les blockbusters vus partout. Évite les décors lointains ou fantastiques (apocalypse, western, dystopie, monstres), les clichés de genre (cimetière, village maudit) et les concepts qu'il faut expliquer.
+RÈGLES DE LA RÉDACTRICE (elles passent avant tes goûts) :
+- NETFLIX D'ABORD : ce sont souvent les films et séries Netflix qui plaisent le plus. Au moins 2 des 3 propositions doivent être [NETFLIX], idéalement les 3.
+- L'ACTUALITÉ D'ABORD : une œuvre marquée [ACTU] (en tendance, sortie récente, titre qui buzz) passe avant une œuvre « découverte », même si elle est connue. Ces publications marchent mieux parce que les gens cherchent justement ces titres en ce moment. Au moins 2 propositions sur 3 doivent être [ACTU] quand c'est possible ; dans « pourquoi », dis ce qui fait l'actualité.
+Ce qui fait le plus réagir : une MENACE VENUE DU CERCLE FAMILIER (un père, une mère, un frère, un enfant, un proche qui n'est pas ce qu'il semble), une INJUSTICE ou un dilemme moral, un enfant ou un proche en danger, un piège dans un lieu du quotidien (airbnb, concert, tunnel, aéroport, vacances en famille), un retournement, une situation où le lecteur se dit « et si c'était moi ? ». Privilégie les œuvres où le lecteur peut se mettre à la place d'un personnage.
+Varie (pas 3 œuvres du même genre ; 2 séries maximum). Évite les décors lointains ou fantastiques (apocalypse, western, dystopie, monstres), les clichés de genre (cimetière, village maudit) et les concepts qu'il faut expliquer, SAUF si l'œuvre est en pleine actualité.
 Pour chacune : un angle éditorial, une idée de hook (une phrase), et pourquoi ça peut faire réagir sur TikTok (une phrase).
 JSON : [{{"ref":"movie:123","score_reaction":8,"angle":"","hook":"","pourquoi":""}}, ...]"""
     out = as_list(ask_json(prompt, max_tokens=3000))
@@ -210,7 +238,16 @@ def corrections_block(limit=8):
     return ("\nCORRECTIONS DE LA RÉDACTRICE (PRIORITÉ MAXIMALE : elle a réécrit elle-même ces phrases, c'est EXACTEMENT sa voix. Compare l'avant et l'après : "
             "longueur, choix des mots, fait concret, ordre de l'information, façon de couper la phrase. Applique la même différence à ta nouvelle écriture, sans recopier) :\n" + "\n".join(lines) + "\n")
 
-def clean_tags(tags, meta, limit=5):
+def platform_tag(platform):
+    """« Netflix / Kocowa » -> #netflix (Netflix en priorité, sinon la première plateforme)."""
+    names = [x.strip() for x in str(platform or '').split('/') if x.strip()]
+    if not names: return ""
+    name = next((x for x in names if x.lower() == 'netflix'), names[0])
+    known = {'prime video': 'primevideo', 'disney+': 'disneyplus', 'apple tv+': 'appletv', 'paramount+': 'paramountplus', 'canal+': 'canalplus', 'max': 'hbomax'}
+    k = known.get(name.lower()) or re.sub(r'[^a-z0-9]', '', name.lower())
+    return '#' + k if k else ''
+
+def clean_tags(tags, meta, limit=5, platform=''):
     """5 hashtags maximum (limite TikTok) : propres (sans accents ni espaces), uniques, avec toujours le hashtag du titre."""
     import unicodedata
     def norm(t):
@@ -221,15 +258,13 @@ def clean_tags(tags, meta, limit=5):
     for t in tags if isinstance(tags, list) else str(tags).split():
         t = norm(t)
         if t and t not in out: out.append(t)
-    title = norm(meta.get("title", ""))
+    title = norm(meta.get("title", "")); plat = platform_tag(platform)
     if title and title != "#":                      # une variante fautive du titre (#herofragile) est remplacée par la bonne
         import difflib
         out = [t for t in out if t == title or difflib.SequenceMatcher(None, t, title).ratio() < 0.8]
-    if title and title != "#" and title not in out:
-        out.insert(min(len(out), limit - 1), title)
-    elif title in out and out.index(title) >= limit:
-        out.remove(title); out.insert(limit - 1, title)
-    return out[:limit]
+    must = [x for x in (title if title != "#" else "", plat) if x]   # toujours présents : le titre et la plateforme
+    rest = [t for t in out if t not in must]
+    return rest[:max(0, limit - len(must))] + must
 
 def precision_check(meta, s):
     """Deuxième regard : chaque phrase contient-elle un fait précis qu'on peut filmer ? Renvoie la liste des phrases trop floues avec une piste."""
@@ -249,7 +284,7 @@ JSON : {{"slides":[{{"vague":false,"raison":"","fait_precis":""}}]}} (une entré
             out.append((i, s[i], str(e_.get("fait_precis") or "").strip()))
     return out
 
-def write_post(meta, guidance="", avoid=None):
+def write_post(meta, guidance="", avoid=None, platform=""):
     kind = "série" if meta["type"] == "tv" else "film"
     extra = ""
     if guidance:
@@ -306,7 +341,7 @@ Chaque slide apporte UNE information nouvelle, plus dérangeante que la précéd
 RÈGLE SPOILER : tu peux raconter le point de départ et la première grande bascule de l'histoire (ce que dirait le résumé au dos du film), mais JAMAIS le retournement final, la fin, qui meurt à la fin, ni l'identité d'un personnage caché.
 Reste fidèle au synopsis fourni : n'invente aucun fait.
 
-HASHTAGS : EXACTEMENT 5 hashtags, pas un de plus (TikTok n'en accepte pas davantage), choisis les plus pertinents pour CETTE œuvre : #film (ou #serie), #quoiregarder, un hashtag du genre (#thriller, #horreur, #suspense, #drame, #comedie…), le hashtag du titre (sans espaces ni accents) et un hashtag précis lié à l'intrigue ou au thème (#disparition, #survie, #huisclos, #injustice, #famille…). Pas de hashtag vague ou inutile.
+HASHTAGS : EXACTEMENT 5 hashtags, pas un de plus (TikTok n'en accepte pas davantage), choisis les plus pertinents pour CETTE œuvre : #film (ou #serie), #quoiregarder, un hashtag du genre (#thriller, #horreur, #suspense, #drame, #comedie…), le hashtag du titre (sans espaces ni accents) et un hashtag précis lié à l'intrigue ou au thème (#disparition, #survie, #huisclos, #injustice, #famille…). Pas de hashtag vague ou inutile. Le hashtag de la plateforme où on voit l'œuvre ({platform_tag(platform) or 'aucun'}) est ajouté automatiquement et compte dans les 5 : donne-moi quand même 5 hashtags dans l'ordre d'importance, je garderai les meilleurs.
 
 PREMIER COMMENTAIRE ("commentaire") : écris le commentaire que la rédactrice postera elle-même sous sa publication pour faire démarrer les réponses. Il doit être incitateur et SPÉCIFIQUE à cette œuvre (jamais « Vous avez aimé ? » ni « Dites-moi en commentaire »). 1 ou 2 phrases courtes, en français parlé, sans spoiler, sans emoji en excès (1 maximum). Formules qui marchent : un dilemme précis (« Un père qui enferme son fils pour le protéger : héros ou monstre ? »), une provocation douce (« Je parie que personne ne devine ce qu'il cache dans la cave »), un défi (« Dis-moi en un mot ce que tu aurais fait à sa place »), un tag (« Tag la personne que tu ne laisserais jamais garder tes enfants »). Pour une question, prends toujours un CHOIX concret entre deux options, pas une question ouverte.
 Mets nb_slides à 2 ou 3 ; si nb_slides = 2, laisse s3 vide.
@@ -345,7 +380,7 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
             except Exception:
                 pass
         if not problems:
-            return {"texts": [oral(x) for x in s], "caption": "", "hashtags": " ".join(clean_tags(r.get("hashtags", []), meta)), "comment": com}
+            return {"texts": [oral(x) for x in s], "caption": "", "hashtags": " ".join(clean_tags(r.get("hashtags", []), meta, platform=platform)), "comment": com}
         note = "\n\nCorrige ce problème : " + ", ".join(problems) + "."
     raise RuntimeError("Impossible d'obtenir des textes valides")
 
