@@ -3,18 +3,18 @@
  "pending": [
   {
    "type": "movie",
-   "id": 1621552,
-   "title": "La captura"
-  },
-  {
-   "type": "tv",
-   "id": 110316,
-   "title": "Alice in Borderland"
+   "id": 493922,
+   "title": "Hérédité"
   },
   {
    "type": "movie",
-   "id": 812583,
-   "title": "Wake Up Dead Man : Une histoire à couteaux tirés"
+   "id": 965150,
+   "title": "Aftersun"
+  },
+  {
+   "type": "movie",
+   "id": 1242332,
+   "title": "Normal"
   }
  ],
  "last": {
@@ -72,7 +72,7 @@
   },
   "last_slide": 1
  },
- "last_propose": "2026-11-11",
+ "last_propose": "2026-11-12",
  "photo": null,
  "add_slide": null
 }
