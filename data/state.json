@@ -1,76 +1,57 @@
 {
- "offset": 422726088,
- "pending": [
-  {
-   "type": "movie",
-   "id": 493922,
-   "title": "Hérédité"
-  },
-  {
-   "type": "movie",
-   "id": 965150,
-   "title": "Aftersun"
-  },
-  {
-   "type": "movie",
-   "id": 1242332,
-   "title": "Normal"
-  }
- ],
+ "offset": 422726089,
+ "pending": [],
  "last": {
   "type": "tv",
-  "id": 81355,
-  "title": "Dans leur regard",
-  "year": "2019",
-  "rating": 8.2,
-  "platform": "Netflix",
+  "id": 124364,
+  "title": "FROM",
+  "year": "2022",
+  "rating": 8.5,
+  "platform": "Canal+ / Paramount+",
   "texts": [
-   "Imagine que t'as 13 ans et qu'on t'accuse d'avoir agressé et tué une femme",
-   "Les policiers te disent que si tu signes des aveux, tu pourras rentrer chez toi",
-   "Alors tu les crois…"
+   "Imagine que tu traverses une petite ville avec ta famille en camping-car",
+   "Tu essaies de repartir, mais chaque route te ramène dans la même ville",
+   "Et chaque soir, dès que le soleil se couche, des créatures sortent de la forêt"
   ],
-  "poster_path": "/wARtDgBwhs3jNiQdIVaKMirpSIi.jpg",
+  "poster_path": "/ubZpbtVOZJulIiqYWOPUl5DvaBY.jpg",
   "candidates": [
-   "/5IIg0PhE764qVuKICgmSAE0Jotx.jpg",
-   "/gbBktSktuOXQVK43yTvrZzwx5wy.jpg",
-   "/ps9bE3tlJGf5rMvRzgZ9nc9RhaU.jpg",
-   "/jngCp5vDL0J6rHNemDJ6hAlarDn.jpg",
-   "/4USLMQ37REMoNqeT2HZMTVrODsf.jpg",
-   "/11qismtEQZ2Z98Yuki968nuQP3u.jpg",
-   "/ce9UOwy5IHSi4oyTExe8lN2JcEy.jpg",
-   "/kkNIbDPr2fA6iGgpkgowRzo9Bdy.jpg",
-   "/pbw2o0H8Jc2bxz9hpB3RUMqNwIQ.jpg",
-   "/jRSIdj3dAdRiHwOh7TfKU3inlEG.jpg",
-   "/kVnbwZyJ4NxH7dBAh1GqEM4JTVu.jpg",
-   "/4qXrm1Gv2bYol1VBG82HY3njql4.jpg",
-   "/9OklB3VuPPnZHVmZmKaJwqJ0GYL.jpg",
-   "/dAdDELvMbN7ryolqtcqRA6waiNi.jpg",
-   "/o6JuaDiKZCpJhLSSlH13T7nKKeq.jpg",
-   "/bsv2VTj83F9AVLkDifmxWtiezA7.jpg"
+   "/m7eiSGHFzr584zFmetGqkqaU6BN.jpg",
+   "/auyEi4Xho43HFvVQnd42LzqBdiV.jpg",
+   "/6gN8DYnIEln8v7OhRy61c57w0Xy.jpg",
+   "/cTUWXPze3Px9HFhbKszc4ejMhuO.jpg",
+   "/q3UGWifvIpdey1T2efX4dSmbZpU.jpg",
+   "/hR2pFXMxVihldEk5WoSrV7Yq2ra.jpg",
+   "/micuMAg5HBeg6drq2InyUuD2iXf.jpg",
+   "/gGZUtCbiVlU7mXBYhIj2TobcXs0.jpg",
+   "/o9cD93V4WZ6qSswN57gQBO4qn0W.jpg",
+   "/64Ak0nu7Au3SITTv1LAyXgynj2s.jpg",
+   "/seddLBvNOW9QK3j8uaJT0CSkVhI.jpg",
+   "/piAmLLUXCkH5ODK6uYd4jhRP4El.jpg",
+   "/pg11548HuugYNvavwtsmh3ZrhFS.jpg",
+   "/kkLfOz7yS17hujwt5jshEMCKDid.jpg",
+   "/29ONmSnMoKTDcnoP8H6jZIrVkRp.jpg",
+   "/ekAQPSxhWx4opIuf610FUb4yIEj.jpg",
+   "/7vBL5GvUArTStpQFmc9u88jb12O.jpg",
+   "/uFXxRPYSSrF4h5JcCU0UKEXthdj.jpg",
+   "/gbGhtHgCACJlGBaRAmUbJBvHvGb.jpg",
+   "/7ixwaafOaoRpMzBfqII8A5nCb5e.jpg",
+   "/bGEXblAt4JRt67t29LC8fuFhDO1.jpg",
+   "/l9Qwe6v1NzgOweld95NdegQ5jsO.jpg",
+   "/z2hQ10eEjunBrUsmr0cAofP6CNc.jpg",
+   "/kY31hMWSv3tGorxpBqpuwUR6vWd.jpg"
   ],
   "assign": [
-   7,
-   5,
-   0
+   18,
+   10,
+   23
   ],
   "focus": [
-   0.47109375,
-   0.5,
-   0.5
+   0.375,
+   0.75,
+   0.3
   ],
-  "hashtags": "#serie #quoiregarder #drame #dansleurregard #injustice",
-  "comment": "Un enfant de 14 ans qui avoue pour qu'on le laisse rentrer chez lui : tu le blâmes ou tu le comprends ?",
-  "custom": {
-   "1": "data/custom/81355_slide1.jpg",
-   "2": "data/custom/81355_slide2.jpg",
-   "3": "data/custom/81355_slide3.jpg"
-  },
-  "zoom": {
-   "1": 1.4,
-   "2": 1.4,
-   "3": 1.4
-  },
-  "last_slide": 1
+  "hashtags": "#serie #quoiregarder #horreur #from #survie",
+  "comment": "Tu t'enfermes chez toi toute la nuit ou tu tentes de fuir par la forêt ? Moi je sais déjà que je ne tiendrais pas une semaine."
  },
  "last_propose": "2026-11-12",
  "photo": null,
