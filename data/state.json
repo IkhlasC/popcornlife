@@ -1,5 +1,5 @@
 {
- "offset": 422726090,
+ "offset": 422726091,
  "pending": [],
  "last": {
   "type": "tv",
@@ -53,12 +53,14 @@
   "hashtags": "#serie #quoiregarder #horreur #from #survie",
   "comment": "Tu t'enfermes chez toi toute la nuit ou tu tentes de fuir par la forêt ? Moi je sais déjà que je ne tiendrais pas une semaine.",
   "custom": {
-   "2": "data/custom/124364_slide2.jpg"
+   "2": "data/custom/124364_slide2.jpg",
+   "3": "data/custom/124364_slide3.jpg"
   },
   "zoom": {
-   "2": 1.4
+   "2": 1.4,
+   "3": 1.4
   },
-  "last_slide": 2
+  "last_slide": 3
  },
  "last_propose": "2026-11-12",
  "photo": null,
