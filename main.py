@@ -57,7 +57,10 @@ def daily():
         except Exception: pass
 
 def propose():
-    pool = tmdb.candidates(recent_ids())
+    actu = ai.actualite()                      # ce dont on parle en ce moment (recherche web) ; [] si indisponible
+    print(f"[propose] {len(actu)} titre(s) d'actualité trouvé(s) par la recherche web", flush=True)
+    pool = tmdb.candidates(recent_ids(), actu=actu)
+    print(f"[propose] {len(pool)} candidats dont {sum(1 for p in pool if p.get('netflix'))} Netflix, {sum(1 for p in pool if p.get('buzz'))} dans l'actualité", flush=True)
     if len(pool) < 6:
         tg.send("⚠️ Je n'ai pas trouvé assez de films disponibles pour faire des propositions."); return
     by_ref = {f'{p["type"]}:{p["id"]}': p for p in pool}
@@ -71,7 +74,8 @@ def propose():
         plat, _ = platform_info(p["type"], p["id"])
         kind = "Série" if p["type"] == "tv" else "Film"
         lines.append(f"<b>{letter} — {e(p['title'])}</b> ({p['year']}) · {kind}{' · ' + e(plat) if plat else ''}\n"
-                     f"Angle : {e(c.get('angle', ''))}\nHook : {e(c.get('hook', ''))}\nPourquoi : {e(c.get('pourquoi', ''))}\n")
+                     + (f"🔥 {e(p['buzz'])}\n" if p.get("buzz") else "")
+                     + f"Angle : {e(c.get('angle', ''))}\nHook : {e(c.get('hook', ''))}\nPourquoi : {e(c.get('pourquoi', ''))}\n")
         buttons.append({"text": f"{letter} — {p['title'][:25]}", "callback_data": f"pick:{p['type']}:{p['id']}"})
         state["pending"].append({"type": p["type"], "id": p["id"], "title": p["title"]})
     save("state", state)
@@ -101,7 +105,7 @@ def rewrite(guidance=""):
         tg.send("Je n'ai pas de post récent à refaire. Écris d'abord un titre de film."); return
     meta = tmdb.details(last["type"], last["id"])
     tg.send(f"✍️ Je réécris les textes de <b>{e(last['title'])}</b>…" + (f"\nConsigne : {e(guidance)}" if guidance else ""))
-    post = ai.write_post(meta, guidance, avoid=last["texts"])
+    post = ai.write_post(meta, guidance, avoid=last["texts"], platform=last.get("platform", ""))
     assign, focus, bd = choose_images(meta, last["candidates"], post["texts"])
     poster = tmdb.download(last["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, focus or [0.5] * 3, poster,
@@ -124,7 +128,7 @@ def produce(t, i):
         warn = "\n⚠️ Tu as déjà fait ce titre il y a moins d'un an."
     tg.send(f"⏳ Je prépare <b>{e(meta['title'])}</b> ({meta['year']})…{warn}")
     plat, plat_msg = platform_info(t, i)
-    post = ai.write_post(meta)
+    post = ai.write_post(meta, platform=plat)
     paths = tmdb.backdrops(t, i)
     last = {"type": t, "id": i, "title": meta["title"], "year": meta["year"], "rating": meta["rating"], "platform": plat,
             "texts": post["texts"], "poster_path": meta["poster_path"], "candidates": paths, "assign": [], "focus": [], "hashtags": post["hashtags"], "comment": post.get("comment", "")}
@@ -175,13 +179,11 @@ def _remember_correction(last, n, old, new):
     save("corrections", items[-40:])
 
 def _save_custom(last, n, src):
-    """Enregistre l'image envoyée par la rédactrice pour la slide n (avec 1 « zoom + » si elle est en bandes noires)."""
+    """Enregistre l'image envoyée par la rédactrice pour la slide n (taille normale : elle règle le zoom elle-même)."""
     from PIL import Image, ImageOps
     os.makedirs(f"{DATA}/custom", exist_ok=True); dst = f"{DATA}/custom/{last['id']}_slide{n}.jpg"
     ImageOps.exif_transpose(Image.open(src)).convert("RGB").save(dst, "JPEG", quality=92)
     last.setdefault("custom", {})[str(n)] = dst; (last.get("zoom") or {}).pop(str(n), None)
-    try: _do_zoom(last, n, "in", only_if_boxed=True)
-    except Exception: traceback.print_exc()
 
 def _add_slide(last, text, path=None):
     """Ajoute une 3e slide de texte (avant l'affiche), avec l'image envoyée par la rédactrice ou une image du film."""
