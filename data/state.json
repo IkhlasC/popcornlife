@@ -1,5 +1,5 @@
 {
- "offset": 422726094,
+ "offset": 422726095,
  "pending": [],
  "last": {
   "type": "tv",
@@ -9,8 +9,8 @@
   "rating": 7.1,
   "platform": "Netflix",
   "texts": [
-   "Cette femme est prisonnière de ses propres parents dans une maison victorienne",
-   "Lizzie massacre ses parents à la hache et tout le pays est choqué"
+   "Cette fille d'une famille victorienne t*e ses parents à coups de hache",
+   "Tout le pays est choqué, sans savoir ce que ses parents lui faisaient vivre"
   ],
   "poster_path": "/ruw68QldiWzOjUdKX9hUFT1pjv.jpg",
   "candidates": [
@@ -38,15 +38,15 @@
    "/7glhEZjQYgCKndHfAtTL76Nu6n7.jpg"
   ],
   "assign": [
-   18,
-   1
+   1,
+   18
   ],
   "focus": [
-   0.57890625,
-   0.48359375
+   0.48359375,
+   0.57890625
   ],
-  "hashtags": "#serie #quoiregarder #truecrime #monstrelhistoiredelizzieborden #netflix",
-  "comment": "Victime ou coupable : tu la mets où, cette Lizzie ? Dis-moi en un mot."
+  "hashtags": "#serie #quoiregarder #crime #monstrelhistoiredelizzieborden #netflix",
+  "comment": "Des parents cruels, ça excuse un peu ou pas du tout ? Dis-moi ton camp en un mot."
  },
  "last_propose": "2026-11-13",
  "photo": null,
