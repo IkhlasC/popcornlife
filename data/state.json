@@ -2,19 +2,19 @@
  "offset": 422726092,
  "pending": [
   {
+   "type": "movie",
+   "id": 1236045,
+   "title": "Animals"
+  },
+  {
+   "type": "movie",
+   "id": 1487861,
+   "title": "Elize Surgie de l'Ombre"
+  },
+  {
    "type": "tv",
    "id": 299939,
    "title": "Monstre : L'Histoire de Lizzie Borden"
-  },
-  {
-   "type": "movie",
-   "id": 1284041,
-   "title": "Le Dernier Refuge"
-  },
-  {
-   "type": "movie",
-   "id": 1483525,
-   "title": "Possible Love"
   }
  ],
  "last": {
@@ -78,7 +78,7 @@
   },
   "last_slide": 3
  },
- "last_propose": "2026-11-12",
+ "last_propose": "2026-11-13",
  "photo": null,
  "add_slide": null
 }
