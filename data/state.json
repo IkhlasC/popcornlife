@@ -1,82 +1,52 @@
 {
- "offset": 422726092,
- "pending": [
-  {
-   "type": "movie",
-   "id": 1236045,
-   "title": "Animals"
-  },
-  {
-   "type": "movie",
-   "id": 1487861,
-   "title": "Elize Surgie de l'Ombre"
-  },
-  {
-   "type": "tv",
-   "id": 299939,
-   "title": "Monstre : L'Histoire de Lizzie Borden"
-  }
- ],
+ "offset": 422726093,
+ "pending": [],
  "last": {
   "type": "tv",
-  "id": 124364,
-  "title": "FROM",
-  "year": "2022",
-  "rating": 8.5,
-  "platform": "Canal+ / Paramount+",
+  "id": 299939,
+  "title": "Monstre : L'Histoire de Lizzie Borden",
+  "year": "2026",
+  "rating": 7.1,
+  "platform": "Netflix",
   "texts": [
-   "Imagine que tu traverses une petite ville avec ta famille en camping-car",
-   "Tu essaies de repartir, mais chaque route te ramène dans la même ville",
-   "Et chaque soir, dès que le soleil se couche, des créatures sortent de la forêt"
+   "Cette femme est prisonnière de ses propres parents dans une maison victorienne",
+   "Lizzie massacre ses parents à la hache et tout le pays est choqué"
   ],
-  "poster_path": "/ubZpbtVOZJulIiqYWOPUl5DvaBY.jpg",
+  "poster_path": "/ruw68QldiWzOjUdKX9hUFT1pjv.jpg",
   "candidates": [
-   "/m7eiSGHFzr584zFmetGqkqaU6BN.jpg",
-   "/auyEi4Xho43HFvVQnd42LzqBdiV.jpg",
-   "/6gN8DYnIEln8v7OhRy61c57w0Xy.jpg",
-   "/cTUWXPze3Px9HFhbKszc4ejMhuO.jpg",
-   "/q3UGWifvIpdey1T2efX4dSmbZpU.jpg",
-   "/hR2pFXMxVihldEk5WoSrV7Yq2ra.jpg",
-   "/micuMAg5HBeg6drq2InyUuD2iXf.jpg",
-   "/gGZUtCbiVlU7mXBYhIj2TobcXs0.jpg",
-   "/o9cD93V4WZ6qSswN57gQBO4qn0W.jpg",
-   "/64Ak0nu7Au3SITTv1LAyXgynj2s.jpg",
-   "/seddLBvNOW9QK3j8uaJT0CSkVhI.jpg",
-   "/piAmLLUXCkH5ODK6uYd4jhRP4El.jpg",
-   "/pg11548HuugYNvavwtsmh3ZrhFS.jpg",
-   "/kkLfOz7yS17hujwt5jshEMCKDid.jpg",
-   "/29ONmSnMoKTDcnoP8H6jZIrVkRp.jpg",
-   "/ekAQPSxhWx4opIuf610FUb4yIEj.jpg",
-   "/7vBL5GvUArTStpQFmc9u88jb12O.jpg",
-   "/uFXxRPYSSrF4h5JcCU0UKEXthdj.jpg",
-   "/gbGhtHgCACJlGBaRAmUbJBvHvGb.jpg",
-   "/7ixwaafOaoRpMzBfqII8A5nCb5e.jpg",
-   "/bGEXblAt4JRt67t29LC8fuFhDO1.jpg",
-   "/l9Qwe6v1NzgOweld95NdegQ5jsO.jpg",
-   "/z2hQ10eEjunBrUsmr0cAofP6CNc.jpg",
-   "/kY31hMWSv3tGorxpBqpuwUR6vWd.jpg"
+   "/gaew60NXUxok3Vmls7gkAT7lYW0.jpg",
+   "/m97hzwX4ZmkMVB6Drky8fwg635n.jpg",
+   "/mtxP1MsB452DeSe2eAuNsqnJQWf.jpg",
+   "/3JVjgaqfX5MhxxHKpGWz05QV7Dz.jpg",
+   "/hcoKwpW6W5jPIlIRop6dVab1XpR.jpg",
+   "/pL6DTyi8tjUAOxOOnGntsWMgBo3.jpg",
+   "/tH0Y4Qru4UGH2aYPvVqLqKJEtbM.jpg",
+   "/wUKhZKFXhAx1SfCxvxbCbfOPLlN.jpg",
+   "/v4f5GQadFtg3M7DsCJfxZwGJPtv.jpg",
+   "/dAo6MRb52pcTYh7ssvRCh2n7xYt.jpg",
+   "/31nXvDuBbMHXmr03l9YO6SEKqh9.jpg",
+   "/feKEHFtJesGBYLQMfB5Wp9hpmqk.jpg",
+   "/sSs0AnQfHLIqQou0OUEmsXpSKuP.jpg",
+   "/zl6h5l9dxfTHdOqVCdVhxiVYjk9.jpg",
+   "/qQoBCDUbO3pv8PGGlU974FQl4fY.jpg",
+   "/41uKxTU7l4B0z2ko0SAYDYqyUrN.jpg",
+   "/b4ldonKaIXWe4px5jgP31VXA22p.jpg",
+   "/sdU5muDls4QNtrgS5sYiXFPXB8b.jpg",
+   "/tcI1HEio6yBZExRQvn8Pm92oE2O.jpg",
+   "/pTV2dspvwk5Sb2F1o3KxfQ6twhU.jpg",
+   "/tf3NbI8Vf3RWSHtfsrEltZCTnDi.jpg",
+   "/7glhEZjQYgCKndHfAtTL76Nu6n7.jpg"
   ],
   "assign": [
    18,
-   10,
-   23
+   1
   ],
   "focus": [
-   0.375,
-   0.75,
-   0.3
+   0.57890625,
+   0.48359375
   ],
-  "hashtags": "#serie #quoiregarder #horreur #from #survie",
-  "comment": "Tu t'enfermes chez toi toute la nuit ou tu tentes de fuir par la forêt ? Moi je sais déjà que je ne tiendrais pas une semaine.",
-  "custom": {
-   "2": "data/custom/124364_slide2.jpg",
-   "3": "data/custom/124364_slide3.jpg"
-  },
-  "zoom": {
-   "2": 1.4,
-   "3": 1.4
-  },
-  "last_slide": 3
+  "hashtags": "#serie #quoiregarder #truecrime #monstrelhistoiredelizzieborden #netflix",
+  "comment": "Victime ou coupable : tu la mets où, cette Lizzie ? Dis-moi en un mot."
  },
  "last_propose": "2026-11-13",
  "photo": null,
