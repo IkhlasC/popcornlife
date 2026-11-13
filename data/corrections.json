@@ -166,5 +166,26 @@
   "avant": "Imagine que ton fils de 14 ans est accusé d'une agression à Central Park",
   "apres": "Imagine que t'as 13 ans et qu'on t'accuse d'avoir agressé et tué une femme",
   "date": "2026-11-09"
+ },
+ {
+  "film": "Le Dernier Refuge",
+  "slide": 1,
+  "avant": "Imagine que ta famille de 4 reste enfermée dans votre maison",
+  "apres": "imagine que tu es enfermé, tu ne peux plus sortir de chez toi",
+  "date": "2026-11-13"
+ },
+ {
+  "film": "Le Dernier Refuge",
+  "slide": 2,
+  "avant": "Très vite, le confort disparaît et le nécessaire pour survivre vient à manquer",
+  "apres": "jour après jour, le frigo se vide…",
+  "date": "2026-11-13"
+ },
+ {
+  "film": "Le Dernier Refuge",
+  "slide": 3,
+  "avant": "Et personne ne sait qui ou quoi vous empêche de sortir",
+  "apres": "et dehors tu entends une étrange créature",
+  "date": "2026-11-13"
  }
 ]

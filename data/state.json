@@ -1,5 +1,5 @@
 {
- "offset": 422726096,
+ "offset": 422726102,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,9 +9,9 @@
   "rating": 6.8,
   "platform": "Netflix",
   "texts": [
-   "Imagine que ta famille de 4 reste enfermée dans votre maison",
-   "Très vite, le confort disparaît et le nécessaire pour survivre vient à manquer",
-   "Et personne ne sait qui ou quoi vous empêche de sortir"
+   "imagine que tu es enfermé, tu ne peux plus sortir de chez toi",
+   "jour après jour, le frigo se vide…",
+   "et dehors tu entends une étrange créature"
   ],
   "poster_path": "/loDdQQZm3mPG9FFQpD2bdC0I2wy.jpg",
   "candidates": [
@@ -51,7 +51,13 @@
    0.3609375
   ],
   "hashtags": "#film #quoiregarder #horreur #ledernierrefuge #netflix",
-  "comment": "Enfermé des mois avec ta famille : tu craques en premier ou tu tiens le plus longtemps ? Tag la personne avec qui tu tiendrais le moins longtemps."
+  "comment": "Enfermé des mois avec ta famille : tu craques en premier ou tu tiens le plus longtemps ? Tag la personne avec qui tu tiendrais le moins longtemps.",
+  "custom": {
+   "1": "data/custom/1284041_slide1.jpg",
+   "2": "data/custom/1284041_slide2.jpg",
+   "3": "data/custom/1284041_slide3.jpg"
+  },
+  "last_slide": 3
  },
  "last_propose": "2026-11-13",
  "photo": null,
