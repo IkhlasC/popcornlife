@@ -1,79 +1,54 @@
 {
- "offset": 422726102,
- "pending": [
-  {
-   "type": "tv",
-   "id": 338684,
-   "title": "Une vie arrachée : Natalee Holloway"
-  },
-  {
-   "type": "tv",
-   "id": 289517,
-   "title": "Un job mortel"
-  },
-  {
-   "type": "movie",
-   "id": 1616687,
-   "title": "Never Surrender"
-  }
- ],
+ "offset": 422726103,
+ "pending": [],
  "last": {
-  "type": "movie",
-  "id": 1284041,
-  "title": "Le Dernier Refuge",
+  "type": "tv",
+  "id": 289517,
+  "title": "Un job mortel",
   "year": "2026",
-  "rating": 6.8,
+  "rating": 7.6,
   "platform": "Netflix",
   "texts": [
-   "imagine que tu es enfermé, tu ne peux plus sortir de chez toi",
-   "jour après jour, le frigo se vide…",
-   "et dehors tu entends une étrange créature"
+   "Imagine que t'es endetté et qu'une agence te propose des petits jobs payés cher",
+   "Plus tu enchaînes ces jobs, plus tu te rends compte qu'ils sont mortels"
   ],
-  "poster_path": "/loDdQQZm3mPG9FFQpD2bdC0I2wy.jpg",
+  "poster_path": "/fEOsnx6TAiHOno5Ez5k8cxMVrtF.jpg",
   "candidates": [
-   "/1RhfevWmWCVHtEqxWBEjPOC5KG1.jpg",
-   "/2mPmccLg8QCD4ZF6v8kSsUijPPW.jpg",
-   "/wlz7wSGNMtW3dUI6QyUv67fT1LT.jpg",
-   "/A2SsNDtRcz3qNhFoNNrbomTesBx.jpg",
-   "/59XYxDTtdhbvNDLo0Ou0jsjhwEy.jpg",
-   "/oHktL8nfaHKqEyDA9Wx0hdR8AI4.jpg",
-   "/m9mjjHZuOfjcf9TC14h4CGbxC81.jpg",
-   "/2CI4I8wl7YgzamyOQseMM9tRoau.jpg",
-   "/uRsrdbERJRV8pQcYnnMt9HTVft8.jpg",
-   "/urGzqGMYmQXkh2ztquDHEVL94iI.jpg",
-   "/xsnW3JDDBkh4vMnGlirAYwa42h3.jpg",
-   "/mdfmCff4sK663qjxc9vzWgrhMOe.jpg",
-   "/heZc42LhkEN20zHRVIMddH7axYk.jpg",
-   "/khwZFefSsLmkW9uCxMrzTsIqtH.jpg",
-   "/bzApLVbo3zhWEg5022HIp2RPZ3c.jpg",
-   "/ajmVDKDlnH6AugKCHZd1I5NxvMA.jpg",
-   "/xd85uplhXzuZvmXIboTtW3ZnLTN.jpg",
-   "/c6pJKrJQsf3XcscJWRwr2lTWVvk.jpg",
-   "/hDWfSly0nkGO8ESrMMEFE4MrXBm.jpg",
-   "/q4ZMKBfh7snVJhOvxIuhPbITDC2.jpg",
-   "/wFCfmiWMpiT65IrYXAWgoCuvnJz.jpg",
-   "/xRjtdyrP61GsEqCXtCDRGt3C4E2.jpg",
-   "/nOefwcyjCp8eUOrm7M4bxie0YeG.jpg",
-   "/g6SuyxBMu9ox1SONMoCp2SfI9Hy.jpg"
+   "/gWedDgBsZkuOho2qe3q2sTQmbpO.jpg",
+   "/cyH2fZUjIJjLmgpF3tgA5CSGz4L.jpg",
+   "/2bIuLHpNIciIN69sJQOiHNJJL9J.jpg",
+   "/4m3jIQaWNKUlFqW0DVMqWANRmJI.jpg",
+   "/9c2hdNhjpWmSQQRJ3GVNIJvyl1Q.jpg",
+   "/iW49eAra4WupwgRBReLBKrpX0dC.jpg",
+   "/8VV0sFCuiQJaYico42KCWT2Mpcb.jpg",
+   "/3DWNoTnro5XbcgxAjGbZSPeL1bq.jpg",
+   "/thJ4Pu7Nrvpj1ZInP8rZtNEFU6D.jpg",
+   "/eXxUJGaqvwh4I4DMIP1ycZ031my.jpg",
+   "/bg0wnaTEh2GHurzrhBNKxCth3G.jpg",
+   "/i4JNJUG0PL7MvqG0emTa6ROvltm.jpg",
+   "/e1BWv3D6b2rt5WfcnWbBKuKcfX3.jpg",
+   "/t9hH8SJa7IxFRyhGcsi03X8mDTJ.jpg",
+   "/dRKQoYtcYdfqqEZWOnDlwmPvhWJ.jpg",
+   "/3Um9BzeTJNtKLrtwgr34UdMK0lt.jpg",
+   "/gs2Fz4bIgZzt5fDp9W1ytAY4rpX.jpg",
+   "/7vu37tTGKEnBWZKrzKIaLWjxOrV.jpg",
+   "/xSQXdlirhezXIuPtKD21mptBo9Z.jpg",
+   "/ke4lWRKw130cZqw5IzoAMUvNEtm.jpg",
+   "/6ryFrbvs0ZLg9XFns5HFJUtJIq9.jpg",
+   "/8q09gA5uu30V2LlA10ysP8n5iMZ.jpg",
+   "/xVv72XAbAO24cC1S7FC6119wO8R.jpg",
+   "/4G0iWwA0o5IpEUssczyiBvVlP6n.jpg"
   ],
   "assign": [
-   3,
-   19,
-   4
+   16,
+   21
   ],
   "focus": [
-   0.2359375,
-   0.4,
-   0.3609375
+   0.6,
+   0.5
   ],
-  "hashtags": "#film #quoiregarder #horreur #ledernierrefuge #netflix",
-  "comment": "Enfermé des mois avec ta famille : tu craques en premier ou tu tiens le plus longtemps ? Tag la personne avec qui tu tiendrais le moins longtemps.",
-  "custom": {
-   "1": "data/custom/1284041_slide1.jpg",
-   "2": "data/custom/1284041_slide2.jpg",
-   "3": "data/custom/1284041_slide3.jpg"
-  },
-  "last_slide": 3
+  "hashtags": "#serie #quoiregarder #suspense #unjobmortel #netflix",
+  "comment": "Une agence te propose un gros chèque pour un petit boulot sans rien t'expliquer : tu acceptes ou tu refuses ?"
  },
  "last_propose": "2026-11-14",
  "photo": null,
