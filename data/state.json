@@ -1,6 +1,22 @@
 {
  "offset": 422726102,
- "pending": [],
+ "pending": [
+  {
+   "type": "tv",
+   "id": 338684,
+   "title": "Une vie arrachée : Natalee Holloway"
+  },
+  {
+   "type": "tv",
+   "id": 289517,
+   "title": "Un job mortel"
+  },
+  {
+   "type": "movie",
+   "id": 1616687,
+   "title": "Never Surrender"
+  }
+ ],
  "last": {
   "type": "movie",
   "id": 1284041,
@@ -59,7 +75,7 @@
   },
   "last_slide": 3
  },
- "last_propose": "2026-11-13",
+ "last_propose": "2026-11-14",
  "photo": null,
  "add_slide": null
 }
