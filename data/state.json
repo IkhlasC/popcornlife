@@ -1,6 +1,22 @@
 {
  "offset": 422726103,
- "pending": [],
+ "pending": [
+  {
+   "type": "movie",
+   "id": 1668364,
+   "title": "Le Désir"
+  },
+  {
+   "type": "tv",
+   "id": 291507,
+   "title": "The Body"
+  },
+  {
+   "type": "movie",
+   "id": 1630409,
+   "title": "The Debt Collector"
+  }
+ ],
  "last": {
   "type": "tv",
   "id": 289517,
@@ -50,7 +66,7 @@
   "hashtags": "#serie #quoiregarder #suspense #unjobmortel #netflix",
   "comment": "Une agence te propose un gros chèque pour un petit boulot sans rien t'expliquer : tu acceptes ou tu refuses ?"
  },
- "last_propose": "2026-11-14",
+ "last_propose": "2026-11-15",
  "photo": null,
  "add_slide": null
 }
