@@ -3,8 +3,8 @@
  "pending": [
   {
    "type": "movie",
-   "id": 1236045,
-   "title": "Animals"
+   "id": 860508,
+   "title": "The Whisper Man"
   },
   {
    "type": "movie",
@@ -12,9 +12,9 @@
    "title": "Never Surrender"
   },
   {
-   "type": "tv",
-   "id": 291507,
-   "title": "The Body"
+   "type": "movie",
+   "id": 1426776,
+   "title": "À bout"
   }
  ],
  "last": {
@@ -66,7 +66,7 @@
   "hashtags": "#serie #quoiregarder #suspense #unjobmortel #netflix",
   "comment": "Une agence te propose un gros chèque pour un petit boulot sans rien t'expliquer : tu acceptes ou tu refuses ?"
  },
- "last_propose": "2026-11-17",
+ "last_propose": "2026-11-18",
  "photo": null,
  "add_slide": null
 }
