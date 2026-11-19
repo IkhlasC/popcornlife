@@ -1,70 +1,39 @@
 {
- "offset": 422726105,
- "pending": [
-  {
-   "type": "tv",
-   "id": 278178,
-   "title": "Sur tes traces"
-  },
-  {
-   "type": "movie",
-   "id": 1487861,
-   "title": "Elize Surgie de l'Ombre"
-  },
-  {
-   "type": "tv",
-   "id": 291507,
-   "title": "The Body"
-  }
- ],
+ "offset": 422726106,
+ "pending": [],
  "last": {
   "type": "tv",
-  "id": 289517,
-  "title": "Un job mortel",
+  "id": 278178,
+  "title": "Sur tes traces",
   "year": "2026",
-  "rating": 7.6,
+  "rating": 8.1,
   "platform": "Netflix",
   "texts": [
-   "Imagine que t'es endetté et qu'une agence te propose des petits jobs payés cher",
-   "Plus tu enchaînes ces jobs, plus tu te rends compte qu'ils sont mortels"
+   "Ce père innocent est condamné à perpétuité pour le m*urtre de son propre fils",
+   "Mais en prison, il reçoit la preuve que son fils est peut-être encore en vie",
+   "Il n'a plus qu'une idée : s'évader pour découvrir la vérité"
   ],
-  "poster_path": "/fEOsnx6TAiHOno5Ez5k8cxMVrtF.jpg",
+  "poster_path": "/bqljPIvFYDGUcgyGmtYBegqJMRh.jpg",
   "candidates": [
-   "/gWedDgBsZkuOho2qe3q2sTQmbpO.jpg",
-   "/cyH2fZUjIJjLmgpF3tgA5CSGz4L.jpg",
-   "/2bIuLHpNIciIN69sJQOiHNJJL9J.jpg",
-   "/4m3jIQaWNKUlFqW0DVMqWANRmJI.jpg",
-   "/9c2hdNhjpWmSQQRJ3GVNIJvyl1Q.jpg",
-   "/iW49eAra4WupwgRBReLBKrpX0dC.jpg",
-   "/8VV0sFCuiQJaYico42KCWT2Mpcb.jpg",
-   "/3DWNoTnro5XbcgxAjGbZSPeL1bq.jpg",
-   "/thJ4Pu7Nrvpj1ZInP8rZtNEFU6D.jpg",
-   "/eXxUJGaqvwh4I4DMIP1ycZ031my.jpg",
-   "/bg0wnaTEh2GHurzrhBNKxCth3G.jpg",
-   "/i4JNJUG0PL7MvqG0emTa6ROvltm.jpg",
-   "/e1BWv3D6b2rt5WfcnWbBKuKcfX3.jpg",
-   "/t9hH8SJa7IxFRyhGcsi03X8mDTJ.jpg",
-   "/dRKQoYtcYdfqqEZWOnDlwmPvhWJ.jpg",
-   "/3Um9BzeTJNtKLrtwgr34UdMK0lt.jpg",
-   "/gs2Fz4bIgZzt5fDp9W1ytAY4rpX.jpg",
-   "/7vu37tTGKEnBWZKrzKIaLWjxOrV.jpg",
-   "/xSQXdlirhezXIuPtKD21mptBo9Z.jpg",
-   "/ke4lWRKw130cZqw5IzoAMUvNEtm.jpg",
-   "/6ryFrbvs0ZLg9XFns5HFJUtJIq9.jpg",
-   "/8q09gA5uu30V2LlA10ysP8n5iMZ.jpg",
-   "/xVv72XAbAO24cC1S7FC6119wO8R.jpg",
-   "/4G0iWwA0o5IpEUssczyiBvVlP6n.jpg"
+   "/yOna5ZGXrvWO2HdOCKcahx2sCDN.jpg",
+   "/z0R6ToCsMMkLwuQXjzzdd1QCdJv.jpg",
+   "/2yDDwP48GqL9Fpb6UEgGHyqM63y.jpg",
+   "/adiCGdJsEethgMNIl2uJDkKTX6c.jpg",
+   "/4vq9lvToiVx2fs7TCVyf0xa8kf6.jpg"
   ],
   "assign": [
-   16,
-   21
+   0,
+   4,
+   2
   ],
   "focus": [
-   0.6,
-   0.5
+   0.65390625,
+   0.72,
+   0.5765625
   ],
-  "hashtags": "#serie #quoiregarder #suspense #unjobmortel #netflix",
-  "comment": "Une agence te propose un gros chèque pour un petit boulot sans rien t'expliquer : tu acceptes ou tu refuses ?"
+  "hashtags": "#serie #quoiregarder #drame #surtestraces #netflix",
+  "comment": "Condamné à vie pour la m*rt de ton fils, puis tu apprends qu'il est peut-être vivant : tu t'évades ou tu attends de prouver ton innocence ?",
+  "caption": "Condamné à vie pour la m*rt de ton fils, puis tu apprends qu'il est peut-être vivant : tu t'évades ou tu attends de prouver ton innocence ?\n#serie #quoiregarder #drame #surtestraces #netflix"
  },
  "last_propose": "2026-11-19",
  "photo": null,
