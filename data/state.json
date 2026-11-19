@@ -1,45 +1,44 @@
 {
- "offset": 422726109,
+ "offset": 422726110,
  "pending": [],
  "last": {
-  "type": "tv",
-  "id": 278178,
-  "title": "Sur tes traces",
+  "type": "movie",
+  "id": 1487861,
+  "title": "Elize Surgie de l'Ombre",
   "year": "2026",
-  "rating": 8.1,
+  "rating": 7.4,
   "platform": "Netflix",
   "texts": [
-   "Ce père innocent est condamné à perpétuité pour le m*urtre de son propre fils",
-   "Mais en prison, il reçoit la preuve que son fils est peut-être encore en vie",
-   "Il n'a plus qu'une idée : s'évader pour découvrir la vérité"
+   "Au Brésil, une mère de famille t*e son mari et découpe son corps",
+   "Mais elle l'avait rencontré quand elle était escort, et lui venait d'une famille riche",
+   "Histoire vraie. Le Brésil entier a suivi l'affaire en 2012."
   ],
-  "poster_path": "/bqljPIvFYDGUcgyGmtYBegqJMRh.jpg",
+  "poster_path": "/ryuWPWA3sZ1eoKHaZLxAvNoxCnV.jpg",
   "candidates": [
-   "/yOna5ZGXrvWO2HdOCKcahx2sCDN.jpg",
-   "/z0R6ToCsMMkLwuQXjzzdd1QCdJv.jpg",
-   "/2yDDwP48GqL9Fpb6UEgGHyqM63y.jpg",
-   "/adiCGdJsEethgMNIl2uJDkKTX6c.jpg",
-   "/4vq9lvToiVx2fs7TCVyf0xa8kf6.jpg"
+   "/z8mTDyKdAWjKsD0vwa7e9LTSY1j.jpg",
+   "/o795VMV1gpUjhepznZ0Lpp4og3v.jpg",
+   "/veCZHRJstTxxFmmUkMTJfgGRZng.jpg",
+   "/kNyNKP4sE01hsTMAZ4ggbRhvllX.jpg",
+   "/yHN9zjUhd1knQ5JKmouyz58bfEI.jpg",
+   "/cVuPRD8zSv9PUQGWvtaDCxTJwj9.jpg",
+   "/z3LeWLHyVHiAseqHAU7YpzJOf2c.jpg",
+   "/iuKYR80UmGNfQwhCPrQogyooG4U.jpg",
+   "/n4tgGc26KBmT0ETVkJBIjj9YdbM.jpg",
+   "/rF6GS97jdmWVnpp03ONgUA8XGNF.jpg"
   ],
   "assign": [
-   0,
-   4,
+   3,
+   8,
    2
   ],
   "focus": [
-   0.65390625,
-   0.72,
-   0.5765625
+   0.70234375,
+   0.51953125,
+   0.51796875
   ],
-  "hashtags": "#serie #quoiregarder #drame #surtestraces #netflix",
-  "comment": "Condamné à vie pour la m*rt de ton fils, puis tu apprends qu'il est peut-être vivant : tu t'évades ou tu attends de prouver ton innocence ?",
-  "caption": "Condamné à vie pour la m*rt de ton fils, puis tu apprends qu'il est peut-être vivant : tu t'évades ou tu attends de prouver ton innocence ?\n#serie #quoiregarder #drame #surtestraces #netflix",
-  "custom": {
-   "1": "data/custom/278178_slide1.jpg",
-   "2": "data/custom/278178_slide2.jpg",
-   "3": "data/custom/278178_slide3.jpg"
-  },
-  "last_slide": 3
+  "hashtags": "#film #quoiregarder #thriller #elizesurgiedelombre #netflix",
+  "comment": "Victime qui a craqué ou coupable sans excuse : tu la mets où ?",
+  "caption": "Victime qui a craqué ou coupable sans excuse : tu la mets où ?\n#film #quoiregarder #thriller #elizesurgiedelombre #netflix"
  },
  "last_propose": "2026-11-19",
  "photo": null,
