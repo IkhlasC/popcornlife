@@ -1,5 +1,5 @@
 {
- "offset": 422726106,
+ "offset": 422726109,
  "pending": [],
  "last": {
   "type": "tv",
@@ -33,7 +33,13 @@
   ],
   "hashtags": "#serie #quoiregarder #drame #surtestraces #netflix",
   "comment": "Condamné à vie pour la m*rt de ton fils, puis tu apprends qu'il est peut-être vivant : tu t'évades ou tu attends de prouver ton innocence ?",
-  "caption": "Condamné à vie pour la m*rt de ton fils, puis tu apprends qu'il est peut-être vivant : tu t'évades ou tu attends de prouver ton innocence ?\n#serie #quoiregarder #drame #surtestraces #netflix"
+  "caption": "Condamné à vie pour la m*rt de ton fils, puis tu apprends qu'il est peut-être vivant : tu t'évades ou tu attends de prouver ton innocence ?\n#serie #quoiregarder #drame #surtestraces #netflix",
+  "custom": {
+   "1": "data/custom/278178_slide1.jpg",
+   "2": "data/custom/278178_slide2.jpg",
+   "3": "data/custom/278178_slide3.jpg"
+  },
+  "last_slide": 3
  },
  "last_propose": "2026-11-19",
  "photo": null,
