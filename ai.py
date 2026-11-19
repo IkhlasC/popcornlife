@@ -84,16 +84,18 @@ Ne tiens PAS compte des fêtes (Halloween, Noël, Saint-Valentin…) : seulement
 def propose(pool):
     import datetime
     def line(p):
-        flags = ("[NETFLIX] " if p.get("netflix") else "") + (f"[ACTU : {p['buzz']}] " if p.get("buzz") else "")
+        flags = ("[NETFLIX] " if p.get("netflix") else "") + (f"[ACTU : {p['buzz']}] " if p.get("groupe") == "actu" else "[PÉPITE RÉCENTE] ")
         return f'{p["type"]}:{p["id"]} | {flags}{p["title"]} ({p["year"]}) | note {p["rating"]} | {", ".join(p["genres"])} | {p["overview"][:220]}'
     lines = "\n".join(line(p) for p in pool)
-    prompt = f"""Nous sommes le {datetime.date.today().strftime("%d/%m/%Y")}. Voici une liste d'œuvres disponibles en streaming en France ([NETFLIX] = disponible sur Netflix ; [ACTU] = on en parle en ce moment) :
+    import random
+    n_actu = random.choice([1, 2])      # rotation : sur 3 propositions, 1 ou 2 d'actualité, les autres des pépites récentes
+    prompt = f"""Nous sommes le {datetime.date.today().strftime("%d/%m/%Y")}. Voici une liste d'œuvres disponibles en streaming en France ([NETFLIX] = disponible sur Netflix ; [ACTU] = on en parle en ce moment ; [PÉPITE RÉCENTE] = film ou série très marquant des 4-5 dernières années, pas forcément dans l'actualité) :
 {lines}
 
 Choisis les 3 œuvres qui vont FAIRE LE PLUS RÉAGIR sur TikTok, c'est-à-dire celles dont une seule phrase provoque une émotion forte (peur, choc, indignation, « c'est quoi ce film ? », « je dois le voir »). Note chaque œuvre de 1 à 10 sur son potentiel de réaction (score_reaction) et ne garde que les 3 meilleures scores, classées de la plus forte à la moins forte. Ne retiens qu'une œuvre à plus de 7 si tu peux la défendre avec une phrase choc ; refuse les œuvres tièdes même si elles sont bien notées.
 RÈGLES DE LA RÉDACTRICE (elles passent avant tes goûts) :
 - NETFLIX D'ABORD : ce sont souvent les films et séries Netflix qui plaisent le plus. Au moins 2 des 3 propositions doivent être [NETFLIX], idéalement les 3.
-- L'ACTUALITÉ D'ABORD : une œuvre marquée [ACTU] (en tendance, sortie récente, titre qui buzz) passe avant une œuvre « découverte », même si elle est connue. Ces publications marchent mieux parce que les gens cherchent justement ces titres en ce moment. Au moins 2 propositions sur 3 doivent être [ACTU] quand c'est possible ; dans « pourquoi », dis ce qui fait l'actualité.
+- ROTATION ACTUALITÉ / PÉPITES : exactement {n_actu} proposition(s) [ACTU] (film dont on parle en ce moment : tendance de la semaine, sortie récente, buzz) et {3 - n_actu} [PÉPITE RÉCENTE] (film ou série des 4-5 dernières années très marquant, avec un fait choc ou une histoire qui divise). Pour une [ACTU], dis dans « pourquoi » ce qui fait l'actualité ; pour une pépite, dis ce qui la rend marquante. Si le pool ne permet pas cette répartition, rapproche-t'en au mieux.
 Ce qui fait le plus réagir : une MENACE VENUE DU CERCLE FAMILIER (un père, une mère, un frère, un enfant, un proche qui n'est pas ce qu'il semble), une INJUSTICE ou un dilemme moral, un enfant ou un proche en danger, un piège dans un lieu du quotidien (airbnb, concert, tunnel, aéroport, vacances en famille), un retournement, une situation où le lecteur se dit « et si c'était moi ? ». Privilégie les œuvres où le lecteur peut se mettre à la place d'un personnage.
 Varie (pas 3 œuvres du même genre ; 2 séries maximum). Évite les décors lointains ou fantastiques (apocalypse, western, dystopie, monstres), les clichés de genre (cimetière, village maudit) et les concepts qu'il faut expliquer, SAUF si l'œuvre est en pleine actualité.
 Pour chacune : un angle éditorial, une idée de hook (une phrase), et pourquoi ça peut faire réagir sur TikTok (une phrase).
@@ -284,42 +286,70 @@ JSON : {{"slides":[{{"vague":false,"raison":"","fait_precis":""}}]}} (une entré
             out.append((i, s[i], str(e_.get("fait_precis") or "").strip()))
     return out
 
-def write_post(meta, guidance="", avoid=None, platform=""):
+BRIEF = """RÈGLES DU BRIEF POPCORNLIFE (elles passent avant tout le reste ; le public réagit à l'injustice, aux dilemmes moraux, aux histoires vraies et aux situations où l'on se demande « qu'est-ce que j'aurais fait ? ») :
+Déroulé : situation, bascule, dilemme. Tu racontes le début de l'œuvre et tu t'arrêtes AVANT la fin.
+- SLIDE 1, le hook (20 mots maximum) : un fait choc en une ligne : qui + situation + ce qui cloche. Écris par défaut à la 3e personne. Ouvertures possibles : la conséquence (« Il vole la mauvaise voiture »), le chiffre (« Un job payé 50 fois le SMIC »), le fait vrai (« En 12 heures, une tempête devient un ouragan de catégorie 5 »). TOUJOURS un élément concret : un chiffre, un délai, un âge, une somme, un lieu réel. JAMAIS le titre de l'œuvre dans la slide 1.
+  « Imagine que tu… » reste autorisé quand il est le plus fort (aucune limite de fréquence).
+- SLIDE 2, la bascule : commence par « Mais », « Sauf que », ou par un fait qui AGGRAVE la situation. Le problème doit grossir : il touche plus de monde, il devient impossible à résoudre, le temps presse.
+- SLIDE 3 (facultative), le dilemme ou le fait vrai : pose le choix impossible sous forme d'AFFIRMATION, ou donne le fait réel qui frappe (« Histoire vraie, New York, 2015 »). Ne révèle JAMAIS la fin. Pour une œuvre à twist, dis qu'il y en a un, sans indice.
+- La dernière slide (l'affiche et le titre) n'est pas ton travail.
+- STYLE : phrases de 4 à 15 mots (slide 1 : 20 maximum). Pas d'adjectif vague (« incroyable », « génial ») : un fait à la place. Mots sensibles censurés par un astérisque (t*eur, m*rt, dr*guer).
+HOOKS MODÈLES (slide 1 / slide 2 / slide 3). Ils servent à calibrer le TON et la LONGUEUR : ne les recopie pas, ne réutilise leurs faits que pour ces œuvres.
+Vrais hooks qui ont fait des millions de vues : « Ce t*eur en série se rend à un concert avec sa fille » → « Il se rend compte que le concert tout entier est un piège pour lui » ; « Un garçon de 13 ans découvre un bunker à côté de sa maison » → « Il décide de dr*guer toute sa famille et les enferme dedans » ; « Une vieille dame écrit le nom de son meurtrier avant de mourir » → « Omar, son jardinier, est jugé coupable, pourtant aucune preuve ne prouve sa culpabilité ».
+1. Le Dernier Refuge : Après la tempête, les portes ne s'ouvrent plus. Les fenêtres sont devenues incassables. / Ils regardent dehors. Tout le quartier est enfermé. / Un jour après sa sortie, il était n°1 sur Netflix.
+2. FROM : Une famille traverse un village. Impossible d'en ressortir. / Toutes les routes ramènent au même endroit. / La nuit, des créatures frappent aux portes. Elles sourient. Elles demandent à entrer.
+3. Prisoners : Sa fille de 6 ans disparaît. Le seul suspect est relâché faute de preuves. / Le père le kidnappe et l'enferme. / Il n'a plus aucune limite.
+4. Tunnel : Il rentre avec le gâteau d'anniversaire de sa fille. Le tunnel s'effondre sur lui. / Deux bouteilles d'eau. Un gâteau. Des tonnes de béton. / Les jours passent. Le pays se demande si le sauver vaut encore le coût.
+5. Cargo : Il vient d'être mordu. Dans 48 heures, il ne sera plus humain. / Sa fille d'un an est attachée dans son dos. / Il doit lui trouver quelqu'un avant de devenir la menace.
+6. Dans leur regard : 5 ados de Harlem accusés d'une agression qu'ils n'ont pas commise. / Interrogés des heures sans leurs parents, ils signent des aveux. / Histoire vraie. Le vrai coupable s'est dénoncé des années plus tard.
+7. Countdown : Une appli donne l'heure exacte de ta mort. La sienne : dans 3 jours. / Elle supprime l'appli. Le compteur continue. / Les conditions d'utilisation interdisent de changer son destin.
+8. Hungry : Ni requin, ni crocodile. Un hippopotame. / Le guide quitte les sentiers balisés. Le bateau se retourne. / Les États-Unis ont vraiment envisagé d'élever des hippopotames en Louisiane.
+9. Escape at Dannemora : Deux meurtriers condamnés à perpétuité s'évadent d'une prison de haute sécurité. / Une employée de la prison les a aidés. / Histoire vraie, New York, 2015.
+10. Serenity : Son ex débarque après des années. Elle lui offre 10 millions pour tuer son mari. / Le mari est violent avec elle et son fils. / Rien sur cette île n'est ce qu'il paraît.
+"""
+
+def write_post(meta, guidance="", avoid=None, platform="", question=False):
     kind = "série" if meta["type"] == "tv" else "film"
     extra = ""
     if guidance:
         extra += f"\nINSTRUCTION DE LA RÉDACTRICE (à respecter en priorité absolue) : {guidance}\n"
     if avoid:
         extra += "\nTextes déjà proposés et REFUSÉS (ne les reprends pas, change d'angle) :\n" + "\n".join(f"- {x}" for x in avoid) + "\n"
+    if question:
+        extra += ("\nMODE TEST QUESTION (demande explicite de la rédactrice, valable pour CE post seulement) : la SLIDE 2 doit être une QUESTION qui se termine par « ? » "
+                  "(un choix concret ou un « jusqu'où irais-tu… ? » / « qu'aurais-tu fait ? » lié à un fait précis de l'œuvre, sans spoiler). "
+                  "Cette exception remplace la règle « aucune question » pour la slide 2 uniquement : les autres slides restent des affirmations, sans point d'interrogation.\n")
     base = f"""Œuvre : {meta['title']} ({meta['year']}), {kind}. Genres : {', '.join(meta['genres'])}.
 Accroche officielle : {meta['tagline'] or '-'}
 Synopsis : {meta['overview']}
 {extra}
 {EXEMPLES}
+{BRIEF}
 {references_block()}{corrections_block()}
 Écris un carrousel TikTok de 2 OU 3 slides (une phrase chacune). Le nombre de slides dépend de l'intrigue :
 - 2 slides si l'histoire tient en deux coups (situation + retournement). C'est souvent le mieux : DEUX slides bien faites valent mieux que TROIS moyennes. Ne rajoute JAMAIS une 3e slide pour remplir.
 - 3 slides seulement si la 3e apporte un vrai coup de plus (un enjeu, un choix impossible, un détail glaçant). Sinon, 2.
 Le but : stopper le scroll dès la slide 1, puis finir sur une ÉMOTION FORTE qui donne envie de savoir la suite. La dernière slide doit laisser le lecteur avec : de la PEUR, de la TRISTESSE, de la SURPRISE, ou une CURIOSITÉ qui brûle (une question qu'il ne peut pas laisser sans réponse). Jamais de conclusion tiède, jamais d'explication, jamais de morale. On s'arrête juste avant la réponse.
-- slide 1 : UNE PERSONNE dans une situation du quotidien, avec le vrai hook dès cette slide (ou l'inversion : le héros est en fait le méchant) ;
-- slide 2 (ou 3 s'il y en a 3) : le coup qui fait mal ou qui surprend, le fait précis qui glace ou qui serre la gorge, jamais la fin.
+- slide 1 : le hook du brief (qui + situation + ce qui cloche, un élément concret, 20 mots maximum, sans le titre), avec une personne dans une situation précise (ou l'inversion : le héros est en fait le méchant) ;
+- slide 2 : la bascule (« Mais… », « Sauf que… » ou un fait qui aggrave), le fait précis qui glace ou qui serre la gorge, jamais la fin ;
+- slide 3 (seulement si elle apporte un vrai coup de plus) : le dilemme en affirmation, ou le fait réel qui frappe.
 
 STYLE DES MOTS (très important) :
 - Les mots les plus SIMPLES, courts et durs, comme on parle à un ami. Jamais de mot soutenu ou littéraire : écris « inutile » (pas « désuet »), « peur » (pas « appréhension »), « tuer » (masqué : t*er), « piège » (pas « stratagème »), « mentir » (pas « dissimuler »), « se rend compte » (pas « prend conscience »), « riche » (pas « fortuné »), « cacher » (pas « dissimuler »).
 - CONTEXTE D'ABORD : quelqu'un qui ne connaît PAS le film doit comprendre la situation : qui (un père, un employé…), où, et la règle ou l'enjeu. Si c'est un jeu ou un mécanisme, explique-le en quelques mots (« un jeu où il faut repérer les anomalies pour sortir d'un couloir sans fin »). Une slide trop vague (« une anomalie », « un objet magique » sans dire quoi) est mauvaise.
 - HÉROS SOUS-ESTIMÉ : joue le CONTRASTE entre ce que les autres croient de lui (lâche, bête, inutile, raté) et ce qu'il est vraiment, puis le DÉCLIC (l'événement qui va tout changer : cambrioleurs, accident, menace), sans dire ce qu'il fait ensuite.
-- Phrases courtes mais CLAIRES : 8 à 14 mots. Le contexte passe avant la brièveté, mais chaque mot doit servir. Coupe tout le reste.
+- Phrases courtes mais CLAIRES : 4 à 15 mots (20 maximum pour la slide 1). Le contexte passe avant la brièveté, mais chaque mot doit servir. Coupe tout le reste.
 - ZÉRO phrase bateau : pas de « tout bascule », « rien ne sera plus comme avant », « un secret terrible », « une histoire incroyable », « un destin hors du commun ». Si la phrase pourrait s'appliquer à 10 autres films, elle est mauvaise : remplace-la par un fait précis (chiffre, objet, lien familial, lieu).
 - N'hésite pas à employer des mots forts et directs (tuer, mourir, enfermer, disparaître, mentir, trahir), masqués par un astérisque quand ils sont sensibles.
 
-ÉTAPE 0, L'INTRIGUE (la plus importante, à faire avant d'écrire) : avant toute phrase, identifie ce qui rend cette œuvre EXTRAORDINAIRE et pousse la curiosité : le fait singulier, le contraste ou le destin hors norme qu'on ne voit pas ailleurs (ex. pour un film : un homme moqué pour sa bêtise qui devient, grâce à un don unique, une star nationale). Ce n'est PAS le simple résumé ni le point de départ banal : c'est le « comment est-ce possible ? » qui donne envie de voir. Remplis "contexte_cle" (ce que le lecteur doit absolument savoir pour comprendre : la règle du jeu, le lien familial, le lieu, ce que les autres pensent du héros), "intrigue_principale" (ce qui fait l'œuvre), "element_extraordinaire" (le fait le plus percutant, concret) et "question_curiosite" (la question que le lecteur se pose). Les 3 slides doivent TOUTES jouer sur cet élément : slide 1 = la personne + le contraste de départ, slide 2 = le fait extraordinaire qui intrigue, slide 3 = l'enjeu ou ce qui reste inexpliqué. N'écris jamais une slide sur un détail secondaire. Tu peux t'appuyer sur ta connaissance de l'œuvre pour repérer cet élément si tu en es certain ; sinon reste fidèle au synopsis.
+ÉTAPE 0, L'INTRIGUE (la plus importante, à faire avant d'écrire) : avant toute phrase, identifie ce qui rend cette œuvre EXTRAORDINAIRE et pousse la curiosité : le fait singulier, le contraste ou le destin hors norme qu'on ne voit pas ailleurs (ex. pour un film : un homme moqué pour sa bêtise qui devient, grâce à un don unique, une star nationale). Ce n'est PAS le simple résumé ni le point de départ banal : c'est le « comment est-ce possible ? » qui donne envie de voir. Remplis "contexte_cle" (ce que le lecteur doit absolument savoir pour comprendre : la règle du jeu, le lien familial, le lieu, ce que les autres pensent du héros), "intrigue_principale" (ce qui fait l'œuvre), "element_extraordinaire" (le fait le plus percutant, concret) et "question_curiosite" (la question que le lecteur se pose). Les slides doivent TOUTES jouer sur cet élément : slide 1 = la personne + le contraste de départ, slide 2 = le fait extraordinaire qui aggrave la situation, slide 3 (si elle existe) = le dilemme en affirmation ou le fait réel. N'écris jamais une slide sur un détail secondaire. Tu peux t'appuyer sur ta connaissance de l'œuvre pour repérer cet élément si tu en es certain ; sinon reste fidèle au synopsis.
 
 MÉTHODE (c'est ce qui décide de la qualité) :
 1. "brouillons_s1" : 6 versions DIFFÉRENTES de la slide 1 : (a) une personne + une situation du quotidien (airbnb, vacances, trajet, concert, travail), (b) l'inversion : le héros est en réalité le méchant ou le piège est pour lui, (c) la menace vient d'un proche (père, mère, enfant, voisin), (d) une proposition coupée (« Après… », « Alors que… ») que la slide 2 terminera, (e) une injustice, (f) un objet ou un fait chiffré qui déclenche l'intrigue, (g) si le synopsis s'y prête, une accroche « Imagine ton frère… » ou « Imagine que tu es… » suivie d'un fait choquant et concret.
-2. "brouillons_s2" : 5 versions de la slide 2 : (a) la prise de conscience (« se rend compte que… »), (b) un retournement ou une ironie, (c) « plus le temps passe, plus… » ou « très vite… », (d) « il va devoir… », (e) l'injustice (« pourtant personne ne le croit »). Toutes basées sur un FAIT PRÉCIS du synopsis, qui laissent volontairement une zone d'ombre.
+2. "brouillons_s2" : 5 versions de la slide 2 (commence par « Mais » ou « Sauf que » ou par un fait qui aggrave) : (a) la prise de conscience (« Mais il se rend compte que… »), (b) un retournement ou une ironie, (c) « plus le temps passe, plus… » ou « très vite… », (d) « il va devoir… », (e) l'injustice (« pourtant personne ne le croit »). Toutes basées sur un FAIT PRÉCIS du synopsis, qui laissent volontairement une zone d'ombre.
 3. Garde pour chaque slide la plus concrète, la plus choquante et la plus intrigante. Si la version (g) « Imagine… » est la plus forte pour cette œuvre (et que ce n'est pas forcé), prends-la.
 Test final pour chaque phrase : (1) peut-on la coller telle quelle sur un autre film ? Alors elle est trop vague, recommence. (2) la slide 1 commence-t-elle par un décor ou un contexte (« Dans un monde… », « En pleine… ») ? Réécris-la avec une personne. (3) contient-elle un jugement ou une conclusion ? Supprime-le. (4) donne-t-elle envie de connaître la suite ? Sinon, recommence.
-INTERDIT : « quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu vas adorer », « d'un côté… de l'autre », « impossible de lâcher », « leurs vacances tournent au drame » et autres formules vagues, les points d'exclamation, les emojis, les superlatifs vides, un nom d'acteur. AUCUNE question dans les slides (ni « jusqu'où irais-tu ? », ni « et toi ? ») : le lecteur doit avoir envie de réagir sans qu'on le lui demande.
+INTERDIT : « quelque chose cloche », « tout bascule », « personne ne s'y attend », « tu vas adorer », « d'un côté… de l'autre », « impossible de lâcher », « leurs vacances tournent au drame » et autres formules vagues, les points d'exclamation, les emojis, les superlatifs vides, un nom d'acteur. AUCUNE question dans les slides (ni « jusqu'où irais-tu ? », ni « et toi ? ») sauf en MODE TEST QUESTION décrit plus haut : le lecteur doit avoir envie de réagir sans qu'on le lui demande.
 
 UN FAIT QU'ON PEUT FILMER (règle n°1 de la rédactrice) : chaque slide doit contenir un FAIT PRÉCIS qu'une caméra pourrait montrer : un geste, un objet, un chiffre, une phrase prononcée, une règle, un lieu précis. Les phrases qui décrivent un ÉTAT ou un SENTIMENT abstrait sont refusées : « il ne la connaissait pas », « tout est faux », « ils ont de moins en moins de chances de rentrer chez eux », « la situation devient dangereuse », « il comprend que quelque chose ne va pas ». Remplace-les par ce qui se passe VRAIMENT dans le film. Prends, dans l'ordre, la scène ou le détail le plus choquant, le plus triste ou le plus inquiétant que tu connais avec certitude (même s'il n'est pas dans le synopsis), à condition qu'il ne révèle pas la fin. Le fait précis doit faire ressentir quelque chose : peur, malaise, tristesse, injustice, curiosité qui brûle.
 Exemples de la différence (tirés de vrais films : ne les réutilise que pour ces films) :
@@ -343,7 +373,7 @@ Reste fidèle au synopsis fourni : n'invente aucun fait.
 
 HASHTAGS : EXACTEMENT 5 hashtags, pas un de plus (TikTok n'en accepte pas davantage), choisis les plus pertinents pour CETTE œuvre : #film (ou #serie), #quoiregarder, un hashtag du genre (#thriller, #horreur, #suspense, #drame, #comedie…), le hashtag du titre (sans espaces ni accents) et un hashtag précis lié à l'intrigue ou au thème (#disparition, #survie, #huisclos, #injustice, #famille…). Pas de hashtag vague ou inutile. Le hashtag de la plateforme où on voit l'œuvre ({platform_tag(platform) or 'aucun'}) est ajouté automatiquement et compte dans les 5 : donne-moi quand même 5 hashtags dans l'ordre d'importance, je garderai les meilleurs.
 
-PREMIER COMMENTAIRE ("commentaire") : écris le commentaire que la rédactrice postera elle-même sous sa publication pour faire démarrer les réponses. Il doit être incitateur et SPÉCIFIQUE à cette œuvre (jamais « Vous avez aimé ? » ni « Dites-moi en commentaire »). 1 ou 2 phrases courtes, en français parlé, sans spoiler, sans emoji en excès (1 maximum). Formules qui marchent : un dilemme précis (« Un père qui enferme son fils pour le protéger : héros ou monstre ? »), une provocation douce (« Je parie que personne ne devine ce qu'il cache dans la cave »), un défi (« Dis-moi en un mot ce que tu aurais fait à sa place »), un tag (« Tag la personne que tu ne laisserais jamais garder tes enfants »). Pour une question, prends toujours un CHOIX concret entre deux options, pas une question ouverte.
+QUESTION DE DESCRIPTION ("commentaire") : écris la question d'accroche qui sera placée TOUT AU DÉBUT de la description de la publication (suivie seulement des hashtags, rien d'autre) pour faire démarrer les réponses. Il doit être incitateur et SPÉCIFIQUE à cette œuvre (jamais « Vous avez aimé ? » ni « Dites-moi en commentaire »). 1 ou 2 phrases courtes, en français parlé, sans spoiler, sans emoji en excès (1 maximum). Formules qui marchent : un dilemme précis (« Un père qui enferme son fils pour le protéger : héros ou monstre ? »), une provocation douce (« Je parie que personne ne devine ce qu'il cache dans la cave »), un défi (« Dis-moi en un mot ce que tu aurais fait à sa place »), un tag (« Tag la personne que tu ne laisserais jamais garder tes enfants »). Pour une question, prends toujours un CHOIX concret entre deux options, pas une question ouverte.
 Mets nb_slides à 2 ou 3 ; si nb_slides = 2, laisse s3 vide.
 TEST DE COMPRÉHENSION avant de répondre : un inconnu qui ne sait rien du film comprend-il, avec tes slides seules, QUI est le héros, OÙ il est, quelle est la RÈGLE ou l'enjeu, et ce qui l'attend ? Sinon, ajoute le contexte manquant.
 JSON : {{"contexte_cle":"","intrigue_principale":"","element_extraordinaire":"","question_curiosite":"","brouillons_s1":["","","","","",""],"brouillons_s2":["","","","",""],"emotion_finale":"peur|tristesse|surprise|curiosité","nb_slides":2,"s1":"","s2":"","s3":"","hashtags":["#...","#...","#...","#...","#..."],"commentaire":"","spoiler_risk":false}}
@@ -355,10 +385,15 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
         if not s[2] or int(r.get("nb_slides") or 3) == 2: s = s[:2]
         problems = []
         if any(not x.strip() for x in s): problems.append("une slide est vide")
-        if any(len(x.split()) > 15 for x in s): problems.append("une phrase dépasse 14 mots : raccourcis sans perdre le contexte")
+        if len(s[0].split()) > 20 or any(len(x.split()) > 15 for x in s[1:]): problems.append("longueur : slide 1 = 20 mots maximum, les autres 15 mots maximum : raccourcis sans perdre le contexte")
+        tn = re.sub(r"[^a-z0-9 ]", "", meta["title"].lower())
+        if len(tn) >= 4 and tn in re.sub(r"[^a-z0-9 ]", "", s[0].lower()): problems.append("le titre de l'œuvre est dans la slide 1 : jamais le titre dans la slide 1")
         if r.get("spoiler_risk"): problems.append("risque de spoiler sur la fin ou un retournement")
         if len(set(s)) < len(s): problems.append("phrases identiques")
-        if any("?" in x for x in s): problems.append("une slide contient une question : aucune question dans les slides, reformule en affirmation qui donne envie de réagir")
+        if question:
+            if "?" not in s[1]: problems.append("MODE TEST QUESTION : la slide 2 doit être une question qui se termine par « ? »")
+            if any("?" in x for k, x in enumerate(s) if k != 1): problems.append("MODE TEST QUESTION : seule la slide 2 est une question, les autres sont des affirmations")
+        elif any("?" in x for x in s): problems.append("une slide contient une question : aucune question dans les slides, reformule en affirmation qui donne envie de réagir")
         if any("!" in x for x in s): problems.append("une phrase contient un point d'exclamation")
         hard = [w for x in s for w in re.findall(r"[A-Za-zÀ-ÿ'-]+", x) if len(w) >= 13 or re.fullmatch(r"(?i)d[ée]su[eè]t[es]*|stratag[èe]mes?|dissimul\w*|appr[ée]hension|incontournables?|insoutenables?|tumultueu\w+|fallacieu\w+|machiav[ée]li\w+|inextricables?|inexorables?|ind[ée]niables?|abyssal\w*|vertigineu\w+", w)]
         if hard: problems.append("mots trop soutenus ou trop longs (" + ", ".join(sorted(set(hard))) + ") : remplace-les par des mots simples et courts")
@@ -376,11 +411,13 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
         if not problems and attempt < 2:
             try:
                 for i, x, idee in precision_check(meta, s):
+                    if "?" in x: continue
                     problems.append(f"la slide {i+1} (« {x} ») est trop floue : elle décrit un état ou un sentiment au lieu d'un FAIT précis qu'on peut filmer" + (f". Piste : {idee}" if idee else "") + ". Remplace-la par le fait le plus précis, choquant ou triste que tu connais avec certitude, sans révéler la fin")
             except Exception:
                 pass
         if not problems:
-            return {"texts": [oral(x) for x in s], "caption": "", "hashtags": " ".join(clean_tags(r.get("hashtags", []), meta, platform=platform)), "comment": com}
+            tags = " ".join(clean_tags(r.get("hashtags", []), meta, platform=platform))
+            return {"texts": [oral(x) for x in s], "caption": (com + "\n" + tags).strip(), "hashtags": tags, "comment": com}
         note = "\n\nCorrige ce problème : " + ", ".join(problems) + "."
     raise RuntimeError("Impossible d'obtenir des textes valides")
 
@@ -407,7 +444,7 @@ Carrousel actuel :
 Réécris UNIQUEMENT la slide {n}. Demande de la rédactrice : « {instruction or 'propose une autre version plus percutante'} ».
 - Si sa demande est déjà une phrase complète prête à afficher (entre guillemets ou clairement rédigée), reprends-la presque telle quelle (corrige seulement les fautes).
 - Sinon, applique sa consigne (ton, angle, élément à mettre en avant).
-- 8 à 14 mots, une seule phrase claire pour quelqu'un qui ne connaît pas le film, mots très simples et courts (jamais de mot soutenu), aucune phrase bateau, en cohérence avec les deux autres slides (la suite doit rester logique), sans spoiler la fin, sans emoji, sans point d'exclamation. Mots sensibles masqués par un astérisque (t*er, m*urtre…).
+- 4 à 15 mots (20 au maximum si c'est la slide 1 ; elle ne contient jamais le titre), une seule phrase claire pour quelqu'un qui ne connaît pas le film, mots très simples et courts (jamais de mot soutenu), aucune phrase bateau, en cohérence avec les deux autres slides (la suite doit rester logique), sans spoiler la fin, sans emoji, sans point d'exclamation. Mots sensibles masqués par un astérisque (t*er, m*urtre…).
 - Ne reprends pas la version actuelle.
 JSON : {{"texte":""}}"""
     for _ in range(3):
@@ -419,9 +456,9 @@ JSON : {{"texte":""}}"""
             m = re.search(r'"texte"\s*:\s*"(.+?)"\s*[,}]', raw, re.S)
             t = m.group(1) if m else raw.strip().splitlines()[-1] if raw.strip() else ""
         t = oral(re.sub(r'^(?:texte|slide\s*\d)\s*:\s*', '', t.strip().strip('"«» ').strip(), flags=re.I).strip('"«» '))
-        if t and t != texts[n - 1] and len(t.split()) <= 16:
+        if t and t != texts[n - 1] and len(t.split()) <= (21 if n == 1 else 16):
             return t
-        prompt += "\n\nPropose une phrase différente de l'actuelle et de 14 mots maximum. Réponds avec le JSON demandé."
+        prompt += "\n\nPropose une phrase différente de l'actuelle et plus courte (15 mots maximum, 20 pour la slide 1). Réponds avec le JSON demandé."
     raise RuntimeError("Impossible de réécrire cette slide")
 
 def pick_images(meta, thumbs, texts=None):

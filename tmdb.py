@@ -2,7 +2,7 @@ import os, io, random, datetime, requests
 from PIL import Image
 
 # Œuvres proposées chaque matin : sorties à partir de cette année (change ce chiffre si tu veux plus ou moins récent).
-MIN_YEAR = datetime.date.today().year - 8
+MIN_YEAR = datetime.date.today().year - 5   # pépites : les 4-5 dernières années (les titres d'actualité peuvent être plus anciens)
 
 BASE = "https://api.themoviedb.org/3"; IMG = "https://image.tmdb.org/t/p/"
 
@@ -86,7 +86,7 @@ def candidates(exclude, n=36, actu=None):
                     ok, nf = _flatrate(t, it["id"])
                     if not ok: continue
                     e["netflix"] = nf
-                _add(pool, e, exclude, MIN_YEAR)
+                _add(pool, e, exclude, MIN_YEAR - 5)
     safe("tendances", tendances)
     # 4) titres de l'actualité (recherche web faite par l'IA)
     def actualite():
@@ -107,6 +107,8 @@ def candidates(exclude, n=36, actu=None):
         try: age = (today - datetime.date.fromisoformat(e["date"])).days
         except Exception: age = 9999
         e["nouveau"] = 0 <= age <= 120
+        e["groupe"] = "actu" if (e.get("actu") or e.get("trending") or e["nouveau"]) else "pepite"
+        if e["groupe"] == "pepite" and not (e["year"].isdigit() and int(e["year"]) >= MIN_YEAR): continue
         buzz = []
         if e.get("actu"): buzz.append(f"dans l'actu : {e['actu']}")
         if e.get("trending"): buzz.append(f"en tendance cette semaine (n°{e['trending']})")
@@ -115,8 +117,15 @@ def candidates(exclude, n=36, actu=None):
         e["score_prio"] = (3 if e.get("netflix") else 0) + (2 if e.get("actu") else 0) \
                           + (2 if e.get("trending") else 0) + (1 if e["nouveau"] else 0) + random.random() * 1.5
         out.append(e)
+    # rotation : moitié actualité (tendances, nouveautés, titres qui buzzent), moitié pépites récentes très marquantes
     out.sort(key=lambda e: -e["score_prio"])
-    return out[:n]
+    actu_l = [e for e in out if e["groupe"] == "actu"]; pep_l = [e for e in out if e["groupe"] == "pepite"]
+    half = n // 2
+    chosen = actu_l[:half] + pep_l[:half]
+    rest = [e for e in out if e not in chosen]
+    chosen += rest[:max(0, n - len(chosen))]
+    chosen.sort(key=lambda e: -e["score_prio"])
+    return chosen
 
 def details(t, i):
     d = get(f"/{t}/{i}", language="fr-FR")

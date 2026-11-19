@@ -14,6 +14,8 @@ HELP = ("🍿 <b>PopcornLife Studio</b>\n\n"
         "• « zoom + » / « zoom - » : j'agrandis ou je réduis l'image de la dernière slide modifiée (« zoom + 2 » pour la slide 2). « plein cadre » : l'image remplit toute la slide.\n"
         "• Ajouter une 3e slide : envoie ton image avec la légende « 3 : ton texte », ou écris « slide 3 : ton texte » (image du film).\n"
         "• Après un post, dis-moi librement ce que tu veux changer, autant de fois que tu veux : « image 1 avec son visage en gros plan », « texte 2 plus dur », « change l'image 2 puis le texte 1 », « slide 2 : ta phrase exacte ».\n"
+        "• « test question » : pour un seul post, la slide 2 devient une question (« Prisoners test question », « A test question » ou « refais test question »). Sinon, jamais de question dans les slides.\n"
+        "• Après chaque post j'envoie : la description (question puis hashtags) et le commentaire « Dispo sur … 🍿 », prêts à copier.\n"
         "• « refais » : j'écris de nouveaux textes pour le dernier film. Tu peux préciser : « refais plus mystérieux ».")
 
 def load(name, default):
@@ -39,6 +41,23 @@ def platform_info(t, i):
     if p["rent"] or p["buy"]:
         return "", "Pas en abonnement en France d'après TMDB (location/achat seulement). Vérifie avant de publier."
     return "", "Plateforme en France introuvable : je n'en affiche aucune sur la slide 4."
+
+TEST_Q = re.compile(r"(?i)[,;:.\-–—\s]*\b(?:en )?(?:mode )?test[ -]question\b|[,;:.\-–—\s]*\btest(?: avec)? (?:une )?question\b|[,;:.\-–—\s]*\bavec (?:une )?question(?: en slide 2)?\b")
+def split_test(text):
+    """« Prisoners test question » -> ('Prisoners', True). Le mode test autorise une question en slide 2, pour CE post seulement."""
+    if TEST_Q.search(text):
+        return TEST_Q.sub("", text).strip(" ,;:.-–—"), True
+    return text, False
+
+def dispo_line(platform):
+    """Ligne prête à copier : « Dispo sur Netflix 🍿 » (Netflix en priorité, sinon la première plateforme)."""
+    names = [x.strip() for x in str(platform or "").split("/") if x.strip()]
+    if not names: return ""
+    return f"Dispo sur {next((x for x in names if x.lower() == 'netflix'), names[0])} 🍿"
+
+def send_dispo(platform):
+    line = dispo_line(platform)
+    if line: tg.send("📍 <b>Commentaire « dispo » à poster</b> :\n<code>" + e(line) + "</code>")
 
 # ---------- propositions ----------
 def daily():
@@ -100,26 +119,27 @@ def choose_images(meta, paths, texts=None):
     return [c["idx"] for c in choice], focus, bd
 
 def rewrite(guidance=""):
+    guidance, q = split_test(guidance)
     state = load("state", {"offset": 0}); last = state.get("last")
     if not last:
         tg.send("Je n'ai pas de post récent à refaire. Écris d'abord un titre de film."); return
     meta = tmdb.details(last["type"], last["id"])
     tg.send(f"✍️ Je réécris les textes de <b>{e(last['title'])}</b>…" + (f"\nConsigne : {e(guidance)}" if guidance else ""))
-    post = ai.write_post(meta, guidance, avoid=last["texts"], platform=last.get("platform", ""))
+    post = ai.write_post(meta, guidance, avoid=last["texts"], platform=last.get("platform", ""), question=q)
     assign, focus, bd = choose_images(meta, last["candidates"], post["texts"])
     poster = tmdb.download(last["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, focus or [0.5] * 3, poster,
                               {"title": last["title"], "year": last["year"], "platform": last["platform"], "rating": last["rating"]}, "out")
     tg.send_files(files[:-1])
-    tg.send(f"<code>{e(post['hashtags'])}</code>")
-    if post.get("comment"): tg.send("💬 <b>1er commentaire à poster</b> :\n<code>" + e(post["comment"]) + "</code>")
-    tg.send("\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(post["texts"])) + "\n\n"
+    tg.send("📝 <b>Description à coller</b> :\n<code>" + e(post["caption"]) + "</code>")
+    send_dispo(last.get("platform", ""))
+    tg.send(("🧪 Test question : slide 2 en question.\n" if q else "") + "\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(post["texts"])) + "\n\n"
             "L'affiche (dernière slide) ne change pas. Pas encore ça ? Écris « refais » suivi de ce que tu veux, "
             "par exemple « refais plus mystérieux, sans question ».")
-    last.update(texts=post["texts"], assign=assign, focus=focus or [0.5] * 3, hashtags=post["hashtags"], comment=post.get("comment", ""))
+    last.update(texts=post["texts"], assign=assign, focus=focus or [0.5] * 3, hashtags=post["hashtags"], comment=post.get("comment", ""), caption=post["caption"])
     state["last"] = last; save("state", state)
 
-def produce(t, i):
+def produce(t, i, question=False):
     meta = tmdb.details(t, i)
     if not meta["overview"] or not meta["poster_path"]:
         tg.send(f"⚠️ TMDB n'a pas de synopsis ou d'affiche pour « {e(meta['title'])} ». Je ne veux pas inventer : choisis-en un autre."); return
@@ -128,19 +148,19 @@ def produce(t, i):
         warn = "\n⚠️ Tu as déjà fait ce titre il y a moins d'un an."
     tg.send(f"⏳ Je prépare <b>{e(meta['title'])}</b> ({meta['year']})…{warn}")
     plat, plat_msg = platform_info(t, i)
-    post = ai.write_post(meta, platform=plat)
+    post = ai.write_post(meta, platform=plat, question=question)
     paths = tmdb.backdrops(t, i)
     last = {"type": t, "id": i, "title": meta["title"], "year": meta["year"], "rating": meta["rating"], "platform": plat,
-            "texts": post["texts"], "poster_path": meta["poster_path"], "candidates": paths, "assign": [], "focus": [], "hashtags": post["hashtags"], "comment": post.get("comment", "")}
+            "texts": post["texts"], "poster_path": meta["poster_path"], "candidates": paths, "assign": [], "focus": [], "hashtags": post["hashtags"], "comment": post.get("comment", ""), "caption": post["caption"]}
     last["assign"], last["focus"], bd = choose_images(meta, paths, post["texts"])
     poster = tmdb.download(meta["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, last["focus"] or [0.5] * 3, poster,
                               {"title": meta["title"], "year": meta["year"], "platform": plat, "rating": meta["rating"]}, "out")
     tg.send_files(files)
     tg.send(f"<code>{e(meta['title'])}</code>")
-    tg.send(f"<code>{e(post['hashtags'])}</code>")
-    if post.get("comment"): tg.send("💬 <b>1er commentaire à poster</b> (copie-le sous ta publication) :\n<code>" + e(post["comment"]) + "</code>")
-    tg.send(f"✅ <b>{e(meta['title'])}</b> est prêt ({len(post['texts'])} slides + l'affiche).\n{e(plat_msg)}\n\n"
+    tg.send("📝 <b>Description à coller</b> (la question, puis les hashtags) :\n<code>" + e(post["caption"]) + "</code>")
+    send_dispo(plat)
+    tg.send(f"✅ <b>{e(meta['title'])}</b> est prêt ({len(post['texts'])} slides + l'affiche){' · 🧪 test question en slide 2' if question else ''}.\n{e(plat_msg)}\n\n"
             + "\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(post["texts"])) + "\n\n"
             f"Une image ne te plaît pas ? Écris « image 1 », « image 2 »… (une par slide).\n{meta['url']}")
     hist = load("history", []); hist.append({"type": t, "id": i, "title": meta["title"], "date": datetime.date.today().isoformat()})
@@ -338,13 +358,14 @@ def parse_request(message):
     return title, year
 
 def manual(message):
+    message, q = split_test(message)
     title, year = parse_request(message)
     if not title:
         tg.send(HELP); return
     found = tmdb.search(title, year) or tmdb.search(title)
     if not found:
         tg.send(f"Je ne trouve pas « {e(title)} » sur TMDB. Vérifie l'orthographe, ou ajoute l'année : « {e(title)} 2026 »."); return
-    produce(*found[0])
+    produce(*found[0], question=q)
 
 # ---------- lecture des messages Telegram ----------
 CAPTION = re.compile(r"(?is)^\s*(?:slide|image|photo|la|n°|numéro)?\s*([1-3])\s*(?:[:：\-–—]\s*(.+))?$")
@@ -425,12 +446,13 @@ def handle(u, state):
             tg.send("Pour ajouter une 3e slide :\n• avec TON image : envoie l'image avec la légende « 3 : ton texte » (ou envoie l'image seule, puis écris « 3 : ton texte »).\n• avec une image du film : écris « slide 3 : ton texte ».")
         return
     if low in ("/start", "aide", "/aide", "help"): tg.send(HELP)
-    elif low in ("a", "b", "c") and state.get("pending"):
-        k = "abc".index(low)
-        if k < len(state["pending"]): p = state["pending"][k]; produce(p["type"], p["id"])
+    elif re.match(r"^[abc]\b", low) and state.get("pending") and (low in ("a", "b", "c") or TEST_Q.search(low)):
+        k = "abc".index(low[0])
+        if k < len(state["pending"]): p = state["pending"][k]; produce(p["type"], p["id"], question=bool(TEST_Q.search(low)))
     elif low.startswith("image") and low[5:].strip() in ("1", "2", "3"): redo_image(int(low[5:].strip()))
     elif re.match(r"(?i)^(refais|refait|autre hook|nouveau hook|nouveaux textes|change les phrases|change le hook)\b", text):
         rewrite(re.sub(r"(?i)^(refais|refait|autre hook|nouveau hook|nouveaux textes|change les phrases|change le hook)\b[\s:,\-]*", "", text).strip())
+    elif low in ("test question", "test avec question", "test avec une question") and state.get("last") and state["last"].get("texts"): rewrite("test question")
     elif low in ("propositions", "proposition", "/propositions", "idées", "idees"): propose()
     else:
         last = state.get("last")
