@@ -2,19 +2,19 @@
  "offset": 422726110,
  "pending": [
   {
+   "type": "movie",
+   "id": 860508,
+   "title": "The Whisper Man"
+  },
+  {
    "type": "tv",
    "id": 286801,
    "title": "Monstre : L'Histoire d'Ed Gein"
   },
   {
-   "type": "movie",
-   "id": 1236045,
-   "title": "Animals"
-  },
-  {
-   "type": "movie",
-   "id": 423108,
-   "title": "Conjuring : Sous l'emprise du Diable"
+   "type": "tv",
+   "id": 126280,
+   "title": "Sex/Life"
   }
  ],
  "last": {
@@ -56,7 +56,7 @@
   "comment": "Victime qui a craqué ou coupable sans excuse : tu la mets où ?",
   "caption": "Victime qui a craqué ou coupable sans excuse : tu la mets où ?\n#film #quoiregarder #thriller #elizesurgiedelombre #netflix"
  },
- "last_propose": "2026-11-20",
+ "last_propose": "2026-11-21",
  "photo": null,
  "add_slide": null
 }
