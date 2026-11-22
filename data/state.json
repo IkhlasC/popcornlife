@@ -1,126 +1,61 @@
 {
- "offset": 422726125,
- "pending": [
-  {
-   "type": "tv",
-   "id": 72039,
-   "title": "Escape at Dannemora",
-   "classeur": {
-    "ligne": null,
-    "titre": "Escape at Dannemora",
-    "type": "tv",
-    "annee": 2018,
-    "libelle": "Escape at Dannemora (2018)",
-    "hook_fr": "Deux meurtriers condamnés à perpétuité s'évadent d'une prison de haute sécurité.",
-    "legende_fr": "",
-    "likes": 0,
-    "vues": 696100,
-    "compte": "@totor_flix",
-    "hook_en": "",
-    "pourquoi": "Histoire vraie, évasion. Format « Si t'as aimé Prison Break » : 696,1K vues chez @totor_flix",
-    "slides_fr": [
-     "Deux meurtriers condamnés à perpétuité s'évadent d'une prison de haute sécurité.",
-     "Une employée de la prison les a aidés.",
-     "Histoire vraie, New York, 2015."
-    ],
-    "note": "",
-    "source": "brief PopcornLife du 19/11/2026",
-    "publie": false
-   }
-  },
-  {
-   "type": "tv",
-   "id": 155537,
-   "title": "Black Bird",
-   "classeur": {
-    "ligne": 2,
-    "titre": "Black Bird",
-    "type": "tv",
-    "annee": 2022,
-    "libelle": "Black Bird (mini-série, 2022)",
-    "hook_fr": "L'histoire vraie d'un détenu à qui on offre la liberté… s'il arrive à faire avouer un tueur en série",
-    "legende_fr": "Un face-à-face entre deux hommes qui ne te lâche plus. Histoire vraie.",
-    "likes": 387100,
-    "compte": "@unmissablemovies",
-    "hook_en": "The true story of James Keene, who is given a chance to get out of prison if he can get a suspected serial k*ller to confess…",
-    "pourquoi": "Histoire vraie + deal impossible : le marché met tout de suite la tension",
-    "publie": false
-   }
-  },
-  {
-   "type": "movie",
-   "id": 1236045,
-   "title": "Animals"
-  }
- ],
+ "offset": 422726126,
+ "pending": [],
  "last": {
-  "type": "movie",
-  "id": 587792,
-  "title": "Palm Springs",
-  "year": "2020",
-  "rating": 7.3,
-  "platform": "Prime Video",
+  "type": "tv",
+  "id": 155537,
+  "title": "Black Bird",
+  "year": "2022",
+  "rating": 8.1,
+  "platform": "Apple TV",
   "texts": [
-   "Deux inconnus se retrouvent coincés dans la même journée… pour toujours",
-   "Très vite, ils se réveillent chaque matin au même mariage à Palm Springs"
+   "L'histoire vraie d'un détenu à qui on offre la liberté… s'il arrive à faire avouer un t*eur en série",
+   "Sa peine : 10 ans. Sa seule sortie : les aveux de Larry Hall"
   ],
-  "poster_path": "/q1JZOiEi9IEKQCI8Gy3rOUVz6dY.jpg",
+  "poster_path": "/qxDOHCeuxcPdT5W0IrX5c7cj7lt.jpg",
   "candidates": [
-   "/d7JUXVvjvVCXWs1mlpyO5ESdWdT.jpg",
-   "/AtKnrwzzxmeucypi8Fx9vzoJvcf.jpg",
-   "/upybe5efxWc3lHgCfq6uTY7ypLF.jpg",
-   "/jPJPMnaS2AFF8ZOehoxznoNl3T6.jpg",
-   "/ygAIWvwmlIH3ZSks9Tcc2jRw8Kd.jpg",
-   "/db5zxaOpemk1e2zxRn03FvDgyKh.jpg",
-   "/itTbAatedhCdreyBT55nww8UNIE.jpg",
-   "/grLr92mG1ooA9RjYYj4pXu0RKI9.jpg",
-   "/eajJinOF2O6vw20aDmukFpvEUoM.jpg",
-   "/vIO0J08ryWg90YUyK6CMwYLSKBz.jpg",
-   "/z4rfb6t7Mie0ku6uwZzpTqWCTIJ.jpg",
-   "/esQ0nlSEPwiqJfg1lZx8n5cTuDF.jpg",
-   "/huazyO3Ksq4lga2h5oZlv6Sjtfx.jpg",
-   "/dK1JoC1OgXly6RcgiedkHlyYNy1.jpg",
-   "/kUDcXbxpTpep6C4HOAszfULQgvE.jpg",
-   "/ujVVLZny22uTkPdBwkXGxlMvOma.jpg",
-   "/xDdDZ1LESgo5sl6VLVu7P3gy0U3.jpg",
-   "/dXjUDGNIkLegfwUjOiOBDZ0wmIH.jpg",
-   "/v6dHk2F8lXeQ3A4FK5ra6lv4UfM.jpg",
-   "/3lIeLJi0VPZdIUauST2q4C804Ga.jpg",
-   "/xoYzBSmDqBFvU1X0OZkLh97cgKT.jpg",
-   "/9WTieACpui60OYDFzt5jl16tizR.jpg",
-   "/8JM3OhK3GlttKLTJIMsEOlqY6Es.jpg",
-   "/o7qBUybNAfNm0cCM8q7uNU4Yxbi.jpg"
+   "/o2C222QdW4dmoyd2dgPlnCcI3cW.jpg",
+   "/aZ4mBxYHrKHFu9QpUmpVDIOoWAb.jpg",
+   "/khnvmHBh9r6jN1NIsv16LjpJTTW.jpg",
+   "/iFzeQq0BHWazrBvZncSuZ5aj7VQ.jpg",
+   "/zEmbjSuX9TSDC7Au5dGmO2wucZw.jpg",
+   "/dXiHf4tBycGb0H7G3D55hnt1j4N.jpg",
+   "/sDS3M6X0QhDNWAQmUhDIWKw8LN5.jpg",
+   "/reCJJWto966fS3o4KapyxInxODc.jpg",
+   "/kWIi7TVXXvybIN4sl6fkrsatwdJ.jpg",
+   "/pl1DoMHsBu6768Z4DwXttQqGUuS.jpg",
+   "/lmufooTiRoFXWFu7wk3HnFLqNAj.jpg",
+   "/khbNYggi71VJy7PTUNWn6Jk5El6.jpg",
+   "/5LrTEZIBOi7cHy0QsuYtunXWoRn.jpg",
+   "/1ToEjl7VEZIhcTdvU8ZASaZRa5Y.jpg",
+   "/pvJU4dlHpFIyB2E00pdH6MWEoJB.jpg",
+   "/160FjoLg7snsh33PlZWh6wcsDQc.jpg"
   ],
   "assign": [
-   21,
-   22
+   2,
+   6
   ],
   "focus": [
-   0.4,
-   0.63125
+   0.34296875,
+   0.5
   ],
-  "hashtags": "#film #quoiregarder #comedie #palmsprings #primevideo",
-  "comment": "Le film parfait à regarder à deux 👀 Tag la personne avec qui tu accepterais de revivre la même journée.",
-  "caption": "Le film parfait à regarder à deux 👀 Tag la personne avec qui tu accepterais de revivre la même journée.\n#film #quoiregarder #comedie #palmsprings #primevideo",
+  "hashtags": "#serie #quoiregarder #crime #blackbird #appletv",
+  "comment": "Un face-à-face entre deux hommes qui ne te lâche plus. Histoire vraie : tu acceptes le deal ou tu fais tes 10 ans ?",
+  "caption": "Un face-à-face entre deux hommes qui ne te lâche plus. Histoire vraie : tu acceptes le deal ou tu fais tes 10 ans ?\n#serie #quoiregarder #crime #blackbird #appletv",
   "modele": {
-   "ligne": 6,
-   "titre": "Palm Springs",
-   "type": "movie",
-   "annee": 2020,
-   "libelle": "Palm Springs (2020)",
-   "hook_fr": "Deux inconnus se retrouvent coincés dans la même journée… pour toujours",
-   "legende_fr": "Le film parfait à regarder à deux 👀",
-   "likes": 80400,
-   "compte": "@benitob.mp4",
-   "hook_en": "Two strangers get stuck reliving the same day…",
-   "pourquoi": "Concept « et si ça t'arrivait » en une phrase",
+   "ligne": 2,
+   "titre": "Black Bird",
+   "type": "tv",
+   "annee": 2022,
+   "libelle": "Black Bird (mini-série, 2022)",
+   "hook_fr": "L'histoire vraie d'un détenu à qui on offre la liberté… s'il arrive à faire avouer un tueur en série",
+   "legende_fr": "Un face-à-face entre deux hommes qui ne te lâche plus. Histoire vraie.",
+   "likes": 387100,
+   "compte": "@unmissablemovies",
+   "hook_en": "The true story of James Keene, who is given a chance to get out of prison if he can get a suspected serial k*ller to confess…",
+   "pourquoi": "Histoire vraie + deal impossible : le marché met tout de suite la tension",
    "publie": false
-  },
-  "custom": {
-   "1": "data/custom/587792_slide1.jpg",
-   "2": "data/custom/587792_slide2.jpg"
-  },
-  "last_slide": 2
+  }
  },
  "last_propose": "2026-11-22",
  "photo": null,
