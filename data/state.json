@@ -1,5 +1,5 @@
 {
- "offset": 422726111,
+ "offset": 422726116,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,8 +9,8 @@
   "rating": 6.8,
   "platform": "Netflix",
   "texts": [
-   "Imagine que ta femme est m*rte et que ton jeune fils disparaît à son tour",
-   "Du coup, tu te tournes vers ton père, flic à la retraite, brouillé avec toi",
+   "Imagine que ton fils se fait enlever par un célèbre t*eur en série",
+   "Tu te tournes vers ton père, flic à la retraite, avec qui tu ne parles plus",
    "Et c'est lui qui avait arrêté le t*eur en série lié à l'affaire"
   ],
   "poster_path": "/pSsX2LnGzyfHR9RioDEiLrPy5wa.jpg",
@@ -43,7 +43,13 @@
   ],
   "hashtags": "#film #quoiregarder #thriller #thewhisperman #netflix",
   "comment": "Ton fils disparaît : tu demandes de l'aide à ton père brouillé avec toi, ou tu cherches tout seul ?",
-  "caption": "Ton fils disparaît : tu demandes de l'aide à ton père brouillé avec toi, ou tu cherches tout seul ?\n#film #quoiregarder #thriller #thewhisperman #netflix"
+  "caption": "Ton fils disparaît : tu demandes de l'aide à ton père brouillé avec toi, ou tu cherches tout seul ?\n#film #quoiregarder #thriller #thewhisperman #netflix",
+  "last_slide": 3,
+  "custom": {
+   "1": "data/custom/860508_slide1.jpg",
+   "2": "data/custom/860508_slide2.jpg",
+   "3": "data/custom/860508_slide3.jpg"
+  }
  },
  "last_propose": "2026-11-22",
  "photo": null,

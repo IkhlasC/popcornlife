@@ -187,5 +187,19 @@
   "avant": "Et personne ne sait qui ou quoi vous empêche de sortir",
   "apres": "et dehors tu entends une étrange créature",
   "date": "2026-11-13"
+ },
+ {
+  "film": "The Whisper Man",
+  "slide": 1,
+  "avant": "Imagine que ta femme est m*rte et que ton jeune fils disparaît à son tour",
+  "apres": "Imagine que ton fils se fait enlever par un célèbre t*eur en série",
+  "date": "2026-11-22"
+ },
+ {
+  "film": "The Whisper Man",
+  "slide": 2,
+  "avant": "Du coup, tu te tournes vers ton père, flic à la retraite, brouillé avec toi",
+  "apres": "Tu te tournes vers ton père, flic à la retraite, avec qui tu ne parles plus",
+  "date": "2026-11-22"
  }
 ]
