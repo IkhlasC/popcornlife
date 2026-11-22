@@ -1,55 +1,38 @@
 {
- "offset": 422726116,
+ "offset": 422726117,
  "pending": [],
  "last": {
   "type": "movie",
-  "id": 860508,
-  "title": "The Whisper Man",
+  "id": 1616419,
+  "title": "Un bon avocat",
   "year": "2026",
-  "rating": 6.8,
+  "rating": 6.6,
   "platform": "Netflix",
   "texts": [
-   "Imagine que ton fils se fait enlever par un célèbre t*eur en série",
-   "Tu te tournes vers ton père, flic à la retraite, avec qui tu ne parles plus",
-   "Et c'est lui qui avait arrêté le t*eur en série lié à l'affaire"
+   "Cet avocat fait une overdose en pleine plaidoirie",
+   "Mais à sa sortie de cure, c'est lui qu'on juge, dans 1 semaine",
+   "Pour l'aider, il a un stagiaire qui ne lâche rien"
   ],
-  "poster_path": "/pSsX2LnGzyfHR9RioDEiLrPy5wa.jpg",
+  "poster_path": "/aoXmmkjKxsMZTNgrVq35d32w3Mg.jpg",
   "candidates": [
-   "/uauoVKKCkNA9iWjgJCL8TdSfLf5.jpg",
-   "/xSJJQeAp9GBFmiKusysTRG6jQjt.jpg",
-   "/b0EVWmBaUgliBHkrxtvmcVruXAG.jpg",
-   "/3qNmFlwdbO7hvdbLgl3FYOoJeAP.jpg",
-   "/wxDIeosQo3gRS3KNiVgdwfD0tV1.jpg",
-   "/d0krmJICW2EL2rvmsQPotM9YJLR.jpg",
-   "/wHWJ1d9hqZ2iY0057xoLm3I3m8r.jpg",
-   "/x1U3jLiURn0O9F09pIy6HSla2h4.jpg",
-   "/wQ0joNJPgmAXyMSVrrUoOhodkIx.jpg",
-   "/ewrH8zcL1ds457Zhrb1elnMWql5.jpg",
-   "/6fWHDqAxKOgxQGoSmViAjFWGa4A.jpg",
-   "/zPX7mz8AzMEe1cVw77Yzurp8tXa.jpg",
-   "/20E2GBPfxh2Y2knlMYjl1Dothfm.jpg",
-   "/7BRNTwT5v9Okq7l4FJl0GrJg7tD.jpg",
-   "/st8bv3WwijIaHcLLj3OScyQEekv.jpg"
+   "/fzlch1j1aVGJKI0GB6IdgbG5gpJ.jpg",
+   "/qYeIw4vHeVoqa6U8avsd6aVeCHj.jpg",
+   "/brnX40DFRxejxbqPS2TOLp4QHns.jpg",
+   "/weIqM0gv9UL9ujQq0gLhFkXj9yP.jpg"
   ],
   "assign": [
-   1,
-   14,
-   6
+   0,
+   2,
+   1
   ],
   "focus": [
-   0.5125,
-   0.54609375,
-   0.5
+   0.51015625,
+   0.45,
+   0.7140625
   ],
-  "hashtags": "#film #quoiregarder #thriller #thewhisperman #netflix",
-  "comment": "Ton fils disparaît : tu demandes de l'aide à ton père brouillé avec toi, ou tu cherches tout seul ?",
-  "caption": "Ton fils disparaît : tu demandes de l'aide à ton père brouillé avec toi, ou tu cherches tout seul ?\n#film #quoiregarder #thriller #thewhisperman #netflix",
-  "last_slide": 3,
-  "custom": {
-   "1": "data/custom/860508_slide1.jpg",
-   "2": "data/custom/860508_slide2.jpg",
-   "3": "data/custom/860508_slide3.jpg"
-  }
+  "hashtags": "#film #quoiregarder #thriller #unbonavocat #netflix",
+  "comment": "Un avocat qui s'est effondré en pleine plaidoirie : tu lui laisses une seconde chance ou tu prends un autre avocat ?",
+  "caption": "Un avocat qui s'est effondré en pleine plaidoirie : tu lui laisses une seconde chance ou tu prends un autre avocat ?\n#film #quoiregarder #thriller #unbonavocat #netflix"
  },
  "last_propose": "2026-11-22",
  "photo": null,
