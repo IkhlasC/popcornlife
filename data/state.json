@@ -1,5 +1,5 @@
 {
- "offset": 422726126,
+ "offset": 422726129,
  "pending": [],
  "last": {
   "type": "tv",
@@ -55,9 +55,14 @@
    "hook_en": "The true story of James Keene, who is given a chance to get out of prison if he can get a suspected serial k*ller to confess…",
    "pourquoi": "Histoire vraie + deal impossible : le marché met tout de suite la tension",
    "publie": false
-  }
+  },
+  "custom": {
+   "1": "data/custom/155537_slide1.jpg",
+   "2": "data/custom/155537_slide2.jpg"
+  },
+  "last_slide": 2
  },
  "last_propose": "2026-11-22",
- "photo": null,
+ "photo": "data/custom/_waiting.jpg",
  "add_slide": null
 }
