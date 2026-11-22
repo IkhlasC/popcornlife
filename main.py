@@ -86,23 +86,24 @@ def propose():
     by_ref = {f'{p["type"]}:{p["id"]}': p for p in pool}
     ranked = [c for c in ai.propose(pool, 4) if c.get("ref") in by_ref]
     chosen = []
-    # 1 film du classeur (post qui a marché), 1 film d'actualité, 1 au choix : le classeur et l'actualité sont garantis à chaque fois
-    cl = None
-    try:
-        cl = classeur.pick(recent_ids() | {(h["type"], h["id"]) for h in load("history", [])}, lambda q, y: tmdb.search(q, y) or tmdb.search(q),
-                           lambda t, i: tmdb._flatrate(t, i)[0])
-    except Exception:
-        traceback.print_exc()
-    if cl:
-        t, i, x = cl
+    # 2 films du classeur (posts qui ont marché) + 1 film d'actualité : le classeur (x2) et l'actualité sont garantis à chaque fois
+    done = recent_ids() | {(h["type"], h["id"]) for h in load("history", [])}
+    cls = []
+    for _ in range(2):
+        try:
+            cl = classeur.pick(done, lambda q, y: tmdb.search(q, y) or tmdb.search(q), lambda t, i: tmdb._flatrate(t, i)[0])
+        except Exception:
+            traceback.print_exc(); cl = None
+        if not cl: break
+        t, i, x = cl; done.add((t, i)); cls.append(cl)
         d = tmdb.details(t, i)
-        p = {"type": t, "id": i, "title": d["title"], "year": d["year"], "classeur": x}
-        chosen.append({"ref": f"{t}:{i}", "angle": x.get("pourquoi", ""), "hook": x.get("hook_fr", ""),
-                       "pourquoi": f"Post modèle de {x.get('compte', '?')} : {fr(x.get('likes', 0))} likes. On le reproduit au plus près.", "classeur": x})
-        by_ref[f"{t}:{i}"] = p
-    else:
-        print("[propose] aucun film du classeur disponible", flush=True)
-    ranked = [c for c in ranked if not (cl and c["ref"] == f"{cl[0]}:{cl[1]}")]
+        score = f"{classeur.fr(x['likes'])} likes" if x.get("likes") else (f"{classeur.fr(x['vues'])} vues" if x.get("vues") else "très bon score")
+        chosen.append({"ref": f"{t}:{i}", "angle": x.get("pourquoi", ""), "hook": x.get("hook_fr") or "(je le construis sur la même mécanique)",
+                       "pourquoi": f"Post modèle de {x.get('compte', '?')} : {score}. On le reproduit au plus près.", "classeur": x})
+        by_ref[f"{t}:{i}"] = {"type": t, "id": i, "title": d["title"], "year": d["year"], "classeur": x}
+    if len(cls) < 2: print(f"[propose] seulement {len(cls)} film(s) du classeur disponible(s)", flush=True)
+    taken = {c["ref"] for c in chosen}
+    ranked = [c for c in ranked if c["ref"] not in taken]
     first_actu = next((c for c in ranked if by_ref[c["ref"]].get("groupe") == "actu"), None)
     if first_actu: chosen.append(first_actu)
     for c in ranked:
@@ -118,7 +119,7 @@ def propose():
         plat, _ = platform_info(p["type"], p["id"])
         kind = "Série" if p["type"] == "tv" else "Film"
         lines.append(f"<b>{letter} — {e(p['title'])}</b> ({p['year']}) · {kind}{' · ' + e(plat) if plat else ''}\n"
-                     + (f"📚 <b>DU CLASSEUR</b> · modèle à reproduire ({fr(c['classeur'].get('likes', 0))} likes chez {e(c['classeur'].get('compte', ''))})\n" if c.get("classeur") else "")
+                     + (f"📚 <b>DU CLASSEUR</b> · modèle à reproduire ({e(c['classeur'].get('compte', ''))}{' · ' + fr(c['classeur']['likes']) + ' likes' if c['classeur'].get('likes') else (' · ' + fr(c['classeur']['vues']) + ' vues' if c['classeur'].get('vues') else '')})\n" if c.get("classeur") else "")
                      + (f"🔥 {e(p['buzz'])}\n" if p.get("buzz") else "")
                      + f"Angle : {e(c.get('angle', ''))}\nHook : {e(c.get('hook', ''))}\nPourquoi : {e(c.get('pourquoi', ''))}\n")
         buttons.append({"text": f"{letter} — {p['title'][:25]}", "callback_data": f"pick:{p['type']}:{p['id']}"})

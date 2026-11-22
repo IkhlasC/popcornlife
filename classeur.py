@@ -37,7 +37,7 @@ def pick(exclude, search, flatrate, tries=8):
     Renvoie (type, id, entrée) ou None."""
     items = [x for x in load() if not x.get("publie")]
     random.shuffle(items)
-    items.sort(key=lambda x: -(x.get("likes", 0) ** 0.5) * random.random())     # tirage pondéré : les gros scores sortent plus souvent
+    items.sort(key=lambda x: -((x.get("likes") or x.get("vues") or 20000) ** 0.5) * random.random())     # tirage pondéré : les gros scores sortent plus souvent
     fallback = None
     for x in items[:tries]:
         try:
@@ -55,11 +55,16 @@ def pick(exclude, search, flatrate, tries=8):
 def model_block(x):
     """Texte ajouté au prompt d'écriture : reproduire au plus près ce qui a marché."""
     if not x: return ""
-    return f"""
-POST MODÈLE À REPRODUIRE AU PLUS PRÈS (priorité maximale, il passe avant les autres consignes de style) : un post de {x.get('compte', '?')} sur CE MÊME film a fait {fr(x.get('likes', 0))} likes. Notre but est de DUPLIQUER ce qui a marché, en l'adaptant à notre style.
-- Hook original (anglais) : « {x.get('hook_en', '')} »
-- Hook en français déjà préparé : « {x.get('hook_fr', '')} »
-- Légende française préparée : « {x.get('legende_fr', '')} »
-- Pourquoi ça marche : {x.get('pourquoi', '')}
-Comment faire : la slide 1 reprend QUASI TEL QUEL le hook français préparé (même mécanique, même construction de phrase, même fin coupée avec « … » ou « mais… » si elle existe, même ordre des informations) ; corrige-la seulement si elle dépasse 20 mots, contient le titre, ou contredit le synopsis. Les slides suivantes prolongent la MÊME mécanique que le modèle (un fait de plus, une aggravation), sans jamais révéler la fin. Pour le champ "commentaire" (question d'accroche de la description), pars de la légende française préparée et adapte-la : même idée, même ton. Adapte à notre sauce seulement ce qui est nécessaire (mots simples, astérisque sur les mots sensibles, phrases courtes, pas de question dans les slides sauf en mode test). Ne dis jamais que c'est un modèle.
-"""
+    score = f"{fr(x['likes'])} likes" if x.get("likes") else (f"{fr(x['vues'])} vues" if x.get("vues") else "un très bon score")
+    lignes = [f"POST MODÈLE À REPRODUIRE AU PLUS PRÈS (priorité maximale, il passe avant les autres consignes de style) : un post de {x.get('compte', '?')} sur CE MÊME film a fait {score}. Notre but est de DUPLIQUER ce qui a marché, en l'adaptant à notre style."]
+    if x.get("hook_en"): lignes.append(f"- Hook original (anglais) : « {x['hook_en']} »")
+    if x.get("hook_fr"): lignes.append(f"- Hook en français déjà préparé : « {x['hook_fr']} »")
+    if x.get("slides_fr"): lignes.append("- Slides françaises du modèle (à suivre : même mécanique slide par slide) : " + " / ".join(f"« {t} »" for t in x["slides_fr"]))
+    if x.get("legende_fr"): lignes.append(f"- Légende française préparée : « {x['legende_fr']} »")
+    if x.get("pourquoi"): lignes.append(f"- Pourquoi ça marche : {x['pourquoi']}")
+    if x.get("note"): lignes.append(f"- ATTENTION : {x['note']}")
+    how = ("Comment faire : la slide 1 reprend QUASI TEL QUEL le hook français préparé (même mécanique, même construction de phrase, même fin coupée avec « … » ou « mais… » si elle existe, même ordre des informations) ; corrige-la seulement si elle dépasse 20 mots, contient le titre, ou contredit le synopsis. Les slides suivantes prolongent la MÊME mécanique que le modèle (un fait de plus, une aggravation), sans jamais révéler la fin."
+           if x.get("hook_fr") else
+           "Comment faire : aucun hook n'est préparé pour ce film : écris-le toi-même en reproduisant la mécanique de « Pourquoi ça marche » (le même type d'angle), avec un fait concret et précis que tu connais avec certitude.")
+    lignes.append(how + " Pour le champ \"commentaire\" (question d'accroche de la description), pars de la légende française préparée si elle existe, sinon écris-en une dans le même esprit. Adapte à notre sauce seulement ce qui est nécessaire (mots simples, astérisque sur les mots sensibles, phrases courtes, pas de question dans les slides sauf en mode test). N'invente aucun fait réel. Ne dis jamais que c'est un modèle.")
+    return "\n" + "\n".join(lignes) + "\n"
