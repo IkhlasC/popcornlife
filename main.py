@@ -1,6 +1,6 @@
 import sys, os, io, re, json, html, datetime, traceback
 from zoneinfo import ZoneInfo
-import tmdb, ai, tg, render
+import tmdb, ai, tg, render, classeur
 
 DATA = "data"
 RECENT_DAYS = 365
@@ -28,6 +28,7 @@ def save(name, obj):
     os.makedirs(DATA, exist_ok=True)
     with open(f"{DATA}/{name}.json", "w", encoding="utf-8") as f: json.dump(obj, f, ensure_ascii=False, indent=1)
 
+def fr(n): return classeur.fr(n)
 def e(s): return html.escape(str(s))
 
 def recent_ids():
@@ -83,7 +84,31 @@ def propose():
     if len(pool) < 6:
         tg.send("⚠️ Je n'ai pas trouvé assez de films disponibles pour faire des propositions."); return
     by_ref = {f'{p["type"]}:{p["id"]}': p for p in pool}
-    chosen = [c for c in ai.propose(pool) if c.get("ref") in by_ref][:3]
+    ranked = [c for c in ai.propose(pool, 4) if c.get("ref") in by_ref]
+    chosen = []
+    # 1 film du classeur (post qui a marché), 1 film d'actualité, 1 au choix : le classeur et l'actualité sont garantis à chaque fois
+    cl = None
+    try:
+        cl = classeur.pick(recent_ids() | {(h["type"], h["id"]) for h in load("history", [])}, lambda q, y: tmdb.search(q, y) or tmdb.search(q),
+                           lambda t, i: tmdb._flatrate(t, i)[0])
+    except Exception:
+        traceback.print_exc()
+    if cl:
+        t, i, x = cl
+        d = tmdb.details(t, i)
+        p = {"type": t, "id": i, "title": d["title"], "year": d["year"], "classeur": x}
+        chosen.append({"ref": f"{t}:{i}", "angle": x.get("pourquoi", ""), "hook": x.get("hook_fr", ""),
+                       "pourquoi": f"Post modèle de {x.get('compte', '?')} : {fr(x.get('likes', 0))} likes. On le reproduit au plus près.", "classeur": x})
+        by_ref[f"{t}:{i}"] = p
+    else:
+        print("[propose] aucun film du classeur disponible", flush=True)
+    ranked = [c for c in ranked if not (cl and c["ref"] == f"{cl[0]}:{cl[1]}")]
+    first_actu = next((c for c in ranked if by_ref[c["ref"]].get("groupe") == "actu"), None)
+    if first_actu: chosen.append(first_actu)
+    for c in ranked:
+        if len(chosen) >= 3: break
+        if c not in chosen: chosen.append(c)
+    chosen = chosen[:3]
     if not chosen:
         tg.send("⚠️ L'IA n'a pas renvoyé de proposition utilisable. Écris « propositions » pour réessayer."); return
     state = load("state", {"offset": 0}); state["pending"] = []
@@ -93,10 +118,11 @@ def propose():
         plat, _ = platform_info(p["type"], p["id"])
         kind = "Série" if p["type"] == "tv" else "Film"
         lines.append(f"<b>{letter} — {e(p['title'])}</b> ({p['year']}) · {kind}{' · ' + e(plat) if plat else ''}\n"
+                     + (f"📚 <b>DU CLASSEUR</b> · modèle à reproduire ({fr(c['classeur'].get('likes', 0))} likes chez {e(c['classeur'].get('compte', ''))})\n" if c.get("classeur") else "")
                      + (f"🔥 {e(p['buzz'])}\n" if p.get("buzz") else "")
                      + f"Angle : {e(c.get('angle', ''))}\nHook : {e(c.get('hook', ''))}\nPourquoi : {e(c.get('pourquoi', ''))}\n")
         buttons.append({"text": f"{letter} — {p['title'][:25]}", "callback_data": f"pick:{p['type']}:{p['id']}"})
-        state["pending"].append({"type": p["type"], "id": p["id"], "title": p["title"]})
+        state["pending"].append({"type": p["type"], "id": p["id"], "title": p["title"], **({"classeur": c["classeur"]} if c.get("classeur") else {})})
     save("state", state)
     tg.send("\n".join(lines), [[b] for b in buttons])
 
@@ -125,7 +151,7 @@ def rewrite(guidance=""):
         tg.send("Je n'ai pas de post récent à refaire. Écris d'abord un titre de film."); return
     meta = tmdb.details(last["type"], last["id"])
     tg.send(f"✍️ Je réécris les textes de <b>{e(last['title'])}</b>…" + (f"\nConsigne : {e(guidance)}" if guidance else ""))
-    post = ai.write_post(meta, guidance, avoid=last["texts"], platform=last.get("platform", ""), question=q)
+    post = ai.write_post(meta, guidance, avoid=last["texts"], platform=last.get("platform", ""), question=q, modele=last.get("modele"))
     assign, focus, bd = choose_images(meta, last["candidates"], post["texts"])
     poster = tmdb.download(last["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, focus or [0.5] * 3, poster,
@@ -140,6 +166,8 @@ def rewrite(guidance=""):
     state["last"] = last; save("state", state)
 
 def produce(t, i, question=False):
+    st0 = load("state", {"offset": 0})
+    modele = next((p.get("classeur") for p in st0.get("pending", []) if p.get("type") == t and p.get("id") == i and p.get("classeur")), None)
     meta = tmdb.details(t, i)
     if not meta["overview"] or not meta["poster_path"]:
         tg.send(f"⚠️ TMDB n'a pas de synopsis ou d'affiche pour « {e(meta['title'])} ». Je ne veux pas inventer : choisis-en un autre."); return
@@ -148,10 +176,11 @@ def produce(t, i, question=False):
         warn = "\n⚠️ Tu as déjà fait ce titre il y a moins d'un an."
     tg.send(f"⏳ Je prépare <b>{e(meta['title'])}</b> ({meta['year']})…{warn}")
     plat, plat_msg = platform_info(t, i)
-    post = ai.write_post(meta, platform=plat, question=question)
+    modele = modele or classeur.find_by_title(meta["title"], meta["year"])   # même si elle tape le titre elle-même
+    post = ai.write_post(meta, platform=plat, question=question, modele=modele)
     paths = tmdb.backdrops(t, i)
     last = {"type": t, "id": i, "title": meta["title"], "year": meta["year"], "rating": meta["rating"], "platform": plat,
-            "texts": post["texts"], "poster_path": meta["poster_path"], "candidates": paths, "assign": [], "focus": [], "hashtags": post["hashtags"], "comment": post.get("comment", ""), "caption": post["caption"]}
+            "texts": post["texts"], "poster_path": meta["poster_path"], "candidates": paths, "assign": [], "focus": [], "hashtags": post["hashtags"], "comment": post.get("comment", ""), "caption": post["caption"], "modele": modele}
     last["assign"], last["focus"], bd = choose_images(meta, paths, post["texts"])
     poster = tmdb.download(meta["poster_path"], "w780")
     files = render.render_all(post["texts"], bd, last["focus"] or [0.5] * 3, poster,
@@ -160,10 +189,11 @@ def produce(t, i, question=False):
     tg.send(f"<code>{e(meta['title'])}</code>")
     tg.send("📝 <b>Description à coller</b> (la question, puis les hashtags) :\n<code>" + e(post["caption"]) + "</code>")
     send_dispo(plat)
-    tg.send(f"✅ <b>{e(meta['title'])}</b> est prêt ({len(post['texts'])} slides + l'affiche){' · 🧪 test question en slide 2' if question else ''}.\n{e(plat_msg)}\n\n"
+    tg.send(f"✅ <b>{e(meta['title'])}</b> est prêt ({len(post['texts'])} slides + l'affiche){' · 🧪 test question en slide 2' if question else ''}{' · 📚 reproduit le modèle du classeur' if modele else ''}.\n{e(plat_msg)}\n\n"
             + "\n".join(f"{k+1}. {e(t)}" for k, t in enumerate(post["texts"])) + "\n\n"
             f"Une image ne te plaît pas ? Écris « image 1 », « image 2 »… (une par slide).\n{meta['url']}")
     hist = load("history", []); hist.append({"type": t, "id": i, "title": meta["title"], "date": datetime.date.today().isoformat()})
+    if modele: classeur.mark_published(modele["titre"])
     save("history", hist)
     state = load("state", {"offset": 0}); state["last"] = last; state["pending"] = []; save("state", state)
 

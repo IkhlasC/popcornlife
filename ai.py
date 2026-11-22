@@ -81,21 +81,21 @@ Ne tiens PAS compte des fêtes (Halloween, Noël, Saint-Valentin…) : seulement
         print(f"[actualite] recherche web indisponible : {ex}", flush=True)
         return []
 
-def propose(pool):
+def propose(pool, n=4):
     import datetime
     def line(p):
         flags = ("[NETFLIX] " if p.get("netflix") else "") + (f"[ACTU : {p['buzz']}] " if p.get("groupe") == "actu" else "[PÉPITE RÉCENTE] ")
         return f'{p["type"]}:{p["id"]} | {flags}{p["title"]} ({p["year"]}) | note {p["rating"]} | {", ".join(p["genres"])} | {p["overview"][:220]}'
     lines = "\n".join(line(p) for p in pool)
     import random
-    n_actu = random.choice([1, 2])      # rotation : sur 3 propositions, 1 ou 2 d'actualité, les autres des pépites récentes
+    n_actu = max(2, n // 2)      # au moins 2 d'actualité sur les propositions (le bot en garde 1, il en faut une garantie), les autres des pépites récentes
     prompt = f"""Nous sommes le {datetime.date.today().strftime("%d/%m/%Y")}. Voici une liste d'œuvres disponibles en streaming en France ([NETFLIX] = disponible sur Netflix ; [ACTU] = on en parle en ce moment ; [PÉPITE RÉCENTE] = film ou série très marquant des 4-5 dernières années, pas forcément dans l'actualité) :
 {lines}
 
-Choisis les 3 œuvres qui vont FAIRE LE PLUS RÉAGIR sur TikTok, c'est-à-dire celles dont une seule phrase provoque une émotion forte (peur, choc, indignation, « c'est quoi ce film ? », « je dois le voir »). Note chaque œuvre de 1 à 10 sur son potentiel de réaction (score_reaction) et ne garde que les 3 meilleures scores, classées de la plus forte à la moins forte. Ne retiens qu'une œuvre à plus de 7 si tu peux la défendre avec une phrase choc ; refuse les œuvres tièdes même si elles sont bien notées.
+Choisis les {n} œuvres qui vont FAIRE LE PLUS RÉAGIR sur TikTok, c'est-à-dire celles dont une seule phrase provoque une émotion forte (peur, choc, indignation, « c'est quoi ce film ? », « je dois le voir »). Note chaque œuvre de 1 à 10 sur son potentiel de réaction (score_reaction) et ne garde que les {n} meilleurs scores, classées de la plus forte à la moins forte. Ne retiens qu'une œuvre à plus de 7 si tu peux la défendre avec une phrase choc ; refuse les œuvres tièdes même si elles sont bien notées.
 RÈGLES DE LA RÉDACTRICE (elles passent avant tes goûts) :
 - NETFLIX D'ABORD : ce sont souvent les films et séries Netflix qui plaisent le plus. Au moins 2 des 3 propositions doivent être [NETFLIX], idéalement les 3.
-- ROTATION ACTUALITÉ / PÉPITES : exactement {n_actu} proposition(s) [ACTU] (film dont on parle en ce moment : tendance de la semaine, sortie récente, buzz) et {3 - n_actu} [PÉPITE RÉCENTE] (film ou série des 4-5 dernières années très marquant, avec un fait choc ou une histoire qui divise). Pour une [ACTU], dis dans « pourquoi » ce qui fait l'actualité ; pour une pépite, dis ce qui la rend marquante. Si le pool ne permet pas cette répartition, rapproche-t'en au mieux.
+- ROTATION ACTUALITÉ / PÉPITES : exactement {n_actu} proposition(s) [ACTU] (film dont on parle en ce moment : tendance de la semaine, sortie récente, buzz) et {n - n_actu} [PÉPITE RÉCENTE] (film ou série des 4-5 dernières années très marquant, avec un fait choc ou une histoire qui divise). Pour une [ACTU], dis dans « pourquoi » ce qui fait l'actualité ; pour une pépite, dis ce qui la rend marquante. Si le pool ne permet pas cette répartition, rapproche-t'en au mieux.
 Ce qui fait le plus réagir : une MENACE VENUE DU CERCLE FAMILIER (un père, une mère, un frère, un enfant, un proche qui n'est pas ce qu'il semble), une INJUSTICE ou un dilemme moral, un enfant ou un proche en danger, un piège dans un lieu du quotidien (airbnb, concert, tunnel, aéroport, vacances en famille), un retournement, une situation où le lecteur se dit « et si c'était moi ? ». Privilégie les œuvres où le lecteur peut se mettre à la place d'un personnage.
 Varie (pas 3 œuvres du même genre ; 2 séries maximum). Évite les décors lointains ou fantastiques (apocalypse, western, dystopie, monstres), les clichés de genre (cimetière, village maudit) et les concepts qu'il faut expliquer, SAUF si l'œuvre est en pleine actualité.
 Pour chacune : un angle éditorial, une idée de hook (une phrase), et pourquoi ça peut faire réagir sur TikTok (une phrase).
@@ -308,7 +308,7 @@ Vrais hooks qui ont fait des millions de vues : « Ce t*eur en série se rend à
 10. Serenity : Son ex débarque après des années. Elle lui offre 10 millions pour tuer son mari. / Le mari est violent avec elle et son fils. / Rien sur cette île n'est ce qu'il paraît.
 """
 
-def write_post(meta, guidance="", avoid=None, platform="", question=False):
+def write_post(meta, guidance="", avoid=None, platform="", question=False, modele=None):
     kind = "série" if meta["type"] == "tv" else "film"
     extra = ""
     if guidance:
@@ -319,6 +319,8 @@ def write_post(meta, guidance="", avoid=None, platform="", question=False):
         extra += ("\nMODE TEST QUESTION (demande explicite de la rédactrice, valable pour CE post seulement) : la SLIDE 2 doit être une QUESTION qui se termine par « ? » "
                   "(un choix concret ou un « jusqu'où irais-tu… ? » / « qu'aurais-tu fait ? » lié à un fait précis de l'œuvre, sans spoiler). "
                   "Cette exception remplace la règle « aucune question » pour la slide 2 uniquement : les autres slides restent des affirmations, sans point d'interrogation.\n")
+    import classeur
+    extra += classeur.model_block(modele)
     base = f"""Œuvre : {meta['title']} ({meta['year']}), {kind}. Genres : {', '.join(meta['genres'])}.
 Accroche officielle : {meta['tagline'] or '-'}
 Synopsis : {meta['overview']}
@@ -400,15 +402,15 @@ Mets spoiler_risk à true seulement si une phrase révèle la fin ou un retourne
         vague = re.compile(r"impossible de (le |la |les |s'en )?(l[âa]cher|quitter|d[ée]crocher)|d'un c[ôo]t[ée]|de l'autre|tout (bascule|change)|rien ne sera plus|plus jamais comme|quelque chose cloche|personne ne s'y attend|tu vas adorer|tournent? au drame", re.I)
         if re.match(r"(?i)^(dans un (monde|futur|univers)|en pleine|dans un pays|dans une soci[ée]t[ée])", s[0].strip()): problems.append("la slide 1 commence par un décor : commence par une personne dans une situation")
         secret = re.compile(r"cach(e|ent|er|ait|aient|é|ée|és|ées) (un|une|des|plein|beaucoup|quelque|tout|bien|de) ?(de )?(secrets?|choses?|trucs?|chose|dérangeant|lourd|sombre|terrible|mensonges?)|un secret (terrible|sombre|inavouable|dérangeant|lourd)|secrets? (terribles?|sombres?|inavouables?|dérangeants?)|quelque chose de (terrible|dérangeant|sombre|inquiétant|louche|étrange)|passé sombre|\bcauchemar|myst[ée]rieu[xs]e?s?\b|ne devrait pas (savoir|voir)", re.I)
-        bad_s = [x for x in s if secret.search(x)]
+        bad_s = [] if modele else [x for x in s if secret.search(x)]
         if bad_s: problems.append("formule floue (« cache un secret », « cauchemar », « mystérieux », « quelque chose de dérangeant ») dans : " + " / ".join(bad_s) + ". NOMME le fait précis et concret qui dérange (un objet, un geste, un chiffre), sans révéler la fin")
-        bad = [x for x in s if vague.search(x)]
+        bad = [] if modele else [x for x in s if vague.search(x)]
         if bad: problems.append("formule vague ou conclusion interdite dans : " + " / ".join(bad) + " (raconte un fait précis à la place)")
         if avoid and oral(s[0]) in [x.strip() for x in avoid]: problems.append("la slide 1 reprend un texte refusé")
         com = str(r.get("commentaire") or "").strip()
         if (not com or len(com) > 220 or re.search(r"(?i)vous avez aim|dites[- ]moi en commentaire|likez|abonn", com)) and attempt < 2:
             problems.append("le champ commentaire est vide, trop long (220 caractères max) ou générique : écris un vrai premier commentaire incitateur, spécifique à l'œuvre")
-        if not problems and attempt < 2:
+        if not problems and attempt < 2 and not modele:
             try:
                 for i, x, idee in precision_check(meta, s):
                     if "?" in x: continue
