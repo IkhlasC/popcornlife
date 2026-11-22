@@ -1,68 +1,72 @@
 {
- "offset": 422726119,
- "pending": [
-  {
-   "type": "movie",
-   "id": 1422,
-   "title": "Les Infiltrés",
-   "classeur": {
-    "ligne": 9,
-    "titre": "Les Infiltrés",
-    "type": "movie",
-    "annee": 2006,
-    "libelle": "Les Infiltrés (2006)",
-    "hook_fr": "Deux hommes aux vies opposées… qui cachent tous les deux qui ils sont vraiment",
-    "legende_fr": "À qui faire confiance quand tout le monde ment ? 👀",
-    "likes": 38400,
-    "compte": "@benitob.mp4",
-    "hook_en": "Two men living completely different lives… Both hiding who they really are",
-    "pourquoi": "Double secret = tension immédiate",
-    "publie": false
-   }
-  },
-  {
-   "type": "movie",
-   "id": 1236045,
-   "title": "Animals"
-  },
-  {
-   "type": "movie",
-   "id": 1621552,
-   "title": "La captura"
-  }
- ],
+ "offset": 422726120,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 1616419,
-  "title": "Un bon avocat",
-  "year": "2026",
-  "rating": 6.6,
-  "platform": "Netflix",
+  "id": 1422,
+  "title": "Les Infiltrés",
+  "year": "2006",
+  "rating": 8.2,
+  "platform": "Prime Video / Sooner",
   "texts": [
-   "Cet avocat fait une overdose en pleine plaidoirie",
-   "Mais à sa sortie de cure, c'est lui qu'on juge, dans 1 semaine",
-   "Pour l'aider, il a un stagiaire qui ne lâche rien"
+   "Deux hommes aux vies opposées… qui cachent tous les deux qui ils sont vraiment",
+   "L'un infiltre la pègre irlandaise, l'autre est la taupe du parrain chez les flics",
+   "Chaque camp sait qu'il a une taupe : c'est à qui démasquera l'autre en premier"
   ],
-  "poster_path": "/aoXmmkjKxsMZTNgrVq35d32w3Mg.jpg",
+  "poster_path": "/xHeuF5zzlx1YxkULiz0mx1TMBJ7.jpg",
   "candidates": [
-   "/fzlch1j1aVGJKI0GB6IdgbG5gpJ.jpg",
-   "/qYeIw4vHeVoqa6U8avsd6aVeCHj.jpg",
-   "/brnX40DFRxejxbqPS2TOLp4QHns.jpg",
-   "/weIqM0gv9UL9ujQq0gLhFkXj9yP.jpg"
+   "/6WRrGYalXXveItfpnipYdayFkQB.jpg",
+   "/cDFtxTxEtE3ljadfQ5SwtRTi8Iw.jpg",
+   "/9RuC3UD6mNZ0p1J6RbfJDUkQ03i.jpg",
+   "/iNtiuXiPsnqrugmKTblDGRfJ2oN.jpg",
+   "/kEOphuj2uWuYvObtsZGxuDo96NG.jpg",
+   "/jpId5NEg6bDazNgEkGX0ZYy6ab7.jpg",
+   "/j0stmN6ktCpqoWE5nT6xHCyDpwP.jpg",
+   "/tQSoGeA53RsRvqtjOH7RjkjaHwI.jpg",
+   "/pC6oJsuQsSbuQtUJOyTgk90eIw2.jpg",
+   "/fwLJUUD02isNUbrINYw0Z7lKN94.jpg",
+   "/iAuIz5oemcPKyg8NQnZRV6dLMV6.jpg",
+   "/jrN72pasL67OMMFgAxFHRUg3qxJ.jpg",
+   "/t6qrNVH2DOfnK3kBiXxaLKMwO3U.jpg",
+   "/jQuB3uu5sUoprPLGIr4rzvRCset.jpg",
+   "/tyW7pzPAuaKopZKZTeOosqrDg5f.jpg",
+   "/37nMVOAVtUwhyfgsszkFWcQkBMP.jpg",
+   "/jSLzBS5AkYescSJ889HU6oI8dT8.jpg",
+   "/stqttCNEqkZAkBOjH7ihF7MKjgh.jpg",
+   "/zPMxVVfMP1ISG7OqdV8iEZsMBAi.jpg",
+   "/q0GdL7Amdplm7Plfsjn6q8mO7D6.jpg",
+   "/pXP8cHMxPw4N0BqkKNfQovaeB3x.jpg",
+   "/tc7dvtDauamQRk1fRHyd9wZxJx9.jpg",
+   "/oDuQR8MH9fgrenBPdPIzqjA6l8j.jpg",
+   "/5SVVLT7r1iSXSqpitf6DFXchFFU.jpg"
   ],
   "assign": [
-   0,
-   2,
-   1
+   1,
+   8,
+   12
   ],
   "focus": [
-   0.51015625,
-   0.45,
-   0.7140625
+   0.5,
+   0.5,
+   0.33671875
   ],
-  "hashtags": "#film #quoiregarder #thriller #unbonavocat #netflix",
-  "comment": "Un avocat qui s'est effondré en pleine plaidoirie : tu lui laisses une seconde chance ou tu prends un autre avocat ?",
-  "caption": "Un avocat qui s'est effondré en pleine plaidoirie : tu lui laisses une seconde chance ou tu prends un autre avocat ?\n#film #quoiregarder #thriller #unbonavocat #netflix"
+  "hashtags": "#film #quoiregarder #thriller #lesinfiltres #primevideo",
+  "comment": "À qui faire confiance quand tout le monde ment ? Tu serais plutôt Billy ou Colin ? 👀",
+  "caption": "À qui faire confiance quand tout le monde ment ? Tu serais plutôt Billy ou Colin ? 👀\n#film #quoiregarder #thriller #lesinfiltres #primevideo",
+  "modele": {
+   "ligne": 9,
+   "titre": "Les Infiltrés",
+   "type": "movie",
+   "annee": 2006,
+   "libelle": "Les Infiltrés (2006)",
+   "hook_fr": "Deux hommes aux vies opposées… qui cachent tous les deux qui ils sont vraiment",
+   "legende_fr": "À qui faire confiance quand tout le monde ment ? 👀",
+   "likes": 38400,
+   "compte": "@benitob.mp4",
+   "hook_en": "Two men living completely different lives… Both hiding who they really are",
+   "pourquoi": "Double secret = tension immédiate",
+   "publie": false
+  }
  },
  "last_propose": "2026-11-22",
  "photo": null,
