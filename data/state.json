@@ -1,6 +1,22 @@
 {
- "offset": 422726117,
- "pending": [],
+ "offset": 422726118,
+ "pending": [
+  {
+   "type": "tv",
+   "id": 113988,
+   "title": "DAHMER - Monstre : L'Histoire de Jeffrey Dahmer"
+  },
+  {
+   "type": "tv",
+   "id": 291496,
+   "title": "Our Sticky Love"
+  },
+  {
+   "type": "movie",
+   "id": 906126,
+   "title": "Le Cercle des neiges"
+  }
+ ],
  "last": {
   "type": "movie",
   "id": 1616419,
