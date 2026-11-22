@@ -1,60 +1,49 @@
 {
- "offset": 422726110,
- "pending": [
-  {
-   "type": "movie",
-   "id": 860508,
-   "title": "The Whisper Man"
-  },
-  {
-   "type": "tv",
-   "id": 225634,
-   "title": "Monstres : L'Histoire de Lyle et Erik Menendez"
-  },
-  {
-   "type": "movie",
-   "id": 1616419,
-   "title": "Un bon avocat"
-  }
- ],
+ "offset": 422726111,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 1487861,
-  "title": "Elize Surgie de l'Ombre",
+  "id": 860508,
+  "title": "The Whisper Man",
   "year": "2026",
-  "rating": 7.4,
+  "rating": 6.8,
   "platform": "Netflix",
   "texts": [
-   "Au Brésil, une mère de famille t*e son mari et découpe son corps",
-   "Mais elle l'avait rencontré quand elle était escort, et lui venait d'une famille riche",
-   "Histoire vraie. Le Brésil entier a suivi l'affaire en 2012."
+   "Imagine que ta femme est m*rte et que ton jeune fils disparaît à son tour",
+   "Du coup, tu te tournes vers ton père, flic à la retraite, brouillé avec toi",
+   "Et c'est lui qui avait arrêté le t*eur en série lié à l'affaire"
   ],
-  "poster_path": "/ryuWPWA3sZ1eoKHaZLxAvNoxCnV.jpg",
+  "poster_path": "/pSsX2LnGzyfHR9RioDEiLrPy5wa.jpg",
   "candidates": [
-   "/z8mTDyKdAWjKsD0vwa7e9LTSY1j.jpg",
-   "/o795VMV1gpUjhepznZ0Lpp4og3v.jpg",
-   "/veCZHRJstTxxFmmUkMTJfgGRZng.jpg",
-   "/kNyNKP4sE01hsTMAZ4ggbRhvllX.jpg",
-   "/yHN9zjUhd1knQ5JKmouyz58bfEI.jpg",
-   "/cVuPRD8zSv9PUQGWvtaDCxTJwj9.jpg",
-   "/z3LeWLHyVHiAseqHAU7YpzJOf2c.jpg",
-   "/iuKYR80UmGNfQwhCPrQogyooG4U.jpg",
-   "/n4tgGc26KBmT0ETVkJBIjj9YdbM.jpg",
-   "/rF6GS97jdmWVnpp03ONgUA8XGNF.jpg"
+   "/uauoVKKCkNA9iWjgJCL8TdSfLf5.jpg",
+   "/xSJJQeAp9GBFmiKusysTRG6jQjt.jpg",
+   "/b0EVWmBaUgliBHkrxtvmcVruXAG.jpg",
+   "/3qNmFlwdbO7hvdbLgl3FYOoJeAP.jpg",
+   "/wxDIeosQo3gRS3KNiVgdwfD0tV1.jpg",
+   "/d0krmJICW2EL2rvmsQPotM9YJLR.jpg",
+   "/wHWJ1d9hqZ2iY0057xoLm3I3m8r.jpg",
+   "/x1U3jLiURn0O9F09pIy6HSla2h4.jpg",
+   "/wQ0joNJPgmAXyMSVrrUoOhodkIx.jpg",
+   "/ewrH8zcL1ds457Zhrb1elnMWql5.jpg",
+   "/6fWHDqAxKOgxQGoSmViAjFWGa4A.jpg",
+   "/zPX7mz8AzMEe1cVw77Yzurp8tXa.jpg",
+   "/20E2GBPfxh2Y2knlMYjl1Dothfm.jpg",
+   "/7BRNTwT5v9Okq7l4FJl0GrJg7tD.jpg",
+   "/st8bv3WwijIaHcLLj3OScyQEekv.jpg"
   ],
   "assign": [
-   3,
-   8,
-   2
+   1,
+   14,
+   6
   ],
   "focus": [
-   0.70234375,
-   0.51953125,
-   0.51796875
+   0.5125,
+   0.54609375,
+   0.5
   ],
-  "hashtags": "#film #quoiregarder #thriller #elizesurgiedelombre #netflix",
-  "comment": "Victime qui a craqué ou coupable sans excuse : tu la mets où ?",
-  "caption": "Victime qui a craqué ou coupable sans excuse : tu la mets où ?\n#film #quoiregarder #thriller #elizesurgiedelombre #netflix"
+  "hashtags": "#film #quoiregarder #thriller #thewhisperman #netflix",
+  "comment": "Ton fils disparaît : tu demandes de l'aide à ton père brouillé avec toi, ou tu cherches tout seul ?",
+  "caption": "Ton fils disparaît : tu demandes de l'aide à ton père brouillé avec toi, ou tu cherches tout seul ?\n#film #quoiregarder #thriller #thewhisperman #netflix"
  },
  "last_propose": "2026-11-22",
  "photo": null,
