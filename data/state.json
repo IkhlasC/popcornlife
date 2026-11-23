@@ -1,6 +1,62 @@
 {
  "offset": 422726129,
- "pending": [],
+ "pending": [
+  {
+   "type": "tv",
+   "id": 72039,
+   "title": "Escape at Dannemora",
+   "classeur": {
+    "ligne": null,
+    "titre": "Escape at Dannemora",
+    "type": "tv",
+    "annee": 2018,
+    "libelle": "Escape at Dannemora (2018)",
+    "hook_fr": "Deux meurtriers condamnés à perpétuité s'évadent d'une prison de haute sécurité.",
+    "legende_fr": "",
+    "likes": 0,
+    "vues": 696100,
+    "compte": "@totor_flix",
+    "hook_en": "",
+    "pourquoi": "Histoire vraie, évasion. Format « Si t'as aimé Prison Break » : 696,1K vues chez @totor_flix",
+    "slides_fr": [
+     "Deux meurtriers condamnés à perpétuité s'évadent d'une prison de haute sécurité.",
+     "Une employée de la prison les a aidés.",
+     "Histoire vraie, New York, 2015."
+    ],
+    "note": "",
+    "source": "brief PopcornLife du 19/11/2026",
+    "publie": false
+   }
+  },
+  {
+   "type": "movie",
+   "id": 1780005,
+   "title": "Contre l'Ouragan",
+   "classeur": {
+    "ligne": null,
+    "titre": "Contre l'ouragan",
+    "type": "tv",
+    "annee": null,
+    "libelle": "Contre l'ouragan",
+    "hook_fr": "",
+    "legende_fr": "",
+    "likes": 0,
+    "vues": 0,
+    "compte": "@totor_flix",
+    "hook_en": "",
+    "pourquoi": "Catastrophe réelle (Otis, 2023) (idée du brief)",
+    "slides_fr": [],
+    "note": "Titre à vérifier sur TMDB.",
+    "source": "brief PopcornLife du 19/11/2026",
+    "publie": false
+   }
+  },
+  {
+   "type": "movie",
+   "id": 1236045,
+   "title": "Animals"
+  }
+ ],
  "last": {
   "type": "tv",
   "id": 155537,
@@ -62,7 +118,7 @@
   },
   "last_slide": 2
  },
- "last_propose": "2026-11-22",
+ "last_propose": "2026-11-23",
  "photo": "data/custom/_waiting.jpg",
  "add_slide": null
 }
