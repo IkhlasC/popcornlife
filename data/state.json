@@ -1,122 +1,62 @@
 {
- "offset": 422726129,
- "pending": [
-  {
-   "type": "tv",
-   "id": 72039,
-   "title": "Escape at Dannemora",
-   "classeur": {
-    "ligne": null,
-    "titre": "Escape at Dannemora",
-    "type": "tv",
-    "annee": 2018,
-    "libelle": "Escape at Dannemora (2018)",
-    "hook_fr": "Deux meurtriers condamnés à perpétuité s'évadent d'une prison de haute sécurité.",
-    "legende_fr": "",
-    "likes": 0,
-    "vues": 696100,
-    "compte": "@totor_flix",
-    "hook_en": "",
-    "pourquoi": "Histoire vraie, évasion. Format « Si t'as aimé Prison Break » : 696,1K vues chez @totor_flix",
-    "slides_fr": [
-     "Deux meurtriers condamnés à perpétuité s'évadent d'une prison de haute sécurité.",
-     "Une employée de la prison les a aidés.",
-     "Histoire vraie, New York, 2015."
-    ],
-    "note": "",
-    "source": "brief PopcornLife du 19/11/2026",
-    "publie": false
-   }
-  },
-  {
-   "type": "movie",
-   "id": 1780005,
-   "title": "Contre l'Ouragan",
-   "classeur": {
-    "ligne": null,
-    "titre": "Contre l'ouragan",
-    "type": "tv",
-    "annee": null,
-    "libelle": "Contre l'ouragan",
-    "hook_fr": "",
-    "legende_fr": "",
-    "likes": 0,
-    "vues": 0,
-    "compte": "@totor_flix",
-    "hook_en": "",
-    "pourquoi": "Catastrophe réelle (Otis, 2023) (idée du brief)",
-    "slides_fr": [],
-    "note": "Titre à vérifier sur TMDB.",
-    "source": "brief PopcornLife du 19/11/2026",
-    "publie": false
-   }
-  },
-  {
-   "type": "movie",
-   "id": 1236045,
-   "title": "Animals"
-  }
- ],
+ "offset": 422726130,
+ "pending": [],
  "last": {
   "type": "tv",
-  "id": 155537,
-  "title": "Black Bird",
-  "year": "2022",
-  "rating": 8.1,
-  "platform": "Apple TV",
+  "id": 72039,
+  "title": "Escape at Dannemora",
+  "year": "2018",
+  "rating": 7.5,
+  "platform": "Paramount+ / Paramount+ Apple TV channel",
   "texts": [
-   "L'histoire vraie d'un détenu à qui on offre la liberté… s'il arrive à faire avouer un t*eur en série",
-   "Sa peine : 10 ans. Sa seule sortie : les aveux de Larry Hall"
+   "Deux m*urtriers condamnés à perpétuité s'évadent d'une prison de haute sécurité.",
+   "Une employée de la prison les a aidés, elle était intimement liée aux deux.",
+   "Histoire vraie, New York, 2015. Une grande chasse à l'homme est lancée."
   ],
-  "poster_path": "/qxDOHCeuxcPdT5W0IrX5c7cj7lt.jpg",
+  "poster_path": "/odk6ccUtUJlGTzPApKS6s4CTTrK.jpg",
   "candidates": [
-   "/o2C222QdW4dmoyd2dgPlnCcI3cW.jpg",
-   "/aZ4mBxYHrKHFu9QpUmpVDIOoWAb.jpg",
-   "/khnvmHBh9r6jN1NIsv16LjpJTTW.jpg",
-   "/iFzeQq0BHWazrBvZncSuZ5aj7VQ.jpg",
-   "/zEmbjSuX9TSDC7Au5dGmO2wucZw.jpg",
-   "/dXiHf4tBycGb0H7G3D55hnt1j4N.jpg",
-   "/sDS3M6X0QhDNWAQmUhDIWKw8LN5.jpg",
-   "/reCJJWto966fS3o4KapyxInxODc.jpg",
-   "/kWIi7TVXXvybIN4sl6fkrsatwdJ.jpg",
-   "/pl1DoMHsBu6768Z4DwXttQqGUuS.jpg",
-   "/lmufooTiRoFXWFu7wk3HnFLqNAj.jpg",
-   "/khbNYggi71VJy7PTUNWn6Jk5El6.jpg",
-   "/5LrTEZIBOi7cHy0QsuYtunXWoRn.jpg",
-   "/1ToEjl7VEZIhcTdvU8ZASaZRa5Y.jpg",
-   "/pvJU4dlHpFIyB2E00pdH6MWEoJB.jpg",
-   "/160FjoLg7snsh33PlZWh6wcsDQc.jpg"
+   "/chu6bVjN5viCdfmzBcx5R3xYfTj.jpg",
+   "/r6c1Sz9TWmgg4maYTWkEVSqokUt.jpg",
+   "/hmrVJsLhY9lLOOUqYSGyGuaNste.jpg",
+   "/AvJMmK4qGrzWCEHjXGufIuVXlwX.jpg",
+   "/mC8yYb5TLPQEuMPlW7THDKtaV5T.jpg",
+   "/lYPGOHFAbCa9ijB6HYMz05ZNHno.jpg"
   ],
   "assign": [
+   5,
    2,
-   6
+   3
   ],
   "focus": [
-   0.34296875,
-   0.5
+   0.53125,
+   0.5,
+   0.45
   ],
-  "hashtags": "#serie #quoiregarder #crime #blackbird #appletv",
-  "comment": "Un face-à-face entre deux hommes qui ne te lâche plus. Histoire vraie : tu acceptes le deal ou tu fais tes 10 ans ?",
-  "caption": "Un face-à-face entre deux hommes qui ne te lâche plus. Histoire vraie : tu acceptes le deal ou tu fais tes 10 ans ?\n#serie #quoiregarder #crime #blackbird #appletv",
+  "hashtags": "#serie #quoiregarder #crime #escapeatdannemora #paramountplus",
+  "comment": "Elle aide deux m*urtriers à s'évader : tu penses qu'elle l'a fait par amour ou par intérêt ?",
+  "caption": "Elle aide deux m*urtriers à s'évader : tu penses qu'elle l'a fait par amour ou par intérêt ?\n#serie #quoiregarder #crime #escapeatdannemora #paramountplus",
   "modele": {
-   "ligne": 2,
-   "titre": "Black Bird",
+   "ligne": null,
+   "titre": "Escape at Dannemora",
    "type": "tv",
-   "annee": 2022,
-   "libelle": "Black Bird (mini-série, 2022)",
-   "hook_fr": "L'histoire vraie d'un détenu à qui on offre la liberté… s'il arrive à faire avouer un tueur en série",
-   "legende_fr": "Un face-à-face entre deux hommes qui ne te lâche plus. Histoire vraie.",
-   "likes": 387100,
-   "compte": "@unmissablemovies",
-   "hook_en": "The true story of James Keene, who is given a chance to get out of prison if he can get a suspected serial k*ller to confess…",
-   "pourquoi": "Histoire vraie + deal impossible : le marché met tout de suite la tension",
+   "annee": 2018,
+   "libelle": "Escape at Dannemora (2018)",
+   "hook_fr": "Deux meurtriers condamnés à perpétuité s'évadent d'une prison de haute sécurité.",
+   "legende_fr": "",
+   "likes": 0,
+   "vues": 696100,
+   "compte": "@totor_flix",
+   "hook_en": "",
+   "pourquoi": "Histoire vraie, évasion. Format « Si t'as aimé Prison Break » : 696,1K vues chez @totor_flix",
+   "slides_fr": [
+    "Deux meurtriers condamnés à perpétuité s'évadent d'une prison de haute sécurité.",
+    "Une employée de la prison les a aidés.",
+    "Histoire vraie, New York, 2015."
+   ],
+   "note": "",
+   "source": "brief PopcornLife du 19/11/2026",
    "publie": false
-  },
-  "custom": {
-   "1": "data/custom/155537_slide1.jpg",
-   "2": "data/custom/155537_slide2.jpg"
-  },
-  "last_slide": 2
+  }
  },
  "last_propose": "2026-11-23",
  "photo": "data/custom/_waiting.jpg",
