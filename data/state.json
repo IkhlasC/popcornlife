@@ -1,97 +1,70 @@
 {
- "offset": 422726135,
- "pending": [
-  {
-   "type": "movie",
-   "id": 45612,
-   "title": "Source Code",
-   "classeur": {
-    "ligne": 18,
-    "titre": "Source Code",
-    "type": "movie",
-    "annee": 2011,
-    "libelle": "Source Code (2011)",
-    "hook_fr": "Un homme se réveille dans un train à côté d'une femme qui semble le connaître… il n'a aucune idée de qui il est",
-    "legende_fr": "Un des thrillers de SF les plus sous-cotés.",
-    "likes": 13500,
-    "compte": "@vincenz.movies",
-    "hook_en": "A man wakes on a train next to a woman who seems to know him… He has no idea who he is.",
-    "pourquoi": "Perte de mémoire = le spectateur découvre avec lui",
-    "publie": false
-   }
-  },
-  {
-   "type": "movie",
-   "id": 9693,
-   "title": "Les Fils de l'homme",
-   "classeur": {
-    "ligne": 10,
-    "titre": "Les Fils de l'homme",
-    "type": "movie",
-    "annee": 2006,
-    "libelle": "Les Fils de l'homme (2006)",
-    "hook_fr": "Aucun enfant n'est né depuis 18 ans",
-    "legende_fr": "Et un jour, une femme tombe enceinte…",
-    "likes": 36700,
-    "compte": "@benitob.mp4",
-    "hook_en": "No child has been born in 18 years",
-    "pourquoi": "Fait choquant ultra-court",
-    "publie": false
-   }
-  },
-  {
-   "type": "movie",
-   "id": 1236045,
-   "title": "Animals"
-  }
- ],
+ "offset": 422726136,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 1780005,
-  "title": "Contre l'Ouragan",
-  "year": "2026",
-  "rating": 7.4,
-  "platform": "Netflix",
+  "id": 45612,
+  "title": "Source Code",
+  "year": "2011",
+  "rating": 7.3,
+  "platform": "Molotov TV / Cine+ OCS",
   "texts": [
-   "Deux demi-frères sont en pleine mer quand une tempête devient un ouragan de catégorie 5",
-   "Sauf que cette tempête n'était pas prévue, et ses vents dépassent 260 km/h",
-   "Otis est un vrai ouragan, il a frappé Acapulco en octobre 2023"
+   "Un homme se réveille dans un train à côté d'une femme qui semble le connaître… il n'a aucun souvenir",
+   "Mais au bout de 8 minutes, une bombe explose et t*e tous les passagers",
+   "Il doit revivre ces 8 minutes en boucle pour trouver qui a posé la bombe"
   ],
-  "poster_path": "/8T590m8nwAub9fTxp72EJPphOWa.jpg",
+  "poster_path": "/4z8PEhDJ38OepZcKaDN38GJ0jXv.jpg",
   "candidates": [
-   "/cpNMIRCrDl0sxDL1tHBzfWi0UZC.jpg",
-   "/izXBnjQ7H3cdM9BEuMs3UwETTJV.jpg",
-   "/8YM9IOC8YpUM2GdvzOQH0Q7Bl1X.jpg"
+   "/mDb4uku4zEElsITXDpbir4fR0HW.jpg",
+   "/tY98hSDUlDqfgjSI6dInHiytoKH.jpg",
+   "/s2Cu1y9Al9RbwRU5blAH8wMCrBI.jpg",
+   "/wj5TfW9gCZMPbzAgkMvUI2mD5Bx.jpg",
+   "/noHDKhzbwP6DfoaO2xRFLVrpX0N.jpg",
+   "/TDkCdytUCem7y6gy2qWhL3YIJG.jpg",
+   "/rETw09yOeP9El5gLKx7M2oQ03r6.jpg",
+   "/vLkDfNn7sqw3PtOfw0kTv8dQ3LD.jpg",
+   "/gZBEy88TX9rivwU9f3lVGkKB0X0.jpg",
+   "/co3W1379xWvzVxdKWHsgjhaGhjI.jpg",
+   "/y3qCq2NpMFjnZLZmwrS1SNQMWyh.jpg",
+   "/oAOOSWrxX3sk52ZuBuo9nqsLcq.jpg",
+   "/z7xLNJleaLjN7bX5LZXcx1nusev.jpg",
+   "/7pf7Sfw918PRsSylSWsxO1c16UU.jpg",
+   "/ptOfXIrH5bbn8lkF7bF8LOWaPDZ.jpg",
+   "/oTAyOtoiirTFeuJ63uFRLbPLEWZ.jpg",
+   "/5MMGzYBmmfppbjGfcHK1tkIFFaf.jpg",
+   "/24pKVAc12E2bIfbYwghOtFBGUYz.jpg",
+   "/rVkDj1cFhuy29avSe0I6mnRyP0H.jpg",
+   "/aT5VFLj7HfuBBr5yNa8klvAa2gB.jpg",
+   "/oIS1SVAmq2qF0k4cIbzhWOpeA8I.jpg",
+   "/cc24LXjnXu3KtHFV3BiXUQ2YvLF.jpg",
+   "/clmz76CJ5Rfyjj26UzALTERpjXl.jpg",
+   "/vND1bn8DhTH787Lqc6QAZxNVUoZ.jpg"
   ],
   "assign": [
-   1,
    0,
-   2
+   6,
+   17
   ],
   "focus": [
-   0.6,
-   0.35,
-   0.62
+   0.67578125,
+   0.45,
+   0.5
   ],
-  "hashtags": "#film #quoiregarder #drame #contrelouragan #netflix",
-  "comment": "En pleine mer face à un ouragan de catégorie 5, tu t'accroches à ton demi-frère ou tu pars seul ?",
-  "caption": "En pleine mer face à un ouragan de catégorie 5, tu t'accroches à ton demi-frère ou tu pars seul ?\n#film #quoiregarder #drame #contrelouragan #netflix",
+  "hashtags": "#film #quoiregarder #thriller #sourcecode #molotovtv",
+  "comment": "Un des thrillers de SF les plus sous-cotés. Tu aurais tenu à revivre les mêmes 8 minutes en boucle, ou tu aurais craqué dès la 3e fois ?",
+  "caption": "Un des thrillers de SF les plus sous-cotés. Tu aurais tenu à revivre les mêmes 8 minutes en boucle, ou tu aurais craqué dès la 3e fois ?\n#film #quoiregarder #thriller #sourcecode #molotovtv",
   "modele": {
-   "ligne": null,
-   "titre": "Contre l'ouragan",
-   "type": "tv",
-   "annee": null,
-   "libelle": "Contre l'ouragan",
-   "hook_fr": "",
-   "legende_fr": "",
-   "likes": 0,
-   "vues": 0,
-   "compte": "@totor_flix",
-   "hook_en": "",
-   "pourquoi": "Catastrophe réelle (Otis, 2023) (idée du brief)",
-   "slides_fr": [],
-   "note": "Titre à vérifier sur TMDB.",
-   "source": "brief PopcornLife du 19/11/2026",
+   "ligne": 18,
+   "titre": "Source Code",
+   "type": "movie",
+   "annee": 2011,
+   "libelle": "Source Code (2011)",
+   "hook_fr": "Un homme se réveille dans un train à côté d'une femme qui semble le connaître… il n'a aucune idée de qui il est",
+   "legende_fr": "Un des thrillers de SF les plus sous-cotés.",
+   "likes": 13500,
+   "compte": "@vincenz.movies",
+   "hook_en": "A man wakes on a train next to a woman who seems to know him… He has no idea who he is.",
+   "pourquoi": "Perte de mémoire = le spectateur découvre avec lui",
    "publie": false
   }
  },
