@@ -1,6 +1,54 @@
 {
  "offset": 422726130,
- "pending": [],
+ "pending": [
+  {
+   "type": "movie",
+   "id": 242582,
+   "title": "Night Call",
+   "classeur": {
+    "ligne": 14,
+    "titre": "Night Call",
+    "type": "movie",
+    "annee": 2014,
+    "libelle": "Night Call (2014)",
+    "hook_fr": "Il a trouvé un moyen de gagner de l'argent la nuit…",
+    "legende_fr": "Ça a l'air tellement malsain…",
+    "likes": 20100,
+    "compte": "@benitob.mp4",
+    "hook_en": "He found a way to make money at night…",
+    "pourquoi": "Phrase anodine qui cache quelque chose de malsain",
+    "publie": false
+   }
+  },
+  {
+   "type": "movie",
+   "id": 1780005,
+   "title": "Contre l'Ouragan",
+   "classeur": {
+    "ligne": null,
+    "titre": "Contre l'ouragan",
+    "type": "tv",
+    "annee": null,
+    "libelle": "Contre l'ouragan",
+    "hook_fr": "",
+    "legende_fr": "",
+    "likes": 0,
+    "vues": 0,
+    "compte": "@totor_flix",
+    "hook_en": "",
+    "pourquoi": "Catastrophe réelle (Otis, 2023) (idée du brief)",
+    "slides_fr": [],
+    "note": "Titre à vérifier sur TMDB.",
+    "source": "brief PopcornLife du 19/11/2026",
+    "publie": false
+   }
+  },
+  {
+   "type": "movie",
+   "id": 1236045,
+   "title": "Animals"
+  }
+ ],
  "last": {
   "type": "tv",
   "id": 72039,
@@ -58,7 +106,7 @@
    "publie": false
   }
  },
- "last_propose": "2026-11-23",
+ "last_propose": "2026-11-24",
  "photo": "data/custom/_waiting.jpg",
  "add_slide": null
 }
