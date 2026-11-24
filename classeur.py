@@ -11,7 +11,7 @@ def fr(n):
 
 def load():
     try:
-        with open("data/classeur.json", encoding="utf-8") as f: return [x for x in json.load(f) if x.get("titre")]
+        with open("data/classeur.json", encoding="utf-8") as f: return [x for x in json.load(f) if x.get("titre") and not x.get("exclu")]
     except Exception:
         return []
 
