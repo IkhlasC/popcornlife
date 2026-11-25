@@ -1,5 +1,5 @@
 {
- "offset": 422726136,
+ "offset": 422726140,
  "pending": [
   {
    "type": "movie",
@@ -110,9 +110,15 @@
    "hook_en": "A man wakes on a train next to a woman who seems to know him… He has no idea who he is.",
    "pourquoi": "Perte de mémoire = le spectateur découvre avec lui",
    "publie": false
-  }
+  },
+  "custom": {
+   "1": "data/custom/45612_slide1.jpg",
+   "2": "data/custom/45612_slide2.jpg",
+   "3": "data/custom/45612_slide3.jpg"
+  },
+  "last_slide": 3
  },
  "last_propose": "2026-11-25",
- "photo": null,
+ "photo": "data/custom/_waiting.jpg",
  "add_slide": null
 }
