@@ -1,6 +1,50 @@
 {
  "offset": 422726136,
- "pending": [],
+ "pending": [
+  {
+   "type": "movie",
+   "id": 9693,
+   "title": "Les Fils de l'homme",
+   "classeur": {
+    "ligne": 10,
+    "titre": "Les Fils de l'homme",
+    "type": "movie",
+    "annee": 2006,
+    "libelle": "Les Fils de l'homme (2006)",
+    "hook_fr": "Aucun enfant n'est né depuis 18 ans",
+    "legende_fr": "Et un jour, une femme tombe enceinte…",
+    "likes": 36700,
+    "compte": "@benitob.mp4",
+    "hook_en": "No child has been born in 18 years",
+    "pourquoi": "Fait choquant ultra-court",
+    "publie": false
+   }
+  },
+  {
+   "type": "movie",
+   "id": 75612,
+   "title": "Oblivion",
+   "classeur": {
+    "ligne": 17,
+    "titre": "Oblivion",
+    "type": "movie",
+    "annee": 2013,
+    "libelle": "Oblivion (2013)",
+    "hook_fr": "Un technicien est envoyé sur une Terre abandonnée pour réparer des drones",
+    "legende_fr": "Ce film a un très gros twist.",
+    "likes": 14600,
+    "compte": "@reenix500",
+    "hook_en": "A technician is sent to abandoned planet earth to fix broken drones",
+    "pourquoi": "Pitch SF clair en une phrase",
+    "publie": false
+   }
+  },
+  {
+   "type": "movie",
+   "id": 1236045,
+   "title": "Animals"
+  }
+ ],
  "last": {
   "type": "movie",
   "id": 45612,
@@ -68,7 +112,7 @@
    "publie": false
   }
  },
- "last_propose": "2026-11-24",
+ "last_propose": "2026-11-25",
  "photo": null,
  "add_slide": null
 }
