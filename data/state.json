@@ -1,5 +1,5 @@
 {
- "offset": 422726141,
+ "offset": 422726145,
  "pending": [],
  "last": {
   "type": "movie",
@@ -9,7 +9,7 @@
   "rating": 7.6,
   "platform": "Canal+ / MUBI",
   "texts": [
-   "Aucun enfant n'est né depuis 18 ans",
+   "Ici, aucun enfant n’est né depuis 18 ans",
    "Le plus jeune humain de la Terre vient de mourir à 18 ans",
    "Puis une femme tombe enceinte… et un homme doit la protéger"
   ],
@@ -66,9 +66,15 @@
    "hook_en": "No child has been born in 18 years",
    "pourquoi": "Fait choquant ultra-court",
    "publie": false
-  }
+  },
+  "custom": {
+   "1": "data/custom/9693_slide1.jpg",
+   "2": "data/custom/9693_slide2.jpg",
+   "3": "data/custom/9693_slide3.jpg"
+  },
+  "last_slide": 1
  },
  "last_propose": "2026-11-26",
- "photo": "data/custom/_waiting.jpg",
+ "photo": null,
  "add_slide": null
 }

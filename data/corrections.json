@@ -201,5 +201,12 @@
   "avant": "Du coup, tu te tournes vers ton père, flic à la retraite, brouillé avec toi",
   "apres": "Tu te tournes vers ton père, flic à la retraite, avec qui tu ne parles plus",
   "date": "2026-11-22"
+ },
+ {
+  "film": "Les Fils de l'homme",
+  "slide": 1,
+  "avant": "Aucun enfant n'est né depuis 18 ans",
+  "apres": "Ici, aucun enfant n’est né depuis 18 ans",
+  "date": "2026-11-26"
  }
 ]
