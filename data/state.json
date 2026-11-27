@@ -1,6 +1,50 @@
 {
  "offset": 422726146,
- "pending": [],
+ "pending": [
+  {
+   "type": "movie",
+   "id": 814800,
+   "title": "Goodnight Mommy",
+   "classeur": {
+    "ligne": 19,
+    "titre": "Goodnight Mommy",
+    "type": "movie",
+    "annee": 2022,
+    "libelle": "Goodnight Mommy (2022)",
+    "hook_fr": "Deux jumeaux sont heureux de revoir enfin leur mère…",
+    "legende_fr": "Le twist de fin est fou !!",
+    "likes": 11400,
+    "compte": "@reenix500",
+    "hook_en": "Two sons are happy to finally see their mother…",
+    "pourquoi": "Début tendre, les « … » annoncent l'inverse",
+    "publie": false
+   }
+  },
+  {
+   "type": "movie",
+   "id": 75612,
+   "title": "Oblivion",
+   "classeur": {
+    "ligne": 17,
+    "titre": "Oblivion",
+    "type": "movie",
+    "annee": 2013,
+    "libelle": "Oblivion (2013)",
+    "hook_fr": "Un technicien est envoyé sur une Terre abandonnée pour réparer des drones",
+    "legende_fr": "Ce film a un très gros twist.",
+    "likes": 14600,
+    "compte": "@reenix500",
+    "hook_en": "A technician is sent to abandoned planet earth to fix broken drones",
+    "pourquoi": "Pitch SF clair en une phrase",
+    "publie": false
+   }
+  },
+  {
+   "type": "movie",
+   "id": 1236045,
+   "title": "Animals"
+  }
+ ],
  "last": {
   "type": "movie",
   "id": 9693,
@@ -74,7 +118,7 @@
   },
   "last_slide": 1
  },
- "last_propose": "2026-11-26",
+ "last_propose": "2026-11-27",
  "photo": null,
  "add_slide": null
 }
