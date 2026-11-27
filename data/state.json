@@ -1,122 +1,54 @@
 {
- "offset": 422726146,
- "pending": [
-  {
-   "type": "movie",
-   "id": 814800,
-   "title": "Goodnight Mommy",
-   "classeur": {
-    "ligne": 19,
-    "titre": "Goodnight Mommy",
-    "type": "movie",
-    "annee": 2022,
-    "libelle": "Goodnight Mommy (2022)",
-    "hook_fr": "Deux jumeaux sont heureux de revoir enfin leur mère…",
-    "legende_fr": "Le twist de fin est fou !!",
-    "likes": 11400,
-    "compte": "@reenix500",
-    "hook_en": "Two sons are happy to finally see their mother…",
-    "pourquoi": "Début tendre, les « … » annoncent l'inverse",
-    "publie": false
-   }
-  },
-  {
-   "type": "movie",
-   "id": 75612,
-   "title": "Oblivion",
-   "classeur": {
-    "ligne": 17,
-    "titre": "Oblivion",
-    "type": "movie",
-    "annee": 2013,
-    "libelle": "Oblivion (2013)",
-    "hook_fr": "Un technicien est envoyé sur une Terre abandonnée pour réparer des drones",
-    "legende_fr": "Ce film a un très gros twist.",
-    "likes": 14600,
-    "compte": "@reenix500",
-    "hook_en": "A technician is sent to abandoned planet earth to fix broken drones",
-    "pourquoi": "Pitch SF clair en une phrase",
-    "publie": false
-   }
-  },
-  {
-   "type": "movie",
-   "id": 1236045,
-   "title": "Animals"
-  }
- ],
+ "offset": 422726147,
+ "pending": [],
  "last": {
   "type": "movie",
-  "id": 9693,
-  "title": "Les Fils de l'homme",
-  "year": "2006",
-  "rating": 7.6,
-  "platform": "Canal+ / MUBI",
+  "id": 814800,
+  "title": "Goodnight Mommy",
+  "year": "2022",
+  "rating": 6.3,
+  "platform": "Prime Video",
   "texts": [
-   "Ici, aucun enfant n’est né depuis 18 ans",
-   "Le plus jeune humain de la Terre vient de mourir à 18 ans",
-   "Puis une femme tombe enceinte… et un homme doit la protéger"
+   "Deux jumeaux sont heureux de revoir enfin leur mère…",
+   "Mais leur mère a le visage couvert de bandages après une opération",
+   "Plus le temps passe, plus ils pensent que cette femme n'est pas elle"
   ],
-  "poster_path": "/zvABa9EuAK9XeqBojYyb3Yaahcf.jpg",
+  "poster_path": "/oHhD5jD4S5ElPNNFCDKXJAzMZ5h.jpg",
   "candidates": [
-   "/8Y1S9BtmTOh86irwFo7CJ01YPXF.jpg",
-   "/www52jvhbB0ppe9s0zxbf9EYox.jpg",
-   "/gFGLwUBhVrq0bq4j9DU08xQDRU2.jpg",
-   "/kdjNM3yOwtQkJIwHZPqvyY4p0Ul.jpg",
-   "/z8FzomPxfCb2nv827VWLSI6oYiB.jpg",
-   "/7cW7zHpDdl9fgaRXI5qAglV247P.jpg",
-   "/wfsKJU42WbSYDzvFzA2HmonMdSG.jpg",
-   "/22yIGscWOOLRvwQb44ZboZmstIH.jpg",
-   "/9JOCdXq5MUwTz2YA4ex7WTXQJ61.jpg",
-   "/hbW1KBwzx3wUjcCaIl3ISHMz5Og.jpg",
-   "/eNNKl4XGujis2NuLG9EieE5rSI0.jpg",
-   "/AvLsDOavbIuGfxIWJBrwlYOPNrV.jpg",
-   "/mXOLm5qmn8NTO8G8a8OhxEZSI9Q.jpg",
-   "/2kT8paZnhTKiTcAT7xEyllZlMA6.jpg",
-   "/sYlhG1dn2OQuYfEzWkKIlg6ZhCn.jpg",
-   "/stmDv9a0VtSanDUmAbs65WpPnpp.jpg",
-   "/xImb0WMLtwQMfsd1dcFgFLd5bJU.jpg",
-   "/ajXlrWeZamzKOHnZAwe1SJad5EF.jpg",
-   "/8NtVOfVUBIxZzYuh204qn9UOv5Y.jpg",
-   "/aHzWvAlvewUO0CehUmXc9eBFd0J.jpg",
-   "/lUZYjwbxUcpEW1SJpquDNbxanNC.jpg",
-   "/6iCnpb0evBKvYnJmOzZmxczZwXm.jpg",
-   "/fvIEitirpuTVrtrqO0DvpnbOX23.jpg",
-   "/m9kgLrfUiU9AAsTi8N87c96uowf.jpg"
+   "/aCaqCvYn48b3lfGKGnUdVAE1yeB.jpg",
+   "/xrummSigYrqRr5O2w1oygTXlljY.jpg",
+   "/vbBGpVX6iP0TqyjwkvSLwj79UV4.jpg",
+   "/nVXL12AmGtb7PAfey1UXn0z8ibT.jpg",
+   "/7p7O806YpHibq9wyUZcX8LmyhkM.jpg",
+   "/b64ipsqrKgI45j5M9kH9ncM6UD.jpg"
   ],
   "assign": [
-   4,
    1,
-   7
+   4,
+   5
   ],
   "focus": [
+   0.58984375,
    0.5,
-   0.3078125,
-   0.4953125
+   0.33671875
   ],
-  "hashtags": "#film #quoiregarder #sciencefiction #lesfilsdelhomme #canalplus",
-  "comment": "Et un jour, une femme tombe enceinte… Tu la caches pour la protéger ou tu préviens le monde entier ?",
-  "caption": "Et un jour, une femme tombe enceinte… Tu la caches pour la protéger ou tu préviens le monde entier ?\n#film #quoiregarder #sciencefiction #lesfilsdelhomme #canalplus",
+  "hashtags": "#film #quoiregarder #horreur #goodnightmommy #primevideo",
+  "comment": "Le twist de fin est fou. Tu le devines avant la fin ou tu te fais avoir ?",
+  "caption": "Le twist de fin est fou. Tu le devines avant la fin ou tu te fais avoir ?\n#film #quoiregarder #horreur #goodnightmommy #primevideo",
   "modele": {
-   "ligne": 10,
-   "titre": "Les Fils de l'homme",
+   "ligne": 19,
+   "titre": "Goodnight Mommy",
    "type": "movie",
-   "annee": 2006,
-   "libelle": "Les Fils de l'homme (2006)",
-   "hook_fr": "Aucun enfant n'est né depuis 18 ans",
-   "legende_fr": "Et un jour, une femme tombe enceinte…",
-   "likes": 36700,
-   "compte": "@benitob.mp4",
-   "hook_en": "No child has been born in 18 years",
-   "pourquoi": "Fait choquant ultra-court",
+   "annee": 2022,
+   "libelle": "Goodnight Mommy (2022)",
+   "hook_fr": "Deux jumeaux sont heureux de revoir enfin leur mère…",
+   "legende_fr": "Le twist de fin est fou !!",
+   "likes": 11400,
+   "compte": "@reenix500",
+   "hook_en": "Two sons are happy to finally see their mother…",
+   "pourquoi": "Début tendre, les « … » annoncent l'inverse",
    "publie": false
-  },
-  "custom": {
-   "1": "data/custom/9693_slide1.jpg",
-   "2": "data/custom/9693_slide2.jpg",
-   "3": "data/custom/9693_slide3.jpg"
-  },
-  "last_slide": 1
+  }
  },
  "last_propose": "2026-11-27",
  "photo": null,
