@@ -1,6 +1,50 @@
 {
  "offset": 422726147,
- "pending": [],
+ "pending": [
+  {
+   "type": "movie",
+   "id": 75612,
+   "title": "Oblivion",
+   "classeur": {
+    "ligne": 17,
+    "titre": "Oblivion",
+    "type": "movie",
+    "annee": 2013,
+    "libelle": "Oblivion (2013)",
+    "hook_fr": "Un technicien est envoyé sur une Terre abandonnée pour réparer des drones",
+    "legende_fr": "Ce film a un très gros twist.",
+    "likes": 14600,
+    "compte": "@reenix500",
+    "hook_en": "A technician is sent to abandoned planet earth to fix broken drones",
+    "pourquoi": "Pitch SF clair en une phrase",
+    "publie": false
+   }
+  },
+  {
+   "type": "movie",
+   "id": 290283,
+   "title": "Honeytrap",
+   "classeur": {
+    "ligne": 3,
+    "titre": "Honeytrap",
+    "type": "movie",
+    "annee": 2014,
+    "libelle": "Honeytrap (2014)",
+    "hook_fr": "J'ai découvert de quoi ce film s'était vraiment inspiré…",
+    "legende_fr": "Tu as peut-être entendu parler de ce film… mais il est inspiré d'un vrai meurtre.",
+    "likes": 332700,
+    "compte": "@trucrimetee",
+    "hook_en": "I found out what this movie was actually inspired by…",
+    "pourquoi": "Révélation « histoire vraie » derrière un film connu : on veut savoir",
+    "publie": false
+   }
+  },
+  {
+   "type": "movie",
+   "id": 1236045,
+   "title": "Animals"
+  }
+ ],
  "last": {
   "type": "movie",
   "id": 814800,
@@ -50,7 +94,7 @@
    "publie": false
   }
  },
- "last_propose": "2026-11-27",
+ "last_propose": "2026-11-28",
  "photo": null,
  "add_slide": null
 }
